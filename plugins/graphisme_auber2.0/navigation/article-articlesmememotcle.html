@@ -1,0 +1,24 @@
+#CACHE{0}
+		<div id="menu1">
+		<h1 class="invisible"><:cisquel:eq_menu_gauche:></h1>
+			<B_multirubricage_mot_gauche>
+				<div class="boxtitregauche"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><h2><:cisquel:eq_autres_rubriques:></h2></div></div></div></div></div>
+				<ul>
+				<BOUCLE_multirubricage_mot_gauche(MOTS){id_article}{type=_multirubricage}>
+				<BOUCLE_multirubricage_rubrique_gauche(RUBRIQUES){id_mot}{doublons}>
+				 <li><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></li>
+				</BOUCLE_multirubricage_rubrique_gauche>
+				</BOUCLE_multirubricage_mot_gauche>
+				</ul>
+			</B_multirubricage_mot_gauche>
+			<B_mot_article_gauche>
+				<div class="boxtitregauche"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><h2><:cisquel:eq_voir_aussi:></h2></div></div></div></div></div>
+				<ul>
+				<BOUCLE_mot_article_gauche(MOTS){id_article}{par titre}>
+				<BOUCLE_article_lie_gauche(ARTICLES){id_mot}{exclus}{doublons}{par num titre}>
+				<li><a href="#URL_ARTICLE" <BOUCLE_nouvelle_fenetre(ARTICLES){id_article}{raccourci=_nouvelle_fenetre}>class="spip_out" title="<:cisquel:eq_voir_article:> (<:cisquel:eq_ouvre_fenetre:>)" </BOUCLE_nouvelle_fenetre> >[(#TITRE|supprimer_numero)]</a></li>
+				</BOUCLE_article_lie_gauche>
+				</BOUCLE_mot_article_gauche>
+				</ul>
+			</B_mot_article_gauche>
+		</div>

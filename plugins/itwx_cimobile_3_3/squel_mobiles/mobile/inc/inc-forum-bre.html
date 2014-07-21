@@ -1,0 +1,72 @@
+[(#REM) Nombre total de messages ]
+
+<div id="total-forums">
+<BOUCLE_decompte(FORUMS) {id_breve ?} {plat} />
+[(#TOTAL_BOUCLE|>{0}|?{#TOTAL_BOUCLE,''}) [(#TOTAL_BOUCLE|=={1}|?{<:message:>,<:messages_forum:>})]]<//B_decompte>
+</div>
+
+
+[(#REM) Messages du forum ]
+	  
+<B_forums>
+#ANCRE_PAGINATION
+  <ul class="forum">
+    <BOUCLE_forums(FORUMS){id_breve ?} {pagination 10 #ENV{for}}{par date}{inverse}>
+    <li class="forum-fil">
+	
+      <div class="forum-message">
+        <div class="forum-chapo">
+		 <strong class="#EDIT{titre} forum-titre"><a href="#forum#ID_FORUM" name="forum#ID_FORUM" id="forum#ID_FORUM">#TITRE</a></strong> 
+		 <small>[(#DATE|affdate_jourcourt)][&nbsp;(#DATE|heures)][:(#DATE|minutes)][, <:par_auteur:> <span class="#EDIT{qui}">(#NOM|couper{80})</span>]</small> 
+		</div>
+        <div class="#EDIT{texte} forum-texte">
+		  [(#TEXTE|lignes_longues)]
+		  [<div class="notes surlignable">(#NOTES|safehtml|lignes_longues)</div>]				
+          [<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" target="_blank">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>] 
+		  <BOUCLE_doc(DOCUMENTS){id_forum}> 
+		  [(#EXTENSION|match{'^(gif|jpg|png)$'}|?{					
+          [(#MODELE{emb}|image_reduire{250})]				
+          ,					
+          [(#LOGO_DOCUMENT{#URL_DOCUMENT})]				
+          })]
+          </BOUCLE_doc>
+		  
+		</div>
+      </div>
+	  
+	  
+      <B_forums_fils>
+        <ul>
+          <BOUCLE_forums_fils(FORUMS) {id_parent} {par date}>
+          <li>
+		  
+            <div class="forum-message">
+              <div class="forum-chapo"> <strong class="#EDIT{titre} forum-titre"><a href="#forum#ID_FORUM" name="forum#ID_FORUM" id="forum#ID_FORUM">#TITRE</a></strong> <small>[(#DATE|affdate_jourcourt)][&nbsp;(#DATE|heures)][:(#DATE|minutes)][, <:par_auteur:> <span class="#EDIT{qui}">(#NOM|couper{80})</span>]</small> </div>
+              <div class="#EDIT{texte} forum-texte"> [(#TEXTE|lignes_longues)]						
+                [<div class="notes surlignable">(#NOTES|safehtml|lignes_longues)</div>]
+                [<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" target="_blank">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>] 
+				<BOUCLE_doc2(DOCUMENTS){id_forum}> 
+				[(#EXTENSION|match{'^(gif|jpg|png)$'}|?{					
+                [(#MODELE{emb}|image_reduire{250})]				
+                ,					
+                [(#LOGO_DOCUMENT{#URL_DOCUMENT})]				
+                })]
+                </BOUCLE_doc2>
+				
+			  </div>
+            </div>
+			
+            <BOUCLE_forums_boucle(boucle_forums_fils)></BOUCLE_forums_boucle>
+			
+          </li>
+          </BOUCLE_forums_fils>
+        </ul>
+      </B_forums_fils>
+	  
+     [(#PARAMETRES_FORUM|?{' '})<div class="rep-mess"><INCLURE{fond=inc/ajax/formulaire-forum-bre}{id_forum}{env}{ajax}></div>]
+	  
+    </li>
+    </BOUCLE_forums>
+  </ul>
+[<div class="pagination pagin-forum">(#PAGINATION)</div>]
+</B_forums>

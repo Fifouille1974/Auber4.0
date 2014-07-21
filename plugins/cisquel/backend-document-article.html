@@ -1,0 +1,34 @@
+#CACHE{3600}
+[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<?xml version="1.0"[ encoding="(#CHARSET)"]?>
+<rss version="2.0" [(#REM) rss 2.0.9)]
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+>
+
+<BOUCLE_art(ARTICLES){id_article}>
+<channel>
+
+	<title><:cisquel:eq_documents:>[ : (#TITRE|supprimer_numero|texte_backend)]</title>
+	<link>#URL_ARTICLE</link>
+	<description>[(#DESCRIPTIF|texte_backend)]</description>
+	<language>#LANG</language>
+
+
+<BOUCLE_documents(DOCUMENTS){id_article}{mode=document}{!par date}{0,10}>
+	<item>
+		<title>[(#TITRE|supprimer_numero|texte_backend)]</title>
+		<link>[(#URL_DOCUMENT|url_absolue)]</link>
+		[<guid isPermaLink="true">(#URL_DOCUMENT|url_absolue) </guid>]
+		[<dc:date>(#DATE|date_iso)</dc:date>]
+		<dc:format>text/html</dc:format>
+		[<dc:language>(#LANG)</dc:language>]
+		<description>[(#DESCRIPTIF|liens_absolus|texte_backend)]</description>
+		[<enclosure url="(#URL_DOCUMENT|url_absolue)"[ length="(#TAILLE)"][ type="(#MIME_TYPE)"] />]
+	</item>
+</BOUCLE_documents>
+
+
+</channel>
+</BOUCLE_art>
+
+</rss>

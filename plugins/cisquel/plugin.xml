@@ -1,0 +1,39 @@
+<plugin>
+	<nom>cisquel : Squelettes de base avec 3 colonnes</nom>
+	<auteur>&#169; C. Imberti</auteur>
+	<icon>pyramides-32.png</icon>
+	<licence>GPL</licence>
+
+	<lien></lien>
+	<version>2.0</version>
+	<etat>stable</etat>
+    <slogan>Auteur : &#169; C. Imberti. Licence : GPL</slogan>
+    <description>
+    Auteur : &#169; C. Imberti. Licence : GPL<br />
+	Squelettes avec 3 colonnes. Il s'utilise conjointement avec le plugin "Configurateur de squelettes".
+	</description>
+	<prefix>cisquel</prefix>
+	<fonctions>cisquel_fonctions.php</fonctions>
+	<options>cisquel_options.php</options>
+
+	<pipeline>
+		<nom>formulaire_charger</nom>
+		<inclure>cisquel_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_verifier</nom>
+		<inclure>cisquel_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_edition</nom>
+		<inclure>cisquel_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>cisf_article_options</nom>
+		<inclure>cisquel_pipelines.php</inclure>
+	</pipeline>
+	
+	<necessite id="SPIP" version='[2.0.9;]' />
+	<necessite id="ciparam" version='[2.0;]' />
+	
+</plugin>

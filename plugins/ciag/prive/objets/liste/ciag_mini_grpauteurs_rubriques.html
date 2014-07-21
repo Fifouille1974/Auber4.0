@@ -1,0 +1,21 @@
+<B_grp>
+<div style="margin:4px 0px 10px 0px;">
+#PAGINATION
+</div>
+<table cellspacing="0" cellpadding="2" style="width: 100%; border: 0px none;" class="arial2">
+<tbody>
+<tr style="background-color:#eee;">
+<th style="width: 50%;"><:ciag:titre_groupes_auteurs:></th><th style="width: 50%;"><:info_rubriques:></th>
+</tr>
+<BOUCLE_grp(CIAG_GRPAUTEURS){par titre}{tous}{pagination 100}>
+<tr class="tr_liste" style="background-color:#fff;">
+<td>#TITRE</td>
+<td class="arial1">[(#ID_GROUPE|ciag_titres_rubriques_de_grpauteurs{oui})]</td>
+</tr>
+</BOUCLE_grp>
+</tbody>
+</table>
+<div style="margin:10px 0px 4px 0px;">
+#PAGINATION
+</div>
+</B_grp>

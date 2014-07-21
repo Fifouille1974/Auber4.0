@@ -1,0 +1,23 @@
+<div class="blocoutilcentral">
+
+	<a rel="noindex,nofollow" href="javascript:chainemail('[(#NOM_SITE_SPIP|ciparam_filtre_mailto{#CHARSET})]  [(#ENV{titremail})]')" title="<:cisquel:eq_envoyer_courriel:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><img src="#CHEMIN{_images/picto_envoie.gif}" title="<:cisquel:eq_envoyer_courriel:> (<:cisquel:eq_ouvre_messagerie:>)" alt="<:cisquel:eq_envoyer_courriel:> (<:cisquel:eq_ouvre_messagerie:>)" /></a>
+	<a rel="noindex,nofollow" href="[(#URL_PAGE{article_print}|parametre_url{id_article,#ENV{id_article}})]" title="<:cisquel:eq_imprimer_page:>" class="imprimer"><img src="#CHEMIN{_images/picto_print.gif}" title="<:cisquel:eq_imprimer_page:>" alt="<:cisquel:eq_imprimer_page:>" /></a>
+
+	[(#PLUGIN{cinotif}|oui)
+		[(#CONFIG{cinotif_article}|=={non}|non)
+<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ENV{id_article}})]" title="<:cisquel:abonner:>" class="abonner"><img src="#CHEMIN{_images/abonner.png}" title="<:cisquel:abonner:>" alt="<:cisquel:abonner:>" /></a>
+<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ENV{id_article}}|parametre_url{desabonner,oui})]" title="<:cisquel:desabonner:>" class="desabonner"><img src="#CHEMIN{_images/desabonner.png}" title="<:cisquel:desabonner:>" alt="<:cisquel:desabonner:>" /></a>
+		]
+	]
+
+	<BOUCLE_reader(ARTICLES){raccourci=_reader_acrobat_ou_autre}{par num titre}>
+<a rel="noindex,nofollow" href="[(#URL_ARTICLE)]" class="acrobat">[<img src="(#LOGO_ARTICLE||image_reduire{19,0}|extraire_attribut{'src'})" alt="" border="0" />][<span>(#TITRE|supprimer_numero)</span>]</a>
+	</BOUCLE_reader>		
+
+	[(#ENV{id_rubrique}|cisquel_rubrique_ec|=={oui}|oui)
+	<a rel="noindex,nofollow" href="[(#URL_PAGE{envoi_membre}|parametre_url{id_article,#ENV{id_article}})]" title="<:cisquel:eq_envoyer_membres:>" class="envoiami"><img src="#CHEMIN{_images/picto_envoie.gif}" title="<:cisquel:eq_envoyer_membres:>" alt="<:cisquel:eq_envoyer_membres:>" /></a>
+	]
+
+	[(#ENV{id_rubrique}|cisquel_logoseul_ari)]
+
+</div>

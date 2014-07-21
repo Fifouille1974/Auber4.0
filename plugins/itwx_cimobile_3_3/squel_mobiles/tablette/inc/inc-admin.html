@@ -1,0 +1,5 @@
+[(#AUTORISER{ecrire})<a href="#EVAL{_DIR_RESTREINT_ABS}"><:espace_prive:></a>]
+[(#SESSION{id_auteur}|?{' '})<a href="#URL_LOGOUT" rel="nofollow" style="background-image: none; text-align:center" class=""><:icone_deconnecter:></a>][(#AUTORISER{ecrire})<a href="#EVAL{_DIR_RESTREINT_ABS}" id="tabecrire"><:espace_prive:></a>]
+[(#SESSION{id_auteur}|?{' '})<a href="#URL_LOGOUT" rel="nofollow" style="background-image: none; text-align:center" id="tablogout"><:icone_deconnecter:></a>]
+[(#SESSION{id_auteur}|?{'',' '})<a href="[(#URL_PAGE{itwx_login}|parametre_url{url,#SELF})]" rel="nofollow" id="tablogin"><:lien_connecter:></a>]
+

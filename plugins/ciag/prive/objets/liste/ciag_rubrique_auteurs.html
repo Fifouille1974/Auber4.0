@@ -1,0 +1,42 @@
+[(#SPIP_VERSION|>={3}|oui)	
+#SET{ciurl,'auteur'}
+#SET{cirub,'rubrique'}
+]
+[(#SPIP_VERSION|>={3}|non)	
+#SET{ciurl,'auteur_infos'}
+#SET{cirub,'naviguer'}
+]
+
+[(#PLUGIN{ciar}|oui)
+	[(#SET{cistatuts,#ARRAY{1,0minirezo,2,1comite,3,6forum}})]
+]
+[(#PLUGIN{ciar}|non)
+	[(#PLUGIN{cirr}|oui)
+		[(#SET{cistatuts,#ARRAY{1,0minirezo,2,1comite}})]
+	]
+	[(#PLUGIN{cirr}|non)
+		[(#SET{cistatuts,#ARRAY{1,0minirezo}})]
+	]
+]
+
+<B_rubriques>
+<div style="margin:4px 0px 10px 0px;">
+#PAGINATION
+</div>
+<table cellspacing="0" cellpadding="2" style="width: 100%; border: 0px none;" class="arial2">
+<tbody>
+<tr style="background-color:#eee;">
+<th style="width: 50%;"><:info_rubriques:></th><th style="width: 50%;"><:auteur:></th>
+</tr>
+<BOUCLE_rubriques(RUBRIQUES){statut IN (prive,publie,new)}{par num titre}{par titre}{pagination 100}>
+<tr class="tr_liste" style="background-color:#fff;">
+<td><a href="[(#URL_ECRIRE{#GET{cirub},id_rubrique=#ID_RUBRIQUE})]">#TITRE</a></td>
+<td class="arial1"><BOUCLE_auteur(AUTEURS auteurs_rubriques){id_rubrique}{statut IN #GET{cistatuts}}><div><a href="[(#URL_ECRIRE{#GET{ciurl},id_auteur=#ID_AUTEUR})]">#NOM</a></div></BOUCLE_auteur></td>
+</tr>
+</BOUCLE_rubriques>
+</tbody>
+</table>
+<div style="margin:10px 0px 4px 0px;">
+#PAGINATION
+</div>
+</B_rubriques>

@@ -1,0 +1,37 @@
+#CACHE{0}
+[(#REM) Pour respecter le droit de voir ou non certains liens
+	il faut une boucle articles, une boucle rubriques, une boucles sites
+	avec des jointures sur cilien 
+]
+
+[(#REM) Les objets ne sont pas cliquables afin qu'un eventuel
+	outil de verification de lien ne les visite pas.
+]
+
+<h1><:cilien:liens_dans_texte_article:></h1>
+<BOUCLE_tranche(CILIEN_TRANCHE){objet=article}>
+#SET{affdatetranche,#DATE_TRANCHE|affdate{'d/m/Y H:i:s'}}
+#SET{cidatetranche,#DATE_TRANCHE|affdate{'YmdHis'}}
+<BOUCLE_nbobjet(ARTICLES){maj>#GET{cidatetranche}}{0,1}>
+</BOUCLE_nbobjet>
+[<:cilien:maj:> (#GET{affdatetranche}) ]
+</B_nbobjet>
+<:cilien:listeajour:>
+<//B_nbobjet>
+</BOUCLE_tranche>
+</B_tranche>
+<:cilien:aucunrecensement:>
+<//B_tranche>
+
+<B_lien>
+[<div class="folio"><div class="pagination">(#PAGINATION{page_cilien})</div></div>]
+<ul><li>
+<BOUCLE_lien(CILIEN){objet=article}{obsolete=non}{par url,id_objet}{pagination 400}>
+	<BOUCLE_art(ARTICLES){id_article=#ID_OBJET}>
+[(#_lien:URL|unique|oui)</li><li><a href='[(#_lien:URL)]'>[(#_lien:URL)]</a>] (<:article:> #ID_ARTICLE)
+	</BOUCLE_art>
+</BOUCLE_lien>
+</li></ul>
+</B_lien>
+<h3><:avis_aucun_resultat:></h3>
+<//B_lien>

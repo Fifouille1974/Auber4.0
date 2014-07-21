@@ -1,0 +1,31 @@
+<B_liste>
+[(#SET{cirub,[(#CHEMIN_IMAGE{rubrique-16.png}|balise_img)]})]
+#ANCRE_PAGINATION
+<div class="liste-objets rubriques">
+<table class='spip liste'>
+<caption><strong class="caption"><:ciag:rubriques_de_ce_groupe:></strong></caption>
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='titre' scope='col'><:info_titre:></th>
+			<th class='id' scope='col'><:info_numero_abbreviation:></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste(CIAG_GRPAUTEURS_RUBRIQUES rubriques){id_groupe}{par titre}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='picto'>#GET{cirub}</td>
+			<td class='titre principale'>[(#LOGO_RUBRIQUE|image_reduire{20,26})]<a href="[(#ID_RUBRIQUE|generer_url_entite{rubrique})]" title="<:info_numero_abbreviation|attribut_html:> #ID_RUBRIQUE">[(#RANG). ]#TITRE</a></td>
+			<td class='id'>[(#AUTORISER{modifier,rubrique,#ID_RUBRIQUE}|?{
+				<a href="[(#URL_ECRIRE{rubriques_edit,id_rubrique=#ID_RUBRIQUE})]">#ID_RUBRIQUE</a>,
+				#ID_RUBRIQUE
+			})]</td>
+		</tr>
+	</BOUCLE_liste>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste>
+<div class="liste-objets rubriques"><strong class="caption"><:ciag:rubriques_de_ce_groupe:></strong></div>
+<//B_liste>

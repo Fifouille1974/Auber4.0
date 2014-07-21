@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title><:spip:info_rechercher:> - [(#NOM_SITE_ITWX|textebrut)]</title>
+<INCLURE{fond=inc/inc-head}>
+<meta name="robots" content="none" />
+</head>
+
+<body class="#LANG_DIR">
+<div id="mob">
+
+  [(#REM) TOOL BARRE ]
+  <INCLURE{fond=inc/inc-navBar}/> 
+  
+  #FORMULAIRE_RECHERCHE
+  
+  [(#REM) Resultats de la recherche ]
+  [<div class="contenu">
+    <div class="cartouche">
+      <h1><:resultats_recherche:></h1>
+      <p class="soustitre">&#171;&nbsp;(#RECHERCHE)&nbsp;&#187;</p>
+      <br />
+    </div>
+  </div>]
+  
+  [(#REM) Articles trouves ] 
+  <INCLURE{fond=inc/inc-rech-listart}{env}{ajax}{art=_art#ID_ARTICLE}/> 
+  
+  [(#REM) Rubriques trouvees ] 
+  <INCLURE{fond=inc/inc-rech-listrub}{env}{ajax}{rub=_rub#ID_RUBRIQUE}/> 
+  
+  [(#REM) Breves trouvees ] 
+  <INCLURE{fond=inc/inc-rech-listbre}{env}{ajax}{bre=_bre#ID_BREVE}/> 
+  
+  [(#REM) Sites web trouves ] 
+  <INCLURE{fond=inc/inc-rech-listsite}{env}{ajax}{site=_site#ID_SYNDIC}/> 
+  
+  [(#REM) Pied ]
+  <div class="group" style="height:17px"></div>
+  <div class="ticket">
+    <div class="ticketmenu">
+      <ul>
+        <li><a rel="start home" href="#URL_SITE_SPIP/"><:accueil_site:></a></li>
+        <li><a rel="start home" href="#URL_PAGE{plan}"><:plan_site:></a></li>
+        [(#AUTORISER{ecrire})<li><a href="#EVAL{_DIR_RESTREINT_ABS}"><:espace_prive:></a></li>]
+        [(#SESSION{id_auteur}|?{' '})<li><a href="#URL_LOGOUT" rel="nofollow" style="text-align:center"><:icone_deconnecter:></a></li>]
+      </ul>
+    </div>
+  </div>
+  
+  <INCLURE{fond=inc/inc-pied}/> 
+  
+</div><!--#page-->
+</body>
+</html>

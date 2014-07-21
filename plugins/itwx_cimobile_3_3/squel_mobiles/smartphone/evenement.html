@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+]<!--[if lt IE 7 ]> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html lang="#LANG"class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]--> 
+<head>
+<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+<title><:icone_agenda:> - [(#NOM_SITE_ITWX|textebrut)]</title>
+<INCLURE{fond=inc/inc-head}>
+<meta name="robots" content="none" />
+</head>
+
+<body id="top">
+<div id="smart">
+
+  [(#REM) TOOL BARRE ]
+  <INCLURE{fond=inc/inc-navBar}/> 
+  
+  <div id="main">
+  
+  <INCLURE{fond=inc/ajax/formulaire_recherche}{env}{ajax}>
+
+  [(#REM) Contenu principal : affichage de l'auteur ]
+  <BOUCLE_evenement(EVENEMENTS) {id_evenement}>
+  <div id="even[(#ID_EVENEMENT)]" class="panel"[ title="(#TITRE|supprimer_numero|attribut_html|couper{80})"]>
+    <div class="contenu">
+      <div class="cartouche"> [(#LOGO_ARTICLE||image_reduire{150,100})]
+        <h1>[(#TITRE|supprimer_numero)]</h1>
+        <p><span class="day">[(#DATE_DEBUT|jour)]</span><span class="month">[(#DATE_DEBUT|nom_mois|couper{3})]</span><abbr class="published"[ title="(#DATE|date_iso)"]>. 	[(#DATE_DEBUT|jour|=={[(#DATE_FIN|jour)]}|?{
+						
+			[(#HORAIRE|=={oui}|?{- 
+			[(#REM) memes heures ?]
+			[(#DATE_DEBUT|=={#DATE_FIN}|?{<small>
+			[(#DATE_DEBUT|heures)]:[(#DATE_DEBUT|minutes)]</small>,''})]
+			[(#REM) pas memes heures ?]
+			[(#DATE_DEBUT|!={#DATE_FIN}|?{<small>
+			[(#DATE_DEBUT|heures)]:[(#DATE_DEBUT|minutes)] /
+			[(#DATE_FIN|heures)]:[(#DATE_FIN|minutes)]</small>,''})]
+			,''})]
+			,
+			[(#HORAIRE|=={oui}|?{<small>-
+			[(#DATE_DEBUT|heures)]:[(#DATE_DEBUT|minutes)]</small>,''})] /
+			[(#DATE_FIN|jour)] [(#DATE_FIN|nom_mois|couper{3})].	
+			[(#HORAIRE|=={oui}|?{<small>-
+			[(#DATE_FIN|heures)]:[(#DATE_FIN|minutes)]</small>
+			,''})]
+			})]
+		  </abbr>
+		  </p>
+      </div><!--cartouche-->
+	  
+      <br />
+     [<div class="chapo">(#LIEU)</div>] 
+     [(#ADRESSE|inserer_attribut{class,chapo})] 
+     [(#DESCRIPTIF|inserer_attribut{class,texte})] 
+	 
+    <p class="lien-evt"><a href="#URL_ARTICLE"><:itwx:lirearticle:></a></p>	
+
+	 </div><!--#contenu-->
+  </div><!--#even-->
+  </BOUCLE_evenement>
+	 
+  
+  [(#REM) Liste evenements ]
+  <INCLURE{fond=inc/inc-evt-listevent}{env}{ajax}/> 
+
+  [(#REM) Pied - Gestion du site ]
+  <div class="group" style="height:17px; border-bottom:1px solid #B9B9B9"></div>
+  <div class="ticket">
+    <div class="ticketmenu">
+      <ul>
+       <li><a rel="start home" href="#URL_PAGE{contact}"><:contact:></a></li>
+       [(#AUTORISER{ecrire})<li><a href="#EVAL{_DIR_RESTREINT_ABS}"><:espace_prive:></a></li>]
+       [(#SESSION{id_auteur}|?{' '})<li><a href="#URL_LOGOUT" rel="nofollow" style="background-image: none; text-align:center" class=""><:icone_deconnecter:></a></li>]
+      </ul>
+    </div>
+  </div>
+  
+  <INCLURE{fond=inc/inc-pied}/> 
+
+  </div><!--#main-->
+
+</div><!--#smart-->
+</body>
+</html>

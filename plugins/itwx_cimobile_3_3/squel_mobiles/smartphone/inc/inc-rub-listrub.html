@@ -1,0 +1,16 @@
+<BOUCLE_menu_rubrique_invisible(RUBRIQUES) {titre_mot = invisible} {doublons}></BOUCLE_menu_rubrique_invisible>
+
+<BOUCLE_secteur(HIERARCHIE){tout}{id_rubrique}{racine}{0,1}>
+<B_rubriques>
+<a id='pagination_rubriques'></a>
+<div class="group"><:sous_rubriques:></div>
+	<div class="listmenu">
+	<ul>
+	<BOUCLE_rubriques(RUBRIQUES) {id_parent} {par num titre, titre} {pagination 5 #ENV{rub}}{doublons}>
+	<li><a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></li>
+	</BOUCLE_rubriques>
+	</ul>
+	</div>
+[<div class="pagination">(#PAGINATION)</div>]
+</B_rubriques>
+</BOUCLE_secteur>

@@ -1,0 +1,56 @@
+<BOUCLE_doc (DOCUMENTS types_documents) {id_document} {tout}>
+[(#REM)
+
+	La largeur de la legende est egale a la largeur de l'image
+	avec un minimum de 120px, et un maximum de 350px.
+
+	Dans le cas d'une simple image (mode=image), on affiche
+	le document lui-meme, sans lien de telechargement
+	
+	Dans le cas d'un document, on l'affiche conformement 
+	a la charte graphique.
+]
+#SET{cixitipj,''}
+#SET{cixtn2,''}
+<BOUCLE_doc_art(ARTICLES){id_document}{0,1}>
+[(#SET{cixitipj,[pj(#ID_ARTICLE)-]})]
+[(#SET{cixtn2,[(#ID_ARTICLE|ciparam_xtn2)]})]
+</BOUCLE_doc_art>
+
+
+[(#MODE|=={image}|oui)
+	#SET{fichier,#URL_DOCUMENT}
+	#SET{width,#LARGEUR}
+	#SET{height,#HAUTEUR}
+	#SET{url,#ENV{lien}}
+	<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+	<dt>[<a href="(#GET{url})"[ class="(#ENV{lien_class})"] title='#EXTENSION - [(#TAILLE|taille_en_octets|texte_backend)]'[ (#ENV{lien}|?{'',type="#MIME_TYPE"})]>]<img src='#GET{fichier}' width='#GET{width}' height='#GET{height}' alt='#EXTENSION - [(#TAILLE|taille_en_octets|texte_backend)]' />[(#GET{url}|?{</a>})]</dt>[
+	<dt class='spip_doc_titre'[ style='width:(#GET{width}|min{350}|max{120})px;']><strong>(#TITRE)</strong></dt>][
+	<dd class='spip_doc_descriptif'[ style='width:(#GET{width}|min{350}|max{120})px;']>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</dd>]
+	</dl>
+]
+
+[(#MODE|=={document}|oui)
+	[(#INCLUS|=={image}|oui)
+		[(#SET{fichier,[(#LOGO_DOCUMENT|extraire_attribut{src})]})]
+		[(#SET{width,[(#LOGO_DOCUMENT|extraire_attribut{width})]})]
+		[(#SET{height,[(#LOGO_DOCUMENT|extraire_attribut{height})]})]
+		#SET{url,#ENV{lien,#URL_DOCUMENT}}
+		#SET{fen_width,#LARGEUR|plus{20}}
+		#SET{fen_height,#HAUTEUR|plus{20}}
+		<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+		<dt>[<a href="(#GET{url})"[ class="(#ENV{lien_class})"] title='#EXTENSION - [(#TAILLE|taille_en_octets|texte_backend)]' onclick="citop=Math.round((screen.availHeight-#GET{fen_height})/2); cileft=Math.round((screen.availWidth-#GET{fen_width})/2); window.open(this.href, 'affiche_image', 'width=#GET{fen_width}, height=#GET{fen_height}, top='+citop+', left='+cileft+', toolbar=no, menubar=no, location=no, resizable=yes, scrollbars=no, status=no'); return false;" [ (#ENV{lien}|?{'',type="#MIME_TYPE"})]>]<img src='#GET{fichier}' width='#GET{width}' height='#GET{height}' alt='#EXTENSION - [(#TAILLE|taille_en_octets|texte_backend)]' />[(#GET{url}|?{</a>})]</dt>[
+		<dt class='spip_doc_titre'[ style='width:(#GET{width}|min{350}|max{120})px;']><strong>(#TITRE)</strong></dt>][
+		<dd class='spip_doc_descriptif'[ style='width:(#GET{width}|min{350}|max{120})px;']>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</dd>]
+		</dl>
+	]
+	[(#INCLUS|!={image}|oui)
+		#SET{fichier,#URL_DOCUMENT}
+		#SET{url,#ENV{lien}}
+		<span class='spip_document_#ID_DOCUMENT'></span> 
+		<a href="#URL_DOCUMENT" onclick="xt_med('C','#GET{cixtn2}','#GET{cixitipj}[(#TITRE|supprimer_numero|ciparam_xtTraiter)]','T')" class="LienTelecharg" title='<:cisquel:eq_ouvre_document:> #TITRE <:cisquel:eq_dans_fenetre:>'>#TITRE</a> ([<:cisquel:eq_format:> (#EXTENSION)][ - (#TAILLE|taille_en_octets|texte_backend)][ - (#DATE|affdate{'d/m/Y'})]) #DESCRIPTIF
+	]
+]
+
+</BOUCLE_doc>
+

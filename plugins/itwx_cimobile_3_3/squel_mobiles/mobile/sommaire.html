@@ -1,0 +1,235 @@
+#CACHE{3600}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title>[(#NOM_SITE_ITWX|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+<script src="http://jwpsrv.com/library/JvFcpKj0EeOGxSIACrqE1A.js"></script>
+<title>Nivo Slider Demo</title>
+    <link rel="stylesheet" href="http://intranet.mairie-aubervilliers.fr/auber4.0/Nivoslider3/nivo-slider/themes/default/default.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="http://intranet.mairie-aubervilliers.fr/auber4.0/Nivoslider3/nivo-slider/themes/light/light.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="http://intranet.mairie-aubervilliers.fr/auber4.0/Nivoslider3/nivo-slider/themes/dark/dark.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="http://intranet.mairie-aubervilliers.fr/auber4.0/Nivoslider3/nivo-slider/themes/bar/bar.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="http://intranet.mairie-aubervilliers.fr/auber4.0/Nivoslider3/nivo-slider/nivo-slider.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="http://intranet.mairie-aubervilliers.fr/auber4.0/Nivoslider3/nivo-slider/demo/style.css" type="text/css" media="screen" />
+
+<INCLURE{fond=inc/inc-head}/>
+</head>
+
+<body class="#LANG_DIR">
+<div id="mob">
+
+  [(#REM) TOOL BARRE ]
+<!--   <div id="tool">
+   <span id="title">[(#NOM_SITE_ITWX|couper{35})]</span>
+  </div>
+ -->
+  [(#REM) Descriptif ]
+  <div class="itwxchapo"><img src="http://intranet.mairie-aubervilliers.fr/auber4.0/IMG/siteon0.jpg" width="100%" height="100%" border="0"><br class="nettoyeur" /></div>
+
+  [(#REM) Derniers articles ] 
+  <INCLURE{fond=inc/inc-sommaire}{id_rubrique}{env}{ajax}/>
+        
+  [(#REM) Breves ] 
+  <BOUCLE_breve_invisible(BREVES) {titre_mot = invisible} {doublons}></BOUCLE_breve_invisible>
+  <B_breves>
+    <div class="group"><:dernieres_breves:></div>
+    <div class="listmenu">
+      <ul>
+        <BOUCLE_breves(BREVES) {par date}{inverse} {0,5}{doublons}>
+        <li><a href="#URL_BREVE">#TITRE[ &ndash; (#DATE|affdate_jourcourt)]</a></li>
+        </BOUCLE_breves>
+      </ul>
+    </div>
+  </B_breves>
+  
+<!--   [(#REM) Derniers commentaires ]
+  <B_forums_liens>
+    <div class="group"><:derniers_commentaires:></div>
+    <div class="listmenu">
+      <ul>
+		<BOUCLE_forums_liens(FORUMS) {plat} {par date}{inverse} {0,8}>
+		<li><a href="#URL_FORUM"[ title="(#TITRE|attribut_html|couper{80})"]>[(#DATE|affdate_jourcourt) : ]#TITRE</a></li>
+		</BOUCLE_forums_liens>
+      </ul>
+    </div>
+  </B_forums_liens>
+ -->  
+  [(#REM) Rubriques ] 
+  [(#CONFIG{itwx/rubriques}|?{' '})<INCLURE{fond=inc/inc-som_rub}/>]
+  
+<!--   [(#REM) Sur le Web ]
+  <B_syndic>
+    <div class="group"><:nouveautes_web:></div>
+    <div class="listmenu">
+      <ul>
+        <BOUCLE_syndic(SYNDIC_ARTICLES) {age<180} {par date}{inverse} {0,6}>
+        <li><a href="#URL_ARTICLE"[ title="(#NOM_SITE|attribut_html|couper{80})"]>#TITRE[ &ndash; (#DATE|affdate_jourcourt)]</a></li>
+        </BOUCLE_syndic>
+      </ul>
+    </div>
+  </B_syndic>
+ -->  
+ 
+
+ <div>
+ <div class="group">Vidéos</div>
+
+	      
+<div id="myElement"></div>
+
+<script>
+    jwplayer("myElement").setup({
+      playlist: "http://intranet.mairie-aubervilliers.fr/auber3.0/jwplayer/test.xml",
+aspectratio: "16:9",
+    listbar: {
+        position: 'bottom',
+        size: 233
+    },
+    width: "100%"
+    });
+</script>
+
+
+
+</div>
+
+<div class="group">Aubermensuel</div>
+<BOUCLE_grandLOGO_RUBRIQUE_SURVOL1(RUBRIQUES){raccourci=_portail_droite_titre_bloc_grandlogo}{par num titre}>
+					
+					<BOUCLE_grandlogo_sous_rubrique1(RUBRIQUES){id_parent}{raccourci=_portail_droite}{par num titre}>
+					<!-- <li><a href="#URL_RUBRIQUE"><img src="[(#LOGO_RUBRIQUE||extraire_attribut{'src'})]" class="logo100" alt="" /> <p>[(#TITRE|supprimer_numero)]</p> </a></li> -->
+					</BOUCLE_grandlogo_sous_rubrique1>
+					<BOUCLE_grandLOGO_ARTICLE_SURVOL1(ARTICLES){id_rubrique}{raccourci=_portail_droite}{par num titre}>
+					<a href="#URL_ARTICLE">
+					<div id="aubermensuelhover" style="background-image:url('http://intranet.mairie-aubervilliers.fr/auber4.0/plugins/graphisme_auber2.0/_images/fondauberm.png');width:100%;height:auto;position:absolute;z-index:999;background-repeat:no-repeat;"></div>
+					<img style="max-width:100%" src="[(#LOGO_ARTICLE||extraire_attribut{'src'})]" alt=""/><!-- <p>[(#TITRE|supprimer_numero)]</p> --></a>
+					</BOUCLE_grandLOGO_ARTICLE_SURVOL1>
+					<BOUCLE_grandlogo1(SITES){id_rubrique}{raccourci=_portail_droite}{par num nom_site}>
+					<!-- <li><a href="#URL_SITE" class="spip_out"><img src="[(#LOGO_SITE||extraire_attribut{'src'})]" alt="<:cisquel:eq_visiter_site:> [(#NOM_SITE|supprimer_numero)] (<:cisquel:eq_ouvre_fenetre:>)" class="logo100" /> <p> [(#NOM_SITE|supprimer_numero)]</p> </a></li> -->
+					</BOUCLE_grandlogo1>
+</BOUCLE_grandLOGO_RUBRIQUE_SURVOL1>
+
+ <div class="group">Pratique</div>
+<div align="center" style="width:100%;background-color:#FFF;">
+ <div id="icone_pratique">
+<LINK rel=stylesheet type="text/css" href="http://intranet.mairie-aubervilliers.fr/auber3.0/plugins/itwx_cimobile_3_2/squel_mobiles/css/style-pratique.css">
+<script src="script.js"></script>
+
+<a href="http://intranet.mairie-aubervilliers.fr/auber3.0/spip.php?rubrique42"><div id="agenda_icon"><img src="http://intranet.mairie-aubervilliers.fr/auber3.0/plugins/itwx_cimobile_3_2/squel_mobiles/mobile/ICONES/png/icone-agenda.png" />
+<span class="legend agenda-legend">Agenda</span></a></div>
+
+<a href="http://intranet.mairie-aubervilliers.fr/auber3.0/spip.php?rubrique1722"><div id="plan_icon"><img src="http://intranet.mairie-aubervilliers.fr/auber3.0/plugins/itwx_cimobile_3_2/squel_mobiles/mobile/ICONES/png/icone-plan.png" />
+<span class="legend plan-legend">Plans</span></a></div>
+
+<a href="http://intranet.mairie-aubervilliers.fr/auber3.0/spip.php?rubrique224"><div id="travaux_icon"><img src="http://intranet.mairie-aubervilliers.fr/auber3.0/plugins/itwx_cimobile_3_2/squel_mobiles/mobile/ICONES/png/icone-travaux.png" />
+<span class="legend travaux-legend">Travaux</span></a></div>
+
+<a href="http://intranet.mairie-aubervilliers.fr/auber3.0/spip.php?rubrique28"><div id="demarches_icon"><img src="http://intranet.mairie-aubervilliers.fr/auber3.0/plugins/itwx_cimobile_3_2/squel_mobiles/mobile/ICONES/png/icone-demarches.png" />
+<span class="legend demarches-legend">Démarches </span></a></div>
+
+<a href="http://intranet.mairie-aubervilliers.fr/auber3.0/spip.php?rubrique36"><div id="quartier_icon"><img src="http://intranet.mairie-aubervilliers.fr/auber3.0/plugins/itwx_cimobile_3_2/squel_mobiles/mobile/ICONES/png/icone-quartier.png" />
+<span class="legend quartier-legend">Quartiers</span></a></div>
+
+<a href="http://intranet.mairie-aubervilliers.fr/auber3.0/spip.php?article4644"><div id="circulation_icon"><img src="http://intranet.mairie-aubervilliers.fr/auber3.0/plugins/itwx_cimobile_3_2/squel_mobiles/mobile/ICONES/png/icone-circulation.png" />
+<span class="legend circulation-legend">Circulation</span></a></div>
+
+<!--TROISIEME LIGNE -->
+<a href="http://intranet.mairie-aubervilliers.fr/auber3.0/spip.php?rubrique306"><div id="archives_icon"><img src="http://intranet.mairie-aubervilliers.fr/auber3.0/plugins/itwx_cimobile_3_2/squel_mobiles/mobile/ICONES/png/icone-archives.png" />
+<span class="legend archives-legend">Archives </span></a></div>
+
+<a href="http://intranet.mairie-aubervilliers.fr/auber3.0/spip.php?rubrique6"><div id="images_icon"><img src="http://intranet.mairie-aubervilliers.fr/auber3.0/plugins/itwx_cimobile_3_2/squel_mobiles/mobile/ICONES/png/icone-image.png" />
+<span class="legend images-legend">Images</span></a></div>
+
+<a href="http://intranet.mairie-aubervilliers.fr/auber3.0/spip.php?rubrique99"><div id="videos_icon"><img src="http://intranet.mairie-aubervilliers.fr/auber3.0/plugins/itwx_cimobile_3_2/squel_mobiles/mobile/ICONES/png/icone-video2.png" />
+<span class="legend videos-legend">Vidéos</span></a></div>
+
+<!--QUATRIEME LIGNE -->
+<a href="http://intranet.mairie-aubervilliers.fr/auber3.0/spip.php?article104"><div id="urgences_icon"><img src="http://intranet.mairie-aubervilliers.fr/auber3.0/plugins/itwx_cimobile_3_2/squel_mobiles/mobile/ICONES/png/icone-urgences.png" />
+<span class="legend urgences-legend">Urgences </span></a></div>
+
+<a href="http://intranet.mairie-aubervilliers.fr/auber3.0/spip.php?rubrique137"><div id="proprete_icon"><img src="http://intranet.mairie-aubervilliers.fr/auber3.0/plugins/itwx_cimobile_3_2/squel_mobiles/mobile/ICONES/png/icone-proprete.png" />
+<span class="legend proprete-legend">Propreté</span></a></div>
+
+<a href="http://intranet.mairie-aubervilliers.fr/auber3.0/spip.php?article4885"><div id="rss_icon"><img src="http://intranet.mairie-aubervilliers.fr/auber3.0/plugins/itwx_cimobile_3_2/squel_mobiles/mobile/ICONES/png/icone-rss.png" />
+<span class="legend rss-legend">RSS</span></a></div>
+
+</div>
+</div>
+
+ 
+  [(#REM) Informations ]
+  <div class="group"><:itwx:infos:></div>
+  <div class="listmenu">
+    <ul>
+	  [(#PLUGIN{agenda}|oui)<li><a href="#URL_PAGE{agenda}"><:icone_agenda:></a></li>]
+      [(#CONFIG{itwx/auteurs}|?{' '})<li><a rel="start home" href="#URL_PAGE{lesauteurs}"><:icone_auteurs:></a></li>]
+	  <BOUCLE_mot_invisible(MOTS) {titre=invisible} {doublons}></BOUCLE_mot_invisible>
+      <BOUCLE_mots(MOTS){0,1}{doublons}>
+	  [(#CONFIG{itwx/mots}|?{' '})<li><a href="#URL_PAGE{lesmots}"><:mots_clefs:></a></li>]
+	  </BOUCLE_mots>
+      [(#CONFIG{itwx/rubriques}|non)<li><a rel="start home" href="#URL_PAGE{lesrubriques}"><:rubriques:></a></li>]
+      <li><a rel="start home" href="#URL_PAGE{plan}"><:plan_site:></a></li>
+      <li><a href="#URL_PAGE{recherche}"><:spip:info_rechercher:></a></li>
+    </ul>
+  </div>
+  
+<script>
+$(function(){
+  $('#enhaut').click(function() {
+    $('html,body').animate({scrollTop: 0}, 'slow');
+  });
+
+  $(window).scroll(function(){
+     if($(window).scrollTop()<900){
+        $('#enhaut').fadeOut();
+     }else{
+        $('#enhaut').fadeIn();
+     }
+  });
+});
+</script>
+
+<style>
+.blochaut{
+width: 60px;
+height: 60px;
+background-color: #FFFFFF;
+background-image: url('http://intranet.mairie-aubervilliers.fr/auber4.0/plugins/graphisme_auber2.0/NAVPICS/fleche.png');
+background-position: 18px 20px;
+background-size: 40%;
+background-repeat: no-repeat;
+border: 1px solid #03a8ae;
+float: right;
+/* margin-top: 33%; */
+margin-left: 1050px;
+position: fixed;
+border-radius: 4px;
+cursor: pointer;
+margin-top: 25px;
+}
+</style>
+         
+<div id="enhaut" class="blochaut"> </div>
+
+  
+<!--   [(#REM) Pied - Gestion du site ]
+  <div class="group" style="height:17px"></div>
+  <div class="ticket">
+    <div class="ticketmenu">
+      <ul>
+        [(#CONFIG{itwx/classique}|?{' '})<li><a rel="start home" href="[(#URL_SITE_SPIP)/?cimobile=web]"><:itwx:siteclassique:></a></li>]
+        [(#SESSION{id_auteur}|?{'',' '})
+         [(#FORMULAIRE_INSCRIPTION|oui)<li><a href="#URL_PAGE{inscription}" rel="nofollow"><:itwx:inscription:></a></li>]
+		]
+        [(#AUTORISER{ecrire})<li><a href="#EVAL{_DIR_RESTREINT_ABS}"><:espace_prive:></a></li>]
+        [(#SESSION{id_auteur}|?{' '})<li><a href="#URL_LOGOUT" rel="nofollow" style="text-align:center"><:icone_deconnecter:></a></li>]
+      </ul>
+    </div>
+  </div>
+ -->  
+  <INCLURE{fond=inc/inc-pied}/> 
+
+</div><!--#page-->
+</body>
+</html>

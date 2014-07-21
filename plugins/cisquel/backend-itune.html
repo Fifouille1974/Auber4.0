@@ -1,0 +1,40 @@
+[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<?xml version="1.0"[ encoding="(#CHARSET)"]?>
+<rss xmlns:itunes="http://www.itunes.com/DTDs/Podcast-1.0.dtd" version="2.0"> 
+ 
+  <channel> 
+    <title>[(#NOM_SITE_SPIP|textebrut|entites_html|entites_unicode)]</title> 
+    <itunes:author>#EMAIL_WEBMASTER</itunes:author> 
+    <link>#URL_SITE_SPIP</link> 
+    <description></description> 
+    <itunes:subtitle></itunes:subtitle> 
+    <itunes:summary></itunes:summary> 
+    <language>#LANG</language> 
+    <copyright>[(#NOM_SITE_SPIP|texte_backend)] 2005</copyright> 
+ 
+ 
+<BOUCLE_article(ARTICLES){raccourci=_podcasting}{par date}{inverse}{0,10}>
+
+   <item> 
+      <title>[(#TITRE|texte_backend)]</title> 
+            <itunes:author><BOUCLE_auteursb(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE_auteursb></itunes:author> 
+      <description>[(#DESCRIPTIF|liens_absolus|texte_backend)]</description> 
+      <itunes:subtitle>[(#SOUS_TITRE|texte_backend)]</itunes:subtitle> 
+      <itunes:summary>[(#DESCRIPTIF|liens_absolus|texte_backend)]</itunes:summary> 
+     
+     <BOUCLE_podcast(DOCUMENTS){id_article}{mode=document}>
+			<enclosure url="[(#URL_DOCUMENT|url_absolue|unique)]" length="[(#TAILLE)]" type="[(#TYPE_DOCUMENT|ciparam_mime_type)]" />
+		</BOUCLE_podcast>
+      
+      <guid isPermaLink="false">[(#URL_ARTICLE|url_absolue|unique)]</guid> 
+      <pubDate>[(#DATE|affdate)] [(#DATE|heures)]:[(#DATE|minutes)]:[(#DATE|secondes)]</pubDate> 
+     
+      <category></category> 
+     
+      <itunes:explicit>no</itunes:explicit> 
+    </item> 
+    
+</BOUCLE_article>
+    
+
+</channel> 
+</rss>

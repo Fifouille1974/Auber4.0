@@ -1,0 +1,57 @@
+#CACHE{0}
+[(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>[(#NOM_SITE_SPIP|textebrut)]</title>
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+<link href="#URL_PAGE{style_prive,ltr=left&couleur_claire=6583A2&couleur_foncee=6583A2}" rel="stylesheet" type="text/css">
+[<link rel="stylesheet" href="(#CHEMIN{_css/cinotif_style.css})" type="text/css" media="all" />]
+</head>
+<body>
+[(#ENV{lien_fermer}|oui)
+<div class="fermer"><a href="javascript:window.close()"><:cinotif:fermer:></a></div>
+]
+
+#SET{ci_id_abonne,0}
+<BOUCLE_auteur(CINOTIF_ABONNES){id_auteur=#SESSION{id_auteur}}>
+[(#SESSION{id_auteur}|>{0}|oui)
+#SET{ci_id_abonne,#ID_ABONNE}
+]
+</BOUCLE_auteur>
+
+<B_abo>
+<div id="contenu">
+<div class="cadre cadre-r">
+<div class="titrem impliable"></div>
+<div class="cadre_padding">
+
+<div style="margin:4px 0px 10px 0px;">
+</div>
+<table cellspacing="0" cellpadding="2" style="width: 100%; border: 0px none;" class="arial2">
+<tbody>
+<tr style="background-color:#eee;">
+<th style="width: 35%;"><:cinotif:titre_objet:></th>
+<th style="width: 45%;"><:cinotif:abonnements:></th>
+<th style="width: 20%;"><:cinotif:titre_statut:></th>
+</tr>
+<BOUCLE_abo(CINOTIF_ABONNEMENTS cinotif_evenements){id_abonne=#GET{ci_id_abonne}}{!par objet}{par id_objet}{tout}>
+<tr class="tr_liste" style="background-color:#fff;">
+<td>[(#PLUGIN{cisquel}|oui)<a href="[(#URL_PAGE{abonnement-#OBJET}|parametre_url{id_#OBJET,#ID_OBJET})]" class="spip_in">][(#PLUGIN{cisquel}|non)<a href="[(#URL_PAGE{cinotif}|parametre_url{objet,#OBJET}|parametre_url{id_objet,#ID_OBJET})]">]#OBJET [(#ID_OBJET|?{#ID_OBJET,''})]</a></td>
+<td>[(#VAL{cinotif:}|concat{#QUOI}|_T)]</td>
+<td>[(#VAL{cinotif:}|concat{#STATUT}|_T)]</td>
+</tr>
+</BOUCLE_abo>
+</tbody>
+</table>
+<div style="margin:10px 0px 4px 0px;">
+</div>
+<div><:cinotif:legende_publie:></div>
+
+</div>
+</div>
+</div>
+</B_abo>
+
+</body>
+</html>

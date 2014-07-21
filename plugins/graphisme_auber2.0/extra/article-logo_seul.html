@@ -1,0 +1,494 @@
+#CACHE{0}
+			<div id="menu2">
+				<h1 class="invisible"><:cisquel:eq_menu_droite:></h1>
+                
+                
+                <BOUCLE_droite_article_normal(ARTICLES){id_article} {id_secteur!=94}>
+				[<div class="visuel"><img src="(#LOGO_ARTICLE||extraire_attribut{'src'})" alt="<:cisquel:eq_illustration:>" ></div>]
+				<div class="blocoutil">
+				<a href="javascript:chainemail('[(#NOM_SITE_SPIP|ciparam_filtre_mailto{#CHARSET})]  [(#TITRE|supprimer_numero|ciparam_filtre_mailto{#CHARSET})]')" title="<:cisquel:eq_envoyer_courriel:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><:cisquel:eq_envoyer_courriel:></a>
+				<BOUCLE_imprimer_article(ARTICLES){id_article}>
+					<a href="[(#URL_PAGE{article_print}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_imprimer_page:>" class="imprimer"><:cisquel:eq_imprimer:></a>
+				</BOUCLE_imprimer_article>
+				<BOUCLE_reader_normal(ARTICLES){raccourci=_reader_acrobat_ou_autre}{par num titre}>
+				<a href="[(#URL_PAGE{affiche_article}|parametre_url{id_article,#ID_ARTICLE})]" onclick="window.open(this.href, 'affiche_image', 'toolbar=0,location=0,directories=0,status=0,scrollbars=1,resizable=1,copyhistory=0,menuBar=0,width=600,height=450'); return false;" title="<:cisquel:eq_ouvre_fenetre:>" class="acrobat">[<img src="(#LOGO_ARTICLE||image_reduire{19,0}|extraire_attribut{'src'})" alt="Picto" border="0">][<span>(#TITRE|supprimer_numero)</span>]</a>
+				</BOUCLE_reader_normal>		
+				</div>
+				[(#ID_RUBRIQUE|cisquel_rubrique_ec|=={oui}|oui)
+				<div class="blocoutil">
+				<a href="[(#URL_PAGE{envoi_membre}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_envoyer_membres:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><:cisquel:eq_envoyer_membres:></a>
+				</div>
+				]
+				</BOUCLE_droite_article_normal>	
+                
+				<BOUCLE_droite_article(ARTICLES){id_article}{raccourci=_portail_permanent_haut_actu}>
+				<BOUCLE_extra_image(DOCUMENTS){id_article}{mode=image}{0,1} {doublons}>
+                        <div id="img_document"> [(#EMBED_DOCUMENT|image_reduire{165,0})]</div>
+			  </BOUCLE_extra_image>
+              
+              <div class="blocoutil">
+						
+				<a rel="noindex,nofollow" href="javascript:chainemail('[(#NOM_SITE_SPIP|ciparam_filtre_mailto{#CHARSET})]  [(#TITRE|supprimer_numero|ciparam_filtre_mailto{#CHARSET})]')" title="<:cisquel:eq_envoyer_courriel:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><:cisquel:eq_envoyer_courriel:></a>
+				<a href="[(#URL_PAGE{article_print}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_imprimer_page:>" class="imprimer"><:cisquel:eq_imprimer:></a>
+
+				[(#PLUGIN{cinotif}|oui)
+					[(#CONFIG{cinotif_article}|=={non}|non)
+				<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:abonner:>" class="abonner"><:cisquel:abonner:></a>
+				<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{desabonner,oui})]" title="<:cisquel:desabonner:>" class="desabonner"><:cisquel:desabonner:></a>
+					]
+				]
+
+				<BOUCLE_reader(ARTICLES){raccourci=_reader_acrobat_ou_autre}{par num titre}>
+				<a rel="noindex,nofollow" href="[(#URL_ARTICLE)]" class="acrobat">[<img src="(#LOGO_ARTICLE||image_reduire{19,0}|extraire_attribut{'src'})" alt="" border="0" />][<span>(#TITRE|supprimer_numero)</span>]</a>
+				</BOUCLE_reader>		
+				</div>
+				[(#ID_RUBRIQUE|cisquel_rubrique_ec|=={oui}|oui)
+				<div class="blocoutil">
+				<a rel="noindex,nofollow" href="[(#URL_PAGE{envoi_membre}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_envoyer_membres:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><:cisquel:eq_envoyer_membres:></a>
+				</div>
+				]
+				
+               </BOUCLE_droite_article> 
+               
+               
+               <BOUCLE_droite_article2(ARTICLES){id_article}{raccourci=_portail_permanent_haut_sortir}>
+				<BOUCLE_extra_image2(DOCUMENTS){id_article}{mode=image}{0,1} {doublons}>
+                        <div id="img_document"> [(#EMBED_DOCUMENT|image_reduire{165,0})]</div>
+			  </BOUCLE_extra_image2>
+              
+              <div class="blocoutil">
+						
+				<a rel="noindex,nofollow" href="javascript:chainemail('[(#NOM_SITE_SPIP|ciparam_filtre_mailto{#CHARSET})]  [(#TITRE|supprimer_numero|ciparam_filtre_mailto{#CHARSET})]')" title="<:cisquel:eq_envoyer_courriel:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><:cisquel:eq_envoyer_courriel:></a>
+				<a href="[(#URL_PAGE{article_print}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_imprimer_page:>" class="imprimer"><:cisquel:eq_imprimer:></a>
+                
+
+
+
+				[(#PLUGIN{cinotif}|oui)
+					[(#CONFIG{cinotif_article}|=={non}|non)
+				<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:abonner:>" class="abonner"><:cisquel:abonner:></a>
+				<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{desabonner,oui})]" title="<:cisquel:desabonner:>" class="desabonner"><:cisquel:desabonner:></a>
+					]
+				]
+
+				<BOUCLE_reader2(ARTICLES){raccourci=_reader_acrobat_ou_autre}{par num titre}>
+				<a rel="noindex,nofollow" href="[(#URL_ARTICLE)]" class="acrobat">[<img src="(#LOGO_ARTICLE||image_reduire{19,0}|extraire_attribut{'src'})" alt="" border="0" />][<span>(#TITRE|supprimer_numero)</span>]</a>
+				</BOUCLE_reader2>		
+				</div>
+				[(#ID_RUBRIQUE|cisquel_rubrique_ec|=={oui}|oui)
+				<div class="blocoutil">
+				<a rel="noindex,nofollow" href="[(#URL_PAGE{envoi_membre}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_envoyer_membres:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><:cisquel:eq_envoyer_membres:></a>
+				</div>
+				]
+				
+                               
+<span class="partage">Partager cet article :</span>
+               <div id="socialnetwork"> 
+                <div id="fb-root"></div>
+                <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
+  {lang: 'fr'}
+</script>
+                
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&appId=595023263845083&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-share-button" data-type="button_count"></div>
+<br />
+
+<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="aubervilliers93" data-lang="fr">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+<g:plusone></g:plusone>
+</div>
+                
+               </BOUCLE_droite_article2> 
+                
+               <BOUCLE_droite_article4(ARTICLES){id_article}{raccourci=_portail_permanent_haut_projets}>
+				<BOUCLE_extra_image4(DOCUMENTS){id_article}{mode=image}{0,1} {doublons}>
+                        <div id="img_document"> [(#EMBED_DOCUMENT|image_reduire{165,0})]</div>
+			  </BOUCLE_extra_image4>
+				
+                <div class="blocoutil">
+						
+				<a rel="noindex,nofollow" href="javascript:chainemail('[(#NOM_SITE_SPIP|ciparam_filtre_mailto{#CHARSET})]  [(#TITRE|supprimer_numero|ciparam_filtre_mailto{#CHARSET})]')" title="<:cisquel:eq_envoyer_courriel:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><:cisquel:eq_envoyer_courriel:></a>
+				<a href="[(#URL_PAGE{article_print}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_imprimer_page:>" class="imprimer"><:cisquel:eq_imprimer:></a>
+
+				[(#PLUGIN{cinotif}|oui)
+					[(#CONFIG{cinotif_article}|=={non}|non)
+				<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:abonner:>" class="abonner"><:cisquel:abonner:></a>
+				<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{desabonner,oui})]" title="<:cisquel:desabonner:>" class="desabonner"><:cisquel:desabonner:></a>
+					]
+				]
+
+				<BOUCLE_reader4(ARTICLES){raccourci=_reader_acrobat_ou_autre}{par num titre}>
+				<a rel="noindex,nofollow" href="[(#URL_ARTICLE)]" class="acrobat">[<img src="(#LOGO_ARTICLE||image_reduire{19,0}|extraire_attribut{'src'})" alt="" border="0" />][<span>(#TITRE|supprimer_numero)</span>]</a>
+				</BOUCLE_reader4>		
+				</div>
+				[(#ID_RUBRIQUE|cisquel_rubrique_ec|=={oui}|oui)
+				<div class="blocoutil">
+				<a rel="noindex,nofollow" href="[(#URL_PAGE{envoi_membre}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_envoyer_membres:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><:cisquel:eq_envoyer_membres:></a>
+				</div>
+				]
+                
+                               
+<span class="partage">Partager cet article :</span>
+               <div id="socialnetwork"> 
+                <div id="fb-root"></div>
+                <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
+  {lang: 'fr'}
+</script>
+                
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&appId=595023263845083&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-share-button" data-type="button_count"></div>
+<br />
+
+<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="aubervilliers93" data-lang="fr">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+<g:plusone></g:plusone>
+</div>
+                
+               </BOUCLE_droite_article4> 
+               
+               <BOUCLE_droite_article6(ARTICLES){id_article}{raccourci=_portail_permanent_haut_pratique}>
+				<BOUCLE_extra_image6(DOCUMENTS){id_article}{mode=image}{0,1} {doublons}>
+                        <div id="img_document"> [(#EMBED_DOCUMENT|image_reduire{165,0})]</div>
+			  </BOUCLE_extra_image6>
+              
+              <div class="blocoutil">
+						
+				<a rel="noindex,nofollow" href="javascript:chainemail('[(#NOM_SITE_SPIP|ciparam_filtre_mailto{#CHARSET})]  [(#TITRE|supprimer_numero|ciparam_filtre_mailto{#CHARSET})]')" title="<:cisquel:eq_envoyer_courriel:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><:cisquel:eq_envoyer_courriel:></a>
+				<a href="[(#URL_PAGE{article_print}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_imprimer_page:>" class="imprimer"><:cisquel:eq_imprimer:></a>
+
+				[(#PLUGIN{cinotif}|oui)
+					[(#CONFIG{cinotif_article}|=={non}|non)
+				<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:abonner:>" class="abonner"><:cisquel:abonner:></a>
+				<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{desabonner,oui})]" title="<:cisquel:desabonner:>" class="desabonner"><:cisquel:desabonner:></a>
+					]
+				]
+
+				<BOUCLE_reader6(ARTICLES){raccourci=_reader_acrobat_ou_autre}{par num titre}>
+				<a rel="noindex,nofollow" href="[(#URL_ARTICLE)]" class="acrobat">[<img src="(#LOGO_ARTICLE||image_reduire{19,0}|extraire_attribut{'src'})" alt="" border="0" />][<span>(#TITRE|supprimer_numero)</span>]</a>
+				</BOUCLE_reader6>		
+				</div>
+				[(#ID_RUBRIQUE|cisquel_rubrique_ec|=={oui}|oui)
+				<div class="blocoutil">
+				<a rel="noindex,nofollow" href="[(#URL_PAGE{envoi_membre}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_envoyer_membres:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><:cisquel:eq_envoyer_membres:></a>
+				</div>
+				]
+				
+                               
+<span class="partage">Partager cet article :</span>
+               <div id="socialnetwork"> 
+                <div id="fb-root"></div>
+                <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
+  {lang: 'fr'}
+</script>
+                
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&appId=595023263845083&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-share-button" data-type="button_count"></div>
+<br />
+
+<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="aubervilliers93" data-lang="fr">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+<g:plusone></g:plusone>
+</div>
+                
+               </BOUCLE_droite_article6> 
+                
+                <BOUCLE_droite_article1(ARTICLES){id_article}{raccourci=_portail_dossiers_actu}>
+				[<div class="visuel"><img src="(#LOGO_ARTICLE||extraire_attribut{'src'})" alt="" /></div>]
+
+				
+				<div class="blocoutil">
+						
+				<a rel="noindex,nofollow" href="javascript:chainemail('[(#NOM_SITE_SPIP|ciparam_filtre_mailto{#CHARSET})]  [(#TITRE|supprimer_numero|ciparam_filtre_mailto{#CHARSET})]')" title="<:cisquel:eq_envoyer_courriel:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><:cisquel:eq_envoyer_courriel:></a>
+				<a href="[(#URL_PAGE{article_print}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_imprimer_page:>" class="imprimer"><:cisquel:eq_imprimer:></a>
+
+				[(#PLUGIN{cinotif}|oui)
+					[(#CONFIG{cinotif_article}|=={non}|non)
+				<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:abonner:>" class="abonner"><:cisquel:abonner:></a>
+				<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{desabonner,oui})]" title="<:cisquel:desabonner:>" class="desabonner"><:cisquel:desabonner:></a>
+					]
+				]
+
+				<BOUCLE_reader1(ARTICLES){raccourci=_reader_acrobat_ou_autre}{par num titre}>
+				<a rel="noindex,nofollow" href="[(#URL_ARTICLE)]" class="acrobat">[<img src="(#LOGO_ARTICLE||image_reduire{19,0}|extraire_attribut{'src'})" alt="" border="0" />][<span>(#TITRE|supprimer_numero)</span>]</a>
+				</BOUCLE_reader1>		
+				</div>
+				[(#ID_RUBRIQUE|cisquel_rubrique_ec|=={oui}|oui)
+				<div class="blocoutil">
+				<a rel="noindex,nofollow" href="[(#URL_PAGE{envoi_membre}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_envoyer_membres:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><:cisquel:eq_envoyer_membres:></a>
+				</div>
+				]
+                
+                               
+<span class="partage">Partager cet article :</span>
+               <div id="socialnetwork"> 
+                <div id="fb-root"></div>
+                <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
+  {lang: 'fr'}
+</script>
+                
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&appId=595023263845083&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-share-button" data-type="button_count"></div>
+<br />
+
+<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="aubervilliers93" data-lang="fr">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+<g:plusone></g:plusone>
+</div>
+                
+				</BOUCLE_droite_article1>	
+                
+                <BOUCLE_droite_article3(ARTICLES){id_article}{raccourci=_portail_dossiers}>
+				[<div class="visuel"><img src="(#LOGO_ARTICLE||extraire_attribut{'src'})" alt="" /></div>]
+
+				
+				<div class="blocoutil">
+						
+				<a rel="noindex,nofollow" href="javascript:chainemail('[(#NOM_SITE_SPIP|ciparam_filtre_mailto{#CHARSET})]  [(#TITRE|supprimer_numero|ciparam_filtre_mailto{#CHARSET})]')" title="<:cisquel:eq_envoyer_courriel:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><:cisquel:eq_envoyer_courriel:></a>
+				<a href="[(#URL_PAGE{article_print}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_imprimer_page:>" class="imprimer"><:cisquel:eq_imprimer:></a>
+
+				[(#PLUGIN{cinotif}|oui)
+					[(#CONFIG{cinotif_article}|=={non}|non)
+				<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:abonner:>" class="abonner"><:cisquel:abonner:></a>
+				<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{desabonner,oui})]" title="<:cisquel:desabonner:>" class="desabonner"><:cisquel:desabonner:></a>
+					]
+				]
+
+				<BOUCLE_reader3(ARTICLES){raccourci=_reader_acrobat_ou_autre}{par num titre}>
+				<a rel="noindex,nofollow" href="[(#URL_ARTICLE)]" class="acrobat">[<img src="(#LOGO_ARTICLE||image_reduire{19,0}|extraire_attribut{'src'})" alt="" border="0" />][<span>(#TITRE|supprimer_numero)</span>]</a>
+				</BOUCLE_reader3>		
+				</div>
+				[(#ID_RUBRIQUE|cisquel_rubrique_ec|=={oui}|oui)
+				<div class="blocoutil">
+				<a rel="noindex,nofollow" href="[(#URL_PAGE{envoi_membre}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_envoyer_membres:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><:cisquel:eq_envoyer_membres:></a>
+				</div>
+				]
+                
+                               
+<span class="partage">Partager cet article :</span>
+               <div id="socialnetwork"> 
+                <div id="fb-root"></div>
+                <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
+  {lang: 'fr'}
+</script>
+                
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&appId=595023263845083&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-share-button" data-type="button_count"></div>
+<br />
+
+<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="aubervilliers93" data-lang="fr">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+<g:plusone></g:plusone>
+</div>
+                
+				</BOUCLE_droite_article3>		
+                		
+                <BOUCLE_droite_article5(ARTICLES){id_article}{raccourci=_portail_dossiers2}>
+				[<div class="visuel"><img src="(#LOGO_ARTICLE||extraire_attribut{'src'})" alt="" /></div>]
+
+				
+				<div class="blocoutil">
+						
+				<a rel="noindex,nofollow" href="javascript:chainemail('[(#NOM_SITE_SPIP|ciparam_filtre_mailto{#CHARSET})]  [(#TITRE|supprimer_numero|ciparam_filtre_mailto{#CHARSET})]')" title="<:cisquel:eq_envoyer_courriel:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><:cisquel:eq_envoyer_courriel:></a>
+				<a href="[(#URL_PAGE{article_print}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_imprimer_page:>" class="imprimer"><:cisquel:eq_imprimer:></a>
+
+				[(#PLUGIN{cinotif}|oui)
+					[(#CONFIG{cinotif_article}|=={non}|non)
+				<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:abonner:>" class="abonner"><:cisquel:abonner:></a>
+				<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{desabonner,oui})]" title="<:cisquel:desabonner:>" class="desabonner"><:cisquel:desabonner:></a>
+					]
+				]
+
+				<BOUCLE_reader5(ARTICLES){raccourci=_reader_acrobat_ou_autre}{par num titre}>
+				<a rel="noindex,nofollow" href="[(#URL_ARTICLE)]" class="acrobat">[<img src="(#LOGO_ARTICLE||image_reduire{19,0}|extraire_attribut{'src'})" alt="" border="0" />][<span>(#TITRE|supprimer_numero)</span>]</a>
+				</BOUCLE_reader5>		
+				</div>
+				[(#ID_RUBRIQUE|cisquel_rubrique_ec|=={oui}|oui)
+				<div class="blocoutil">
+				<a rel="noindex,nofollow" href="[(#URL_PAGE{envoi_membre}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_envoyer_membres:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><:cisquel:eq_envoyer_membres:></a>
+				</div>
+				]
+                
+                               
+<span class="partage">Partager cet article :</span>
+               <div id="socialnetwork"> 
+                <div id="fb-root"></div>
+                <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
+  {lang: 'fr'}
+</script>
+                
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&appId=595023263845083&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-share-button" data-type="button_count"></div>
+<br />
+
+<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="aubervilliers93" data-lang="fr">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+<g:plusone></g:plusone>
+</div>
+                
+				</BOUCLE_droite_article5>		
+	
+    
+    <BOUCLE_droite_article7(ARTICLES){id_article}{raccourci=_portail_dossiers3}>
+				[<div class="visuel"><img src="(#LOGO_ARTICLE||extraire_attribut{'src'})" alt="" /></div>]
+
+				
+				<div class="blocoutil">
+						
+				<a rel="noindex,nofollow" href="javascript:chainemail('[(#NOM_SITE_SPIP|ciparam_filtre_mailto{#CHARSET})]  [(#TITRE|supprimer_numero|ciparam_filtre_mailto{#CHARSET})]')" title="<:cisquel:eq_envoyer_courriel:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><:cisquel:eq_envoyer_courriel:></a>
+				<a href="[(#URL_PAGE{article_print}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_imprimer_page:>" class="imprimer"><:cisquel:eq_imprimer:></a>
+
+				[(#PLUGIN{cinotif}|oui)
+					[(#CONFIG{cinotif_article}|=={non}|non)
+				<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:abonner:>" class="abonner"><:cisquel:abonner:></a>
+				<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{desabonner,oui})]" title="<:cisquel:desabonner:>" class="desabonner"><:cisquel:desabonner:></a>
+					]
+				]
+
+				<BOUCLE_reader7(ARTICLES){raccourci=_reader_acrobat_ou_autre}{par num titre}>
+				<a rel="noindex,nofollow" href="[(#URL_ARTICLE)]" class="acrobat">[<img src="(#LOGO_ARTICLE||image_reduire{19,0}|extraire_attribut{'src'})" alt="" border="0" />][<span>(#TITRE|supprimer_numero)</span>]</a>
+				</BOUCLE_reader7>		
+				</div>
+				[(#ID_RUBRIQUE|cisquel_rubrique_ec|=={oui}|oui)
+				<div class="blocoutil">
+				<a rel="noindex,nofollow" href="[(#URL_PAGE{envoi_membre}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_envoyer_membres:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><:cisquel:eq_envoyer_membres:></a>
+				</div>
+				]
+                
+                
+                               
+	<script type="text/javascript" src="https://apis.google.com/js/plusone.js">
+	{lang: 'fr'}
+	</script>
+					
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&appId=595023263845083&version=v2.0";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
+				
+<div id="sharenetworkbubble">                               
+	<span id="sharetitle">Partager</span>
+				   <div id="socialnetwork"> 
+					<div id="fb-root"></div>
+	<section id="networktop">
+		<div id="shareitem1">			
+			<!--<div class="fb-share-button" data-type="button_count"></div>-->
+			<div class="imgnetwork1"></div>
+		</div>
+		<div id="shareitem1">	
+			<div class="imgnetwork2"></div>
+			<!--<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="aubervilliers93" data-lang="fr">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>-->
+		</div>
+	</section>
+	
+	<section id="networkbottom">
+		<div id="shareitem1">
+			<div class="imgnetwork3"></div>
+			<!--<g:plusone></g:plusone>-->
+		</div>
+		
+		<div id="shareitem1">
+			<div class="imgnetwork4"></div>
+		</div>
+	</section>
+	
+	</div>
+</div>
+
+				</BOUCLE_droite_article7>	
+                
+                
+				<!-- ACTU SLIDER-->
+      <BOUCLE_droite_article8(ARTICLES){id_article}{raccourci=_alaune}>
+				[<div class="visuel"><img src="(#LOGO_ARTICLE||extraire_attribut{'src'})" alt="" /></div>]
+
+				
+				<div class="blocoutil">
+						
+				<a rel="noindex,nofollow" href="javascript:chainemail('[(#NOM_SITE_SPIP|ciparam_filtre_mailto{#CHARSET})]  [(#TITRE|supprimer_numero|ciparam_filtre_mailto{#CHARSET})]')" title="<:cisquel:eq_envoyer_courriel:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><:cisquel:eq_envoyer_courriel:></a>
+				<a href="[(#URL_PAGE{article_print}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_imprimer_page:>" class="imprimer"><:cisquel:eq_imprimer:></a>
+
+				[(#PLUGIN{cinotif}|oui)
+					[(#CONFIG{cinotif_article}|=={non}|non)
+				<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:abonner:>" class="abonner"><:cisquel:abonner:></a>
+				<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{desabonner,oui})]" title="<:cisquel:desabonner:>" class="desabonner"><:cisquel:desabonner:></a>
+					]
+				]
+
+				<BOUCLE_reader8(ARTICLES){raccourci=_reader_acrobat_ou_autre}{par num titre}>
+				<a rel="noindex,nofollow" href="[(#URL_ARTICLE)]" class="acrobat">[<img src="(#LOGO_ARTICLE||image_reduire{19,0}|extraire_attribut{'src'})" alt="" border="0" />][<span>(#TITRE|supprimer_numero)</span>]</a>
+				</BOUCLE_reader8>		
+				</div>
+				[(#ID_RUBRIQUE|cisquel_rubrique_ec|=={oui}|oui)
+				<div class="blocoutil">
+				<a rel="noindex,nofollow" href="[(#URL_PAGE{envoi_membre}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_envoyer_membres:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><:cisquel:eq_envoyer_membres:></a>
+				</div>
+				]
+                
+	<script type="text/javascript" src="https://apis.google.com/js/plusone.js">
+	{lang: 'fr'}
+	</script>
+					
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&appId=595023263845083&version=v2.0";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
+				
+<div id="sharenetwork">                               
+	<h2>Partager cet article</h2>
+				   <div id="socialnetwork"> 
+					<div id="fb-root"></div>
+	<div id="shareitem">			
+		<div class="fb-share-button" data-type="button_count"></div>
+	</div>
+	<div id="shareitem">	
+		<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="aubervilliers93" data-lang="fr">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+	</div>
+	<div id="shareitem">
+		<g:plusone></g:plusone>
+	</div>
+	
+	
+	</div>
+</div>
+                
+				</BOUCLE_droite_article8>
+ 
+
+
+			</div>

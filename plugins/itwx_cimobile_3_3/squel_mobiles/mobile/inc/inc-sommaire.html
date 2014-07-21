@@ -1,0 +1,220 @@
+  <BOUCLE_article_invisible(ARTICLES) {titre_mot = invisible} {doublons}></BOUCLE_article_invisible>
+
+ <!--  <B_articles_recents>
+    <div class="group">L'événement</div>
+    <div class="menu articles">
+	#ANCRE_PAGINATION
+      <ul>
+        <BOUCLE_articles_recents(ARTICLES){id_rubrique=263} {raccourci=_portail_permanent} {par date}{inverse} {pagination 10}{doublons}>
+        <li class="hentry" onclick="window.location.href='#URL_ARTICLE'"> 
+		<div class="logo-article"><div id="title"><h3 class="entry-title" style="padding: 0px;"><a href="#URL_ARTICLE">#TITRE</a></h3></div>[(#LOGO_ARTICLE_RUBRIQUE{#URL_ARTICLE})]</div>
+          
+          <div class="#EDIT{intro} entry-content">[(#INTRODUCTION)]</div>
+          <div class="nettoyeur"></div>
+        </li>
+        </BOUCLE_articles_recents>
+      </ul>
+	  [<div class="pagination">(#PAGINATION)</div>]
+    </div>
+  </B_articles_recents> -->
+  
+   <B_articles_recents5>
+    <div class="menu articles">
+	<div class="group">A la une</div>
+    <div id="wrapper">
+        <!--<a href="http://dev7studios.com" id="dev7link" title="Go to dev7studios">dev7studios</a>-->
+
+        <div class="slider-wrapper theme-default">
+            <div id="slider2" class="nivoSlider">
+                <a href="http://intranet.mairie-aubervilliers.fr/auber4.0/spip.php?article91527"><img src="http://intranet.mairie-aubervilliers.fr/auber4.0/Nivoslider3/nivo-slider/demo/images/Elections.jpg" title="<b>Elections européennes</b><br />
+Retour aux urnes dimanche 25 mai : les citoyens sont appelés à élire les 74 députés français pour cinq ans au Parlement européen." data-thumb="images/toystory.jpg" alt="" data-transition="slideInLeft"/></a>
+                <a href="http://intranet.mairie-aubervilliers.fr/auber4.0/spip.php?article91532"><img src="http://intranet.mairie-aubervilliers.fr/auber4.0/Nivoslider3/nivo-slider/demo/images/Bus.jpg" data-thumb="images/up.jpg" alt="" title="<b>Bus 35 : Un nouveau terminus en juillet</b><br />
+En débouchant de la rue de la Commune de Paris, les chauffeurs du bus 35 vont devoir changer leurs habitudes." data-transition="fade"/></a>
+                <a href="http://intranet.mairie-aubervilliers.fr/auber4.0/spip.php?article91539"><img src="http://intranet.mairie-aubervilliers.fr/auber4.0/Nivoslider3/nivo-slider/demo/images/Metro.jpg" data-thumb="images/walle.jpg" alt="" data-transition="slideInRight" title="<b>Le métro fait son trou</b><br />
+Sous nos pieds, le tunnel de béton traverse
+la ville. "/></a>
+               
+            </div>
+            <div id="htmlcaption" class="nivo-html-caption">
+                <strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>. 
+            </div>
+        </div>
+
+    </div>
+    <script type="text/javascript" src="http://intranet.mairie-aubervilliers.fr/auber4.0/Nivoslider3/nivo-slider/demo/scripts/jquery-1.9.0.min.js"></script>
+    <script type="text/javascript" src="http://intranet.mairie-aubervilliers.fr/auber4.0/Nivoslider3/nivo-slider/jquery.nivo.slider.js"></script>
+    <script type="text/javascript">
+    $(window).load(function() {
+        $('#slider2').nivoSlider();
+    });
+    </script>
+<!--	#ANCRE_PAGINATION
+      <ul>
+        <BOUCLE_articles_recents5(ARTICLES){id_rubrique=1752} {raccourci=_alaune} {par date}{inverse} {pagination 10} {0,3}  {doublons}>
+        <li class="hentry" onclick="window.location.href='#URL_ARTICLE'"> 
+		<div class="logo-article"><div id="title"><h3 class="entry-title" style="padding: 0px;"><a href="#URL_ARTICLE">#TITRE</a></h3></div>[(#LOGO_ARTICLE_RUBRIQUE{#URL_ARTICLE})]</div>
+          
+          <div class="#EDIT{intro} entry-content">[(#CHAPO|couper{150})]</div>
+          <div class="nettoyeur"></div>
+        </li>
+        </BOUCLE_articles_recents5>
+      </ul>-->
+	  
+	
+	 
+	  [<div class="pagination">(#PAGINATION)</div>]
+    </div>
+
+  </B_articles_recents5>
+
+
+ <B_articles_recents2>
+    <div class="group">Les actualités</div>
+    <div class="menu articles">
+	#ANCRE_PAGINATION
+		<ul> 
+			<BOUCLE_articles_permanent_actu(ARTICLES){id_rubrique=194} {raccourci=_portail_permanent_haut_actu} {par date}{inverse} {pagination 10} {0,3} {doublons}>
+        <li class="hentry" onclick="window.location.href='#URL_ARTICLE'"> 
+		<div class="logo-article"><div id="title"><h3 class="entry-title" style="padding: 3px;"><a href="#URL_ARTICLE">#TITRE</a></h3></div>
+		<BOUCLE_trombi_image(DOCUMENTS){id_article}{mode=image}{0,1} {doublons}>
+                        <div id="img_document"> [(#EMBED_DOCUMENT)]</div>
+			  </BOUCLE_trombi_image></div>
+        
+          <div class="#EDIT{intro} entry-content">[(#CHAPO|couper{150})]</div>
+          <div class="nettoyeur"></div>
+        </li>
+        </BOUCLE_articles_permanent_actu>
+		</ul>
+      <ul>
+        <BOUCLE_articles_recents2(ARTICLES){id_rubrique=194} {raccourci=_portail_dossiers_actu} {par date}{inverse} {pagination 10} {0,3} {doublons}>
+        <li class="hentry" onclick="window.location.href='#URL_ARTICLE'"> 
+		
+			<div id="title-actu"><h3 class="entry-title" style="padding: 0px;"><a href="#URL_ARTICLE">#TITRE</a></h3></div>
+			<div class="logo-article1">[(#LOGO_ARTICLE_RUBRIQUE{#URL_ARTICLE})]</div>
+			
+          <div class="#EDIT{intro} entry-content1">[(#CHAPO|couper{150})]</div>
+          <div class="nettoyeur"></div>
+        </li>
+        </BOUCLE_articles_recents2>
+      </ul>
+	  
+	 
+	  [<div class="pagination">(#PAGINATION)</div>]
+    </div>
+  </B_articles_recents2>
+  
+   <B_articles_recents3>
+    <div class="group">Sortir</div>
+    <div class="menu articles">
+	#ANCRE_PAGINATION
+		<ul>
+			<BOUCLE_articles_permanent_sortir(ARTICLES){id_rubrique=196} {raccourci=_portail_permanent_haut_sortir} {par date}{inverse} {pagination 10} {0,3} {doublons}>
+			<li class="hentry" onclick="window.location.href='#URL_ARTICLE'"> 
+			<div class="logo-article"><div id="title"><h3 class="entry-title" style="padding: 3px;"><a href="#URL_ARTICLE">#TITRE</a></h3></div>
+		<BOUCLE_trombi_image_sortir(DOCUMENTS){id_article}{mode=image}{0,1} {doublons}>
+                        <div id="img_document"> [(#EMBED_DOCUMENT)]</div>
+			  </BOUCLE_trombi_image_sortir></div>
+			
+			  <div class="#EDIT{intro} entry-content">[(#CHAPO|couper{150})]</div>
+			  <div class="nettoyeur"></div>
+			</li>
+			</BOUCLE_articles_permanent_sortir>
+		</ul>
+      <ul>
+        <BOUCLE_articles_recents3(ARTICLES){id_rubrique=196} {raccourci=_portail_dossiers} {par date}{inverse} {pagination 10} {0,3} {doublons}>
+        <li class="hentry" onclick="window.location.href='#URL_ARTICLE'"> 
+		
+		<div id="title-actu"><h3 class="entry-title" style="padding: 0px;"><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a></h3></div>
+		<div class="logo-article1">[(#LOGO_ARTICLE_RUBRIQUE{#URL_ARTICLE})]</div>
+		
+          <div class="#EDIT{intro} entry-content1">[(#CHAPO|couper{150})]</div>
+          <div class="nettoyeur"></div>
+        </li>
+        </BOUCLE_articles_recents3>
+      </ul>
+	  
+	
+	 
+	  [<div class="pagination">(#PAGINATION)</div>]
+    </div>
+  </B_articles_recents3>
+  
+   <B_articles_recents4>
+    <div class="group">Les projets d’Auber</div>
+    <div class="menu articles">
+	#ANCRE_PAGINATION
+	
+			<ul>
+			<BOUCLE_articles_permanent_projets(ARTICLES){id_rubrique=195} {raccourci=_portail_permanent_haut_projets} {par date}{inverse} {pagination 10} {0,3} {doublons}>
+			<li class="hentry" onclick="window.location.href='#URL_ARTICLE'"> 
+			<div class="logo-article"><div id="title"><h3 class="entry-title" style="padding: 3px;"><a href="#URL_ARTICLE">#TITRE</a></h3></div>
+		<BOUCLE_trombi_image_projets(DOCUMENTS){id_article}{mode=image}{0,1} {doublons}>
+                        <div id="img_document"> [(#EMBED_DOCUMENT)]</div>
+			  </BOUCLE_trombi_image_projets></div>
+			
+			  <div class="#EDIT{intro} entry-content">[(#CHAPO|couper{150})]</div>
+			  <div class="nettoyeur"></div>
+			</li>
+			</BOUCLE_articles_permanent_projets>
+		</ul>
+		
+      <ul>
+        <BOUCLE_articles_recents4(ARTICLES){id_rubrique=195} {raccourci=_portail_dossiers2} {par date}{inverse} {pagination 10} {0,3}  {doublons}>
+        <li class="hentry" onclick="window.location.href='#URL_ARTICLE'"> 
+		
+			<div id="title-actu"><h3 class="entry-title" style="padding: 0px;"><a href="#URL_ARTICLE">#TITRE</a></h3></div>	
+		<div class="logo-article1">[(#LOGO_ARTICLE_RUBRIQUE{#URL_ARTICLE})]</div>
+		
+          <div class="#EDIT{intro} entry-content1">[(#CHAPO|couper{150})]</div>
+          <div class="nettoyeur"></div>
+        </li>
+        </BOUCLE_articles_recents4>
+      </ul>
+	  
+	
+	 
+	  [<div class="pagination">(#PAGINATION)</div>]
+    </div>
+
+  </B_articles_recents4>
+  
+  
+  <B_articles_recents6>
+    <div class="group">Pratique</div>
+    <div class="menu articles">
+	#ANCRE_PAGINATION
+	
+			<ul>
+			<BOUCLE_articles_permanent_pratique(ARTICLES){id_rubrique=344} {raccourci=_portail_permanent_haut_pratique} {par date}{inverse} {pagination 10} {0,3} {doublons}>
+			<li class="hentry" onclick="window.location.href='#URL_ARTICLE'"> 
+			<div class="logo-article"><div id="title"><h3 class="entry-title" style="padding: 3px;"><a href="#URL_ARTICLE">#TITRE</a></h3></div>
+		<BOUCLE_trombi_image_pratique(DOCUMENTS){id_article}{mode=image}{0,1} {doublons}>
+                        <div id="img_document"> [(#EMBED_DOCUMENT)]</div>
+			  </BOUCLE_trombi_image_pratique></div>
+			
+			  <div class="#EDIT{intro} entry-content">[(#CHAPO|couper{150})]</div>
+			  <div class="nettoyeur"></div>
+			</li>
+			</BOUCLE_articles_permanent_pratique>
+		</ul>
+		
+      <ul>
+        <BOUCLE_articles_recents6(ARTICLES){id_rubrique=344} {raccourci=_portail_dossiers3} {par date}{inverse} {pagination 10} {0,3}  {doublons}>
+        <li class="hentry" onclick="window.location.href='#URL_ARTICLE'"> 
+		
+		<div id="title-actu"><h3 class="entry-title" style="padding: 0px;"><a href="#URL_ARTICLE">#TITRE</a></h3></div>
+		<div class="logo-article1">[(#LOGO_ARTICLE_RUBRIQUE{#URL_ARTICLE})]</div>
+		
+          <div class="#EDIT{intro} entry-content1">[(#CHAPO|couper{150})]</div>
+          <div class="nettoyeur"></div>
+        </li>
+        </BOUCLE_articles_recents6>
+      </ul>
+	  
+	
+	 
+	  [<div class="pagination">(#PAGINATION)</div>]
+    </div>
+
+  </B_articles_recents6>
+

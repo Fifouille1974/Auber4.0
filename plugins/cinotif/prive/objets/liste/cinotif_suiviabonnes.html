@@ -1,0 +1,50 @@
+#SET{ciedit,''}
+[(#AUTORISER{configurer})
+	#SET{ciedit,'oui'}
+]
+<B_abo>
+[(#ENV{email}|non)
+<:cinotif:nb_abonnes:> #ENV{nb_abonnes}
+]
+<div style="margin:4px 0px 10px 0px;">
+#PAGINATION
+</div>
+<table cellspacing="0" cellpadding="2" style="width: 100%; border: 0px none;" class="arial2">
+<tbody>
+<tr style="background-color:#eee;">
+<th style="width: 70%;"><:cinotif:titre_email:></th>
+<th style="width: 10%;">N°<:cinotif:titre_auteur:></th>
+[(#GET{ciedit}|oui)
+<th style="width: 20%;text-align:center;"><:cinotif:action:></th>
+]
+</tr>
+
+<BOUCLE_abo(CINOTIF_ABONNES){email ?LIKE %(#ENV{email})%}{!par id_abonne}{tout}{pagination 50}>
+[<tr class="tr_liste" style="background-color:#fff;">
+<td><a href="[(#URL_ECRIRE{cinotif_suiviabonnements,id_abonne=#ID_ABONNE})]">(#EMAIL)</a>[(#ENV{abonnes_non_confirmes}|find{#ID_ABONNE}|oui)(<:cinotif:prop:>)]</td>
+<td>[(#ID_AUTEUR|?{#ID_AUTEUR,''})]</td>
+[(#GET{ciedit}|oui)
+[(#SPIP_VERSION|>={3}|oui)	
+<td>[(#URL_ACTION_AUTEUR{supprimer_abonne,#ID_ABONNE,#URL_ECRIRE{cinotif_suiviabonnes}}|icone_horizontale{<:cinotif:supprimer:>,groupe_mots,del})]</td>
+]
+[(#SPIP_VERSION|>={3}|non)	
+<td><a href="[(#URL_ACTION_AUTEUR{supprimer_abonne,#ID_ABONNE,#URL_ECRIRE{cinotif_suiviabonnes}})]">
+<img alt="<:cinotif:supprimer:>" src="../prive/images/supprimer.gif">
+<span><:cinotif:supprimer:></span></a></td>
+]
+]
+</tr>]
+</BOUCLE_abo>
+</tbody>
+</table>
+<div style="margin:10px 0px 4px 0px;">
+#PAGINATION
+</div>
+<div><em class='attention'><:cinotif:info_suppr_abonne:></em></div>
+<em class='attention'><:cinotif:clic_email_pour_voir_abonnements:></em>
+[(#ENV{email}|non)
+<div><em class='attention'><:cinotif:nb_max_abonnes:> #ENV{nb_max_abonnes}</em></div>
+]
+</B_abo>
+<h3><:avis_aucun_resultat:></h3>
+<//B_abo>

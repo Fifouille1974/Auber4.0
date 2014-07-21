@@ -1,0 +1,41 @@
+[(#REM) Portfolio : album d'images ]
+
+<B_documents_portfolio>
+<div class="grouplist"><:medias:info_portfolio:></div>
+
+<div id="documents_portfolio" style="text-align:center">
+
+<BOUCLE_documents_portfolio(DOCUMENTS) {id_article?}{id_breve?}{id_rubrique?}{mode=document} {extension IN png,jpg,gif} {par num titre, date} {doublons}>				
+[<a href="#URL_PAGE{document,id_document=#ID_DOCUMENT}">(#FICHIER|copie_locale|image_reduire{0,80}|inserer_attribut{class,spip_logos}|inserer_attribut{alt,[(#TITRE|supprimer_numero|attribut_html|couper{60})]})</a>]				
+</BOUCLE_documents_portfolio>			
+</div>			
+<br class="nettoyeur" />
+</B_documents_portfolio>
+
+
+[(#REM) Si un seul document est joint a l'article, et si le texte est vide, on incruste automatiquement ce document ]
+
+<BOUCLE_documents_decompte(DOCUMENTS spip_documents_liens articles) {id_article?}{id_breve?}{id_rubrique?} {mode=document}{texte=''}{extension !IN gif,jpg,png} {vu=non}>[
+(#TOTAL_BOUCLE|=={1}	
+|?{[(#INCLURE{fond=modeles/emb}{id_document}
+|trim)]})]</BOUCLE_documents_decompte>
+
+
+[(#REM) Sinon, liste des autres documents joints ]
+
+<B_documents_joints>	
+<div class="listinc">	
+<div class="grouplist"><:medias:titre_documents_joints:></div>	
+<ul>
+	<BOUCLE_documents_joints(DOCUMENTS) {id_article?}{id_breve?}{id_rubrique?} {mode=document} {par num titre, date} {doublons}>
+		<li><a href="#URL_DOCUMENT" type="#MIME_TYPE">
+			[(#TITRE|sinon{<:info_document:>})]
+			<small>(<span>#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)]</span>)</small>
+		</a></li>
+	</BOUCLE_documents_joints>
+</ul>
+</div>
+</B_documents_joints>
+
+
+<//B_documents_decompte>

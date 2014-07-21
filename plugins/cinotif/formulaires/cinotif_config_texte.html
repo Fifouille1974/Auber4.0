@@ -1,0 +1,40 @@
+[(#SPIP_VERSION|>={3}|non)
+<div class='cadre cadre-formulaire-editer'>
+<div class="entete-formulaire">
+<h1><:cinotif:texte_titre:></h1>
+</div>
+]
+
+<div class="formulaire_spip formulaire_configurer formulaire_texte">
+[(#SPIP_VERSION|>={3}|oui)
+<h3 class='titrem'><:cinotif:texte_titre:></h3>
+]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<div class="cadre_padding"><:cinotif:texte_info:></div>
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+		  	#SET{name,abo_texte}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+		    <li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]" style="padding-left:10px;">
+		    	<label for="#GET{name}" style="position:inherit;float:inherit;margin:inherit;width:inherit;"><:cinotif:abo_texte:></label>
+					[<span class='erreur_message'>(#GET{erreurs})</span>]
+					<textarea name='#GET{name}' id='#GET{name}' class='inserer_barre_edition' rows='3'>#ENV{#GET{name}}</textarea>
+		    </li>
+			
+		  	#SET{name,desabo_texte}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+		    <li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]" style="padding-left:10px;">
+		    	<label for="#GET{name}" style="position:inherit;float:inherit;margin:inherit;width:inherit;"><:cinotif:desabo_texte:></label>
+					[<span class='erreur_message'>(#GET{erreurs})</span>]
+					<textarea name='#GET{name}' id='#GET{name}' class='inserer_barre_edition' rows='3'>#ENV{#GET{name}}</textarea>
+		    </li>
+		</ul>
+	  <p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+</div>		
+
+[(#SPIP_VERSION|>={3}|non)
+</div>
+]

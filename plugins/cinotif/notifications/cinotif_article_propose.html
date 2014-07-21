@@ -1,0 +1,26 @@
+[(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]
+<BOUCLE_art(ARTICLES){id_article}{statut?}{tout}>
+#SET{auteurs,#LESAUTEURS}
+[(#VAL{info_propose_1}|_T{#ARRAY{nom_site_spip,#NOM_SITE_SPIP,titre,#TITRE|supprimer_numero}}|nettoyer_titre_email)]
+
+<:cinotif:message_auto:>
+
+<:info_propose_2:>
+
+<:cinotif:article:>[ : (#TITRE|supprimer_numero)]
+<:cinotif:info_propose:>[(#GET{auteurs}|oui)[(#VAL{info_les_auteurs_1}|_T{#ARRAY{les_auteurs,#GET{auteurs}}})]][ (#VAL{date_fmt_nomjour_date}|_T{[(#ARRAY{'nomjour',[(#DATE|nom_jour)],'date',[(#DATE|affdate)]})]}).]
+
+<:cinotif:info_attente_validation:>
+[(#SET{ciurl,[(#ID_ARTICLE|generer_url_entite{article,'','',0})]})][(#SET{cipos,[(#GET{ciurl}|strpos{/ecrire/})]})]
+[(#PLUGIN{cisf}|oui)[(#SET{ciurl,[(#GET{ciurl}|substr{0,#GET{cipos}})/spip.php?page=cisf_article&id_article=#ID_ARTICLE]})]]
+<:cinotif:info_consulter:>
+[(#GET{ciurl}) ]
+
+
+[<:cinotif:info_extrait:>
+(#DESCRIPTIF|textebrut)
+
+
+]
+</BOUCLE_art>
+#FILTRE{supprimer_tags|filtrer_entites|trim}

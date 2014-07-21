@@ -1,0 +1,58 @@
+[(#SPIP_VERSION|>={3}|non)
+<div class='cadre cadre-formulaire-editer'>
+<div class="entete-formulaire">
+<h1><:cinotif:typeabo_titre:></h1>
+</div>
+]
+
+<div class="formulaire_spip formulaire_configurer formulaire_typeabo">
+[(#SPIP_VERSION|>={3}|oui)
+<h3 class='titrem'><:cinotif:typeabo_titre:></h3>
+]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<div class="cadre_padding"><:cinotif:typeabo_info:></div>
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			#SET{name,typeabo}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]" style="padding-left:15px;">
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+					<div class="choix">
+						<input type="radio" name="#GET{name}" id="#GET{name}_defaut" value="defaut"
+						[(#ENV{#GET{name}}|=={defaut}|oui)checked="checked"] />
+						<label for="#GET{name}_defaut">
+						[(#ENV{#GET{name}}|=={defaut}|oui)<b>]
+						<:cinotif:formdefaut:>
+						[(#ENV{#GET{name}}|=={defaut}|oui)</b>]
+						</label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="#GET{name}" id="#GET{name}_theme" value="theme"
+						[(#ENV{#GET{name}}|=={theme}|oui)checked="checked"] />
+						<label for="#GET{name}_theme">
+						[(#ENV{#GET{name}}|=={theme}|oui)<b>]
+						<:cinotif:formtheme:>
+						[(#ENV{#GET{name}}|=={theme}|oui)</b>]
+						</label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="#GET{name}" id="#GET{name}_simple" value="simple"
+						[(#ENV{#GET{name}}|=={simple}|oui)checked="checked"] />
+						<label for="#GET{name}_simple">
+						[(#ENV{#GET{name}}|=={simple}|oui)<b>]
+						<:cinotif:formsimple:>
+						[(#ENV{#GET{name}}|=={simple}|oui)</b>]
+						</label>
+					</div>
+			</li>
+		</ul>
+	  <p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+</div>		
+
+[(#SPIP_VERSION|>={3}|non)
+</div>
+]

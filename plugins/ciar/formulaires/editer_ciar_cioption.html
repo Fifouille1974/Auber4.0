@@ -1,0 +1,33 @@
+<div class='ajax'>
+<div class="formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'>
+	<img class="cadre-icone" alt="" src="../prive/images/cadenas-24.gif">
+	<div style="padding-top:15px;">
+		#ACTION_FORMULAIRE{#ENV{action}}
+		[<span class='erreur_message'>(#GET{erreurs})</span>]
+    	<div style="padding:0px 0px 5px 5px;">
+		
+		[(#ENV{auteur_restreint}|=={non}|oui)
+		<input type='radio' class='radio' name='cioption' id='1' value='ecadminsite' [(#ENV{name}|=={ecadminsite}|oui)checked='checked'] />
+		<label for='1' [(#ENV{name}|=={ecadminsite}|oui)style='font-weight: bold;']><:ciar:cioption_ecadminsite:></label>
+		<br>
+		<input type='radio' class='radio' name='cioption' id='2' value='eccma' [(#ENV{name}|=={eccma}|oui)checked='checked'] /><label for='2' [(#ENV{name}|=={eccma}|oui)style='font-weight: bold;']><:ciar:cioption_eccma:></label>
+		<br>
+		<input type='radio' class='radio' name='cioption' id='3' value='ecadminrestreint' [(#ENV{name}|=={ecadminrestreint}|oui)checked='checked'] />
+		<label for='3' [(#ENV{name}|=={ecadminrestreint}|oui)style='font-weight: bold;']><:ciar:cioption_ecadminrestreint:></label>
+		]
+		
+		[(#ENV{auteur_restreint}|=={oui}|oui)
+		<input type='radio' class='radio' name='cioption' id='ar_oui' value='eccma' [(#ENV{name}|=={eccma}|oui)checked='checked'] /><label for='ar_oui' [(#ENV{name}|=={eccma}|oui)style='font-weight: bold;']><:ciar:cioption_eccma_oui:></label>
+		<br>
+		<input type='radio' class='radio' name='cioption' id='ar_non' value='ecadminrestreint' [(#ENV{name}|=={ecadminrestreint}|oui)checked='checked'] /><label for='ar_non' [(#ENV{name}|=={ecadminrestreint}|oui)style='font-weight: bold;']><:ciar:cioption_eccma_non:></label>
+		]
+		
+		</div>
+	  <p class='boutons'><span class='image_loading'></span><input type='submit' class='submit' value='<:bouton_valider:>' /></p>
+	</div>
+	</form>
+</div>
+</div>

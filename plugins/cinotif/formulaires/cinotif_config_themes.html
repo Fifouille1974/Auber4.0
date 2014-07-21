@@ -1,0 +1,77 @@
+[(#SPIP_VERSION|>={3}|non)
+<div class='cadre cadre-formulaire-editer'>
+<div class="entete-formulaire">
+[(#CONFIG{cinotif_formulaire}|=={theme}|oui)
+<h1><:cinotif:titre_themes:></h1>
+]
+[(#CONFIG{cinotif_formulaire}|=={simple}|oui)
+<h1><:cinotif:simple_evenements:></h1>
+]
+</div>
+]
+
+<div class="formulaire_spip formulaire_configurer formulaire_typeabo" style="position:relative;">
+[(#SPIP_VERSION|>={3}|oui)
+[(#CONFIG{cinotif_formulaire}|=={theme}|oui)
+<h3 class='titrem'><:cinotif:titre_themes:></h3>
+]
+[(#CONFIG{cinotif_formulaire}|=={simple}|oui)
+<h3 class='titrem'><:cinotif:simple_evenements:></h3>
+]
+]
+
+[(#CONFIG{cinotif_formulaire}|=={theme}|oui)
+	<div class="cadre_padding"><:cinotif:info_themes_supp:></div>
+]
+[(#CONFIG{cinotif_formulaire}|=={simple}|oui)
+	<div class="cadre_padding"><:cinotif:simple_info:></div>
+]
+	
+	
+[(#SPIP_VERSION|>={3}|non)
+<div class="cadre_padding">
+<table cellspacing="0" cellpadding="2" style="width: 100%; border: 0px none;" class="arial2">
+	<caption style="background-color:#fff; font-weight:bold; padding:0.25em;text-align:left;margin-top:10px;"><:cinotif:titre_themes:></caption>
+]
+[(#SPIP_VERSION|>={3}|oui)
+<table class='spip liste'>
+	<caption><strong class="caption"><:cinotif:titre_themes:></strong></caption>
+]
+	<thead>
+		<tr class='first_row' style="background-color:#eee;">
+			<th style="width: 65%;"><:cinotif:theme_col_titre:></th>
+			<th style="width: 35%;"><:cinotif:theme_col_objet:> / <:cinotif:theme_col_evenement:></th>
+			<th style="width: 10%;"><:cinotif:theme_col_statut:></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_evenements(CINOTIF_EVENEMENTS){par num titre,titre}>
+		[<tr class="tr_liste" style="background-color:#fff;">
+			<td>[(#URL_MULTISITE)<br/>]<a href="[(#URL_ECRIRE{cinotif_theme,id_evenement=#ID_EVENEMENT})]">(#TITRE)</a>[(#ENV{sympa_actif}|=={oui}|oui)[<br/>(#ADRESSE_LISTE_DIFFUSION)]]</td>
+			<td><a href="[(#OBJET|cinotif_url_public{#ID_OBJET})]">#OBJET[(#ID_OBJET|>{0}|oui)[ (#ID_OBJET)]]</a>
+			[ / (#VAL{cinotif:}|concat{#QUOI}|_T)]</td>
+			<td>[(#VAL{cinotif:}|concat{#STATUT}|_T)]</td>			
+		</tr>]		
+	</BOUCLE_evenements>
+	</tbody>
+</table>
+	
+<div style="float:right;width:20%;text-align:center;margin-top:10px;">
+<?php	
+		if (spip_version()>=3) {
+			echo icone_verticale(_T('cinotif:titre_creer_theme'), generer_url_ecrire("cinotif_theme","new=oui"), "groupe_mots-24.png", "creer.gif", $spip_lang_left);
+		} else {
+			echo icone_inline(_T('cinotif:titre_creer_theme'), generer_url_ecrire("cinotif_theme","new=oui"), "groupe-mot-24.gif", "creer.gif", $spip_lang_left);
+		}
+?>		
+</div>
+[(#SPIP_VERSION|>={3}|non)
+</div>
+]
+<div style="clear:both;"></div>
+
+</div>
+
+[(#SPIP_VERSION|>={3}|non)
+</div>
+]

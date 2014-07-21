@@ -1,0 +1,17 @@
+<BOUCLE_contenu(ARTICLES){id_article}>
+				<h2>[(#TITRE|supprimer_numero)]</h2>
+				<div class="dateart">
+				</div>
+				<div class="texte">
+				<script type="text/javascript">
+				<!--
+				document.write("<script src='[(#TEXTE*|texte_script|ciparam_texte_sans_nbsp|parametre_url{charset,#CHARSET,&})]' type='text/javascript'>");
+				document.write("</");
+				document.write("script>");					
+				//-->
+				</script>
+				</div>
+				<noscript>
+				<div class="texte"><a href='[(#TEXTE*|texte_script|ciparam_texte_sans_nbsp)]' title="<:cisquel:eq_ouvre_fenetre:>" class="spip_out">[(#TITRE|supprimer_numero)]</a></div>
+				</noscript>
+</BOUCLE_contenu>

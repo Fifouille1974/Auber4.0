@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<item><nom>articlesmememotcle</nom><description>Articles ayant un mot-clé en commun avec l'article en cours</description></item>
+<item><nom>freres</nom><description>Articles frères</description></item>
+<item><nom>freres_et_articlesmememotcle</nom><description>Articles frères et articles ayant un mot-clé en commun</description></item>
+<item><nom>freres_et_motcle</nom><description>Articles frères et mots-clés de l'article</description></item>
+<item><nom>freres_ou_sp_accueil</nom><description>Articles frères ou sous page d'accueil</description></item>
+<item><nom>idem_accueil</nom><description>Idem page d'accueil</description></item>
+<item><nom>idem_accueil_ou_sp_accueil</nom><description>Idem page d'accueil ou sous page d'accueil</description></item>
+<item><nom>motcle</nom><description>Mots-clés de l'article</description></item>
+<item><nom>vide</nom><description>Vide</description></item>

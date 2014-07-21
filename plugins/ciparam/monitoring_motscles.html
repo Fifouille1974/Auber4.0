@@ -1,0 +1,28 @@
+#CACHE{60}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<STYLE type="text/css">
+<!--
+	body {font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;}
+	h2 {font-size: 1.2em;}
+	h3 {font-size: 0.8em;}
+	p {font-size: 0.7em;}
+-->
+</STYLE>
+</head>
+<body>
+<h3>#NOM_SITE_SPIP (#URL_SITE_SPIP)</h3>
+<h2><:ciparam:eq_liste_mots_cles:></h2>
+
+<!-- pour chaque groupe de mot-clé -->
+<BOUCLE1(GROUPES_MOTS){par titre}>
+<h3>[(#ID_GROUPE)]     [(#TITRE)]</h3>
+<BOUCLE12(MOTS){id_groupe}{par titre}>
+<p>#ID_MOT - #TITRE [- (#DESCRIPTIF)] (#TYPE)</p>
+</BOUCLE12>
+</BOUCLE1>
+
+</body>
+</html>

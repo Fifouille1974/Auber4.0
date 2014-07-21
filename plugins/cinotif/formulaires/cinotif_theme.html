@@ -1,0 +1,127 @@
+<div class='formulaire_spip formulaire_editer'>
+	<!-- <br class='bugajaxie' /> -->
+	[<p class='reponse_formulaire reponse_formulaire_ok'>(#ENV**{message_ok})</p>]
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+	  <input type='hidden' name='id_evenement' value='#ENV{id_evenement}' />
+	  
+	  <ul>
+	    <li class='editer_titre [ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur] editer_type_input'>
+			<label for='titre'><:cinotif:label_nom_theme:></label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>]
+			<input type='text' class='text' name='titre' id='titre' value='[(#ENV*{titre})]'/>
+	    </li>
+
+	    <li>
+			<label for="objet"><:cinotif:label_objet:></label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{objet})</span>]
+			<select name="objet" id="objet">
+				<option value="" [(#ENV{objet}|non)selected="selected"]> </option>
+				<option value="rubrique" [(#ENV{objet}|=={rubrique}|oui)selected="selected"]><:cinotif:branche_du_site:></option>
+				<option value="article" [(#ENV{objet}|=={article}|oui)selected="selected"]><:cinotif:article_du_site:></option>
+				<option value="site" [(#ENV{objet}|=={site}|oui)selected="selected"]><:cinotif:tout_le_site:></option>
+			</select>
+	    </li>
+
+	    <li class='editer_id_objet[ (#ENV**{erreurs}|table_valeur{id_objet}|oui)erreur] editer_type_input'>
+			<label for='id_objet'><:cinotif:label_id_objet:></label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_objet})</span>]
+			<input type='text' class='text' name='id_objet' id='id_objet' value='[(#ENV{id_objet})]' />
+			[<span>(#ENV**{erreurs}|table_valeur{libelle_objet})</span>]
+	    </li>
+	    
+	    <li>
+			<label for="quoi"><:cinotif:label_quoi:></label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{quoi})</span>]
+			<select name="quoi" id="quoi">
+				<option value="" [(#ENV{quoi}|non)selected="selected"]> </option>
+				<option value="actupublie" [(#ENV{quoi}|=={actupublie}|oui)selected="selected"]><:cinotif:actupublie:></option>
+				<option value="articlepublie" [(#ENV{quoi}|=={articlepublie}|oui)selected="selected"]><:cinotif:articlepublie:></option>
+				<option value="articlemodifie" [(#ENV{quoi}|=={articlemodifie}|oui)selected="selected"]><:cinotif:articlemodifie:></option>
+				<option value="documentajoute" [(#ENV{quoi}|=={documentajoute}|oui)selected="selected"]><:cinotif:documentajoute:></option>				
+				<option value="forumvalide" [(#ENV{quoi}|=={forumvalide}|oui)selected="selected"]><:cinotif:forumvalide:></option>
+			</select>
+	    </li>	    
+	    
+		[<li class="editer_multisite">
+			<label for='multisite'><:cinotif:label_multisite:></label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{multisite})</span>]
+			(#ENV**{_choix_site})
+		</li>]
+
+		[(#ENV{_choix_site}|oui)
+		    <li class='editer_url_multisite [ (#ENV**{erreurs}|table_valeur{url_multisite}|oui)erreur] editer_type_input'>
+				<label for='url_multisite'><:cinotif:label_url_multisite:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{url_multisite})</span>]
+				<input type='text' class='text' name='url_multisite' id='url_multisite' value='[(#ENV{url_multisite})]'/>
+		    </li>
+		]
+		
+		[(#ENV{sympa_actif}|=={oui}|oui)
+	    <li class='editer_adresse_liste_diffusion [ (#ENV**{erreurs}|table_valeur{adresse_liste_diffusion}|oui)erreur] editer_type_input'>
+			<label for='adresse_liste_diffusion'><:cinotif:label_adresse_liste_diffusion:></label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{adresse_liste_diffusion})</span>]
+			<input type='text' class='text' name='adresse_liste_diffusion' id='adresse_liste_diffusion' value='[(#ENV{adresse_liste_diffusion})]'/>
+	    </li>
+	    ]
+	    
+	    <li>
+			<label for="statut"><:cinotif:label_statut:></label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{statut})</span>]
+			<select name="statut" id="statut">
+				<option value="prepa" [(#ENV{statut}|=={prepa}|oui)selected="selected"]><:cinotif:prepa:></option>
+				<option value="publie" [(#ENV{statut}|=={publie}|oui)selected="selected"]><:cinotif:publie:></option>
+				<option value="sansnotif" [(#ENV{statut}|=={sansnotif}|oui)selected="selected"]><:cinotif:sansnotif:></option>
+				<option value="ferme" [(#ENV{statut}|=={ferme}|oui)selected="selected"]><:cinotif:ferme:></option>
+			</select>
+	    </li>
+
+	  </ul>
+	  <div><em class='attention'><:cinotif:legende_publie:></em></div>
+	  
+	  <p class='boutons'><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>	
+
+</div>
+
+[(#ID_EVENEMENT|>{0}|oui)
+	[(#AUTORISER{configurer,configuration})
+		[(#ENV{cisupprimable}|=={oui}|oui)
+			<div>
+			[(#SPIP_VERSION|>={3}|oui)	
+			[(#URL_ACTION_AUTEUR{supprimer_theme,#ID_EVENEMENT,#URL_ECRIRE{cinotif_config}}|icone_horizontale{<:cinotif:icone_supprimer_theme:>,groupe_mots,del})]
+			]
+			
+			[(#SPIP_VERSION|>={3}|non)	
+			<a href="[(#URL_ACTION_AUTEUR{supprimer_theme,#ID_EVENEMENT,#URL_ECRIRE{cinotif_config}})]" class="icone36 danger groupe-mot-24" style="float: left;"><img height="24" width="24" style="background: url('../prive/images/groupe-mot-24.gif') no-repeat scroll center center transparent;" alt="<:icone_supprimer_theme:>" src="../prive/images/supprimer.gif"><span><:cinotif:icone_supprimer_theme:></span></a>
+			]
+			</div>
+			<div style='clear:both;'></div>	
+		]
+	]
+]
+<br />	
+
+[(#SPIP_VERSION|>={3}|oui)	
+<div class="notice">
+	<div><:cinotif:legende_statuts:></div>
+	[(#ENV{sympa_actif}|=={oui}|oui)
+	<div><:cinotif:legende_statuts_sympa:></div>
+	]
+</div>
+]
+[(#SPIP_VERSION|>={3}|non)
+<div class="cadre cadre-info verdana1"><div class="cadre_padding">
+<div style="text-align: justify" class="verdana2">
+	<div><:cinotif:legende_statuts:></div>
+	[(#ENV{sympa_actif}|=={oui}|oui)
+	<div><:cinotif:legende_statuts_sympa:></div>
+	]
+</div>
+<div class="nettoyeur"></div>
+</div></div>
+]

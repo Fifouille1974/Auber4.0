@@ -1,0 +1,908 @@
+#CACHE{0}
+			<div id="menu2">
+			
+		
+</style>
+
+<script src="http://code.jquery.com/jquery-1.10.2.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+ $('#plusgrand').click(function(){
+	curSizeChapeau= parseInt($('.texte').css('font-size')) + 2;
+	curSizeTitle= parseInt($('.titre_article').css('font-size')) + 2;
+  if(curSizeTitle<=24){
+        $('.texte').css('font-size', curSizeChapeau);
+        $('#chapeau').css('font-size', curSizeChapeau);
+        $('.titre_article').css('font-size', curSizeTitle);
+       }
+	else if (curSizeTitle>24) {
+		return curSizeTitle;
+	} 
+	}); 
+		
+  $('#pluspetit').click(function(){ 
+        curSizeChapeau= parseInt($('.texte').css('font-size')) - 2;
+		curSizeTitle= parseInt($('.titre_article').css('font-size')) - 2;
+  if(curSizeChapeau>=9){
+        $('.texte').css('font-size', curSizeChapeau); 
+		$('#chapeau').css('font-size', curSizeChapeau);
+        $('.titre_article').css('font-size', curSizeTitle);
+	}
+	else if (curSizeTitle<9) {
+		return curSizeTitle;
+	} 
+  });
+});
+  </script>
+  
+
+
+				<h1 class="invisible"><:cisquel:eq_menu_droite:></h1>
+				<BOUCLE_droite_article_normal(ARTICLES){id_article} {id_secteur!=94}>
+<!--                 [<div class="visuel"><img src="(#LOGO_ARTICLE||extraire_attribut{'src'})" alt="" /></div>]-->
+				<div class="blocoutil">
+				
+				
+					<div id="plusgrand" title="Augmenter la taille de la police"></div>
+					<div id="pluspetit" title="Réduire la taille de la police"></div>
+					<a rel="noindex,nofollow" href="javascript:chainemail('[(#NOM_SITE_SPIP|ciparam_filtre_mailto{#CHARSET})]  [(#TITRE|supprimer_numero|ciparam_filtre_mailto{#CHARSET})]')" title="<:cisquel:eq_envoyer_courriel:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami" target="_blank"><div id="envcourriel"><BOUCLE_type(ARTICLES) {id_article}> #TIPAFRIEND</BOUCLE_type></div><!-- <:cisquel:eq_envoyer_courriel:> -->
+					</a>
+					<a rel="noindex,nofollow" href="[(#URL_PAGE{article_print}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_imprimer_page:>" class="imprimer"><div id="iconeimprimer"></div><!-- <:cisquel:eq_imprimer:> --></a>
+				
+				
+				[(#PLUGIN{cinotif}|oui)
+					[(#CONFIG{cinotif_article}|=={non}|non)
+				<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:abonner:>" class="abonner"><:cisquel:abonner:></a>
+				<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{desabonner,oui})]" title="<:cisquel:desabonner:>" class="desabonner"><:cisquel:desabonner:></a>
+					]
+				]
+				
+				<BOUCLE_reader(ARTICLES){raccourci=_reader_acrobat_ou_autre}{par num titre}>
+				<a rel="noindex,nofollow" href="[(#URL_ARTICLE)]" class="acrobat">
+				<!-- [<img src="(#LOGO_ARTICLE||image_reduire{19,0}|extraire_attribut{'src'})" alt="" border="0" />] -->
+				[<span>(#TITRE|supprimer_numero)</span>]</a>
+				</BOUCLE_reader>		
+				</div>
+				
+				<div>								
+								<BOUCLE_documentsdocumentjoints0(DOCUMENTS){id_article}{id_rubrique!=9}{par num titre}{mode=document}{extension!=mov}{doublons}>
+								<div class="documentjoints">
+									<a href="#URL_DOCUMENT" target="_blank"onclick="xt_clic('T','[pj(#ID_ARTICLE)-][(#TITRE|supprimer_numero|ciparam_xtTraiter)]')" title="<:cisquel:eq_ouvre_document:> [(#TITRE|supprimer_numero)] <:cisquel:eq_dans_fenetre:>">[(#LOGO_DOCUMENT)] <p class="titredocarticles">[(#TITRE|supprimer_numero)]</p></a>
+									
+									<p class="description_document_article">([(#TYPE_DOCUMENT)][ - (#TAILLE|taille_en_octets)])</p>[<span class="docdesc">(#DESCRIPTIF)</span>]
+								</div>
+								</BOUCLE_documentsdocumentjoints0>
+								</div>
+				
+				<B_multirubricage_mot_droite>
+				<div class="boxtitredroite2"><div class="blc"><div class="brc"><div class="tlc"><div class="trc">
+					<h2><:cisquel:eq_autres_rubriques:></h2>
+				</div></div></div></div></div>
+					<div class="bloc2">
+						<ul>
+						<BOUCLE_multirubricage_mot_droite(MOTS){id_article}{type=_multirubricage}>
+						<BOUCLE_multirubricage_rubrique_droite(RUBRIQUES){id_mot}{doublons}>
+						 <li><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></li>
+						</BOUCLE_multirubricage_rubrique_droite>
+						</BOUCLE_multirubricage_mot_droite>
+						</ul>
+					</div>
+				</B_multirubricage_mot_droite>
+				<B_mot_article_droite>
+				<div class="boxtitredroite2"><div class="blc"><div class="brc"><div class="tlc"><div class="trc">
+					<h2><:cisquel:eq_voir_aussi:></h2>
+				</div></div></div></div></div>
+					<div class="bloc2">
+						<ul>
+						<BOUCLE_mot_article_droite(MOTS){id_article}{par titre}>
+						<BOUCLE_article_lie_droite(ARTICLES){id_mot}{exclus}{doublons}{par num titre}{0,10}>
+						<li><a href="#URL_ARTICLE" <BOUCLE_nouvelle_fenetre(ARTICLES){id_article}{raccourci=_nouvelle_fenetre}>class="spip_out" title="<:cisquel:eq_voir_article:> (<:cisquel:eq_ouvre_fenetre:>)" </BOUCLE_nouvelle_fenetre> >[(#TITRE|supprimer_numero)]</a></li>
+						</BOUCLE_article_lie_droite>
+						</BOUCLE_mot_article_droite>
+						</ul>
+					</div>
+				</B_mot_article_droite>
+				
+				
+				[(#ID_RUBRIQUE|cisquel_rubrique_ec|=={oui}|oui)
+				<div class="blocoutil">
+				<a rel="noindex,nofollow" href="[(#URL_PAGE{envoi_membre}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_envoyer_membres:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><:cisquel:eq_envoyer_membres:></a>
+				</div>
+				]
+               
+                
+				</BOUCLE_droite_article_normal>				
+			
+
+		<BOUCLE_droite_article1(ARTICLES){id_article} {raccourci=_portail_permanent_haut_actu}>
+<!--                 <BOUCLE_extra_image(DOCUMENTS){id_article}{mode=image}{0,1} {doublons}>
+                        <div id="img_document"> [(#EMBED_DOCUMENT|image_reduire{165,0})]</div>
+			  </BOUCLE_extra_image> -->
+                <div class="blocoutil">
+					<div id="plusgrand" title="Augmenter la taille de la police"></div>
+					<div id="pluspetit" title="Réduire la taille de la police"></div>
+					<a rel="noindex,nofollow" href="javascript:chainemail('[(#NOM_SITE_SPIP|ciparam_filtre_mailto{#CHARSET})]  [(#TITRE|supprimer_numero|ciparam_filtre_mailto{#CHARSET})]')" title="<:cisquel:eq_envoyer_courriel:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><div id="envcourriel"><BOUCLE_type2(ARTICLES) {id_article}> #TIPAFRIEND</BOUCLE_type2></div><!-- <:cisquel:eq_envoyer_courriel:> --></a>
+					<a rel="noindex,nofollow" href="[(#URL_PAGE{article_print}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_imprimer_page:>" class="imprimer"><div id="iconeimprimer"></div><!-- <:cisquel:eq_imprimer:> --></a>
+
+			
+
+				[(#PLUGIN{cinotif}|oui)
+					[(#CONFIG{cinotif_article}|=={non}|non)
+				<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:abonner:>" class="abonner"><:cisquel:abonner:></a>
+				<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{desabonner,oui})]" title="<:cisquel:desabonner:>" class="desabonner"><:cisquel:desabonner:></a>
+					]
+				]
+				
+				<BOUCLE_reader1(ARTICLES){raccourci=_reader_acrobat_ou_autre}{par num titre}>
+				<a rel="noindex,nofollow" href="[(#URL_ARTICLE)]" class="acrobat"><!-- [<img src="(#LOGO_ARTICLE||image_reduire{19,0}|extraire_attribut{'src'})" alt="" border="0" />] -->[<span>(#TITRE|supprimer_numero)</span>]</a>
+				</BOUCLE_reader1>		
+				</div>
+				
+				<div>								
+								<BOUCLE_documentsdocumentjoints1(DOCUMENTS){id_article}{par num titre}{mode=document}{doublons}>
+								<div class="documentjoints">
+									<a href="#URL_DOCUMENT" target="_blank"onclick="xt_clic('T','[pj(#ID_ARTICLE)-][(#TITRE|supprimer_numero|ciparam_xtTraiter)]')" title="<:cisquel:eq_ouvre_document:> [(#TITRE|supprimer_numero)] <:cisquel:eq_dans_fenetre:>">[(#LOGO_DOCUMENT)] <p class="titredocarticles">[(#TITRE|supprimer_numero)]</p></a>
+									
+									<p class="description_document_article">([(#TYPE_DOCUMENT)][ - (#TAILLE|taille_en_octets)])</p>[<span class="docdesc">(#DESCRIPTIF)</span>]
+								</div>
+								</BOUCLE_documentsdocumentjoints1>
+								</div>
+				
+				<B_multirubricage_mot_droite1>
+				<div class="boxtitredroite2"><div class="blc"><div class="brc"><div class="tlc"><div class="trc">
+					<h2><:cisquel:eq_autres_rubriques:></h2>
+				</div></div></div></div></div>
+					<div class="bloc2">
+						<ul>
+						<BOUCLE_multirubricage_mot_droite1(MOTS){id_article}{type=_multirubricage}>
+						<BOUCLE_multirubricage_rubrique_droite1(RUBRIQUES){id_mot}{doublons}>
+						 <li><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></li>
+						</BOUCLE_multirubricage_rubrique_droite1>
+						</BOUCLE_multirubricage_mot_droite1>
+						</ul>
+					</div>
+				</B_multirubricage_mot_droite1>
+				<B_mot_article_droite1>
+				<div class="boxtitredroite2"><div class="blc"><div class="brc"><div class="tlc"><div class="trc">
+					<h2><:cisquel:eq_voir_aussi:></h2>
+				</div></div></div></div></div>
+					<div class="bloc2">
+						<ul>
+						<BOUCLE_mot_article_droite1(MOTS){id_article}{par titre}>
+						<BOUCLE_article_lie_droite1(ARTICLES){id_mot}{exclus}{doublons}{par num titre} {0,10}>
+						<li><a href="#URL_ARTICLE" <BOUCLE_nouvelle_fenetre1(ARTICLES){id_article}{raccourci=_nouvelle_fenetre}>class="spip_out" title="<:cisquel:eq_voir_article:> (<:cisquel:eq_ouvre_fenetre:>)" </BOUCLE_nouvelle_fenetre1> >[(#TITRE|supprimer_numero)]</a></li>
+						</BOUCLE_article_lie_droite1>
+						</BOUCLE_mot_article_droite1>
+						</ul>
+					</div>
+				</B_mot_article_droite1>
+				
+				
+				[(#ID_RUBRIQUE|cisquel_rubrique_ec|=={oui}|oui)
+				<div class="blocoutil">
+				<a rel="noindex,nofollow" href="[(#URL_PAGE{envoi_membre}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_envoyer_membres:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><:cisquel:eq_envoyer_membres:></a>
+				</div>
+				]
+               
+                
+				</BOUCLE_droite_article1>	
+
+
+				<BOUCLE_droite_article2(ARTICLES){id_article} {raccourci=_portail_permanent_haut_sortir}>
+<!-- 						<BOUCLE_extra_image2(DOCUMENTS){id_article}{mode=image}{0,1} {doublons}>
+								<div id="img_document"> [(#EMBED_DOCUMENT|image_reduire{165,0})]</div>
+					  </BOUCLE_extra_image2> -->
+						<div class="blocoutil">
+						
+							<div id="plusgrand" title="Augmenter la taille de la police"></div>
+							<div id="pluspetit" title="Réduire la taille de la police"></div>
+							<a rel="noindex,nofollow" href="javascript:chainemail('[(#NOM_SITE_SPIP|ciparam_filtre_mailto{#CHARSET})]  [(#TITRE|supprimer_numero|ciparam_filtre_mailto{#CHARSET})]')" title="<:cisquel:eq_envoyer_courriel:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><div id="envcourriel"><BOUCLE_type3(ARTICLES) {id_article}> #TIPAFRIEND</BOUCLE_type3></div><!-- <:cisquel:eq_envoyer_courriel:> --></a>
+							<a rel="noindex,nofollow" href="[(#URL_PAGE{article_print}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_imprimer_page:>" class="imprimer"><div id="iconeimprimer"></div><!-- <:cisquel:eq_imprimer:> --></a>
+
+						
+
+						[(#PLUGIN{cinotif}|oui)
+							[(#CONFIG{cinotif_article}|=={non}|non)
+						<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:abonner:>" class="abonner"><:cisquel:abonner:></a>
+						<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{desabonner,oui})]" title="<:cisquel:desabonner:>" class="desabonner"><:cisquel:desabonner:></a>
+							]
+						]
+						
+						<BOUCLE_reader2(ARTICLES){raccourci=_reader_acrobat_ou_autre}{par num titre}>
+						<a rel="noindex,nofollow" href="[(#URL_ARTICLE)]" class="acrobat"><!-- [<img src="(#LOGO_ARTICLE||image_reduire{19,0}|extraire_attribut{'src'})" alt="" border="0" />] -->[<span>(#TITRE|supprimer_numero)</span>]</a>
+						</BOUCLE_reader2>		
+						</div>
+						
+						<div>								
+								<BOUCLE_documentsdocumentjoints2(DOCUMENTS){id_article}{par num titre}{mode=document}{doublons}>
+								<div class="documentjoints">
+									<a href="#URL_DOCUMENT" target="_blank"onclick="xt_clic('T','[pj(#ID_ARTICLE)-][(#TITRE|supprimer_numero|ciparam_xtTraiter)]')" title="<:cisquel:eq_ouvre_document:> [(#TITRE|supprimer_numero)] <:cisquel:eq_dans_fenetre:>">[(#LOGO_DOCUMENT)] <p class="titredocarticles">[(#TITRE|supprimer_numero)]</p></a>
+									
+									<p class="description_document_article">([(#TYPE_DOCUMENT)][ - (#TAILLE|taille_en_octets)])</p>[<span class="docdesc">(#DESCRIPTIF)</span>]
+								</div>
+								</BOUCLE_documentsdocumentjoints2>
+								</div>
+								
+						<B_multirubricage_mot_droite2>
+						<div class="boxtitredroite2"><div class="blc"><div class="brc"><div class="tlc"><div class="trc">
+							<h2><:cisquel:eq_autres_rubriques:></h2>
+						</div></div></div></div></div>
+							<div class="bloc2">
+								<ul>
+								<BOUCLE_multirubricage_mot_droite2(MOTS){id_article}{type=_multirubricage}>
+								<BOUCLE_multirubricage_rubrique_droite2(RUBRIQUES){id_mot}{doublons}>
+								 <li><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></li>
+								</BOUCLE_multirubricage_rubrique_droite2>
+								</BOUCLE_multirubricage_mot_droite2>
+								</ul>
+							</div>
+						</B_multirubricage_mot_droite2>
+						<B_mot_article_droite2>
+						<div class="boxtitredroite2"><div class="blc"><div class="brc"><div class="tlc"><div class="trc">
+							<h2><:cisquel:eq_voir_aussi:></h2>
+						</div></div></div></div></div>
+							<div class="bloc2">
+								<ul>
+								<BOUCLE_mot_article_droite2(MOTS){id_article}{par titre}>
+								<BOUCLE_article_lie_droite2(ARTICLES){id_mot}{exclus}{doublons}{par num titre}{0,10}>
+								<li><a href="#URL_ARTICLE" <BOUCLE_nouvelle_fenetre2(ARTICLES){id_article}{raccourci=_nouvelle_fenetre}>class="spip_out" title="<:cisquel:eq_voir_article:> (<:cisquel:eq_ouvre_fenetre:>)" </BOUCLE_nouvelle_fenetre2> >[(#TITRE|supprimer_numero)]</a></li>
+								</BOUCLE_article_lie_droite2>
+								</BOUCLE_mot_article_droite2>
+								</ul>
+							</div>
+						</B_mot_article_droite2>
+						
+						
+						[(#ID_RUBRIQUE|cisquel_rubrique_ec|=={oui}|oui)
+						<div class="blocoutil">
+						<a rel="noindex,nofollow" href="[(#URL_PAGE{envoi_membre}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_envoyer_membres:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><:cisquel:eq_envoyer_membres:></a>
+						</div>
+						]
+					   
+						
+						</BOUCLE_droite_article2>
+
+						<BOUCLE_droite_article3(ARTICLES){id_article} {raccourci=_portail_permanent_haut_projets}>
+<!-- 								<BOUCLE_extra_image3(DOCUMENTS){id_article}{mode=image}{0,1} {doublons}>
+										<div id="img_document"> [(#EMBED_DOCUMENT|image_reduire{165,0})]</div>
+							  </BOUCLE_extra_image3> -->
+								<div class="blocoutil">
+								
+									<div id="plusgrand" title="Augmenter la taille de la police"></div>
+									<div id="pluspetit" title="Réduire la taille de la police"></div>
+									<a rel="noindex,nofollow" href="javascript:chainemail('[(#NOM_SITE_SPIP|ciparam_filtre_mailto{#CHARSET})]  [(#TITRE|supprimer_numero|ciparam_filtre_mailto{#CHARSET})]')" title="<:cisquel:eq_envoyer_courriel:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><div id="envcourriel"><BOUCLE_type4(ARTICLES) {id_article}> #TIPAFRIEND</BOUCLE_type4></div><!-- <:cisquel:eq_envoyer_courriel:> --></a>
+									<a rel="noindex,nofollow" href="[(#URL_PAGE{article_print}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_imprimer_page:>" class="imprimer"><div id="iconeimprimer"></div><!-- <:cisquel:eq_imprimer:> --></a>
+
+								
+								[(#PLUGIN{cinotif}|oui)
+									[(#CONFIG{cinotif_article}|=={non}|non)
+								<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:abonner:>" class="abonner"><:cisquel:abonner:></a>
+								<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{desabonner,oui})]" title="<:cisquel:desabonner:>" class="desabonner"><:cisquel:desabonner:></a>
+									]
+								]
+								
+								<BOUCLE_reader3(ARTICLES){raccourci=_reader_acrobat_ou_autre}{par num titre}>
+								<a rel="noindex,nofollow" href="[(#URL_ARTICLE)]" class="acrobat"><!-- [<img src="(#LOGO_ARTICLE||image_reduire{19,0}|extraire_attribut{'src'})" alt="" border="0" />] -->[<span>(#TITRE|supprimer_numero)</span>]</a>
+								</BOUCLE_reader3>		
+								</div>
+								
+								<div>								
+								<BOUCLE_documentsdocumentjoints3(DOCUMENTS){id_article}{par num titre}{mode=document}{doublons}>
+								<div class="documentjoints">
+									<a href="#URL_DOCUMENT" target="_blank"onclick="xt_clic('T','[pj(#ID_ARTICLE)-][(#TITRE|supprimer_numero|ciparam_xtTraiter)]')" title="<:cisquel:eq_ouvre_document:> [(#TITRE|supprimer_numero)] <:cisquel:eq_dans_fenetre:>">[(#LOGO_DOCUMENT)] <p class="titredocarticles">[(#TITRE|supprimer_numero)]</p></a>
+									
+									<p class="description_document_article">([(#TYPE_DOCUMENT)][ - (#TAILLE|taille_en_octets)])</p>[<span class="docdesc">(#DESCRIPTIF)</span>]
+								</div>
+								</BOUCLE_documentsdocumentjoints3>
+								</div>
+								
+								[(#ID_RUBRIQUE|cisquel_rubrique_ec|=={oui}|oui)
+								<div class="blocoutil">
+								<a rel="noindex,nofollow" href="[(#URL_PAGE{envoi_membre}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_envoyer_membres:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><:cisquel:eq_envoyer_membres:></a>
+								</div>
+								]
+								
+								<B_multirubricage_mot_droite3>
+								<div><div class="blc"><div class="brc"><div class="tlc"><div class="trc">
+									<h2><:cisquel:eq_autres_rubriques:></h2>
+								</div></div></div></div></div>
+									<div class="bloc2">
+										<ul>
+										<BOUCLE_multirubricage_mot_droite3(MOTS){id_article}{type=_multirubricage}>
+										<BOUCLE_multirubricage_rubrique_droite3(RUBRIQUES){id_mot}{doublons}>
+										 <li><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></li>
+										</BOUCLE_multirubricage_rubrique_droite3>
+										</BOUCLE_multirubricage_mot_droite3>
+										</ul>
+									</div>
+								</B_multirubricage_mot_droite3>
+								<B_mot_article_droite3>
+								<div class="boxtitredroite2"><div class="blc"><div class="brc"><div class="tlc"><div class="trc">
+									<h2><:cisquel:eq_voir_aussi:></h2>
+								</div></div></div></div></div>
+									<div class="bloc2">
+										<ul>
+										<BOUCLE_mot_article_droite3(MOTS){id_article}{par titre}>
+										<BOUCLE_article_lie_droite3(ARTICLES){id_mot}{exclus}{doublons}{par num titre}{0,10}>
+										<li><a href="#URL_ARTICLE" <BOUCLE_nouvelle_fenetre3(ARTICLES){id_article}{raccourci=_nouvelle_fenetre}>class="spip_out" title="<:cisquel:eq_voir_article:> (<:cisquel:eq_ouvre_fenetre:>)" </BOUCLE_nouvelle_fenetre3> >[(#TITRE|supprimer_numero)]</a></li>
+										</BOUCLE_article_lie_droite3>
+										</BOUCLE_mot_article_droite3>
+										</ul>
+									</div>
+								</B_mot_article_droite3>
+								
+								
+								[(#ID_RUBRIQUE|cisquel_rubrique_ec|=={oui}|oui)
+								<div class="blocoutil">
+								<a rel="noindex,nofollow" href="[(#URL_PAGE{envoi_membre}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_envoyer_membres:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><:cisquel:eq_envoyer_membres:></a>
+								</div>
+								]
+							   
+								
+								</BOUCLE_droite_article3>	
+
+						<BOUCLE_droite_article4(ARTICLES){id_article} {raccourci=_portail_permanent_haut_pratique}>
+<!-- 								<BOUCLE_extra_image4(DOCUMENTS){id_article}{mode=image}{0,1} {doublons}>
+										<div id="img_document"> [(#EMBED_DOCUMENT|image_reduire{165,0})]</div>
+							  </BOUCLE_extra_image4> -->
+								<div class="blocoutil">
+								
+									<div id="plusgrand" title="Augmenter la taille de la police"></div>
+									<div id="pluspetit" title="Réduire la taille de la police"></div>
+									<a rel="noindex,nofollow" href="javascript:chainemail('[(#NOM_SITE_SPIP|ciparam_filtre_mailto{#CHARSET})]  [(#TITRE|supprimer_numero|ciparam_filtre_mailto{#CHARSET})]')" title="<:cisquel:eq_envoyer_courriel:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><div id="envcourriel"><BOUCLE_type5(ARTICLES) {id_article}> #TIPAFRIEND</BOUCLE_type5></div><!-- <:cisquel:eq_envoyer_courriel:> --></a>
+									<a rel="noindex,nofollow" href="[(#URL_PAGE{article_print}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_imprimer_page:>" class="imprimer"><div id="iconeimprimer"></div><!-- <:cisquel:eq_imprimer:> --></a>
+
+								
+
+								[(#PLUGIN{cinotif}|oui)
+									[(#CONFIG{cinotif_article}|=={non}|non)
+								<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:abonner:>" class="abonner"><:cisquel:abonner:></a>
+								<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{desabonner,oui})]" title="<:cisquel:desabonner:>" class="desabonner"><:cisquel:desabonner:></a>
+									]
+								]
+								
+								<BOUCLE_reader4(ARTICLES){raccourci=_reader_acrobat_ou_autre}{par num titre}>
+								<a rel="noindex,nofollow" href="[(#URL_ARTICLE)]" class="acrobat"><!-- [<img src="(#LOGO_ARTICLE||image_reduire{19,0}|extraire_attribut{'src'})" alt="" border="0" />] -->[<span>(#TITRE|supprimer_numero)</span>]</a>
+								</BOUCLE_reader4>		
+								</div>
+								
+								<div>								
+								<BOUCLE_documentsdocumentjoints4(DOCUMENTS){id_article}{par num titre}{mode=document}{doublons}>
+								<div class="documentjoints">
+									<a href="#URL_DOCUMENT" target="_blank"onclick="xt_clic('T','[pj(#ID_ARTICLE)-][(#TITRE|supprimer_numero|ciparam_xtTraiter)]')" title="<:cisquel:eq_ouvre_document:> [(#TITRE|supprimer_numero)] <:cisquel:eq_dans_fenetre:>">[(#LOGO_DOCUMENT)] <p class="titredocarticles">[(#TITRE|supprimer_numero)]</p></a>
+									
+									<p class="description_document_article">([(#TYPE_DOCUMENT)][ - (#TAILLE|taille_en_octets)])</p>[<span class="docdesc">(#DESCRIPTIF)</span>]
+								</div>
+								</BOUCLE_documentsdocumentjoints4>
+								</div>
+								
+								<B_multirubricage_mot_droite4>
+								<div class="boxtitredroite2"><div class="blc"><div class="brc"><div class="tlc"><div class="trc">
+									<h2><:cisquel:eq_autres_rubriques:></h2>
+								</div></div></div></div></div>
+									<div class="bloc2">
+										<ul>
+										<BOUCLE_multirubricage_mot_droite4(MOTS){id_article}{type=_multirubricage}>
+										<BOUCLE_multirubricage_rubrique_droite4(RUBRIQUES){id_mot}{doublons}>
+										 <li><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></li>
+										</BOUCLE_multirubricage_rubrique_droite4>
+										</BOUCLE_multirubricage_mot_droite4>
+										</ul>
+									</div>
+								</B_multirubricage_mot_droite4>
+								<B_mot_article_droite4>
+								<div class="boxtitredroite2"><div class="blc"><div class="brc"><div class="tlc"><div class="trc">
+									<h2><:cisquel:eq_voir_aussi:></h2>
+								</div></div></div></div></div>
+									<div class="bloc2">
+										<ul>
+										<BOUCLE_mot_article_droite4(MOTS){id_article}{par titre}>
+										<BOUCLE_article_lie_droite4(ARTICLES){id_mot}{exclus}{doublons}{par num titre}{0,10}>
+										<li><a href="#URL_ARTICLE" <BOUCLE_nouvelle_fenetre4(ARTICLES){id_article}{raccourci=_nouvelle_fenetre}>class="spip_out" title="<:cisquel:eq_voir_article:> (<:cisquel:eq_ouvre_fenetre:>)" </BOUCLE_nouvelle_fenetre4> >[(#TITRE|supprimer_numero)]</a></li>
+										</BOUCLE_article_lie_droite4>
+										</BOUCLE_mot_article_droite4>
+										</ul>
+									</div>
+								</B_mot_article_droite4>
+								
+								
+								[(#ID_RUBRIQUE|cisquel_rubrique_ec|=={oui}|oui)
+								<div class="blocoutil">
+								<a rel="noindex,nofollow" href="[(#URL_PAGE{envoi_membre}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_envoyer_membres:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><:cisquel:eq_envoyer_membres:></a>
+								</div>
+								]
+							   
+								
+								</BOUCLE_droite_article4>
+								
+								<BOUCLE_droite_article5(ARTICLES){id_article} {raccourci=_portail_dossiers_actu}>
+								
+								<!-- [<div class="visuel"><img src="(#LOGO_ARTICLE||extraire_attribut{'src'})" alt="" /></div>] -->
+								
+								<div class="blocoutil">
+								<div id="textaccessibility">
+									<div id="plusgrand" title="Augmenter la taille de la police"></div>
+									<div id="pluspetit" title="Réduire la taille de la police"></div>
+									<a rel="noindex,nofollow" href="javascript:chainemail('[(#NOM_SITE_SPIP|ciparam_filtre_mailto{#CHARSET})]  [(#TITRE|supprimer_numero|ciparam_filtre_mailto{#CHARSET})]')" title="<:cisquel:eq_envoyer_courriel:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><div id="envcourriel"><BOUCLE_type6(ARTICLES) {id_article}> #TIPAFRIEND</BOUCLE_type6></div><!-- <:cisquel:eq_envoyer_courriel:> --></a>
+									<a rel="noindex,nofollow" href="[(#URL_PAGE{article_print}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_imprimer_page:>" class="imprimer"><div id="iconeimprimer"></div><!-- <:cisquel:eq_imprimer:> --></a>
+
+								</div>
+								[(#PLUGIN{cinotif}|oui)
+									[(#CONFIG{cinotif_article}|=={non}|non)
+								<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:abonner:>" class="abonner"><:cisquel:abonner:></a>
+								<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{desabonner,oui})]" title="<:cisquel:desabonner:>" class="desabonner"><:cisquel:desabonner:></a>
+									]
+								]
+								
+								<BOUCLE_reader5(ARTICLES){raccourci=_reader_acrobat_ou_autre}{par num titre}>
+								<a rel="noindex,nofollow" href="[(#URL_ARTICLE)]" class="acrobat"><!-- [<img src="(#LOGO_ARTICLE||image_reduire{19,0}|extraire_attribut{'src'})" alt="" border="0" />] -->[<span>(#TITRE|supprimer_numero)</span>]</a>
+								</BOUCLE_reader5>		
+								</div>
+								
+								<div>								
+								<BOUCLE_documentsdocumentjoints5(DOCUMENTS){id_article}{par num titre}{mode=document}{doublons}>
+								<div class="documentjoints">
+									<a href="#URL_DOCUMENT" target="_blank"onclick="xt_clic('T','[pj(#ID_ARTICLE)-][(#TITRE|supprimer_numero|ciparam_xtTraiter)]')" title="<:cisquel:eq_ouvre_document:> [(#TITRE|supprimer_numero)] <:cisquel:eq_dans_fenetre:>">[(#LOGO_DOCUMENT)] <p class="titredocarticles">[(#TITRE|supprimer_numero)]</p></a>
+									
+									<p class="description_document_article">([(#TYPE_DOCUMENT)][ - (#TAILLE|taille_en_octets)])</p>[<span class="docdesc">(#DESCRIPTIF)</span>]
+								</div>
+								</BOUCLE_documentsdocumentjoints5>
+								</div>
+								
+								<B_multirubricage_mot_droite5>
+								<div class="boxtitredroite2"><div class="blc"><div class="brc"><div class="tlc"><div class="trc">
+									<h2><:cisquel:eq_autres_rubriques:></h2>
+								</div></div></div></div></div>
+									<div class="bloc2">
+										<ul>
+										<BOUCLE_multirubricage_mot_droite5(MOTS){id_article}{type=_multirubricage}>
+										<BOUCLE_multirubricage_rubrique_droite5(RUBRIQUES){id_mot}{doublons}>
+										 <li><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></li>
+										</BOUCLE_multirubricage_rubrique_droite5>
+										</BOUCLE_multirubricage_mot_droite5>
+										</ul>
+									</div>
+								</B_multirubricage_mot_droite5>
+								<B_mot_article_droite5>
+								<div class="boxtitredroite2"><div class="blc"><div class="brc"><div class="tlc"><div class="trc">
+									<h2><:cisquel:eq_voir_aussi:></h2>
+								</div></div></div></div></div>
+									<div class="bloc2">
+										<ul>
+										<BOUCLE_mot_article_droite5(MOTS){id_article}{par titre}>
+										<BOUCLE_article_lie_droite5(ARTICLES){id_mot}{exclus}{doublons}{par num titre}{0,10}>
+										<li><a href="#URL_ARTICLE" <BOUCLE_nouvelle_fenetre5(ARTICLES){id_article}{raccourci=_nouvelle_fenetre}>class="spip_out" title="<:cisquel:eq_voir_article:> (<:cisquel:eq_ouvre_fenetre:>)" </BOUCLE_nouvelle_fenetre5> >[(#TITRE|supprimer_numero)]</a></li>
+										</BOUCLE_article_lie_droite5>
+										</BOUCLE_mot_article_droite5>
+										</ul>
+									</div>
+								</B_mot_article_droite5>
+								
+								
+								[(#ID_RUBRIQUE|cisquel_rubrique_ec|=={oui}|oui)
+								<div class="blocoutil">
+								<a rel="noindex,nofollow" href="[(#URL_PAGE{envoi_membre}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_envoyer_membres:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><:cisquel:eq_envoyer_membres:></a>
+								</div>
+								]
+							   
+								
+								</BOUCLE_droite_article5>
+								
+								<BOUCLE_droite_article6(ARTICLES){id_article} {raccourci=_portail_dossiers}>
+								
+								<!-- [<div class="visuel"><img src="(#LOGO_ARTICLE||extraire_attribut{'src'})" alt="" /></div>] -->
+								
+								<div class="blocoutil">
+								<div id="textaccessibility">
+									<div id="plusgrand" title="Augmenter la taille de la police"></div>
+									<div id="pluspetit" title="Réduire la taille de la police"></div>
+									<a rel="noindex,nofollow" href="javascript:chainemail('[(#NOM_SITE_SPIP|ciparam_filtre_mailto{#CHARSET})]  [(#TITRE|supprimer_numero|ciparam_filtre_mailto{#CHARSET})]')" title="<:cisquel:eq_envoyer_courriel:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><div id="envcourriel"><BOUCLE_type7(ARTICLES) {id_article}> #TIPAFRIEND</BOUCLE_type7></div><!-- <:cisquel:eq_envoyer_courriel:> --></a>
+									<a rel="noindex,nofollow" href="[(#URL_PAGE{article_print}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_imprimer_page:>" class="imprimer"><div id="iconeimprimer"></div><!-- <:cisquel:eq_imprimer:> --></a>
+
+								</div>
+
+								[(#PLUGIN{cinotif}|oui)
+									[(#CONFIG{cinotif_article}|=={non}|non)
+								<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:abonner:>" class="abonner"><:cisquel:abonner:></a>
+								<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{desabonner,oui})]" title="<:cisquel:desabonner:>" class="desabonner"><:cisquel:desabonner:></a>
+									]
+								]
+								
+								<BOUCLE_reader6(ARTICLES){raccourci=_reader_acrobat_ou_autre}{par num titre}>
+								<a rel="noindex,nofollow" href="[(#URL_ARTICLE)]" class="acrobat"><!-- [<img src="(#LOGO_ARTICLE||image_reduire{19,0}|extraire_attribut{'src'})" alt="" border="0" />] -->[<span>(#TITRE|supprimer_numero)</span>]</a>
+								</BOUCLE_reader6>		
+								</div>
+								
+								<div>								
+								<BOUCLE_documentsdocumentjoints6(DOCUMENTS){id_article}{par num titre}{mode=document}{doublons}>
+								<div class="documentjoints">
+									<a href="#URL_DOCUMENT" target="_blank"onclick="xt_clic('T','[pj(#ID_ARTICLE)-][(#TITRE|supprimer_numero|ciparam_xtTraiter)]')" title="<:cisquel:eq_ouvre_document:> [(#TITRE|supprimer_numero)] <:cisquel:eq_dans_fenetre:>">[(#LOGO_DOCUMENT)] <p class="titredocarticles">[(#TITRE|supprimer_numero)]</p></a>
+									
+									<p class="description_document_article">([(#TYPE_DOCUMENT)][ - (#TAILLE|taille_en_octets)])</p>[<span class="docdesc">(#DESCRIPTIF)</span>]
+								</div>
+								</BOUCLE_documentsdocumentjoints6>
+								</div>
+								
+								<B_multirubricage_mot_droite6>
+								<div class="boxtitredroite2"><div class="blc"><div class="brc"><div class="tlc"><div class="trc">
+									<h2><:cisquel:eq_autres_rubriques:></h2>
+								</div></div></div></div></div>
+									<div class="bloc2">
+										<ul>
+										<BOUCLE_multirubricage_mot_droite6(MOTS){id_article}{type=_multirubricage}>
+										<BOUCLE_multirubricage_rubrique_droite6(RUBRIQUES){id_mot}{doublons}>
+										 <li><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></li>
+										</BOUCLE_multirubricage_rubrique_droite6>
+										</BOUCLE_multirubricage_mot_droite6>
+										</ul>
+									</div>
+								</B_multirubricage_mot_droite6>
+								<B_mot_article_droite6>
+								<div class="boxtitredroite2"><div class="blc"><div class="brc"><div class="tlc"><div class="trc">
+									<h2><:cisquel:eq_voir_aussi:></h2>
+								</div></div></div></div></div>
+									<div class="bloc2">
+										<ul>
+										<BOUCLE_mot_article_droite6(MOTS){id_article}{par titre}>
+										<BOUCLE_article_lie_droite6(ARTICLES){id_mot}{exclus}{doublons}{par num titre}{0,10}>
+										<li><a href="#URL_ARTICLE" <BOUCLE_nouvelle_fenetre6(ARTICLES){id_article}{raccourci=_nouvelle_fenetre}>class="spip_out" title="<:cisquel:eq_voir_article:> (<:cisquel:eq_ouvre_fenetre:>)" </BOUCLE_nouvelle_fenetre6> >[(#TITRE|supprimer_numero)]</a></li>
+										</BOUCLE_article_lie_droite6>
+										</BOUCLE_mot_article_droite6>
+										</ul>
+									</div>
+								</B_mot_article_droite6>
+								
+								
+								[(#ID_RUBRIQUE|cisquel_rubrique_ec|=={oui}|oui)
+								<div class="blocoutil">
+								<a rel="noindex,nofollow" href="[(#URL_PAGE{envoi_membre}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_envoyer_membres:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><:cisquel:eq_envoyer_membres:></a>
+								</div>
+								]
+							   
+								
+								</BOUCLE_droite_article6>
+								
+								<BOUCLE_droite_article7(ARTICLES){id_article} {raccourci=_portail_dossiers2}>
+								
+								<!-- [<div class="visuel"><img src="(#LOGO_ARTICLE||extraire_attribut{'src'})" alt="" /></div>] -->
+								
+								<div class="blocoutil">
+								<div id="textaccessibility">
+									<div id="plusgrand" title="Augmenter la taille de la police"></div>
+									<div id="pluspetit" title="Réduire la taille de la police"></div>
+									<a rel="noindex,nofollow" href="javascript:chainemail('[(#NOM_SITE_SPIP|ciparam_filtre_mailto{#CHARSET})]  [(#TITRE|supprimer_numero|ciparam_filtre_mailto{#CHARSET})]')" title="<:cisquel:eq_envoyer_courriel:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><div id="envcourriel"><BOUCLE_type8(ARTICLES) {id_article}> #TIPAFRIEND</BOUCLE_type8></div><!-- <:cisquel:eq_envoyer_courriel:> --></a>
+									<a rel="noindex,nofollow" href="[(#URL_PAGE{article_print}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_imprimer_page:>" class="imprimer"><div id="iconeimprimer"></div><!-- <:cisquel:eq_imprimer:> --></a>
+
+								</div>
+
+								[(#PLUGIN{cinotif}|oui)
+									[(#CONFIG{cinotif_article}|=={non}|non)
+								<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:abonner:>" class="abonner"><:cisquel:abonner:></a>
+								<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{desabonner,oui})]" title="<:cisquel:desabonner:>" class="desabonner"><:cisquel:desabonner:></a>
+									]
+								]
+								
+								<BOUCLE_reader7(ARTICLES){raccourci=_reader_acrobat_ou_autre}{par num titre}>
+								<a rel="noindex,nofollow" href="[(#URL_ARTICLE)]" class="acrobat"><!-- [<img src="(#LOGO_ARTICLE||image_reduire{19,0}|extraire_attribut{'src'})" alt="" border="0" />] -->[<span>(#TITRE|supprimer_numero)</span>]</a>
+								</BOUCLE_reader7>		
+								</div>
+								
+								<div>								
+								<BOUCLE_documentsdocumentjoints7(DOCUMENTS){id_article}{par num titre}{mode=document}{doublons}>
+								<div class="documentjoints">
+									<a href="#URL_DOCUMENT" target="_blank"onclick="xt_clic('T','[pj(#ID_ARTICLE)-][(#TITRE|supprimer_numero|ciparam_xtTraiter)]')" title="<:cisquel:eq_ouvre_document:> [(#TITRE|supprimer_numero)] <:cisquel:eq_dans_fenetre:>">[(#LOGO_DOCUMENT)] <p class="titredocarticles">[(#TITRE|supprimer_numero)]</p></a>
+									
+									<p class="description_document_article">([(#TYPE_DOCUMENT)][ - (#TAILLE|taille_en_octets)])</p>[<span class="docdesc">(#DESCRIPTIF)</span>]
+								</div>
+								</BOUCLE_documentsdocumentjoints7>
+								</div>
+								
+								<B_multirubricage_mot_droite7>
+								<div class="boxtitredroite2"><div class="blc"><div class="brc"><div class="tlc"><div class="trc">
+									<h2><:cisquel:eq_autres_rubriques:></h2>
+								</div></div></div></div></div>
+									<div class="bloc2">
+										<ul>
+										<BOUCLE_multirubricage_mot_droite7(MOTS){id_article}{type=_multirubricage}>
+										<BOUCLE_multirubricage_rubrique_droite7(RUBRIQUES){id_mot}{doublons}>
+										 <li><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></li>
+										</BOUCLE_multirubricage_rubrique_droite7>
+										</BOUCLE_multirubricage_mot_droite7>
+										</ul>
+									</div>
+								</B_multirubricage_mot_droite7>
+								<B_mot_article_droite7>
+								<div class="boxtitredroite2"><div class="blc"><div class="brc"><div class="tlc"><div class="trc">
+									<h2><:cisquel:eq_voir_aussi:></h2>
+								</div></div></div></div></div>
+									<div class="bloc2">
+										<ul>
+										<BOUCLE_mot_article_droite7(MOTS){id_article}{par titre}>
+										<BOUCLE_article_lie_droite7(ARTICLES){id_mot}{exclus}{doublons}{par num titre}{0,10}>
+										<li><a href="#URL_ARTICLE" <BOUCLE_nouvelle_fenetre7(ARTICLES){id_article}{raccourci=_nouvelle_fenetre}>class="spip_out" title="<:cisquel:eq_voir_article:> (<:cisquel:eq_ouvre_fenetre:>)" </BOUCLE_nouvelle_fenetre7> >[(#TITRE|supprimer_numero)]</a></li>
+										</BOUCLE_article_lie_droite7>
+										</BOUCLE_mot_article_droite7>
+										</ul>
+									</div>
+								</B_mot_article_droite7>
+								
+								
+								[(#ID_RUBRIQUE|cisquel_rubrique_ec|=={oui}|oui)
+								<div class="blocoutil">
+								<a rel="noindex,nofollow" href="[(#URL_PAGE{envoi_membre}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_envoyer_membres:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><:cisquel:eq_envoyer_membres:></a>
+								</div>
+								]
+							   
+								
+								</BOUCLE_droite_article7>
+								
+								
+								<BOUCLE_droite_article8(ARTICLES){id_article} {raccourci=_portail_dossiers3}>
+								
+								<!-- [<div class="visuel"><img src="(#LOGO_ARTICLE||extraire_attribut{'src'})" alt="" /></div>] -->
+								
+								<div class="blocoutil">
+								<div id="textaccessibility">
+									<div id="plusgrand" title="Augmenter la taille de la police"></div>
+									<div id="pluspetit" title="Réduire la taille de la police"></div>
+									<a rel="noindex,nofollow" href="javascript:chainemail('[(#NOM_SITE_SPIP|ciparam_filtre_mailto{#CHARSET})]  [(#TITRE|supprimer_numero|ciparam_filtre_mailto{#CHARSET})]')" title="<:cisquel:eq_envoyer_courriel:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><div id="envcourriel"><BOUCLE_type9(ARTICLES) {id_article}> #TIPAFRIEND</BOUCLE_type9></div><!-- <:cisquel:eq_envoyer_courriel:> --></a>
+									<a rel="noindex,nofollow" href="[(#URL_PAGE{article_print}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_imprimer_page:>" class="imprimer"><div id="iconeimprimer"></div><!-- <:cisquel:eq_imprimer:> --></a>
+
+								</div>
+
+								[(#PLUGIN{cinotif}|oui)
+									[(#CONFIG{cinotif_article}|=={non}|non)
+								<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:abonner:>" class="abonner"><:cisquel:abonner:></a>
+								<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{desabonner,oui})]" title="<:cisquel:desabonner:>" class="desabonner"><:cisquel:desabonner:></a>
+									]
+								]
+								
+								<BOUCLE_reader8(ARTICLES){raccourci=_reader_acrobat_ou_autre}{par num titre}>
+								<a rel="noindex,nofollow" href="[(#URL_ARTICLE)]" class="acrobat"><!-- [<img src="(#LOGO_ARTICLE||image_reduire{19,0}|extraire_attribut{'src'})" alt="" border="0" />] -->[<span>(#TITRE|supprimer_numero)</span>]</a>
+								</BOUCLE_reader8>		
+								</div>
+								
+								<div>								
+								<BOUCLE_documentsdocumentjoints8(DOCUMENTS){id_article}{par num titre}{mode=document}{doublons}>
+								<div class="documentjoints">
+									<a href="#URL_DOCUMENT" target="_blank" onclick="xt_clic('T','[pj(#ID_ARTICLE)-][(#TITRE|supprimer_numero|ciparam_xtTraiter)]')" title="<:cisquel:eq_ouvre_document:> [(#TITRE|supprimer_numero)] <:cisquel:eq_dans_fenetre:>">[(#LOGO_DOCUMENT)] <p class="titredocarticles">[(#TITRE|supprimer_numero)]</p></a>
+									
+									<p class="description_document_article">([(#TYPE_DOCUMENT)][ - (#TAILLE|taille_en_octets)])</p>[<span class="docdesc">(#DESCRIPTIF)</span>]
+								</div>
+								</BOUCLE_documentsdocumentjoints8>
+								</div>
+								
+								<B_multirubricage_mot_droite8>
+								<div class="boxtitredroite2"><div class="blc"><div class="brc"><div class="tlc"><div class="trc">
+									<h2><:cisquel:eq_autres_rubriques:></h2>
+								</div></div></div></div></div>
+									<div class="bloc2">
+										<ul>
+										<BOUCLE_multirubricage_mot_droite8(MOTS){id_article}{type=_multirubricage}>
+										<BOUCLE_multirubricage_rubrique_droite8(RUBRIQUES){id_mot}{doublons}>
+										 <li><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></li>
+										</BOUCLE_multirubricage_rubrique_droite8>
+										</BOUCLE_multirubricage_mot_droite8>
+										</ul>
+									</div>
+								</B_multirubricage_mot_droite8>
+								<B_mot_article_droite8>
+								<div class="boxtitredroite2"><div class="blc"><div class="brc"><div class="tlc"><div class="trc">
+									<h2><:cisquel:eq_voir_aussi:></h2>
+								</div></div></div></div></div>
+									<div class="bloc2">
+										<ul>
+										<BOUCLE_mot_article_droite8(MOTS){id_article}{par titre}>
+										<BOUCLE_article_lie_droite8(ARTICLES){id_mot}{exclus}{doublons}{par num titre}{0,10}>
+										<li><a href="#URL_ARTICLE" <BOUCLE_nouvelle_fenetre8(ARTICLES){id_article}{raccourci=_nouvelle_fenetre}>class="spip_out" title="<:cisquel:eq_voir_article:> (<:cisquel:eq_ouvre_fenetre:>)" </BOUCLE_nouvelle_fenetre8> >[(#TITRE|supprimer_numero)]</a></li>
+										</BOUCLE_article_lie_droite8>
+										</BOUCLE_mot_article_droite8>
+										</ul>
+									</div>
+								</B_mot_article_droite8>
+								
+								
+								[(#ID_RUBRIQUE|cisquel_rubrique_ec|=={oui}|oui)
+								<div class="blocoutil">
+								<a rel="noindex,nofollow" href="[(#URL_PAGE{envoi_membre}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_envoyer_membres:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><:cisquel:eq_envoyer_membres:></a>
+								</div>
+								]
+							   
+								
+								</BOUCLE_droite_article8>
+				
+								<BOUCLE_droite_article9(ARTICLES){id_article} {raccourci=_alaune}>
+								
+								<!-- [<div class="visuel"><img src="(#LOGO_ARTICLE||extraire_attribut{'src'})" alt="" /></div>] -->
+								
+								<div class="blocoutil">
+								<div id="textaccessibility">
+									<div id="plusgrand" title="Augmenter la taille de la police"></div>
+									<div id="pluspetit" title="Réduire la taille de la police"></div>
+									<a rel="noindex,nofollow" href="javascript:chainemail('[(#NOM_SITE_SPIP|ciparam_filtre_mailto{#CHARSET})]  [(#TITRE|supprimer_numero|ciparam_filtre_mailto{#CHARSET})]')" title="<:cisquel:eq_envoyer_courriel:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><div id="envcourriel"><BOUCLE_type10(ARTICLES) {id_article}> #TIPAFRIEND</BOUCLE_type10></div><!-- <:cisquel:eq_envoyer_courriel:> --></a>
+									<a rel="noindex,nofollow" href="[(#URL_PAGE{article_print}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_imprimer_page:>" class="imprimer"><div id="iconeimprimer"></div><!-- <:cisquel:eq_imprimer:> --></a>
+
+								</div>
+
+								[(#PLUGIN{cinotif}|oui)
+									[(#CONFIG{cinotif_article}|=={non}|non)
+								<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:abonner:>" class="abonner"><:cisquel:abonner:></a>
+								<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{desabonner,oui})]" title="<:cisquel:desabonner:>" class="desabonner"><:cisquel:desabonner:></a>
+									]
+								]
+								
+								<BOUCLE_reader9(ARTICLES){raccourci=_reader_acrobat_ou_autre}{par num titre}>
+								<a rel="noindex,nofollow" href="[(#URL_ARTICLE)]" class="acrobat"><!-- [<img src="(#LOGO_ARTICLE||image_reduire{19,0}|extraire_attribut{'src'})" alt="" border="0" />] -->[<span>(#TITRE|supprimer_numero)</span>]</a>
+								</BOUCLE_reader9>		
+								</div>
+								
+								<div>								
+								<BOUCLE_documentsdocumentjoints9(DOCUMENTS){id_article}{par num titre}{mode=document}{doublons}>
+								<div class="documentjoints">
+									<a href="#URL_DOCUMENT" target="_blank"onclick="xt_clic('T','[pj(#ID_ARTICLE)-][(#TITRE|supprimer_numero|ciparam_xtTraiter)]')" title="<:cisquel:eq_ouvre_document:> [(#TITRE|supprimer_numero)] <:cisquel:eq_dans_fenetre:>">[(#LOGO_DOCUMENT)] <p class="titredocarticles">[(#TITRE|supprimer_numero)]</p></a>
+									
+									<p class="description_document_article">([(#TYPE_DOCUMENT)][ - (#TAILLE|taille_en_octets)])</p>[<span class="docdesc">(#DESCRIPTIF)</span>]
+								</div>
+								</BOUCLE_documentsdocumentjoints9>
+								</div>
+								
+								<B_multirubricage_mot_droite9>
+								<div class="boxtitredroite2"><div class="blc"><div class="brc"><div class="tlc"><div class="trc">
+									<h2><:cisquel:eq_autres_rubriques:></h2>
+								</div></div></div></div></div>
+									<div class="bloc2">
+										<ul>
+										<BOUCLE_multirubricage_mot_droite9(MOTS){id_article}{type=_multirubricage}>
+										<BOUCLE_multirubricage_rubrique_droite9(RUBRIQUES){id_mot}{doublons}>
+										 <li><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></li>
+										</BOUCLE_multirubricage_rubrique_droite9>
+										</BOUCLE_multirubricage_mot_droite9>
+										</ul>
+									</div>
+								</B_multirubricage_mot_droite9>
+								<B_mot_article_droite9>
+								<div class="boxtitredroite2"><div class="blc"><div class="brc"><div class="tlc"><div class="trc">
+									<h2><:cisquel:eq_voir_aussi:></h2>
+								</div></div></div></div></div>
+									<div class="bloc2">
+										<ul>
+										<BOUCLE_mot_article_droite9(MOTS){id_article}{par titre}>
+										<BOUCLE_article_lie_droite9(ARTICLES){id_mot}{exclus}{doublons}{par num titre}{0,10}>
+										<li><a href="#URL_ARTICLE" <BOUCLE_nouvelle_fenetre9(ARTICLES){id_article}{raccourci=_nouvelle_fenetre}>class="spip_out" title="<:cisquel:eq_voir_article:> (<:cisquel:eq_ouvre_fenetre:>)" </BOUCLE_nouvelle_fenetre9> >[(#TITRE|supprimer_numero)]</a></li>
+										</BOUCLE_article_lie_droite9>
+										</BOUCLE_mot_article_droite9>
+										</ul>
+									</div>
+								</B_mot_article_droite9>
+								
+								
+								[(#ID_RUBRIQUE|cisquel_rubrique_ec|=={oui}|oui)
+								<div class="blocoutil">
+								<a rel="noindex,nofollow" href="[(#URL_PAGE{envoi_membre}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_envoyer_membres:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><:cisquel:eq_envoyer_membres:></a>
+								</div>
+								]
+								
+								
+								</BOUCLE_droite_article9>
+								
+								<BOUCLE_droite_articleaubermensuel(ARTICLES){id_article}{id_rubrique=100}>
+								
+								<!-- [<div class="visuel"><img src="(#LOGO_ARTICLE||extraire_attribut{'src'})" alt="" /></div>] -->
+								
+								<div class="blocoutil">
+								[(#PLUGIN{cinotif}|oui)
+									[(#CONFIG{cinotif_article}|=={non}|non)
+								<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:abonner:>" class="abonner"><:cisquel:abonner:></a>
+								<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{desabonner,oui})]" title="<:cisquel:desabonner:>" class="desabonner"><:cisquel:desabonner:></a>
+									]
+								]
+								
+								<BOUCLE_readeraubermensuel(ARTICLES){raccourci=_reader_acrobat_ou_autre}{par num titre}>
+								<a rel="noindex,nofollow" href="[(#URL_ARTICLE)]" class="acrobat"><!-- [<img src="(#LOGO_ARTICLE||image_reduire{19,0}|extraire_attribut{'src'})" alt="" border="0" />] -->[<span>(#TITRE|supprimer_numero)</span>]</a>
+								</BOUCLE_readeraubermensuel>		
+								</div>
+								<B_multirubricage_mot_droiteaubermensuel>
+								<div class="boxtitredroite2"><div class="blc"><div class="brc"><div class="tlc"><div class="trc">
+									<h2><:cisquel:eq_autres_rubriques:></h2>
+								</div></div></div></div></div>
+									<div class="bloc2">
+										<ul>
+										<BOUCLE_multirubricage_mot_droiteaubermensuel(MOTS){id_article}{type=_multirubricage}>
+										<BOUCLE_multirubricage_rubrique_droiteaubermensuel(RUBRIQUES){id_mot}{doublons}>
+										 <li><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></li>
+										</BOUCLE_multirubricage_rubrique_droiteaubermensuel>
+										</BOUCLE_multirubricage_mot_droiteaubermensuel>
+										</ul>
+									</div>
+								</B_multirubricage_mot_droiteaubermensuel>
+								<!-- <B_mot_article_droiteaubermensuel>
+								<div class="boxtitredroite2"><div class="blc"><div class="brc"><div class="tlc"><div class="trc">
+									<h2><:cisquel:eq_voir_aussi:></h2>
+								</div></div></div></div></div>
+									<div class="bloc2">
+										<ul>
+										<BOUCLE_mot_article_droiteaubermensuel(MOTS){id_article}{par titre}>
+										<BOUCLE_article_lie_droiteaubermensuel(ARTICLES){id_mot}{exclus}{doublons}{par num titre}{0,10}>
+										<li><a href="#URL_ARTICLE" <BOUCLE_nouvelle_fenetreaubermensuel(ARTICLES){id_article}{raccourci=_nouvelle_fenetre}>class="spip_out" title="<:cisquel:eq_voir_article:> (<:cisquel:eq_ouvre_fenetre:>)" </BOUCLE_nouvelle_fenetreaubermensuel> >[(#TITRE|supprimer_numero)]</a></li>
+										</BOUCLE_article_lie_droiteaubermensuel>
+										</BOUCLE_mot_article_droiteaubermensuel>
+										</ul>
+									</div>
+								</B_mot_article_droiteaubermensuel> -->
+								
+								<BOUCLE_documentsaubermensuel(DOCUMENTS){id_article}{par num titre}{mode=document}{doublons}>
+								<a href="#URL_DOCUMENT" target="_blank"onclick="xt_clic('T','[pj(#ID_ARTICLE)-][(#TITRE|supprimer_numero|ciparam_xtTraiter)]')" class="document" title="<:cisquel:eq_ouvre_document:> [(#TITRE|supprimer_numero)] <:cisquel:eq_dans_fenetre:>" width="140" height="182">[(#LOGO_DOCUMENT)] <p class="titredoc">[(#TITRE|supprimer_numero)]</p></a><p class="description_document">([<:cisquel:eq_format:> (#TYPE_DOCUMENT)][ - (#TAILLE|taille_en_octets)])</p>[<span class="docdesc">(#DESCRIPTIF)</span>]
+								</BOUCLE_documentsaubermensuel>
+								
+								[(#ID_RUBRIQUE|cisquel_rubrique_ec|=={oui}|oui)
+								<div class="blocoutil">
+								<a rel="noindex,nofollow" href="[(#URL_PAGE{envoi_membre}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_envoyer_membres:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><:cisquel:eq_envoyer_membres:></a>
+								</div>
+								]
+								<BOUCLE_documents_jointsaubermensuel(DOCUMENTS) {id_article} {mode=document} {par num titre, date} {doublons}>
+					
+									<div class="spip_doc_titre"><a href="#URL_DOCUMENT" target="_blank"title="<:bouton_telecharger:>" target="_blank" type="#MIME_TYPE">[(#TITRE|sinon{<:info_document:>})]</a> <small>(#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)])</small></div>
+									[<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]
+								
+								</BOUCLE_documents_jointsaubermensuel>
+								
+								
+								</BOUCLE_droite_articleaubermensuel>
+								
+								
+								<BOUCLE_quicktime(RUBRIQUES){id_rubrique}{id_parent=148}>
+
+													<div class="qt">								
+													<div class="img_qt"></div>Téléchargez <a href="http://www.apple.com/fr/quicktime/">Quick Time</a> pour visionner les visites virtuelles.
+													</div>
+
+								</BOUCLE_quicktime>	
+															
+						
+	<script type="text/javascript" src="https://apis.google.com/js/plusone.js">
+	{lang: 'fr'}
+	</script>
+					
+					<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<!-- <div id="sharenetworkbubble">                               
+<span id="sharetitle">Partager</span>		
+	<div id="socialnetwork"> 
+					<div id="fb-root"></div>
+	<section id="networktop">	
+	<div class="fb-share-button" data-type="button_count"></div>
+	
+
+
+		<!--<a href="http://www.facebook.com/share.php?u=#URL_SITE_SPIP/#URL_ARTICLE?t=#TITLE"><div id="shareitem1">			
+		
+			<div class="imgnetwork1"></div>
+			
+		</div></a>
+		<div id="shareitem1">	
+			<!--<div class="imgnetwork2"></div>
+			<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="aubervilliers93" data-lang="fr">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+		</div>
+	</section>
+	
+	<section id="networkbottom">
+		<div id="shareitem1">
+			<!--<div class="imgnetwork3"></div>
+			<g:plusone></g:plusone>
+		</div>
+		
+		<div id="shareitem1">
+			<!--<div class="imgnetwork4"></div>
+		</div>
+	</section>
+	
+	</div>
+</div>-->
+                </div>

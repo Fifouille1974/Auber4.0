@@ -1,0 +1,64 @@
+<BOUCLE_principale(MOTS) {id_mot}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title>[(#TITRE|textebrut) - ][(#NOM_SITE_ITWX|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF|couper{150}|attribut_html)" />]
+<INCLURE{fond=inc/inc-head}/>
+[(#REM) Lien vers le flux RSS des articles du mot cle ]
+<link rel="alternate" type="application/rss+xml"[ title="(#TITRE|attribut_html)"] href="[(#URL_PAGE{backend}|parametre_url{id_mot,#ID_MOT})]" />
+</head>
+
+<body class="#LANG_DIR">
+<div id="mob">
+ 
+  [(#REM) TOOL BARRE ]
+  <INCLURE{fond=inc/inc-navBar}/> 
+  
+  [(#REM) Mot-cle ]
+  <div class="contenu">
+    <div class="cartouche"> [(#LOGO_ARTICLE|image_reduire{120,100})]
+      <div class="surlignable">[<h1>(#TITRE)</h1>]</div>
+    </div><!--#cartouche-->
+    <br class="nettoyeur" />
+	
+    <div class="surlignable">
+	 [<div class="#EDIT{chapo} chapo">(#DESCRIPTIF|image_reduire{320,450})</div>]			
+     [<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{320,450})</div>] 
+	</div>
+  </div><!--#contenu-->
+  
+  [(#REM) Articles lies au mot-cle ] 
+  <INCLURE{fond=inc/inc-mot-listart}{env}{ajax}{art=_art#ID_ARTICLE}/> 
+  
+  [(#REM) Breves liees au mot-cle ] 
+  <INCLURE{fond=inc/inc-mot-listbre}{env}{ajax}{bre=_bre#ID_BREVE}/> 
+  
+  [(#REM) Rubriques liees au mot-cle ] 
+  <INCLURE{fond=inc/inc-mot-listrub}{env}{ajax}{rub=_rub#ID_RUBRIQUE}/> 
+  
+  [(#REM) Sites web lies au mot-cle ] 
+  <INCLURE{fond=inc/inc-mot-listsite}{env}{ajax}{site=_site#ID_SYNDIC}/> 
+  
+  [(#REM) Autres mots-cles ] 
+  <INCLURE{fond=inc/inc-mot-listmot}{env}{ajax}{mot=_mot#ID_MOT}/> 
+
+  [(#REM) Pied ]
+  <div class="group" style="height:17px"></div>
+  <div class="ticket">
+    <div class="ticketmenu">
+      <ul>
+        <li><a rel="start home" href="#URL_SITE_SPIP/"><:accueil_site:></a></li>
+        [(#CONFIG{itwx/classique}|?{' '})<li><a rel="start home" href="[(#URL_MOT|parametre_url{'cimobile','web'})]"><:itwx:pageclassique:></a></li>]
+        [(#AUTORISER{ecrire})<li><a href="#EVAL{_DIR_RESTREINT_ABS}"><:espace_prive:></a></li>]
+        [(#SESSION{id_auteur}|?{' '})<li><a href="#URL_LOGOUT" rel="nofollow" style="text-align:center"><:icone_deconnecter:></a></li>]
+      </ul>
+    </div>
+  </div>
+  
+  <INCLURE{fond=inc/inc-pied}/> 
+  
+</div><!--#page-->
+</body>
+</html>
+</BOUCLE_principale>

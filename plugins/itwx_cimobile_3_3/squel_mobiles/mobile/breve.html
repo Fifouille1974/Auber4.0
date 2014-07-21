@@ -1,0 +1,71 @@
+<BOUCLE_principale(BREVES) {id_breve}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title>[(#TITRE|textebrut) - ][(#NOM_SITE_ITWX|textebrut)]</title>
+[<meta name="description" content="(#INTRODUCTION{150}|attribut_html)" />]
+<INCLURE{fond=inc/inc-head}>
+[(#REM) Lien vers le flux RSS des breves ]
+<link rel="alternate" type="application/rss+xml" title="<:dernieres_breves:>" href="#URL_PAGE{backend-breves}" />
+</head>
+
+<body class="#LANG_DIR">
+<div id="mob">
+
+  [(#REM) BARRE DE NAVIGATION ]
+  <INCLURE{fond=inc/inc-navBar}/>   
+  
+  [(#REM) Contenu : corps de la breve ]
+  <div class="contenu">
+    <div class="cartouche">
+	 [(#LOGO_BREVE|image_reduire{120,100})]
+      <h1 class="#EDIT{titre}">#TITRE</h1>
+      <p><small><abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour) ][(#DATE|affdate)]</abbr></small></p>
+    </div><!--#cartouche-->
+    <br class="nettoyeur" />
+    [<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{0,0})</div>]        
+    [<p class="lien"><a href="(#URL_SITE)" target="_blank"><:voir_en_ligne:> : [(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+    [<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
+	<br />
+		
+  </div><!--#contenu-->
+  
+  [(#REM) Gestion du portfolio et des documents ]
+  [(#INCLURE{fond=inc/inc-documents}{id_breve}{env})]
+  
+  [(#REM) Forum de l'article ]
+  <a href="#forum" name="forum" id="forum"></a> 
+  [(#PARAMETRES_FORUM|?{' '})<div class="grouplist"><:forum:></div>]
+  <div class="ticket">
+    [<div class="repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)" rel="noindex nofollow"><:repondre_breve:></a></div>]
+	<INCLURE{fond=inc/inc-forum}{id_breve}{env}{ajax}{for=_for#ID_FORUM}/>
+  </div>
+  
+  [(#REM) Breves dans la meme rubrique ] 
+  <INCLURE{fond=inc/inc-bre-listbre}{id_rubrique}{env}{ajax}{bre=_bre#ID_BREVE}/> 
+  
+  [(#REM) Menu de navigation mots-cles ]
+  <INCLURE{fond=inc/inc-bre-listmot}{id_rubrique}{env}{ajax}{mot=_mot#ID_MOT}/> 
+  
+  [(#REM) Menu de Rubriques ] 
+  <INCLURE{fond=inc/inc-rubriques}{id_rubrique}/> 
+  
+  [(#REM) Pied ]
+  <div class="group" style="height:17px"></div>
+  <div class="ticket">
+    <div class="ticketmenu">
+      <ul>
+        <li><a rel="start home" href="#URL_SITE_SPIP/"><:accueil_site:></a></li>
+        [(#CONFIG{itwx/classique}|?{' '})<li><a rel="start home" href="[(#URL_BREVE|parametre_url{'cimobile','web'})]"><:itwx:pageclassique:></a></li>]
+        [(#AUTORISER{ecrire})<li><a href="#EVAL{_DIR_RESTREINT_ABS}"><:espace_prive:></a></li>]
+        [(#SESSION{id_auteur}|?{' '})<li><a href="#URL_LOGOUT" rel="nofollow" style="text-align:center"><:icone_deconnecter:></a></li>]
+      </ul>
+    </div>
+  </div>
+  
+  <INCLURE{fond=inc/inc-pied}/> 
+
+</div><!--#page-->
+</body>
+</html>
+</BOUCLE_principale>

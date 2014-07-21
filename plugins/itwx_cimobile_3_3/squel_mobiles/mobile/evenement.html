@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title><:itwx:agenda:> - [(#NOM_SITE_ITWX|textebrut)]</title>
+<INCLURE{fond=inc/inc-head}>
+<meta name="robots" content="none" />
+</head>
+
+<body class="#LANG_DIR">
+<div id="mob">
+
+  [(#REM) TOOL BARRE ]
+  <INCLURE{fond=inc/inc-navBar}/> 
+  
+  [(#REM) Contenu principal : affichage de l'auteur ]
+  <BOUCLE_evenement(EVENEMENTS) {id_evenement}>
+  <div id="even[(#ID_EVENEMENT)]" class="panel"[ title="(#TITRE|supprimer_numero|attribut_html|couper{80})"]>
+    <div class="contenu">
+      <div class="cartouche"> [(#LOGO_ARTICLE||image_reduire{150,100})]
+        <h1>[(#TITRE|supprimer_numero)]</h1>
+        <p><span class="day">[(#DATE_DEBUT|jour)]</span><span class="month">[(#DATE_DEBUT|nom_mois|couper{3})].</span> <abbr class="published"[ title="(#DATE|date_iso)"]>			[(#DATE_DEBUT|jour|=={[(#DATE_FIN|jour)]}|?{
+						
+			[(#HORAIRE|=={oui}|?{- 
+			[(#REM) memes heures ?]
+			[(#DATE_DEBUT|=={#DATE_FIN}|?{<small>
+			[(#DATE_DEBUT|heures)]:[(#DATE_DEBUT|minutes)]</small>,''})]
+			[(#REM) pas memes heures ?]
+			[(#DATE_DEBUT|!={#DATE_FIN}|?{<small>
+			[(#DATE_DEBUT|heures)]:[(#DATE_DEBUT|minutes)] /
+			[(#DATE_FIN|heures)]:[(#DATE_FIN|minutes)]</small>,''})]
+			,''})]
+			,
+			[(#HORAIRE|=={oui}|?{<small>-
+			[(#DATE_DEBUT|heures)]:[(#DATE_DEBUT|minutes)]</small>,''})] /
+			[(#DATE_FIN|jour)] [(#DATE_FIN|nom_mois|couper{3})]	
+			[(#HORAIRE|=={oui}|?{<small>-
+			[(#DATE_FIN|heures)]:[(#DATE_FIN|minutes)]</small>
+			,''})]
+			})]
+		  </abbr>
+		  </p>
+      </div><!--.cartouche-->
+	  
+      <br />
+     [<div class="chapo">(#LIEU)</div>] 
+     [<span class="chapo">(#ADRESSE)</span>] 
+	 <br class="nettoyeur" />
+     [<div class="texte">(#DESCRIPTIF)</div>] 
+	 </div><!--#contenu-->
+	 
+    [(#REM) Lien vers article ]
+    <div class="ticket">
+      <div class="ticketmenu">
+        <ul>
+        <li><a href="#URL_ARTICLE"><:itwx:lirearticle:></a></li>
+        </ul>
+      </div>
+    </div>
+	
+    </BOUCLE_evenement>
+  </div>
+  
+  [(#REM) Liste evenements ]
+  <INCLURE{fond=inc/inc-evt-listevent}{env}{ajax}/> 
+
+  [(#REM) Pied ]
+  <div class="group" style="height:17px"></div>
+  <div class="ticket">
+    <div class="ticketmenu">
+      <ul>
+        <li><a rel="start home" href="#URL_SITE_SPIP/"><:accueil_site:></a></li>
+        [(#AUTORISER{ecrire})<li><a href="#EVAL{_DIR_RESTREINT_ABS}"><:espace_prive:></a></li>]
+        [(#SESSION{id_auteur}|?{' '})<li><a href="#URL_LOGOUT" rel="nofollow" style="text-align:center"><:icone_deconnecter:></a></li>]
+      </ul>
+    </div>
+  </div>
+  
+  <INCLURE{fond=inc/inc-pied}/> 
+
+</div><!--#page-->
+</body>
+</html>

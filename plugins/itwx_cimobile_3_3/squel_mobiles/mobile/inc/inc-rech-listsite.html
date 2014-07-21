@@ -1,0 +1,14 @@
+<BOUCLE_site_invisible(SITES) {titre_mot = invisible} {doublons}></BOUCLE_site_invisible>
+
+<B_sites>
+<div class="group"><:sites_web:> (#GRAND_TOTAL)</div>
+#ANCRE_PAGINATION
+	<div class="listmenu">
+	<ul>
+	<BOUCLE_sites(SITES) {recherche} {par points}{inverse}{pagination 5 #ENV{site}}{doublons}>
+	<li><a href="[(#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT})]">#NOM_SITE</a></li>
+	</BOUCLE_sites>
+	</ul>
+	</div>
+[<div class="pagination">(#PAGINATION)</div>]	
+</B_sites>

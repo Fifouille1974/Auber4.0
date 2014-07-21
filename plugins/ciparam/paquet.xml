@@ -1,0 +1,31 @@
+<paquet
+	prefix="ciparam"
+	categorie="divers"
+	version="2.0.0"
+	etat="stable"
+	compatibilite="[3.0.0;]"
+	logo="prive/themes/spip/images/pyramides-32.png"
+	schema="1.0.0"	
+>	
+
+	<nom>ciparam : Configurateur de squelettes</nom>
+
+	<auteur>C. Imberti</auteur>
+
+	<licence lien="http://creativecommons.org/licenses/by-nc-sa/2.0/fr/">Creative commons by-nc-sa</licence>	
+
+	<pipeline nom="declarer_tables_principales" inclure="base/ciparam_tables.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/ciparam_tables.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/ciparam_tables.php" />
+	<pipeline nom="styliser" inclure="public/ciparam_styliser.php" />
+	<pipeline nom="affiche_milieu" inclure="inc/ciparam_inc_choix.php" />
+	<pipeline nom="post_edition" inclure="inc/ciparam_inc_document.php" />
+	<pipeline nom="pre_propre" inclure="inc/ciparam_inc_texte.php" />
+	<pipeline nom="pre_typo" inclure="inc/ciparam_inc_texte.php" />
+	<pipeline nom="post_typo" inclure="inc/ciparam_inc_texte.php" />
+	<pipeline nom="cisf_article_options" inclure="inc/ciparam_inc_cisf.php" />
+	<pipeline nom="affichage_final" inclure="ciparam_pipelines.php" />
+	
+	<menu nom="ciparam_config" titre="ciparam:ciparam_titre" parent="menu_configuration" icone="images/ciparam-16.png" />
+
+</paquet>

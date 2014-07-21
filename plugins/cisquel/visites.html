@@ -1,0 +1,74 @@
+#CIPARAM_DOCTYPE
+<head>
+<title><:titre_statistiques:>[ - (#NOM_SITE_SPIP|textebrut)]</title>
+<meta name="robots" content="noindex, nofollow" />
+<link href="#CHEMIN{_css/styleexceptions.css}" rel="stylesheet" type="text/css" />
+<INCLURE{fond=noisettes/head}{lang}>
+</head>
+
+<body>
+<INCLURE{fond=noisettes/haut}{lang}>
+<div id="pageVisites">
+<div id="milieu">
+	<div id="ext-main">
+		<div class="main">
+			<div id="gauche">
+				<INCLURE{fond=noisettes/recherche_gauche}{lang}>
+	
+			    <INCLURE{fond=navigation/sommaire}{lang}>
+			</div>
+
+  			<div id="contenu">
+			<div class="main-content">
+				<h1 class="invisible"><:cisquel:eq_contenu:></h1>
+				<div id="boxnavpath"><div id="navpath">
+					<a href="[(#URL_PAGE{sommaire})]"><:cisquel:eq_accueil:></a>&gt; <:titre_statistiques:>
+				</div></div>
+				<div class="rub">
+				<h2><:titre_statistiques:> : <:cisquel:eq_articles_plus_visite:></h2>
+				</div>
+
+			            <div id="tableauforum">
+				<table summary="<:cisquel:eq_articles_plus_visite:>" class="forum">
+					<thead>
+					<tr>
+						<th scope="col" id="col1" width="45%" class="forum"><:articles:></th>
+						<th scope="col" id="col2" width="24%" class="forum"><:cisquel:eq_nb_visites:></th>
+						<th scope="col" id="col3" width="14%" class="forum"><:cisquel:eq_moy_jour:></th>
+						<th scope="col" id="col4" width="14%" class="forum"><:popularite:></th>
+					</tr>
+					</thead>
+				<BOUCLE_pop(ARTICLES){par visites} {inverse} {0,15}>
+				<tr>
+					<td headers="col1" align="left" class="forumcoltexte"><a href="#URL_ARTICLE" class="titreforum">[(#TITRE|supprimer_numero)]</a>
+					</td>
+					<td headers="col2" align="center" class="forum">
+					#VISITES <:cisquel:eq_visites_depuis:> [(#DATE|affdate{'d/m/Y'})]
+					</td>
+					<td headers="col3" align="center" class="forum">
+					<?php
+					$jour = "[(#DATE|jour)]" * 1;
+					$mois = "[(#DATE|mois)]" * 1;
+					$annee = "[(#DATE|annee)]" * 1;
+					$visites = "#VISITES" * 1;
+					$ts1 = mktime(0,0,0,$mois,$jour,$annee);
+					echo (number_format($visites / ((time() - $ts1)/24/60/60),2));
+					?>
+					</td>
+					<td headers="col4" align="center" class="forum">
+					#POPULARITE %
+					</td>
+				</tr>
+				</BOUCLE_pop>
+				</table>
+				</div>
+			</div>
+			</div>
+		<div class="clearer"></div>
+				
+		</div>
+	</div>
+</div>
+</div>
+<INCLURE{fond=noisettes/pied}{lang}><INCLURE{fond=noisettes/pied_connexion}{self=#SELF}{lang}>
+	

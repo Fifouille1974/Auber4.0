@@ -1,0 +1,10 @@
+<B_groupes_auteurs>
+<:ciag:info_titre_gestionnaires:>
+<ul class='arial11'>
+<BOUCLE_groupes_auteurs(CIAG_GRPAUTEURS){par titre}>
+	<li><a href="[(#URL_ECRIRE{ciag_groupe_auteurs,id_groupe=#ID_GROUPE})]">#TITRE</a>
+		<B_gest>(<BOUCLE_gest(CIAG_GRPAUTEURS_GESTIONNAIRES auteurs){id_groupe}{", "}>#NOM</BOUCLE_gest>)</B_gest>
+	</li>
+</BOUCLE_groupes_auteurs>	
+</ul>
+</B_groupes_auteurs>

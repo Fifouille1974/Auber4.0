@@ -1,0 +1,26 @@
+<BOUCLE_article(DOCUMENTS) {id_document}{mode=document}{extension IN png,jpg,gif}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title>[(#TITRE) - ][(#NOM_SITE_ITWX|textebrut)]</title>
+[<meta name="description" content="(#INTRODUCTION{150}|attribut_html)" />]
+<INCLURE{fond=inc/inc-head}>
+<meta name="robots" content="none" />
+</head>
+
+<body class="#LANG_DIR">
+<div id="mob">
+
+  [(#REM) TOOL BARRE ]
+  <INCLURE{fond=inc/inc-navBack}/> 
+  
+  [(#REM) Document ]
+  <div class="pf">
+  [(#MODELE{itwxemb}|image_reduire{0,0})]
+  </div>
+  
+  
+  </div><!--#page-->
+</body>
+</html>
+</BOUCLE_article>

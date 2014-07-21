@@ -1,0 +1,21 @@
+<BOUCLE_contenu(ARTICLES){id_article}>
+				<h2>[(#TITRE|supprimer_numero)]</h2>
+				<div class="dateart">[(#DATE|affdate{'Ymd'}|=={[(#DATE_MODIF|affdate{'Ymd'})]}|?{<:cisquel:eq_publie_le:> [(#DATE|affdate)] ,<:cisquel:eq_publie_le:> [(#DATE|affdate)] (<:cisquel:eq_modifie_le:> [(#DATE_MODIF|affdate)]) })]
+				</div>
+			      	[<div class="texte">(#TEXTE)</div>]
+			      	
+				<B_portfolio>
+				<BOUCLE_portfolio(DOCUMENTS){id_article}{extension==jpg|png|gif}{mode=document}{par num titre}>
+				<div class="mosaique">
+				<a href="[(#URL_PAGE{affiche_image}|parametre_url{id_document,#ID_DOCUMENT})]" onclick="window.open(this.href, 'affiche_image', 'height=[(#HAUTEUR)], width=[(#LARGEUR)], top=20, left=20, toolbar=no, menubar=no, location=no, resizable=yes, scrollbars=yes, status=no'); return false;"  title="<:cisquel:eq_lien_image_gd_format:>"><img src="[(#LOGO_DOCUMENT||extraire_attribut{'src'})]" alt="<:cisquel:eq_lien_image_gd_format:>" /></a>
+				<div class='clearer'></div>
+				<a href="[(#URL_PAGE{affiche_image}|parametre_url{id_document,#ID_DOCUMENT})]" onclick="window.open(this.href, 'affiche_image', 'height=[(#HAUTEUR)], width=[(#LARGEUR)], top=20, left=20, toolbar=no, menubar=no, location=no, resizable=yes, scrollbars=yes, status=no'); return false;" title="<:cisquel:eq_lien_image_gd_format:>">[<span class="titrephoto">(#TITRE|supprimer_numero)</span>]</a>[<div class="texte">(#DESCRIPTIF)</div>]
+				<div class="linki"><a href="[(#URL_PAGE{affiche_image}|parametre_url{id_document,#ID_DOCUMENT})]" onclick="window.open(this.href, 'affiche_image', 'height=[(#HAUTEUR)], width=[(#LARGEUR)], top=20, left=20, toolbar=no, menubar=no, location=no, resizable=yes, scrollbars=yes, status=no'); return false;" title="<:cisquel:eq_lien_image_gd_format:>">#LARGEUR X #HAUTEUR | [(#TAILLE|taille_en_octets)][ - (#DATE|affdate{'d/m/Y'})]</a></div>                                   
+				</div>
+				</BOUCLE_portfolio>
+				</B_portfolio>
+				
+				<div class='clearer'>&nbsp;</div>	
+				[<div class="notes">(#NOTES)</div>]
+				
+</BOUCLE_contenu>

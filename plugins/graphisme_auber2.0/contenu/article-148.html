@@ -1,0 +1,26 @@
+<BOUCLE_contenu_article_normal(ARTICLES){id_article}>
+ #INSERT_HEAD
+ 
+				<h2>[(#TITRE|supprimer_numero)]</h2>
+				<h3>[(#SOUSTITRE|supprimer_numero)]</h3>
+                <div id="contenu">
+			      	[<div class="texte">(#TEXTE) 
+                    <!--<span class="dateactu"> <:cisquel:eq_publie_le:>&nbsp;[(#DATE|nom_jour)]&nbsp;[(#DATE|jour)]&nbsp;[(#DATE|nom_mois)]&nbsp;[(#DATE|annee)]</span>--></div>]
+					
+					<div class="texte">[(#CHAPO)]</div>
+					
+				<B_documents_normal>
+				<div class="listedoc">
+				<ul>
+				<BOUCLE_documents_normal(DOCUMENTS){id_article}{par num titre}{mode=document}{doublons}>
+				[(#EMBED_DOCUMENT)]
+				</BOUCLE_documents_normal>
+				</ul>
+				</div>
+				<div class="texte">
+				<strong>Cliquez sur l'image et déplacez la souris. MAJ pour zoomer, CTRL pour dézoomer.</strong>
+				</div>
+				</B_documents_normal>
+				[<div class="notes">(#NOTES)</div>]
+				</div>
+</BOUCLE_contenu_article_normal>

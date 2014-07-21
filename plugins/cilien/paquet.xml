@@ -1,0 +1,25 @@
+<paquet
+	prefix="cilien"
+	categorie="edition"
+	version="1.0.0"
+	etat="stable"
+	compatibilite="[3.0.0;]"
+	logo="prive/themes/spip/images/pyramides-32.png"
+	schema="1.0.0"	
+>	
+
+	<nom>cilien : Liste des liens</nom>
+
+	<auteur>C. Imberti</auteur>
+
+	<licence lien="http://creativecommons.org/licenses/by-nc-sa/2.0/fr/">Creative commons by-nc-sa</licence>	
+
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/cilien_tables.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/cilien_tables.php" />
+	<pipeline nom="affiche_gauche" inclure="cilien_pipelines.php" />
+	<pipeline nom="autoriser" inclure="cilien_autoriser.php" />
+	
+	<menu nom="ciliengerer" titre="cilien:cilien_titre" parent="menu_configuration" icone="images/cilien-16.png" />
+	<menu nom="cilienmesliens" titre="cilien:cilien_titre" parent="menu_edition" icone="images/cilien-16.png" />
+	
+</paquet>

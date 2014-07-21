@@ -1,0 +1,12 @@
+<BOUCLE_breve_invisible(BREVES) {titre_mot = invisible} {doublons}></BOUCLE_breve_invisible>
+
+<B_breves>      
+<h4 class="entry-title"><:breves:></h4>
+#ANCRE_PAGINATION
+	<ul>
+    <BOUCLE_breves(BREVES) {id_rubrique} {par date}{inverse}{pagination 5 #ENV{bre}}{doublons}>
+    <li><a href="#URL_BREVE">#TITRE</a></li>
+    </BOUCLE_breves>
+    </ul>   
+[<div class="pagination">(#PAGINATION)</div>]	
+</B_breves>

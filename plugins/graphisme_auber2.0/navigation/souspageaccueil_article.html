@@ -1,0 +1,25 @@
+#CACHE{0}
+<div id="menu1">
+<h1 class="invisible"><:cisquel:eq_menu_gauche:></h1>
+<BOUCLE_col_gauche_rub2(RUBRIQUES){id_rubrique}>
+       	<BOUCLE_hierar2(HIERARCHIE){id_article}>
+       	<BOUCLE_spaccueil2(RUBRIQUES){id_rubrique}{ciforme=_souspageaccueil}>
+    	<BOUCLE_colonne_gauche2(RUBRIQUES){branche}{raccourci=_souspageaccueil_gauche_titre_bloc}{par num titre}>
+				<div class="boxtitregauche"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><h2>[(#TITRE|supprimer_numero)]</h2></div></div></div></div></div>
+				<ul>
+            <BOUCLE_sous_rubrique_gauche2(RUBRIQUES){id_parent}{raccourci=_souspageaccueil_gauche}{par num titre}>
+				<li><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></li>
+    		</BOUCLE_sous_rubrique_gauche2>
+            <BOUCLE_article_gauche2(ARTICLES){id_rubrique}{raccourci=_souspageaccueil_gauche}{par num titre}>
+				<li><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a></li>
+    		</BOUCLE_article_gauche2>
+            <BOUCLE_sites_gauche2(SITES){id_rubrique}{raccourci=_souspageaccueil_gauche}{par num nom_site}>
+				<li><a href="#URL_SITE" title="<:cisquel:eq_visiter_site:> [(#NOM_SITE|supprimer_numero)] (<:cisquel:eq_ouvre_fenetre:>)" class="spip_out">[(#NOM_SITE|supprimer_numero)]</a></li>
+    		</BOUCLE_sites_gauche2>
+				</ul>
+    	</BOUCLE_colonne_gauche2>
+    	</BOUCLE_spaccueil2>
+    	</BOUCLE_hierar2>
+</BOUCLE_col_gauche_rub2>
+
+</div>

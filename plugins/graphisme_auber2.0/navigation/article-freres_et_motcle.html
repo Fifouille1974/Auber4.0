@@ -1,0 +1,48 @@
+#CACHE{0}
+		<div id="menu1">
+		<h1 class="invisible"><:cisquel:eq_menu_gauche:></h1>
+			<BOUCLE_parent_rubriques(RUBRIQUES){id_rubrique}>
+				#SET{ci_id_rubrique_multi_gauche, #ID_RUBRIQUE}
+				#SET{ci_li,''}
+				#SET{ci_mots_gauche, #ARRAY{}}
+				<BOUCLE_mot_sous_rubrique(MOTS){id_rubrique}{type=_multirubricage}{par titre}>
+				[(#SET{ci_mots_gauche, #GET{ci_mots_gauche}|push{#ID_MOT}})]
+				</BOUCLE_mot_sous_rubrique>
+				<div class="boxtitregauche"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><h2>[(#TITRE|supprimer_numero)]</h2></div></div></div></div></div>
+				<ul>
+				<B_articles_multi_gauche>
+				#SET{ci_li,'oui'}
+			    <BOUCLE_articles_multi_gauche(ARTICLES){id_mot IN #GET{ci_mots_gauche}}{doublons}{par #CITRI}{!par #CITRIINVERSE}{par num #CITRINUM}>
+				<li><a href="[(#URL_ARTICLE|parametre_url{id_rubrique,#GET{ci_id_rubrique_multi_gauche}})]" [class="(#EXPOSE)"]>[(#TITRE|supprimer_numero)]</a></li>
+			    </BOUCLE_articles_multi_gauche>
+				
+				<B_articles_rubrique_gauche>
+				#SET{ci_li,'oui'}
+				<BOUCLE_articles_rubrique_gauche(ARTICLES){id_rubrique}{doublons}{par #CITRI}{!par #CITRIINVERSE}{par num #CITRINUM}>
+				<li><a href="#URL_ARTICLE" [class="(#EXPOSE)"]>[(#TITRE|supprimer_numero)]</a></li>
+				</BOUCLE_articles_rubrique_gauche>
+				
+				[(#GET{ci_li}|non)
+				<li></li>
+				]
+				</ul>
+			</BOUCLE_parent_rubriques>
+			<B_multirubricage_mot_gauche>
+				<div class="boxtitregauche"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><h2><:cisquel:eq_autres_rubriques:></h2></div></div></div></div></div>
+				<ul>
+				<BOUCLE_multirubricage_mot_gauche(MOTS){id_article}{type=_multirubricage}>
+				<BOUCLE_multirubricage_rubrique_gauche(RUBRIQUES){id_mot}{doublons}>
+				 <li><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></li>
+				</BOUCLE_multirubricage_rubrique_gauche>
+				</BOUCLE_multirubricage_mot_gauche>
+				</ul>
+			</B_multirubricage_mot_gauche>
+			<B_mot_article_gauche>
+				<div class="boxtitregauche"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><h2><:cisquel:eq_voir_aussi:></h2></div></div></div></div></div>
+				<ul>
+				<BOUCLE_mot_article_gauche(MOTS){id_article}{type!==_multirubricage}>
+				<li><a href="[(#URL_PAGE{mot}|parametre_url{id_mot,#ID_MOT})]">#TITRE</a></li>
+				</BOUCLE_mot_article_gauche>
+				</ul>
+			</B_mot_article_gauche>
+		</div>

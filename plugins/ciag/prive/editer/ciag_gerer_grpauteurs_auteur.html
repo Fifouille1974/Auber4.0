@@ -1,0 +1,21 @@
+[(#SPIP_VERSION|>={3}|oui)	
+#SET{ciurl,'auteur'}
+]
+[(#SPIP_VERSION|>={3}|non)	
+#SET{ciurl,'auteur_infos'}
+]
+
+<div class='cadre cadre-formulaire-editer'>
+<div class="entete-formulaire">
+[(#SPIP_VERSION|>={3}|oui)
+	[(#URL_ECRIRE{#GET{ciurl},id_auteur=#ID_AUTEUR}|ciag_icone_verticale{<:icone_retour:>,auteur,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+]
+[(#SPIP_VERSION|>={3}|non)
+	#ENV**{icone_retour}
+]
+
+[<:ciag:grpauteurs_auteur:>
+<h1>(#ENV{titre})</h1>]
+</div>
+#FORMULAIRE_CIAG_GERER_GRPAUTEURS_AUTEUR{#ENV{new},#ENV{redirect},#ENV{config_fonc}}
+</div>

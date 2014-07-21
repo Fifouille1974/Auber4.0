@@ -1,0 +1,23 @@
+<div class='formulaire_spip formulaire_editer formulaire_editer_rubrique formulaire_editer_rubrique-#ENV{id_rubrique,nouveau}'>
+	<!-- <br class='bugajaxie' /> -->
+	[<p class='reponse_formulaire reponse_formulaire_ok'>(#ENV**{message_ok})</p>]
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<B_auteur_col1>
+		[<div class="pagination">(#PAGINATION)</div>]
+		<fieldset class="motcle">
+		 
+		<BOUCLE_auteur_col1(AUTEURS){tout}{statut!==poubelle}{par nom}{pagination #ENV{ci_pagination}}>
+		  <div><input id="aut#ID_AUTEUR" type="checkbox" [(#ID_AUTEUR|in_array{#ENV{tableau_auteurs}}|oui)checked="checked" disabled="disabled"] value=#ID_AUTEUR name='auteurs[]' /><label for="aut#ID_AUTEUR">#NOM</label></div>
+		</BOUCLE_auteur_col1>
+		
+		</fieldset>
+					
+
+	  <p class='boutons'><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+</div>

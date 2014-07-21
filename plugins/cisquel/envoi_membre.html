@@ -1,0 +1,103 @@
+#CACHE{3600}
+#CIPARAM_DOCTYPE
+<head>
+<BOUCLE_contenu(ARTICLES){id_article}>
+<title>[(#TITRE|supprimer_numero)][ - (#NOM_SITE_SPIP|textebrut)]</title>
+<link rel="schema.DC" href="http://purl.org/DC/elements/1.0/" />
+<meta name="DC.Title" content="[(#TITRE|supprimer_numero)]" />
+<meta name="DC.Creator" content="[(#NOM_SITE_SPIP)]" />
+<meta name="DC.Date" content="[(#DATE|affdate{'Y-m-d'})]" />
+<meta name="DC.Subject" content="<BOUCLE_motcle2(MOTS){id_article}{type!==Type de document}>#TITRE, </BOUCLE_motcle2>" />
+<meta name="DC.Format" content="text/html" />
+<meta name="DC.Language" content="#LANG" />
+<meta name="DC.Identifier" content="[(#URL_SITE_SPIP)/][(#URL_ARTICLE)]" />
+<meta name="DC.Type" content="<BOUCLE_typedoc(MOTS){id_article}{type==Type de document}>#TITRE, </BOUCLE_typedoc>" />
+<meta name="keywords" content="<BOUCLE_motcle(MOTS){id_article}{type!==Type de document}>#TITRE, </BOUCLE_motcle>" />
+<INCLURE{fond=noisettes/head}{lang}>
+
+<BOUCLE_script_article(ARTICLES){id_article}>
+<script type='text/javascript'>
+<!--
+function chainemailmembres(titreobjet) {
+	chaine_mail = "mailto:";
+	chaine_mail += "[(#ID_RUBRIQUE|ciar_liste_email_outlook)]";	
+	chaine_mail += "?subject=<:cisquel:eq_pour_information:>" + titreobjet;
+	chaine_mail += "&body= <:cisquel:eq_je_recommande_page:>" + titreobjet;
+	chaine_mail += ". <:cisquel:eq_pour_la_consulter_cliquer:>" + escape("#URL_PAGE{article}&id_article=#ID_ARTICLE");
+	location.href = chaine_mail;
+}
+
+function chainemailmembrestb(titreobjet) {
+	chaine_mail = "mailto:";
+	chaine_mail += "[(#ID_RUBRIQUE|ciar_liste_email_thunderbird)]";
+	chaine_mail += "?subject=<:cisquel:eq_pour_information:>" + titreobjet;
+	chaine_mail += "&body= <:cisquel:eq_je_recommande_page:>" + titreobjet;
+	chaine_mail += ". <:cisquel:eq_pour_la_consulter_cliquer:>" + escape("#URL_PAGE{article}&id_article=#ID_ARTICLE");
+	location.href = chaine_mail;
+}
+-->
+</script>
+</BOUCLE_script_article>
+
+</head>
+
+<body>
+<INCLURE{fond=noisettes/haut}{lang}>
+<div id="milieu">
+	<div id="ext-main">
+		<div class="main">
+			<div id="gauche">
+				<INCLURE{fond=noisettes/recherche_gauche}{lang}>
+	
+			    [(#INCLURE{fond=navigation/article,id_article,id_rubrique,lang})]
+			</div>
+
+  			<div id="contenu">
+			<div class="main-content">
+				<h1 class="invisible"><:cisquel:eq_contenu:></h1>
+				<div id="boxnavpath"><div id="navpath">
+					<a href="[(#URL_PAGE{sommaire})]"><:cisquel:eq_accueil:></a>
+					<BOUCLE_chem_nav(HIERARCHIE){id_article}>
+					&gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a>
+					</BOUCLE_chem_nav>
+				</div></div>
+				<div id="boxcentrale"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale">
+				
+					<h2>#TITRE</h2>
+					<div class="retour"><a href="[(#URL_PAGE{article}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" title="<:cisquel:eq_retour_article:>"><:cisquel:eq_retour_article:></a></div>
+					
+				[(#ID_RUBRIQUE|cisquel_rubrique_ec|=={oui}|oui)
+					<div>&nbsp;</div>
+					<div class="titreacturub"><:ciar:liste_membres:></div>
+					
+					[(#ID_RUBRIQUE|ciar_liste_email_texte)]
+	
+					<div>&nbsp;</div>
+					<div class="retour">
+					<a href="javascript:chainemailmembrestb('[(#NOM_SITE_SPIP|ciar_filtre_mailto{#CHARSET})]  [(#TITRE|supprimer_numero|ciar_filtre_mailto{#CHARSET})]')"><:ciar:envoyer_courriel_membres:> (Thunderbird)</a>
+					</div>
+					<div>&nbsp;</div>
+					<div class="retour">
+					<a href="javascript:chainemailmembres('[(#NOM_SITE_SPIP|ciar_filtre_mailto{#CHARSET})]  [(#TITRE|supprimer_numero|ciar_filtre_mailto{#CHARSET})]')"><:ciar:envoyer_courriel_membres:> (Outlook)</a>
+					</div>
+				]
+								
+		    	<div class="o2paj"><a href="#entete" title="<:cisquel:eq_haut_page:>"><:cisquel:eq_haut_page:></a></div>
+				</div></div></div></div></div></div>
+			</div>
+			</div>
+			<div class='clearer'>&nbsp;</div>	
+		</div>
+		<div id="droite">
+		[(#ID_RUBRIQUE|cisquel_logo_ari)]
+		</div>
+	</div>
+</div>
+[(#CIPARAM_ABONNEMENT_XITI|oui)[(#CIPARAM_ABONNEMENT_XITI|match{_images/void.gif}|non)[(#INCLURE{fond=noisettes/compteur_article,id_article})]]]
+
+<INCLURE{fond=noisettes/pied}{lang}><INCLURE{fond=noisettes/pied_connexion}{self=#SELF}{lang}>
+
+</BOUCLE_contenu>
+</B_contenu>
+<INCLURE{fond=altern}>
+<//B_contenu>

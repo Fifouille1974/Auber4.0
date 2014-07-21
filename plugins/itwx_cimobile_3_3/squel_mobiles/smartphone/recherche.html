@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+]<!--[if lt IE 7 ]> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html lang="#LANG"class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]--> 
+<head>
+<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+<title><:spip:info_rechercher:> - [(#NOM_SITE_ITWX|textebrut)]</title>
+<INCLURE{fond=inc/inc-head}>
+<meta name="robots" content="none" />
+</head>
+
+<body class="#LANG_DIR" id="top">
+<div id="smart">
+
+ [(#REM) TOOL BARRE ]
+ <INCLURE{fond=inc/inc-navBar}>
+  
+  <div id="main">
+  
+  <INCLURE{fond=inc/ajax/formulaire_recherche}{env}{ajax}>
+
+  [(#REM) Resultats de la recherche ]
+  [<div class="contenu">
+    <div class="cartouche"> <br />
+      <h1><:resultats_recherche:></h1>
+      <p class="soustitre">&#171;&nbsp;(#RECHERCHE)&nbsp;&#187;</p>
+      <br />
+    </div>
+  </div>]
+  
+  [(#REM) Articles trouves ] 
+  <INCLURE{fond=inc/inc-rech-listart}{env}{ajax}{art=_art#ID_ARTICLE}/> 
+  
+  [(#REM) Rubriques trouvees ] 
+  <INCLURE{fond=inc/inc-rech-listrub}{env}{ajax}{rub=_rub#ID_RUBRIQUE}/> 
+  
+  [(#REM) Breves trouvees ] 
+  <INCLURE{fond=inc/inc-rech-listbre}{env}{ajax}{bre=_bre#ID_BREVE}/> 
+  
+  [(#REM) Sites web trouves ] 
+  <INCLURE{fond=inc/inc-rech-listsite}{env}{ajax}{site=_site#ID_SYNDIC}/> 
+  
+  [(#REM) Pied - Gestion du site ]
+  <div class="group" style="height:17px; border-bottom:1px solid #B9B9B9"></div>
+  <div class="ticket">
+    <div class="ticketmenu">
+      <ul>
+       <li><a rel="start home" href="#URL_PAGE{contact}"><:contact:></a></li>
+       [(#AUTORISER{ecrire})<li><a href="#EVAL{_DIR_RESTREINT_ABS}"><:espace_prive:></a></li>]
+       [(#SESSION{id_auteur}|?{' '})<li><a href="#URL_LOGOUT" rel="nofollow" style="background-image: none; text-align:center" class=""><:icone_deconnecter:></a></li>]
+      </ul>
+    </div>
+  </div>
+  
+  <INCLURE{fond=inc/inc-pied}/> 
+
+  </div><!--#main-->
+
+</div><!--#smart-->
+</body>
+</html>

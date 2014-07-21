@@ -1,0 +1,10 @@
+<BOUCLE_article(ARTICLES){id_article}>
+<B_traductions>
+<p class="traductions">
+	<:trad_article_traduction:><br />
+	<BOUCLE_traductions(ARTICLES) {traduction} {par lang}>[(#TOTAL_BOUCLE|>{1}|?{' '})
+	<span lang="#LANG" xml:lang="#LANG" dir="#LANG_DIR"[ class="(#EXPOSE)"]>[(#EXPOSE{'',<a href="#URL_ARTICLE" rel="alternate"[ title="(#TITRE|attribut_html|couper{80})"]>})][(#LANG|traduire_nom_langue)]#EXPOSE{'',</a>}</span>
+	]</BOUCLE_traductions>
+</p>
+</B_traductions>
+</BOUCLE_article>

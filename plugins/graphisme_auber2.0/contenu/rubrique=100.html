@@ -1,0 +1,37 @@
+<BOUCLE_contenu(RUBRIQUES){id_rubrique}>
+				<div class="rub">
+				<h2>[(#TITRE|supprimer_numero)]</h2>
+			      	[<div class="texte">(#TEXTE)</div>]
+				[<div class="texte">(#NOTES)</div>]
+				</div>
+			      	
+				<BOUCLE_sous_rubriques(RUBRIQUES){id_parent}{par num titre}>
+				<div class="listerub">
+					
+				      <li>	<a href="#URL_RUBRIQUE" class="titresousrub">[(#TITRE|supprimer_numero)]</a></li>
+				      	[<div class="textesousrub">(#DESCRIPTIF)</div>]
+					<B_sous_sous_rubriques>
+					<div class="liens">
+					<ul>
+					<BOUCLE_sous_sous_rubriques(RUBRIQUES){id_parent}{par num titre}>
+					<li><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></li>
+					</BOUCLE_sous_sous_rubriques>
+					</ul>
+				      	</div>
+					</B_sous_sous_rubriques>
+					<div class="clearer">&nbsp;</div>
+				</div>
+				</BOUCLE_sous_rubriques>
+				
+				
+				
+				<BOUCLE_aubermensuel(ARTICLES) {id_rubrique} {par date} {inverse} {0,3} {doublons}>
+				<div class="item_aubermensuel">
+				<div class="logo_aubermensuel">[(#LOGO_ARTICLE|#URL_ARTICLE)]</div>
+				<A HREF="#URL_ARTICLE" class="spip_in">[(#TITRE|supprimer_numero)] [(#DATE|nom_mois)] [(#DATE|annee)]
+				[<br>(#SOUSTITRE)]</A>
+				[<br>(#CHAPO)]
+				</div>
+				</BOUCLE_aubermensuel>
+				
+</BOUCLE_contenu>

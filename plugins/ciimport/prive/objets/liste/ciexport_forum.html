@@ -1,0 +1,52 @@
+#SET{ciobjet,''}
+[(#ENV{objet}|oui)
+	[(#ENV{id_objet}|oui)
+	[(#SET{ciobjet,&objet=#ENV{objet}&id_objet=#ENV{id_objet}})]
+	]
+]
+[(#ENV{statut}|oui)
+	#SET{tableau_statuts, #ARRAY{0,tous,1,nonpublie}} 
+	[(#ENV{statut}|in_array{#GET{tableau_statuts}}|oui)
+	[(#SET{ciobjet,#GET{ciobjet}&statut=#ENV{statut}})]
+	]
+]
+[(#SPIP_VERSION|>={3}|oui)
+	[(#ENV{redirect}|ciimport_icone_verticale{<:icone_retour:>,article,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+]
+[(#SPIP_VERSION|>={3}|non)
+	#ENV**{icone_retour}
+]
+<table cellspacing="0" cellpadding="2" style="width: 100%; border: 0px none;" class="arial2">
+<tbody>
+<tr style="background-color:#eee;">
+<th></th>
+[(#ENV{statut}|non)<th><:ciimport:icone_export_forum_publie:></th>]
+[(#ENV{statut}|=={tous}|oui)<th><:ciimport:icone_export_forum_tous:></th>]
+[(#ENV{statut}|=={nonpublie}|oui)<th><:ciimport:icone_export_forum_nonpublie:></th>]
+</tr>
+
+<tr class="tr_liste" style="background-color:#fff;">
+<td><a href="#URL_ECRIRE{ciexport_fichier_forum,forme=forum_csv&charset=iso-8859-1#GET{ciobjet}}"><img src='#CHEMIN{images/telecharger.png}' width='24' height='24' alt='' /></a></td>
+<td><a href="#URL_ECRIRE{ciexport_fichier_forum,forme=forum_csv&charset=iso-8859-1#GET{ciobjet}}"><:ciimport:forum_ciexport_csv_iso8859:></a></td>
+</tr>
+<tr class="tr_liste" style="background-color:#fff;">
+<td><a href="#URL_ECRIRE{ciexport_fichier_forum,forme=forum_csv&charset=utf-8#GET{ciobjet}}"><img src='#CHEMIN{images/telecharger.png}' width='24' height='24' alt='' /></a></td>
+<td><a href="#URL_ECRIRE{ciexport_fichier_forum,forme=forum_csv&charset=utf-8#GET{ciobjet}}"><:ciimport:forum_ciexport_csv_utf8:></a></td>
+</tr>
+
+<tr class="tr_liste" style="background-color:#fff;">
+<td><a href="#URL_ECRIRE{ciexport_fichier_forum,forme=forum_texte&charset=iso-8859-1#GET{ciobjet}}"><img src='#CHEMIN{images/telecharger.png}' width='24' height='24' alt='' /></a></td>
+<td><a href="#URL_ECRIRE{ciexport_fichier_forum,forme=forum_texte&charset=iso-8859-1#GET{ciobjet}}"><:ciimport:forum_ciexport_texte_iso8859:></a></td>
+</tr>
+<tr class="tr_liste" style="background-color:#fff;">
+<td><a href="#URL_ECRIRE{ciexport_fichier_forum,forme=forum_texte&charset=utf-8#GET{ciobjet}}"><img src='#CHEMIN{images/telecharger.png}' width='24' height='24' alt='' /></a></td>
+<td><a href="#URL_ECRIRE{ciexport_fichier_forum,forme=forum_texte&charset=utf-8#GET{ciobjet}}"><:ciimport:forum_ciexport_texte_utf8:></a></td>
+</tr>
+
+<tr class="tr_liste" style="background-color:#fff;">
+<td><a href="#URL_ECRIRE{ciexport_fichier_forum,forme=forum_html#GET{ciobjet}}"><img src='#CHEMIN{images/telecharger.png}' width='24' height='24' alt='' /></a></td>
+<td><a href="#URL_ECRIRE{ciexport_fichier_forum,forme=forum_html#GET{ciobjet}}"><:ciimport:forum_ciexport_html:></a></td>
+</tr>
+
+</tbody>
+</table>

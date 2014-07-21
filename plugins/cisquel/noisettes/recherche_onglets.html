@@ -1,0 +1,40 @@
+#SET{cidebut,'0000-01-01'}
+#SET{cifin,'9000-01-01'}
+
+[(#ENV{age}|intval|>{0}|oui)
+	[(#SET{cidebut,[(#ENV{age}|cisquel_age_vers_date|sinon{0000-01-01})]})]
+]
+[(#ENV{datedebut}|cisquel_verifier_et_convertir_date|oui)
+	#SET{cidebut, #ENV{datedebut}|cisquel_verifier_et_convertir_date|sinon{0000-01-01}}	
+]
+[(#ENV{datefin}|cisquel_verifier_et_convertir_date|oui)
+	#SET{cifin, #ENV{datefin}|cisquel_verifier_et_convertir_date|sinon{9000-01-01}}	
+]
+
+#SET{cidebut,#GET{cidebut}' 00:00:00'}
+#SET{cifin,#GET{cifin}' 23:59:59'}
+
+#SET{cigetonglet,#RECHERCHE|cisquel_getonglet{#ENV**}}
+#SET{self,#SELF}
+
+<div class='onglets_recherche'>
+<ul>
+
+<li class='onglet_article'><a href="[(#GET{self}|parametre_url{onglet,article})]" [(#GET{cigetonglet}|=={article}|oui)class="on"][(#GET{cigetonglet}|non)class="on"]><:articles:>
+<BOUCLE_nbre_articles(ARTICLES){recherche}{date>=#GET{cidebut}} {date<=#GET{cifin}}></BOUCLE_nbre_articles>(#GRAND_TOTAL)<//B_nbre_articles>
+</a></li>
+<li class='onglet_rubrique'><a href="[(#GET{self}|parametre_url{onglet,rubrique})]" [(#GET{cigetonglet}|=={rubrique}|oui)class="on"]><:rubriques:>
+<BOUCLE_nbre_rubriques(RUBRIQUES){recherche}></BOUCLE_nbre_rubriques>(#GRAND_TOTAL)<//B_nbre_rubriques>
+</a></li>
+<li class='onglet_document'><a href="[(#GET{self}|parametre_url{onglet,document})]" [(#GET{cigetonglet}|=={document}|oui)class="on"]><:onglet_documents:>
+<BOUCLE_nbre_documents(DOCUMENTS){recherche}{extension ?}{date>=#GET{cidebut}} {date<=#GET{cifin}}></BOUCLE_nbre_documents>
+[(#ENV{elargir}|=={doc}|non)&#40;#GRAND_TOTAL&#41;][(#ENV{elargir}|=={doc}|oui)&#40;-&#41;]
+<//B_nbre_documents>
+</a></li>
+<li class='onglet_forum'><a href="[(#GET{self}|parametre_url{onglet,forum})]" [(#GET{cigetonglet}|=={forum}|oui)class="on"]><:cisquel:eq_commentaires:>
+<BOUCLE_nbre_forums(FORUMS){recherche}{date>=#GET{cidebut}} {date<=#GET{cifin}}></BOUCLE_nbre_forums>(#GRAND_TOTAL)<//B_nbre_forums>
+</a></li>
+
+</ul>
+<div class="clearer"></div>
+</div>

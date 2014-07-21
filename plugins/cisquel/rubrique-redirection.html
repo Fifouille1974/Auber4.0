@@ -1,0 +1,17 @@
+#CIPARAM_DOCTYPE
+<head>
+</head>
+<body>
+<BOUCLE_principale(RUBRIQUES){id_rubrique}>
+    <BOUCLE_articles_unseul(ARTICLES) {id_rubrique}{par date}{inverse}{0,1}>
+        <script type="text/javascript">
+        <!--
+        document.location.href="[(#URL_ARTICLE)]"
+        //-->
+        </script>
+    </BOUCLE_articles_unseul>
+    <:cisquel:eq_info_redirection:>
+    <//B_articles_unseul>
+</BOUCLE_principale>
+</body>
+</html>

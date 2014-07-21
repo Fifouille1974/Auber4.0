@@ -1,0 +1,61 @@
+[(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]
+#CIPARAM_DOCTYPE
+<head>
+<BOUCLE_title(RUBRIQUES){id_rubrique}>
+<title>[(#TITRE|supprimer_numero)][ - (#NOM_SITE_SPIP|textebrut)]</title>
+</BOUCLE_title>
+<meta name="robots" content="noindex, nofollow" />
+<link href="#CHEMIN{_css/styleexceptions.css}" rel="stylesheet" type="text/css" />
+<INCLURE{fond=noisettes/headsimple}{lang}>
+<style type="text/css">
+<!-- 
+body {background: #FFFFFF;}
+-->
+</style>
+<script type="text/javascript">
+function printPage() {
+	window.print();
+	return false; 
+}
+</script>
+</head>
+
+<body onload="printPage()">
+<div id="pageImprimer">
+<INCLURE{fond=noisettes/haut_print}{lang}>
+
+<div id="milieu">
+	<div id="ext-main">
+		<BOUCLE_contenu(RUBRIQUES){id_rubrique}>
+		<div class="main">
+
+  			<div id="contenu">
+			<div class="main-content">
+				<div id="boxnavpath"><div id="navpath">
+					<a href="[(#URL_PAGE{sommaire})]"><:cisquel:eq_accueil:></a>
+					<BOUCLE_chem_nav(HIERARCHIE){id_rubrique}>
+					&gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a>
+					</BOUCLE_chem_nav>
+					&gt; [(#TITRE|supprimer_numero)]
+				</div></div>
+				
+				<INCLURE{fond=contenu/rubrique-textearticle}{id_rubrique}{env}{lang}>
+				
+			</div>
+			</div>
+			<div class='clearer'>&nbsp;</div>	
+		</div>
+		</BOUCLE_contenu>
+	</div>
+</div>
+<div id="pied">
+	<div id="copyright">
+	[<p>&copy;&nbsp;(#NOM_SITE_SPIP)</p>]
+	[<p><:cisquel:date_impression:> : (#DATE|affdate{'d/m/Y h:i:s'})</p>]
+	<p><:cisquel:adresse_page:> : [(#URL_SITE_SPIP)/][(#URL_RUBRIQUE)]</p>
+	</div>
+</div>
+
+</div>
+</body>
+</html>

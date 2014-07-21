@@ -1,0 +1,219 @@
+#CIPARAM_DOCTYPE
+<head>
+<BOUCLE_contenu(RUBRIQUES){id_rubrique}>
+<title>[(#TITRE|supprimer_numero)][ - (#NOM_SITE_SPIP|textebrut)]</title>
+<link rel="schema.DC" href="http://purl.org/DC/elements/1.0/" />
+<meta name="DC.Title" content="[(#TITRE|supprimer_numero)]" />
+<meta name="DC.Creator" content="[(#NOM_SITE_SPIP)]" />
+<meta name="DC.Date" content="<BOUCLE_datesite(ARTICLES){par date}{inverse}{0,1}>[(#DATE|affdate{'Y-m-d'})]</BOUCLE_datesite>" />
+<meta name="DC.Subject" content="<BOUCLE_motcle2(MOTS){id_rubrique}{type!==Type de document}>#TITRE, </BOUCLE_motcle2>" />
+<meta name="DC.Format" content="text/html" />
+<meta name="DC.Language" content="#LANG" />
+<meta name="DC.Identifier" content="[(#URL_SITE_SPIP)/][(#URL_RUBRIQUE)]" />
+<meta name="DC.Type" content="<BOUCLE_typedoc(MOTS){id_rubrique}{type==Type de document}>#TITRE, </BOUCLE_typedoc>" />
+<meta name="keywords" content="<BOUCLE_motcle(MOTS){id_rubrique}{type!==Type de document}>#TITRE, </BOUCLE_motcle>" />
+ 
+<link href="#CHEMIN{_css/styleexceptions.css}" rel="stylesheet" type="text/css" />
+<link rel="alternate" type="application/rss+xml" title="#NOM_SITE_SPIP - <:cisquel:eq_actu:> - <:rubrique:> : [(#TITRE|supprimer_numero)]" href="[(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" />
+<INCLURE{fond=noisettes/head}{lang}>
+</head>
+
+<body>
+<INCLURE{fond=noisettes/haut}{lang}>
+<div id="pageRubEspacededie">
+<div id="milieu">
+	<div id="ext-main">
+		 
+		<div class="main">
+			<div id="gauche">
+				<INCLURE{fond=noisettes/recherche_gauche}{lang}>
+	
+			    [(#INCLURE{fond=navigation/rubrique,id_rubrique,lang})]
+			</div>
+
+  			<div id="contenu">
+			<div class="main-content">
+				<h1 class="invisible"><:cisquel:eq_contenu:></h1>
+				<div id="boxnavpath"><div id="navpath">
+					<a href="[(#URL_PAGE{sommaire})]"><:cisquel:eq_accueil:></a>
+					<BOUCLE_chem_nav(HIERARCHIE){id_rubrique}>
+					&gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a>
+					</BOUCLE_chem_nav>
+					&gt; [(#TITRE|supprimer_numero)]
+				</div></div>
+				<div id="boxespdedie"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale">
+				<div id="droitehaut">
+					<div id="menu2">
+						<h1 class="invisible"><:cisquel:eq_menu_droite:></h1>
+						<BOUCLE_droite_rubrique(RUBRIQUES){id_rubrique}>
+						[<div class="visuel"><img src="(#LOGO_RUBRIQUE||extraire_attribut{'src'})" alt="" /></div>]
+						<div class="blocoutil">
+						<a rel="noindex,nofollow" href="javascript:chainemail('[(#NOM_SITE_SPIP|ciparam_filtre_mailto{#CHARSET})]  [(#TITRE|supprimer_numero|ciparam_filtre_mailto{#CHARSET})]')" title="<:cisquel:eq_envoyer_courriel:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><:cisquel:eq_envoyer_courriel:></a>
+						<a rel="noindex,nofollow" href="[(#URL_PAGE{rubrique_print_esp}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" title="<:cisquel:eq_imprimer_page:>" class="imprimer"><:cisquel:eq_imprimer:></a>
+
+						[(#PLUGIN{cinotif}|oui)
+							[(#CONFIG{cinotif_rubrique}|=={non}|non)
+						<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-rubrique}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" title="<:cisquel:abonner:>" class="abonner"><:cisquel:abonner:></a>
+						<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-rubrique}|parametre_url{id_rubrique,#ID_RUBRIQUE}|parametre_url{desabonner,oui})]" title="<:cisquel:desabonner:>" class="desabonner"><:cisquel:desabonner:></a>
+							]
+						]
+				
+						<BOUCLE_reader(ARTICLES){raccourci=_reader_acrobat_ou_autre}{par num titre}>
+						<a href="[(#URL_ARTICLE)]" class="acrobat">[<img src="(#LOGO_ARTICLE||image_reduire{19,0}|extraire_attribut{'src'})" alt="" border="0" />][<span>(#TITRE|supprimer_numero)</span>]</a>
+						</BOUCLE_reader>
+							
+						</div>
+						[(#ID_RUBRIQUE|cisquel_rubrique_ec|=={oui}|oui)
+						<div class="blocoutil">
+						<a href="[(#URL_PAGE{liste_membre}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" title="<:cisquel:eq_liste_membres:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><:cisquel:eq_liste_membres:></a>
+						</div>
+						]
+						</BOUCLE_droite_rubrique>
+					</div>
+				</div>	
+				<div class="rub">
+				<h2>[(#TITRE|supprimer_numero)]</h2>
+				<div class="dateart">[<:cisquel:eq_publie_le:> (#DATE|affdate)]
+				</div>
+			      	[<div class="texte">(#TEXTE)</div>]
+				[<div class="texte">(#NOTES)</div>]
+				</div>
+				<div class='clearer'>&nbsp;</div>
+
+			      	
+				<div class="listerub1sur2">
+				<BOUCLE_sous_rubriques_col1(RUBRIQUES){id_parent}{par num titre}{1/2}>
+				<div class="listerub">
+					[<img src="(#LOGO_RUBRIQUE||image_reduire{44,0}|extraire_attribut{'src'})" alt=""  class="rightill" />]
+				      	<a href="#URL_RUBRIQUE" class="titresousrub">[(#TITRE|supprimer_numero)]</a>
+				      	[<div class="textesousrub">(#DESCRIPTIF)</div>]
+				<div class='clearer'>&nbsp;</div>
+				</div>
+				
+				</BOUCLE_sous_rubriques_col1>
+				</div>
+				<div class="listerub2sur2">
+				<BOUCLE_sous_rubriques_col2(RUBRIQUES){id_parent}{par num titre}{2/2}>
+				<div class="listerub">
+					[<img src="(#LOGO_RUBRIQUE||image_reduire{44,0}|extraire_attribut{'src'})" alt=""  class="rightill" />]
+				      	<a href="#URL_RUBRIQUE" class="titresousrub">[(#TITRE|supprimer_numero)]</a>
+				      	[<div class="textesousrub">(#DESCRIPTIF)</div>]
+				<div class='clearer'>&nbsp;</div>
+				</div>
+				</BOUCLE_sous_rubriques_col2>
+				</div>
+
+				<div class='clearer'>&nbsp;</div>
+
+				<div class="listeart1sur2">
+				<BOUCLE_articles_col3(ARTICLES){id_rubrique}{par #CITRI}{!par #CITRIINVERSE}{par num #CITRINUM}{1/2}>
+				<div class="listeart">
+					[<img src="(#LOGO_ARTICLE||image_reduire{44,0}|extraire_attribut{'src'})" alt=""  class="rightill" />]
+				      	<a href="#URL_ARTICLE" <BOUCLE_nf_art_col3(ARTICLES){id_article}{raccourci=_nouvelle_fenetre}>class="spip_out titreartliste"</BOUCLE_nf_art_col3></B_nf_art_col3>class="titreartliste"<//B_nf_art_col3> >[(#TITRE|supprimer_numero)]</a>
+				      	[<div class="texte">(#TEXTE)</div>]
+					<B_doc_col3>
+					<div class="listedoc">
+					<ul>
+					<BOUCLE_doc_col3(DOCUMENTS){id_article}{par num titre}{mode=document}{doublons}>
+					<li><a href="#URL_DOCUMENT" onclick="xt_med('C','[(#ID_ARTICLE|ciparam_xtn2)]','[pj(#ID_ARTICLE)-][(#TITRE|supprimer_numero|ciparam_xtTraiter)]','T')" class="document" title="<:cisquel:eq_ouvre_document:> [(#TITRE|supprimer_numero)] <:cisquel:eq_dans_fenetre:>">[(#TITRE|supprimer_numero)]</a>&nbsp;([<:cisquel:eq_format:> (#EXTENSION)][ - (#TAILLE|taille_en_octets)][ - (#DATE|affdate{'d/m/Y'})])[<span class="docdesc">(#DESCRIPTIF)</span>][<span class="docdesc">(#TAILLE|cisquel_temps_telechargement)</span>]</li>
+					</BOUCLE_doc_col3>
+					</ul>
+					</div>
+					</B_doc_col3>
+				 <div class="clearer">&nbsp;</div>    	
+				</div>
+				</BOUCLE_articles_col3>
+				</div>
+				
+				<div class="listeart2sur2">
+				<BOUCLE_articles_col4(ARTICLES){id_rubrique}{par #CITRI}{!par #CITRIINVERSE}{par num #CITRINUM}{2/2}>
+				<div class="listeart">
+					[<img src="(#LOGO_ARTICLE||image_reduire{44,0}|extraire_attribut{'src'})" alt=""  class="rightill" />]
+				      	<a href="#URL_ARTICLE" <BOUCLE_nf_art_col4(ARTICLES){id_article}{raccourci=_nouvelle_fenetre}>class="spip_out titreartliste"</BOUCLE_nf_art_col4></B_nf_art_col4>class="titreartliste"<//B_nf_art_col4> >[(#TITRE|supprimer_numero)]</a>
+				      	[<div class="texte">(#TEXTE)</div>]
+					<B_doc_col4>
+					<div class="listedoc">
+					<ul>
+					<BOUCLE_doc_col4(DOCUMENTS){id_article}{par num titre}{mode=document}{doublons}>
+					<li><a href="#URL_DOCUMENT" onclick="xt_med('C','[(#ID_ARTICLE|ciparam_xtn2)]','[pj(#ID_ARTICLE)-][(#TITRE|supprimer_numero|ciparam_xtTraiter)]','T')" class="document" title="<:cisquel:eq_ouvre_document:> [(#TITRE|supprimer_numero)] <:cisquel:eq_dans_fenetre:>">[(#TITRE|supprimer_numero)]</a>&nbsp;([<:cisquel:eq_format:> (#EXTENSION)][ - (#TAILLE|taille_en_octets)][ - (#DATE|affdate{'d/m/Y'})])[<span class="docdesc">(#DESCRIPTIF)</span>][<span class="docdesc">(#TAILLE|cisquel_temps_telechargement)</span>]</li>
+					</BOUCLE_doc_col4>
+					</ul>
+					</div>
+					</B_doc_col4>				      	
+				 <div class="clearer">&nbsp;</div>    	
+				</div>
+				</BOUCLE_articles_col4>
+				</div>
+				
+				 <div class="clearer">&nbsp;</div>    	
+				
+				
+				#SET{ci_mots, #ARRAY{}}
+				<BOUCLE_mot_sous_rubrique(MOTS){id_rubrique}{type=_multirubricage}{par titre}>
+				[(#SET{ci_mots, #GET{ci_mots}|push{#ID_MOT}})]
+				</BOUCLE_mot_sous_rubrique>
+				
+				#SET{ci_id_rubrique_multi, #ID_RUBRIQUE}
+			    
+					<div class="listeart1sur2">
+				    <BOUCLE_articles_col1(ARTICLES){id_mot IN #GET{ci_mots}}{par #CITRI}{!par #CITRIINVERSE}{par num #CITRINUM}{1/2}>
+					<div class="listeart">
+						[<img src="(#LOGO_ARTICLE||image_reduire{44,0}|extraire_attribut{'src'})" alt=""  class="rightill" />]
+					      	<a href="[(#URL_ARTICLE|parametre_url{id_rubrique,#GET{ci_id_rubrique_multi}})]" <BOUCLE_nf_art_col1(ARTICLES){id_article}{raccourci=_nouvelle_fenetre}>class="spip_out titreartliste"</BOUCLE_nf_art_col1></B_nf_art_col1>class="titreartliste"<//B_nf_art_col1> >[(#TITRE|supprimer_numero)]</a>
+					      	[<div class="texte">(#TEXTE)</div>]
+						<B_doc_col1>
+						<div class="listedoc">
+						<ul>
+						<BOUCLE_doc_col1(DOCUMENTS){id_article}{par num titre}{mode=document}{doublons}>
+						<li><a href="#URL_DOCUMENT" onclick="xt_med('C','[(#ID_ARTICLE|ciparam_xtn2)]','[pj(#ID_ARTICLE)-][(#TITRE|supprimer_numero|ciparam_xtTraiter)]','T')" class="document" title="<:cisquel:eq_ouvre_document:> [(#TITRE|supprimer_numero)] <:cisquel:eq_dans_fenetre:>">[(#TITRE|supprimer_numero)]</a>&nbsp;([<:cisquel:eq_format:> (#EXTENSION)][ - (#TAILLE|taille_en_octets)][ - (#DATE|affdate{'d/m/Y'})])[<span class="docdesc">(#DESCRIPTIF)</span>][<span class="docdesc">(#TAILLE|cisquel_temps_telechargement)</span>]</li>
+						</BOUCLE_doc_col1>
+						</ul>
+						</div>
+						</B_doc_col1>
+					 <div class="clearer">&nbsp;</div>    	
+					</div>
+					</BOUCLE_articles_col1>
+					</div>
+
+					<div class="listeart2sur2">
+				    <BOUCLE_articles_col2(ARTICLES){id_mot IN #GET{ci_mots}}{par #CITRI}{!par #CITRIINVERSE}{par num #CITRINUM}{2/2}>
+					<div class="listeart">
+						[<img src="(#LOGO_ARTICLE||image_reduire{44,0}|extraire_attribut{'src'})" alt=""  class="rightill" />]
+					      	<a href="[(#URL_ARTICLE|parametre_url{id_rubrique,#GET{ci_id_rubrique_multi}})]" <BOUCLE_nf_art_col2(ARTICLES){id_article}{raccourci=_nouvelle_fenetre}>class="spip_out titreartliste"</BOUCLE_nf_art_col2></B_nf_art_col2>class="titreartliste"<//B_nf_art_col2> >[(#TITRE|supprimer_numero)]</a>
+					      	[<div class="texte">(#TEXTE)</div>]
+						<B_doc_col2>
+						<div class="listedoc">
+						<ul>
+						<BOUCLE_doc_col2(DOCUMENTS){id_article}{par num titre}{mode=document}{doublons}>
+						<li><a href="#URL_DOCUMENT" onclick="xt_med('C','[(#ID_ARTICLE|ciparam_xtn2)]','[pj(#ID_ARTICLE)-][(#TITRE|supprimer_numero|ciparam_xtTraiter)]','T')" class="document" title="<:cisquel:eq_ouvre_document:> [(#TITRE|supprimer_numero)] <:cisquel:eq_dans_fenetre:>">[(#TITRE|supprimer_numero)]</a>&nbsp;([<:cisquel:eq_format:> (#EXTENSION)][ - (#TAILLE|taille_en_octets)][ - (#DATE|affdate{'d/m/Y'})])[<span class="docdesc">(#DESCRIPTIF)</span>][<span class="docdesc">(#TAILLE|cisquel_temps_telechargement)</span>]</li>
+						</BOUCLE_doc_col2>
+						</ul>
+						</div>
+						</B_doc_col2>				      	
+					 <div class="clearer">&nbsp;</div>    	
+					</div>
+					</BOUCLE_articles_col2>
+					</div>
+					
+					 <div class="clearer">&nbsp;</div>    	
+
+				 
+				 
+				 <div class="o2paj"><a href="#entete" title="<:cisquel:eq_haut_page:>"><:cisquel:eq_haut_page:></a></div>
+				</div></div></div></div></div></div>
+			</div>
+			</div>
+			<div class='clearer'>&nbsp;</div>	
+		</div>
+		 
+	</div>
+</div>
+</div>
+[(#CIPARAM_ABONNEMENT_XITI|oui)[(#CIPARAM_ABONNEMENT_XITI|match{_images/void.gif}|non)[(#INCLURE{fond=noisettes/compteur_rubrique,id_rubrique})]]]
+
+<INCLURE{fond=noisettes/pied}{lang}><INCLURE{fond=noisettes/pied_connexion}{self=#SELF}{lang}>
+
+</BOUCLE_contenu>
+</B_contenu>
+<INCLURE{fond=altern}>
+<//B_contenu>

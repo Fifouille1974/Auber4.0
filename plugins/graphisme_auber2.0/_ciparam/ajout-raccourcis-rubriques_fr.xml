@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<item><nom>_tous_les_dossiers2</nom><description>Page d'accueil : titre colonne centrale ("Projets" ou autre)</description></item>
+<item><nom>_tous_les_dossiers3</nom><description>Page d'accueil : titre colonne centrale ("Pratique" ou autre)</description></item>
+<item><nom>_tous_les_dossiers_actu</nom><description>Page d'accueil : titre colonne centrale ("Actualité" ou autre)</description></item>
+<item><nom>_portail_droite_titre_bloc_albertivi</nom><description>Page d'accueil : titre colonne droite ("Albertivi")</description></item>
+<item><nom>_large</nom><description>Sans la colonne de droite</description></item>

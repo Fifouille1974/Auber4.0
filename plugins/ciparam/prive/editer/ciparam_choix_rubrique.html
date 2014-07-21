@@ -1,0 +1,31 @@
+#SET{cirang,'non'}
+<BOUCLE_rang(RUBRIQUES){tout}{id_rubrique=#ENV{id}}{raccourci LIKE \_portail\_droite\_titre\_bloc%}>
+#SET{cirang,'oui'}
+</BOUCLE_rang>
+
+#SET{cirangspa,'non'}
+<BOUCLE_rangspa(RUBRIQUES){tout}{id_rubrique=#ENV{id}}{raccourci LIKE \_souspageaccueil\_droite\_titre\_bloc%}>
+#SET{cirangspa,'oui'}
+</BOUCLE_rangspa>
+
+[(#ENV{id}|!={0}|oui)
+<div class="cadre" id="choixforme">
+#FORMULAIRE_EDITER_CIPARAM_FORME_RUBRIQUE{#ENV{type},#ENV{id}}
+</div>
+<div class="cadre" id="choixraccourci">
+#FORMULAIRE_EDITER_CIPARAM_RACCOURCI_RUBRIQUE{#ENV{type},#ENV{id}}
+</div>
+[(#GET{cirang}|=={oui}|oui)
+<div class="cadre" id="choixrang">
+#FORMULAIRE_EDITER_CIPARAM_RANG_RUBRIQUE{#ENV{id}}
+</div>
+]
+[(#GET{cirangspa}|=={oui}|oui)
+<div class="cadre" id="choixrangspa">
+#FORMULAIRE_EDITER_CIPARAM_RANGSPA_RUBRIQUE{#ENV{id}}
+</div>
+]
+<div class="cadre" id="choixtri">
+#FORMULAIRE_EDITER_CIPARAM_TRI_RUBRIQUE{#ENV{type},#ENV{id}}
+</div>
+]

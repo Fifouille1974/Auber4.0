@@ -1,0 +1,79 @@
+#CACHE{3600}<BOUCLE_principale(RUBRIQUES) {id_rubrique}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title>[(#TITRE|textebrut) - ][(#NOM_SITE_ITWX|textebrut)]</title>
+[<meta name="description" content="(#INTRODUCTION{150}|textebrut)" />]
+<INCLURE{fond=inc/inc-head}>
+[(#REM) Lien vers le flux RSS des articles la rubrique ]
+<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" />
+</head>
+
+<body class="#LANG_DIR">
+<div id="mob">
+
+  [(#REM) TOOL BARRE ]
+  <INCLURE{fond=inc/inc-navBar}/> 
+  
+  [(#REM) Contenu principal : contenu de la rubrique ]
+  <div class="contenu">
+    <div class="cartouche"> [(#LOGO_RUBRIQUE|image_reduire{120,100})]
+      <h1 class="#EDIT{titre}">[(#TITRE|supprimer_numero)]</h1>
+	</div>
+    [<div class="#EDIT{texte} chapo">(#TEXTE|image_reduire{0,0})</div>]
+  <br class="nettoyeur" />
+    [<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>] 
+		
+  </div><!--#contenu-->
+  <br class="nettoyeur" />
+  
+  [(#REM) Documents joints a la rubrique ]
+  <B_documents_joints>	
+  <div class="listinc">	
+  <div class="grouplist"><:titre_documents_joints:></div>	
+  <ul>
+  	<BOUCLE_documents_joints(DOCUMENTS) {id_rubrique} {mode=document} {par num titre, date} {doublons}>
+		<li><a href="#URL_DOCUMENT" type="#MIME_TYPE">
+			[(#TITRE|sinon{<:info_document:>})]
+			<small>(<span>#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)]</span>)</small>
+		</a></li>
+	</BOUCLE_documents_joints>
+  </ul>
+  </div>
+  </B_documents_joints>
+  
+  [(#REM) Articles de la rubrique ] 
+  <INCLURE{fond=inc/inc-rub-listart}{env}{ajax}{art=_art#ID_ARTICLE}/> 
+  
+  [(#REM) Breves du secteur ] 
+  <INCLURE{fond=inc/inc-rub-listbre}{env}{ajax}{bre=_bre#ID_BREVE}/> 
+  
+  [(#REM) Rubriques ] 
+  <INCLURE{fond=inc/inc-rub-listrub}{env}{ajax}{rub=_rub#ID_RUBRIQUE}/> 
+  
+  [(#REM) Sites de la rubrique ] 
+  <INCLURE{fond=inc/inc-rub-listsite}{env}{ajax}{site=_site#ID_SYNDIC}/> 
+  
+  [(#REM) Proposer un site ]
+  #FORMULAIRE_SITE
+  
+  
+  [(#REM) Retour Accueil ]
+  <div class="group" style="height:17px"></div>
+  <div class="ticket">
+    <div class="ticketmenu">
+      <ul>
+        <li><a rel="start home" href="#URL_SITE_SPIP/"><:accueil_site:></a></li>
+        [(#CONFIG{itwx/classique}|?{' '})<li><a rel="start home" href="[(#URL_RUBRIQUE|parametre_url{'cimobile','web'})]"><:itwx:pageclassique:></a></li>]
+        [(#AUTORISER{ecrire})<li><a href="#EVAL{_DIR_RESTREINT_ABS}"><:espace_prive:></a></li>]
+        [(#SESSION{id_auteur}|?{' '})<li><a href="#URL_LOGOUT" rel="nofollow" style="text-align:center"><:icone_deconnecter:></a></li>]
+      </ul>
+    </div>
+  </div>
+
+  <INCLURE{fond=inc/inc-pied}/> 
+  
+</div><!--#page-->
+</body>
+</html>
+</BOUCLE_principale>

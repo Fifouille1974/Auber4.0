@@ -1,0 +1,21 @@
+#CACHE{0}
+				<div class="folio"><div class="choixpage">
+				<BOUCLE_selectrub_haut(RUBRIQUES){id_rubrique}>
+				<form method="get" action="">
+				<input type="hidden" name="page" value="rubrique" />
+				<input type="hidden" name="id_rubrique" value="#ID_RUBRIQUE" />
+				<select name="id_article">
+				<option value="" selected="selected"><:bouton_choisir:></option>
+				<BOUCLE_mot_sous_rubrique_haut(MOTS){id_rubrique}{type=_multirubricage}{par titre}{0,1}>
+				    <BOUCLE_article_sous_rubrique_haut(ARTICLES){id_mot}{doublons}{par #CITRI}{!par #CITRIINVERSE}{par num #CITRINUM}>
+				    <option value="#ID_ARTICLE">[(#TITRE|supprimer_numero)]</option>
+				    </BOUCLE_article_sous_rubrique_haut>
+				</BOUCLE_mot_sous_rubrique_haut>
+				<BOUCLE_selectarticle_haut(ARTICLES){id_rubrique}{doublons}{par #CITRI}{!par #CITRIINVERSE}{par num #CITRINUM}>
+				<option value="#ID_ARTICLE">[(#TITRE|supprimer_numero)]</option>
+				</BOUCLE_selectarticle_haut>
+				</select>
+				<input type="submit" name="masquable" value="OK" title="OK" />
+				</form>				
+				</BOUCLE_selectrub_haut>
+				</div></div>

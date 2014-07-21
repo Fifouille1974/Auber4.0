@@ -1,0 +1,37 @@
+#CACHE{0}
+[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<?xml version="1.0"[ encoding="(#CHARSET)"]?>
+<rss version="0.91" xmlns:dc="http://purl.org/dc/elements/1.1/">
+
+<BOUCLE_contenu(RUBRIQUES){id_rubrique}>
+[(#SET{cixtor,[(#URL_SITE_SPIP|ciparam_xtor_rss)]})]
+<channel>
+	<title>[(#NOM_SITE_SPIP|texte_backend)][ - (#TITRE|supprimer_numero|texte_backend)]</title>
+	<link>#URL_SITE_SPIP/#URL_RUBRIQUE</link>
+	<description></description>
+	<language>#LANG</language>
+
+	<image>
+		<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
+		<url>[(#LOGO_SITE_SPIP||extraire_attribut{src}|url_absolue|texte_backend)]</url>
+		<link>#URL_SITE_SPIP/</link>
+		<description></description>
+	</image>
+
+<!-- tous les articles de la rubrique -->
+	<BOUCLE_articles(ARTICLES){id_rubrique}{par #CITRI}{!par #CITRIINVERSE}{par num #CITRINUM}>
+	    <item>
+		<title>[(#TITRE|supprimer_numero|texte_backend)]</title>
+	    <link>#URL_SITE_SPIP/#URL_ARTICLE#GET{cixtor}</link>
+	    <date>#DATE</date>
+	    <description>[(#DESCRIPTIF|texte_backend)]</description>
+	    <author><BOUCLE_aut2(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE_aut2></author>
+		<dc:date>[(#DATE|date_iso)]</dc:date>
+		<dc:format>text/html</dc:format>
+		<dc:language>#LANG</dc:language>
+		<dc:creator><BOUCLE_auteursb2(AUTEURS){id_article}>[(#NOM|texte_backend)]</BOUCLE_auteursb2></dc:creator>
+	    </item>
+	</BOUCLE_articles>
+</channel>
+</BOUCLE_contenu>
+
+</rss>

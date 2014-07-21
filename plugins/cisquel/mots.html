@@ -1,0 +1,68 @@
+#CACHE{0}
+#CIPARAM_DOCTYPE
+<head>
+<title>Index[ - (#NOM_SITE_SPIP|textebrut)]</title>
+<meta name="robots" content="noindex, nofollow" />
+<link href="#CHEMIN{_css/styleexceptions.css}" rel="stylesheet" type="text/css" />
+<INCLURE{fond=noisettes/head}{lang}>
+</head>
+
+<body>
+<INCLURE{fond=noisettes/haut}{lang}>
+<div id="pageMot">
+<div id="milieu">
+	<div id="ext-main">
+		<div class="main">
+			<div id="gauche">
+				<INCLURE{fond=noisettes/recherche_gauche}{lang}>
+	
+			    <INCLURE{fond=navigation/sommaire}{lang}>
+			</div>
+
+  			<div id="contenu">
+			<div class="main-content">
+				<h1 class="invisible"><:cisquel:eq_contenu:></h1>
+				<div id="boxnavpath"><div id="navpath">
+					<a href="[(#URL_PAGE{sommaire})]"><:cisquel:eq_accueil:></a>&gt; <:cisquel:eq_recherche_resultats:>
+				</div></div>
+				<div id="boxcentrale"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale">
+				<div class="rub">
+				<h2><:cisquel:eq_recherche_motcle:></h2>
+				</div>
+				<div class="f_style2">
+
+				<BOUCLE_mot_article(MOTS mots_articles){id_article>0}{par titre}>
+				</BOUCLE_mot_article>
+				
+					<BOUCLE_groupe(GROUPES_MOTS){titre!==^[_]}>
+					<form name="[f_(#ID_GROUPE)]" id="[f_(#ID_GROUPE)]" action="Javascript:goToSelectURL('[f_(#ID_GROUPE)]', 'sel[(#ID_GROUPE)]');" method="get" >
+					<label for='sel[(#ID_GROUPE)]'>#TITRE : </label>
+					<select name='sel[(#ID_GROUPE)]' id='sel[(#ID_GROUPE)]'>
+					<option value='00' selected="selected">Choisissez</option>			
+						<BOUCLE_mot(MOTS mots_articles){id_groupe}{id_article>0}{par titre}>
+						<option value='?page=mot&id_mot=[(#ID_MOT)]'>#TITRE</option>
+						</BOUCLE_mot>
+					</select>
+					<input name="masquable" type="submit" alt="<:bouton_valider:>" value="Ok" class="ok_normal" />
+					
+					</form>
+					<br />
+					</BOUCLE_groupe>
+
+				</B_mot_article>
+				<div class="titrerubart">Aucun mot-cl&eacute; n'est utilis&eacute; actuellement, aussi la recherche par mot-cl&eacute; n'est pas disponible.</div>
+				<//B_mot_article>
+				
+				
+				</div>
+				</div></div></div></div></div></div>
+			</div>
+			</div>
+		<div class="clearer"></div>
+				
+		</div>
+	</div>
+</div>
+</div>
+	<INCLURE{fond=noisettes/pied}{lang}><INCLURE{fond=noisettes/pied_connexion}{self=#SELF}{lang}>
+	

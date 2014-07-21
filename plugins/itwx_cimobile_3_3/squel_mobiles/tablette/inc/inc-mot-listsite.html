@@ -1,0 +1,13 @@
+<B_sites>
+<a id="pagination_sites"></a>
+<div class="group"><:sites_web:></div>
+	<div class="listmenu">     
+    <ul class="docs">
+	<BOUCLE_sites(SITES) {id_mot} {par nom_site}{pagination 5 #ENV{site}}>
+        <li><a href="[(#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT})]">#NOM_SITE</a></li>
+	</BOUCLE_sites>
+	</ul>
+    </div>
+[<div class="pagination">(#PAGINATION)</div>]
+<br />
+</B_sites>

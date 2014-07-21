@@ -1,0 +1,12 @@
+<B_articles>        
+<a id="pagination_articles"></a>
+<div class="grouplist"><:articles:></div>
+	<div class="listmenu">     
+    <ul>
+	<BOUCLE_articles(ARTICLES) {id_mot} {par popularite}{inverse} {pagination 10 #ENV{art}}>
+	<li><a href="#URL_ARTICLE">#TITRE</a></li>
+	</BOUCLE_articles>
+	</ul>       
+	</div>
+[<div class="pagination">(#PAGINATION)</div>]
+</B_articles> 

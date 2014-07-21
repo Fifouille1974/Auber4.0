@@ -1,0 +1,130 @@
+/* -----------------------------------------------------------------------------
+  Exceptions qui concernent uniquement certains gabarits
+  (pour eviter de définir un style dans le gabarit en question)
+  Cette CSS est chargée en premier et peut donc etre surchargée par la CSS principale
+-------------------------------------------------------------------------------- */
+
+ 
+/*======  Milieu (colonnes gauche, centrale et droite) =======*/
+#pageRubEspacededie #milieu { padding : 0 0 0 180px; margin:0; }
+#pageArchive #milieu { padding : 0 0 0 180px; margin:0; }
+#pageArticleForum #milieu { padding : 0 0 0 180px; margin:0; }
+#pageArticleQuestion #milieu { padding : 0 0 0 180px; margin:0; }
+#pageArticleRediger #milieu { padding : 0 0 0 180px; margin:0; }
+#pageAuthentification #milieu { padding : 0 0 0 180px; margin:0; }
+#pageRecherche #milieu { padding : 0 0 0 180px; margin:0; }
+#pageArticleParMois #milieu { padding : 0 0 0 180px; margin:0; }
+#pageMot #milieu { padding : 0 0 0 180px; margin:0; }
+#pageRubForum #milieu { padding : 0 0 0 180px; margin:0; }
+#pageVisites #milieu { padding : 0 0 0 180px; margin:0; }
+
+#pageForum #milieu { padding : 0 0 0 0; margin:0; }
+#pageSujetForum #milieu { padding : 0 0 0 0; margin:0; }
+
+#pagePlan #milieu {	padding : 0 0 0 55px; margin:0; }
+
+#pageImprimer #milieu {
+	margin:0;
+	padding : 0 0 0 0;
+	background: #FFFFFF;
+}
+
+#pageAfficheArticle #milieu {
+	margin:0;
+	padding : 0 0 0 0;
+	background: #FFFFFF;
+}
+#pageAfficheArticle div#bloc {
+	position: relative;
+	float:right;
+	margin:8px 0px 0px 0px;
+	padding:0px;
+	width: 180px;
+	background: #FFFFFF;
+	z-index:10;
+}
+#pageAfficheArticle #menu2 {
+	background: #FFFFFF;
+	padding: 10px 0px 0px 0px;
+}
+#pageAfficheArticle #menu2 .blocoutil {
+	position: relative;  /* indispensable pour IE 5.5 */
+	border-top: 0px;
+	padding: 0px 0px 0px 0px;
+}
+
+
+#pageRubEspacededie div#droitehaut { margin-top:12px; }
+#pageRubEspacededie #menu2 { margin: 0px 0px 0.5em 0px; }
+#pageRubEspacededie #navpath { margin:0 181px 0 0; }
+#pageRubEspacededie .o2paj { margin: 15px 10px 0.5em;}
+#pageRubEspacededie #contenu .rub {
+	margin:0 181px 0 0;
+	padding: 0 10px 0.5em 0;
+}
+#pageRubEspacededie #contenu .texte {
+	font-size: 0.7em;
+	margin: 0 0 0.5em 0;
+	color: #484848;
+	line-height: 1.1em;
+	text-align: justify;
+	padding: 0 10px 0 0;	
+}
+
+#pageArticleSignature .formulaire {
+	width : 50%;
+	background-color: #efefef;
+	padding: 5px;
+	margin: 0;
+}
+#pageArticleSignature fieldset {border: none;}
+
+#pageArticleEditer #contenu textarea {
+	width: 100%;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	color: #484848;
+	text-align: justify;
+	font-size: 0.7em;
+	line-height: 1.1em;
+}
+
+#pageRubCalendrier #calend td {
+	padding: 0px;
+}
+#pageRubCalendrier #calend .casejour {
+	clear: both;
+	padding: 3px;
+}
+#pageRubCalendrier #calend .jour {
+    display: block;
+    float: left;
+    width: 14px;
+    height: 14px;
+    padding: 1px;
+    background: #ddd;
+    border-right: 1px solid #999;
+    border-bottom: 1px solid #999;
+    text-align: center;
+    text-decoration: none;
+}
+#pageRubCalendrier #calend .jour:hover {
+    text-decoration: none;
+    background: #e9e9e9;
+}
+#pageRubCalendrier #calend a.plus {
+	background: #ddd url(../_images/plus.png) no-repeat 2px 4px;
+    display: block;
+    float: left;
+    height: 12px;
+    width: 12px;
+    padding: 4px 0 0;
+    margin: 0px;
+    font-size: 6px;
+    text-align: center;
+    border-right: 1px solid #999;
+    border-bottom: 1px solid #999;
+	text-decoration: none;
+}
+#pageRubCalendrier #calend a.plus:hover {
+	background: #e9e9e9 url(../_images/plus.png) no-repeat 2px 4px;
+}

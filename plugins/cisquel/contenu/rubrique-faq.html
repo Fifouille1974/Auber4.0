@@ -1,0 +1,34 @@
+<BOUCLE_contenu(RUBRIQUES){id_rubrique}>
+				<div class="rub">
+				<h2>[(#TITRE|supprimer_numero)]</h2>
+				<div class="dateart">
+				</div>
+			      	[<div class="texte">(#TEXTE)</div>]
+				[<div class="texte">(#NOTES)</div>]
+				</div>
+
+				<BOUCLE_formulaire(ARTICLES){id_rubrique}{ciforme=_questionner}{par #CITRI}{!par #CITRIINVERSE}{par num #CITRINUM}{doublons}>
+				<div class="action">
+				<a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a>
+				</div>
+				</BOUCLE_formulaire>
+
+				[(#INCLURE{fond=noisettes/choix_questionner,id_rubrique,citri=#ENV{citri},_citri=#ENV{_citri},citri_n=#ENV{citri_n}})]
+				
+				<BOUCLE_articles(ARTICLES){id_rubrique}{par #CITRI}{!par #CITRIINVERSE}{par num #CITRINUM}{doublons}>
+				<a name="sommaire_#ID_ARTICLE" href="#top"></a><h2>[(#TITRE|supprimer_numero)]</h2>
+			      	[<div class="texte"><:cisquel:eq_description:> : <br />(#DESCRIPTIF)</div>]
+			      	[<div class="texte"><:cisquel:eq_reponse:> : <br />(#TEXTE)</div>]
+				<B_documents>
+				<div class="listedoc">
+				<ul>
+				<BOUCLE_documents(DOCUMENTS){id_article}{par num titre}{mode=document}{doublons}>
+				<li><a href="#URL_DOCUMENT" onclick="xt_med('C','[(#ID_ARTICLE|ciparam_xtn2)]','[pj(#ID_ARTICLE)-][(#TITRE|supprimer_numero|ciparam_xtTraiter)]','T')" class="document" title="<:cisquel:eq_ouvre_document:> [(#TITRE|supprimer_numero)] <:cisquel:eq_dans_fenetre:>">[(#TITRE|supprimer_numero)]</a>&nbsp;([<:cisquel:eq_format:> (#EXTENSION)][ - (#TAILLE|taille_en_octets)][ - (#DATE|affdate{'d/m/Y'})])[<span class="docdesc">(#DESCRIPTIF)</span>][<span class="docdesc">(#TAILLE|cisquel_temps_telechargement)</span>]</li>
+				</BOUCLE_documents>
+				</ul>
+				</div>
+				</B_documents>
+				[<div class="notes">(#NOTES)</div>]
+				</BOUCLE_articles>
+
+</BOUCLE_contenu>

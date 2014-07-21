@@ -1,0 +1,72 @@
+#CACHE{0}
+#CIPARAM_DOCTYPE
+<head>
+<title><:cisquel:eq_recherche_resultats:>[ - (#NOM_SITE_SPIP|textebrut)]</title>
+<meta name="robots" content="noindex, nofollow" />
+<link href="#CHEMIN{_css/styleexceptions.css}" rel="stylesheet" type="text/css" />
+<INCLURE{fond=noisettes/head}{lang}>
+</head>
+
+<body>
+<INCLURE{fond=noisettes/haut}{lang}>
+<div id="pageMot">
+<div id="milieu">
+	<div id="ext-main">
+		<div class="main">
+			<div id="gauche">
+				<INCLURE{fond=noisettes/recherche_gauche}{lang}>
+	
+			    <INCLURE{fond=navigation/sommaire}{lang}>
+			</div>
+
+  			<div id="contenu">
+			<div class="main-content">
+				<h1 class="invisible"><:cisquel:eq_contenu:></h1>
+				<div id="boxnavpath"><div id="navpath">
+					<a href="[(#URL_PAGE{sommaire})]"><:cisquel:eq_accueil:></a> &gt; <a href="[(#URL_PAGE{mots})]"><:cisquel:eq_recherche:></a> &gt; <:cisquel:eq_recherche_resultats:>
+				</div></div>
+				<div id="boxcentrale"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale">
+				<div class="rub">
+				<h2><:cisquel:eq_resultats_recherche:></h2>
+				</div>
+				<div class="retour"><a href="[(#URL_PAGE{mots})]" title="<:cisquel:eq_modifier_recherche:>"><:cisquel:eq_modifier_recherche:></a></div>
+				
+				<div id="results">
+					<p class="enteteresult"><strong><:cisquel:eq_criteres_recherche:></strong> <BOUCLE_titremot(MOTS){id_mot}>[(#TITRE)]</BOUCLE_titremot></p>
+				  	<p class="enteteresult"><strong><:cisquel:eq_nb_resultats:> :</strong>
+					<B_total>
+					<BOUCLE_total(ARTICLES){id_mot}>
+					</BOUCLE_total>
+					#TOTAL_BOUCLE
+					</B_total>
+				  	</p>
+					<B_articles>
+					[<div class="folio"><div class="pagination">(#PAGINATION)</div></div>]
+					<BOUCLE_articles(ARTICLES){id_mot}{par date}{inverse}{pagination 10}>
+					<div class="item">
+					<p class="titreresult"><a href="[(#URL_ARTICLE)]">[(#TITRE|supprimer_numero)]</a> (<:cisquel:eq_publie_le:> [(#DATE|affdate{'d/m/Y'})])</p>
+					<p class="path"><a href="[(#URL_PAGE{sommaire})]"><:cisquel:eq_accueil:></a>
+					<BOUCLE_nav(ARTICLES){id_article}>
+					<BOUCLE_chem_nav(HIERARCHIE){id_rubrique}>
+					&gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a>
+					</BOUCLE_chem_nav>
+					</BOUCLE_nav>
+					</p>
+					[<div class="texte">(#DESCRIPTIF)</div>]                
+					</div>
+					</BOUCLE_articles>				    		    
+				    </div>
+					[<div class="folio"><div class="pagination">(#PAGINATION)</div></div>]
+					</B_articles>
+				</div>
+
+				</div></div></div></div></div></div>
+			</div>
+			</div>
+		<div class="clearer"></div>
+				
+		</div>
+	</div>
+</div>
+	<INCLURE{fond=noisettes/pied}{lang}><INCLURE{fond=noisettes/pied_connexion}{self=#SELF}{lang}>
+	

@@ -1,0 +1,17 @@
+#CACHE{0}
+[(#SET{ci_sp_accueil,'non'})]
+<BOUCLE_col_gauche_rub1(RUBRIQUES){id_rubrique}>
+<BOUCLE_hiera(HIERARCHIE){id_rubrique}>
+<BOUCLE_spacc(RUBRIQUES){id_rubrique}{ciforme=_souspageaccueil}>
+[(#SET{ci_sp_accueil,'oui'})]
+</BOUCLE_spacc>
+</BOUCLE_hiera>
+</BOUCLE_col_gauche_rub1>
+
+[(#GET{ci_sp_accueil}|=={oui}|oui)
+<INCLURE{fond=navigation/souspageaccueil_rubrique}{id_rubrique}{lang}>
+]
+
+[(#GET{ci_sp_accueil}|=={non}|oui)
+<INCLURE{fond=navigation/sommaire}{lang}>
+]

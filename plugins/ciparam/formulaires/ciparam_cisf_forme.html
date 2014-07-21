@@ -1,0 +1,35 @@
+#CACHE{0}
+		[<p class='formulaire_ok'>(#ENV*{message_ok})</p>]
+		[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+			<form action='#ENV{action}' method='post' name="formulaire" onsubmit="return OnSubmitForm();" >
+
+				<BOUCLE_article(ARTICLES){id_article}{statut IN (prop,prepa,publie,poubelle,refuse,archive)}>
+				<div id="boxcentrale"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale">
+					<h2>#TITRE</h2>
+					<div class="retour"><a href="[(#URL_PAGE{cisf_article}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" title="<:cisf:eq_retour_article:>"><:cisf:eq_retour_article:></a></div>
+					<div class="titreaction"><:ciparam:eq_choix_forme_article:></div>
+	
+	
+					<fieldset class="motcle">
+					  <legend class="motcle"><:ciparam:eq_choix_forme_article:></legend>
+						#ENV*{_choix_forme_article}
+					</fieldset>
+
+
+					[(#REM) declarer les hidden qui declencheront le service du formulaire 
+					parametre : url d'action ]
+					#ACTION_FORMULAIRE{#ENV{action}}
+					
+					<input name='cimodif_img_avant' type=Hidden value=#ENV{old_ciforme}>
+					<input name='formulaire' type=Hidden value='auteur'>
+					<input name='id_article' type=Hidden value='#ID_ARTICLE'>
+					<input type="hidden" name="ciaction" value="editer_article_auteur" >
+					<div class="cadrevalider">
+					<input type="submit" name="enregistrer" value="<:bouton_enregistrer:>" class="bouton_valider">
+					<input type="submit" name="annuler" value="<:cisf:eq_annuler:>" class="bouton_valider">
+					</div>
+					
+				</div></div></div></div></div></div>
+				</BOUCLE_article>
+
+			</form>

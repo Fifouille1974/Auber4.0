@@ -1,0 +1,46 @@
+<BOUCLE_artfin(ARTICLES){par date}{inverse} {0,1}>
+<?php
+$cimoisfin="[(#DATE|mois)]";
+$cianneefin="[(#DATE|annee)]";
+?>
+</BOUCLE_artfin>
+<BOUCLE_artdeb(ARTICLES){par date} {0,1}>
+<?php
+$cimoisdeb="[(#DATE|mois)]";
+$cianneedeb="[(#DATE|annee)]";
+$cidebut=intval($cianneedeb.$cimoisdeb);
+?>
+</BOUCLE_artdeb>
+
+<form method="get" action="">
+<input type="hidden" name="page" value="liste_article_par_mois" />
+<select name="date">
+<option value="" selected="selected"><:cisquel:eq_choisir_un_mois:>&nbsp;&nbsp;</option>
+<?php
+if ($cianneefin){
+
+	while (intval($cianneefin.$cimoisfin)>=$cidebut) {
+		$citableaumois=array('01' => '<:date_mois_1:>', '02' => '<:date_mois_2:>', '03' => '<:date_mois_3:>', '04' => '<:date_mois_4:>', '05' => '<:date_mois_5:>', '06' => '<:date_mois_6:>', '07' => '<:date_mois_7:>', '08' => '<:date_mois_8:>','09' => '<:date_mois_9:>','10' => '<:date_mois_10:>','11' => '<:date_mois_11:>','12' => '<:date_mois_12:>');
+		$cinommois=$cimoisfin;
+		if (isset($citableaumois[$cimoisfin])) {
+			$cinommois=$citableaumois[$cimoisfin];
+		}
+		echo '<option value="'.$cianneefin.'-'.$cimoisfin.'-01">'.$cianneefin.' - '.$cinommois.'</option>';
+		if ($cimoisfin=="01") {
+			$cimoisfin= "12";
+			$cianneefin=strval(intval($cianneefin)-1);
+		} else {
+			if (substr($cimoisfin,0,1)=="0")  $cimoisfin=substr($cimoisfin,1,1);
+			$ciintmoisfin=intval($cimoisfin)-1;
+			if  ($ciintmoisfin<10) {
+				$cimoisfin="0".strval($ciintmoisfin);
+			} else {
+				$cimoisfin=strval($ciintmoisfin);
+			}		
+		}
+	}
+}	
+?>
+</select>
+<input type="submit" name="masquable" value="OK" title="OK" />
+</form>

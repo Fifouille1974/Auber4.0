@@ -1,0 +1,85 @@
+#CACHE{0}
+
+#SET{ciperiode,''}	
+[(#ENV{ciperiode}|=={oui}|oui)
+	#SET{ciperiode,'oui'}
+]
+[(#ENV{datedebut}|oui)
+	#SET{ciperiode,'oui'}
+]
+
+[(#SET{cirecherche,[(#RECHERCHE|cisquel_filtrer_recherche)]})]
+[(#SET{ciself,[(#SELF|parametre_url{recherche,#GET{cirecherche}})]})]
+
+<div id="recherche_options_g">
+	<h1 class="invisible"><:cisquel:eq_menu_gauche:></h1>
+	
+		<div class="options">
+				<h2><:cisquel:tri:></h2>
+				<a href="[(#GET{ciself}|parametre_url{tri,''})]" [(#ENV{tri}|non)class="gras"]><:cisquel:parpertinence:></a>
+				<a href="[(#GET{ciself}|parametre_url{tri,datedesc})]" [(#ENV{tri}|=={datedesc}?{class="gras"})]><:cisquel:pardatedesc:></a>
+				<a href="[(#GET{ciself}|parametre_url{tri,date})]" [(#ENV{tri}|=={date}?{class="gras"})]><:cisquel:pardate:></a>
+		</div>
+	
+		<div class="options">
+				<h2><:cisquel:depuis:></h2>
+				<a href="[(#GET{ciself}|parametre_url{age,''}|parametre_url{datedebut,''}|parametre_url{datefin,''})]" [(#ENV{datedebut}|non)[(#ENV{age}|non)class="gras"]]><:cisquel:dateindif:></a>
+				<a href="[(#GET{ciself}|parametre_url{age,2}|parametre_url{datedebut,''}|parametre_url{datefin,''})]" [(#ENV{age}|=={2}?{class="gras"})]>2 <:date_jours:></a>
+				<a href="[(#GET{ciself}|parametre_url{age,7}|parametre_url{datedebut,''}|parametre_url{datefin,''})]" [(#ENV{age}|=={7}?{class="gras"})]>7 <:date_jours:></a>
+				<a href="[(#GET{ciself}|parametre_url{age,15}|parametre_url{datedebut,''}|parametre_url{datefin,''})]" [(#ENV{age}|=={15}?{class="gras"})]>15 <:date_jours:></a>
+				<a href="[(#GET{ciself}|parametre_url{age,31}|parametre_url{datedebut,''}|parametre_url{datefin,''})]" [(#ENV{age}|=={31}?{class="gras"})]>1 <:date_mois:></a>
+				<a href="[(#GET{ciself}|parametre_url{age,91}|parametre_url{datedebut,''}|parametre_url{datefin,''})]" [(#ENV{age}|=={91}?{class="gras"})]>3 <:date_mois:></a>
+				<a href="[(#GET{ciself}|parametre_url{age,182}|parametre_url{datedebut,''}|parametre_url{datefin,''})]" [(#ENV{age}|=={182}?{class="gras"})]>6 <:date_mois:></a>
+				<a href="[(#GET{ciself}|parametre_url{age,365}|parametre_url{datedebut,''}|parametre_url{datefin,''})]" [(#ENV{age}|=={365}?{class="gras"})]>1 <:cisquel:date_an:></a>
+		</div>
+			
+		<div class="options">
+			<a href="[(#GET{ciperiode}|oui)[(#GET{ciself}|parametre_url{ciperiode,non})]][(#GET{ciperiode}|non)[(#GET{ciself}|parametre_url{ciperiode,oui})]]" onclick="Javascript:ci_show_hide('ciperiode'); return false;" class="periode[(#ENV{datedebut}|oui) gras]"><:cisquel:periode_m:></a>
+
+			<div id="ciperiode" [(#GET{ciperiode}|non)style="display: none;"]>			
+			<:cisquel:format_date_min:>
+			<form action="[(#URL_PAGE{recherche})]" method="get">
+				<input type="hidden" name="page" value="recherche" />
+				[<input type="hidden" name="lang" value="(#LANG)" />
+				<input type="hidden" name="forcer_lang" value="true" />]
+				<input type="hidden" class="recherche" name="recherche" id="recherche" value="[(#GET{cirecherche}|entites_html|interdire_scripts)]" />
+				<input type="hidden" name="tri" value="#ENV{tri}" />
+				<input type="hidden" name="elargir" value="#ENV{elargir}" />
+				
+				<label for="datedebutg" class="datedebut"><:cisquel:datedebut:></label>
+				<input type="text" class="date" name="datedebut" id="datedebutg" value="[(#ENV{datedebut}|cisquel_verifier_date)]" />
+				<div class="clearer">&nbsp;</div>
+				<label for="datefing" class="datefin"><:cisquel:datefin:></label>
+				<input type="text" class="date" name="datefin" id="datefing" value="[(#ENV{datefin}|cisquel_verifier_date)]" />
+				<div class="clearer"></div>
+				
+				<input type="submit" class="submit" value="<:bouton_valider:>" title="<:bouton_valider:>" />
+			</form>
+			</div>
+		</div>
+		
+		[(#SET{les_typesdoc,[(#ENV|cisquel_typesdoc)]})]
+		<B_typesdoc>
+		<div class="options">
+				<h2><:cisquel:doc_format:></h2>
+				<a href="[(#GET{ciself}|parametre_url{typedoc,''})]" [(#ENV{typedoc}|non)class="gras"]><:cisquel:doc_tous:></a>
+			<BOUCLE_typesdoc(TYPES_DOCUMENTS){extension IN #GET{les_typesdoc}}{par extension}>
+				<a href="[(#GET{ciself}|parametre_url{typedoc,[(#EXTENSION)]})]" [(#ENV{typedoc}|=={[(#EXTENSION)]}?{class="gras"})]>[(#EXTENSION|cisquel_typesdoclib)]</a>
+			</BOUCLE_typesdoc>	
+		</div>
+		</B_typesdoc>
+
+[(#LANG|cisquel_choixelargirrecherche|=={oui}|oui)
+	<div class="options">
+			<h2><:cisquel:elargir_recherche:></h2>
+			<a href="[(#GET{ciself}|parametre_url{elargir,''})]" [(#ENV{elargir}|non)class="gras"]><:cisquel:elargir_non:></a>
+	[(#VAL{cisquelchoixrecherchesiteetdocuments}|cisquel_config|=={oui}|oui)
+			<a href="[(#GET{ciself}|parametre_url{elargir,doc})]" [(#ENV{elargir}|=={doc}|oui)class="gras"]><:cisquel:elargir_doc:>[(#SESSION{id_auteur}|oui) <:cisquel:non_proteges:>]</a>
+	]								
+	[(#VAL{cisquelchoixrecherchetouslessites}|cisquel_config|=={oui}|oui)
+			<a href="[(#GET{ciself}|parametre_url{elargir,toussites})]" [(#ENV{elargir}|=={toussites}|oui)class="gras"]><:cisquel:elargir_toussites:>[(#SESSION{id_auteur}|oui) <:cisquel:non_proteges:>]</a>
+	]
+	</div>
+]
+
+</div>

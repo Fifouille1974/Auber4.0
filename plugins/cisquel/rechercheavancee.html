@@ -1,0 +1,58 @@
+#CACHE{0}
+#CIPARAM_DOCTYPE
+<head>
+<title><:cisquel:recherche_avancee:>[ - (#NOM_SITE_SPIP|textebrut)]</title>
+<meta name="robots" content="noindex, nofollow" />
+<link href="#CHEMIN{_css/styleexceptions.css}" rel="stylesheet" type="text/css" />
+<INCLURE{fond=noisettes/head}{lang}>
+
+[<link href="(#CHEMIN{_css/style_rechercheoptions.css})" rel="stylesheet" type="text/css" />]
+
+[<script type="text/javascript" src="(#CHEMIN{prive/javascript/jquery.js})"></script>]
+[<script type="text/javascript" src="(#CHEMIN{_js/ui.core.js})"></script>]
+[<script type="text/javascript" src="(#CHEMIN{_js/ui.datepicker.js})"></script>]
+[<script type="text/javascript" src="(#CHEMIN{_js/ui.datepicker-[(#LANG)].js})"></script>]
+
+<script type="text/javascript">
+$(function() {
+	$("#datedebut").datepicker({ showOn: 'button', buttonImage: '#CHEMIN{_images/icones/cal-today.gif}', buttonImageOnly: true, dateFormat: 'dd/mm/yy' });
+	$("#datefin").datepicker({ showOn: 'button', buttonImage: '#CHEMIN{_images/icones/cal-today.gif}', buttonImageOnly: true, dateFormat: 'dd/mm/yy' });
+});
+</script>
+
+</head>
+
+<body>
+<INCLURE{fond=noisettes/haut}{lang}>
+<div id="pageRecherche">
+<div id="milieu">
+	<div id="ext-main">
+		<div class="main">
+			<div id="gauche">
+			</div>
+
+  			<div id="contenu">
+			<div class="main-content">
+				<h1 class="invisible"><:cisquel:eq_contenu:></h1>
+				<div id="boxnavpath"><div id="navpath">
+					<a href="[(#URL_PAGE{sommaire})]"><:cisquel:eq_accueil:></a>&gt; <:cisquel:recherche_avancee:>
+				</div></div>
+				<div id="boxcentrale"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale">
+				<div class="rub">
+				<h2><:cisquel:recherche_avancee:></h2>
+
+				<INCLURE{fond=noisettes/recherche_options,env}>	
+
+				</div>
+
+				</div></div></div></div></div></div>
+			</div>
+			</div>
+		<div class="clearer"></div>
+				
+		</div>
+	</div>
+</div>
+</div>
+<INCLURE{fond=noisettes/pied}{lang}><INCLURE{fond=noisettes/pied_connexion}{self=#SELF}{lang}>
+	

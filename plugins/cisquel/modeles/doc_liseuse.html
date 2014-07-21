@@ -1,0 +1,39 @@
+[(#REM)
+        Insère un lecteur FreepapeR pour la lecture des documents PDF
+        L'id du document à visualiser suit le nom du modèle
+		xmlData (par defaut freepaper.xml)
+		xmlLang (par defaut "<langueMachineVirtuelle>.xml", ex : en.xml, de.xml, zh-CN.xml)
+		trace (par defaut auto)
+		wmode (par defaut transparent)
+]
+#SET{citrace,'auto'}
+#SET{tableautrace, #ARRAY{0,true,1,false,2,auto}} 
+[(#ENV{trace}|in_array{#GET{tableautrace}}|oui)
+	#SET{citrace,#ENV{trace}}
+]
+#SET{ciwmode,'transparent'}
+#SET{tableauwmode, #ARRAY{0,window,1,opaque,2,transparent}} 
+[(#ENV{wmode}|in_array{#GET{tableauwmode}}|oui)
+	#SET{ciwmode,#ENV{wmode}}
+]
+#SET{ciaffichage,''}
+#SET{tableauaffichage, #ARRAY{0,livre,1,liste,2,piles}} 
+[(#ENV{affichage}|in_array{#GET{tableauaffichage}}|oui)
+	#SET{ciaffichage,#ENV{affichage}}
+]
+#SET{ciaffichage,'_flash/freepaper'#GET{ciaffichage}'.xml'}
+
+<BOUCLE_swf(DOCUMENTS) {id_document} {tout}>
+<div class="spip_document_#ID_DOCUMENT">
+<object height="[(#HAUTEUR|intval|sinon{800})]" width="[(#LARGEUR|intval|sinon{600})]" type="application/x-shockwave-flash" trace="#GET{citrace}" altcontentid="freepaper#ID_DOCUMENT" id="[freepaper(#ID_DOCUMENT)_ready]" name="freepaper#ID_DOCUMENT" class="freepaper" data="[(#CHEMIN{_flash/freepaper2.1.0.0.swf}|url_absolue)]">
+<param name="width" value="[(#LARGEUR|intval|sinon{600})]">
+<param name="height" value="[(#HAUTEUR|intval|sinon{800})]">
+<param name="wmode" value="#GET{ciwmode}">
+<param name="scale" value="noScale">
+<param name="allowFullScreen" value="true">
+<param name="movie" value="[(#CHEMIN{_flash/freepaper2.1.0.0.swf}|url_absolue)]" />
+<param name="flashvars" value="xmlDataPath=[(#CHEMIN{#GET{ciaffichage}}|url_absolue)]&playerId=[freepaper(#ID_DOCUMENT)_ready]&swfURL=[(#URL_DOCUMENT|url_absolue)]">
+</object>
+</div>
+</BOUCLE_swf>
+

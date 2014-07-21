@@ -1,0 +1,112 @@
+			<div id="menu2">
+				<h1 class="invisible"><:cisquel:eq_menu_droite:></h1>
+				<BOUCLE_espaces_dedies(RUBRIQUES){raccourci=_portail_droite_titre_bloc_2col_logo}{par num titre}>
+				<div class="boxtitredroite"><div class="blc"><div class="brc"><div class="tlc"><div class="trc">
+				<h2>[(#TITRE|supprimer_numero)]</h2>
+				</div></div></div></div></div>
+				<div class="bloc1">
+                
+					<div class="colonne1">
+					<BOUCLE_espace_dedie1(RUBRIQUES){id_parent}{par num titre}{1/2}>
+					<a href="#URL_RUBRIQUE"><img src="[(#LOGO_RUBRIQUE||image_reduire{44,0}|extraire_attribut{'src'})]" alt="<:cisquel:eq_lien_vers:> [(#TITRE|supprimer_numero)]" class="logo35b" /></a><a href="#URL_RUBRIQUE" class="lien">[(#TITRE|supprimer_numero)]</a>	
+					</BOUCLE_espace_dedie1>
+					</div>
+					<div class="colonne2">
+					<BOUCLE_espace_dedie2(RUBRIQUES){id_parent}{par num titre}{2/2}>
+					<a href="#URL_RUBRIQUE"><img src="[(#LOGO_RUBRIQUE||image_reduire{44,0}|extraire_attribut{'src'})]" alt="<:cisquel:eq_lien_vers:> [(#TITRE|supprimer_numero)]" class="logo35b" /></a><a href="#URL_RUBRIQUE" class="lien">[(#TITRE|supprimer_numero)]</a>
+					</BOUCLE_espace_dedie2>
+					</div>
+					<div class='clearer'>&nbsp;</div>	
+				</div>
+				</BOUCLE_espaces_dedies>
+            <!--  <BOUCLE_service_rubrique2(RUBRIQUES){raccourci=_portail_droite_titre_bloc_albertivi}{par num titre}>
+				<div class="boxtitredroite"><div class="blc"><div class="brc"><div class="tlc"><div class="trc">
+				<h2>[(#TITRE|supprimer_numero)]</h2>
+				</div></div></div></div></div>
+				<div class="bloc_albertivi">
+					<ul>
+						<BOUCLE_service_sous_rubrique2(RUBRIQUES){id_parent}{raccourci=_portail_droite}{par num titre}>
+						<li><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></li>
+						</BOUCLE_service_sous_rubrique2>
+						<BOUCLE_service_article2(ARTICLES){id_rubrique}{raccourci=_albertivi}{par num titre}>
+						<li><a href="#URL_ARTICLE">[(#LOGO_ARTICLE|supprimer_numero)]</a></li>
+						</BOUCLE_service_article2>
+						<BOUCLE_service_site2(SITES){id_rubrique}{raccourci=_portail_droite}{par num nom_site}>
+						<li><a href="#URL_SITE" title="<:cisquel:eq_visiter_site:> [(#NOM_SITE|supprimer_numero)] (<:cisquel:eq_ouvre_fenetre:>)" class="spip_out">[(#NOM_SITE|supprimer_numero)]</a></li>
+						</BOUCLE_service_site2>						
+					</ul>
+				</div>
+				</BOUCLE_service_rubrique2> -->
+				<LINK rel="stylesheet" type="text/css" href="plugins/graphisme_auber2.0/_css/style-pratique.css">
+				<script src="plugins/graphisme_auber2.0/_js/script-icono.js"></script>
+				
+				<div class="newsletter" id="news-letter"> <a href="http://intranet.mairie-aubervilliers.fr/auber4.0/spip.php?article1950"><img src="plugins/graphisme_auber2.0/_images/logo-newsletter.png" width="175px" height="auto" border="0"/></a></div>
+				<span id="bulle_newsletter" class="invisible"> <div class="arrow-up-newsletter"></div> Chaque mois, recevez l'essentiel de l'<strong>actualité d'Aubervilliers</strong> dans votre boîte mail.</span>
+                
+				<BOUCLE_service_rubrique(RUBRIQUES){raccourci=_portail_droite_titre_bloc_lien}{par num titre}>
+				<div class="boxtitredroite"><div class="blc"><div class="brc"><div class="tlc"><div class="trc">
+				<h2>[(#TITRE|supprimer_numero)]</h2>
+				</div></div></div></div></div>
+				<div class="bloc2">
+					<ul>
+						<BOUCLE_service_sous_rubrique(RUBRIQUES){id_parent}{raccourci=_portail_droite}{par num titre}>
+						<li><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></li>
+						</BOUCLE_service_sous_rubrique>
+						<BOUCLE_service_article(ARTICLES){id_rubrique}{raccourci=_portail_droite}{par num titre}>
+						<li><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a></li>
+						</BOUCLE_service_article>
+						<BOUCLE_service_site(SITES){id_rubrique}{raccourci=_portail_droite}{par num nom_site}>
+						<li><a href="#URL_SITE" title="<:cisquel:eq_visiter_site:> [(#NOM_SITE|supprimer_numero)] (<:cisquel:eq_ouvre_fenetre:>)" class="spip_out">[(#NOM_SITE|supprimer_numero)]</a></li>
+						</BOUCLE_service_site>						
+					</ul>
+				</div>
+				</BOUCLE_service_rubrique>
+
+				<BOUCLE_pratique_rubrique(RUBRIQUES){raccourci=_portail_droite_titre_bloc_logo}{par num titre}>
+				<div class="boxtitredroite"><div class="blc"><div class="brc"><div class="tlc"><div class="trc">
+				<h2>[(#TITRE|supprimer_numero)]</h2>
+				</div></div></div></div></div>
+				<div class="bloc3">
+					<ul>
+					<BOUCLE_pratique_sous_rubrique(RUBRIQUES){id_parent}{raccourci=_portail_droite}{par num titre}>
+					<li><a href="#URL_RUBRIQUE"><img src="[(#LOGO_RUBRIQUE||image_reduire{35,0}|extraire_attribut{'src'})]" class="logo35" alt="" />[(#TITRE|supprimer_numero)]</a><div class="texte">[(#DESCRIPTIF)]</div></li>
+					</BOUCLE_pratique_sous_rubrique>
+					<BOUCLE_pratique_article(ARTICLES){id_rubrique}{raccourci=_portail_droite}{par num titre}>
+					<li><a href="#URL_ARTICLE"><img src="[(#LOGO_ARTICLE||image_reduire{35,0}|extraire_attribut{'src'})]" class="logo35" alt="" />[(#TITRE|supprimer_numero)]</a><div class="texte">[(#DESCRIPTIF)]</div></li>
+					</BOUCLE_pratique_article>
+					<BOUCLE_pratique(SITES){id_rubrique}{raccourci=_portail_droite}{par num nom_site}>
+					<li><a href="#URL_SITE" class="spip_out"><img src="[(#LOGO_SITE||image_reduire{35,0}|extraire_attribut{'src'})]" alt="<:cisquel:eq_visiter_site:> [(#NOM_SITE|supprimer_numero)] (<:cisquel:eq_ouvre_fenetre:>)" class="logo35" />[(#NOM_SITE|supprimer_numero)]</a><div class="texte">[(#DESCRIPTIF)]</div></li>
+					</BOUCLE_pratique>					
+					</ul>
+				</div>
+				</BOUCLE_pratique_rubrique>
+
+				<BOUCLE_grandLOGO_RUBRIQUE_SURVOL(RUBRIQUES){raccourci=_portail_droite_titre_bloc_grandlogo}{par num titre}>
+				<div class="aubermensuelbloc">
+					<BOUCLE_grandlogo_sous_rubrique(RUBRIQUES){id_parent}{raccourci=_portail_droite}{par num titre}>
+					<a href="#URL_RUBRIQUE"><img src="[(#LOGO_RUBRIQUE||extraire_attribut{'src'})]" class="logo100" alt="" /><!-- <p>[(#TITRE|supprimer_numero)]</p> --></a>
+					</BOUCLE_grandlogo_sous_rubrique>
+					<BOUCLE_grandLOGO_ARTICLE_SURVOL(ARTICLES){id_rubrique}{raccourci=_portail_droite}{par num titre}>
+					<a href="#URL_ARTICLE">
+					<div id="aubermensuelhover" style="background-image:url('http://intranet.mairie-aubervilliers.fr/auber4.0/plugins/graphisme_auber2.0/_images/fondauberm.png');width: 168px;height: 219px;position:absolute;z-index:999;background-repeat:no-repeat;border-radius: 0px;margin-top: 2px;margin-left: 2px;"></div>
+					<img src="[(#LOGO_ARTICLE||extraire_attribut{'src'})]" alt=""/><!-- <p>[(#TITRE|supprimer_numero)]</p> --></a>
+					</BOUCLE_grandLOGO_ARTICLE_SURVOL>
+					<BOUCLE_grandlogo(SITES){id_rubrique}{raccourci=_portail_droite}{par num nom_site}>
+					<a href="#URL_SITE" class="spip_out"><img src="[(#LOGO_SITE||extraire_attribut{'src'})]" alt="<:cisquel:eq_visiter_site:> [(#NOM_SITE|supprimer_numero)] (<:cisquel:eq_ouvre_fenetre:>)" class="logo100" /><!-- <p> [(#NOM_SITE|supprimer_numero)]</p> --></a>
+					</BOUCLE_grandlogo>
+				</div>
+				</BOUCLE_grandLOGO_RUBRIQUE_SURVOL>
+				
+				[(#PLUGIN{cinotif}|oui)
+					[(#CONFIG{cinotif_site}|=={non}|non)
+				<div class="clearer">&nbsp;</div>
+				<div class="blocoutil">
+					<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-site})]" title="<:cisquel:abonner:>" class="abonner"><:cisquel:abonner:></a>
+					<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-site}|parametre_url{desabonner,oui})]" title="<:cisquel:desabonner:>" class="desabonner"><:cisquel:desabonner:></a>
+				</div>
+					]
+				]
+
+			</div>
+		<div class="clearer">&nbsp;</div>
+		

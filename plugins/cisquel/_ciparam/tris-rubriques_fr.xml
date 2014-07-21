@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<item><nom>titre</nom><ordre>num</ordre><description>Tri des articles par numéro de titre</description></item>
+<item><nom>date</nom><ordre>asc</ordre><description>Tri des articles par date de publication croissante</description></item>
+<item><nom>date</nom><ordre>desc</ordre><description>Tri des articles par date de publication décroissante</description></item>
+<item><nom>titre</nom><ordre>asc</ordre><description>Tri des articles par ordre alphabétique de titre</description></item>

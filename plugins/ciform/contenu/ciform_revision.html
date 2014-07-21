@@ -1,0 +1,17 @@
+[(#AUTORISER{voirrevisions,#OBJET,#ID_OBJET}|sinon_interdire_acces)]
+<BOUCLE_lastv(VERSIONS){id_objet}{objet}{!par id_version}{0,1}>#SET{lastversion,#ID_VERSION}</BOUCLE_lastv>
+#SET{id_version,#ENV{id_version,#GET{lastversion}}}
+#SET{id_diff,#ENV{id_diff,#GET{lastversion}}|min{#GET{id_version}|moins{1}}}
+#SET{textes,#ID_OBJET|revision_comparee{#OBJET,#GET{id_version},complet,#GET{id_diff}}}
+
+[(#BOITE_OUVRIR{[
+	<h2>(#INFO_TITRE{#OBJET,#ID_OBJET})</h2>
+	<h2><:revisions:differences_versions{id_version=#GET{id_version},id_diff=#GET{id_diff}}:></h2>
+],simple fiche_objet_diff})]
+
+
+	<div id="wysiwyg" class="revision">
+	<div class="texte">[(#GET*{textes}|table_valeur{texte}|propre_diff)]</div>		
+	</div>
+
+#BOITE_FERMER

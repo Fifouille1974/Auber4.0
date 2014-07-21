@@ -1,0 +1,12 @@
+#CACHE{0}
+<BOUCLE_article(ARTICLES){id_article}>
+[(#TITRE*|supprimer_numero)]
+
+<BOUCLE_mots(FORUMS){id_article}{statut IN #ENV{cistatuts}}{plat}{par date}>
+
+[(#TITRE*)]
+<:par_auteur:> : [(#NOM)] [(#EMAIL)]
+[(#DATE|affdate{'d/m/Y'})] [(#DATE|affdate{'H:i'})] 
+[(#TEXTE*)]
+</BOUCLE_mots>
+</BOUCLE_article>

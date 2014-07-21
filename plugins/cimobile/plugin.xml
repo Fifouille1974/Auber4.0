@@ -1,0 +1,18 @@
+<plugin>
+	<nom>cimobile : d&#233;tection et aiguillage des t&#233;l&#233;phones mobiles</nom>
+	<auteur>&#169; C. Imberti</auteur>
+	<icon>pyramides-32.png</icon>
+	<licence>[Creative commons by-nc-sa->http://creativecommons.org/licenses/by-nc-sa/2.0/fr/]</licence>
+	<lien></lien>
+	<version>1.02</version>
+	<etat>stable</etat>
+    <slogan>Auteur : &#169; C. Imberti. Licence : Creative commons by-nc-sa.</slogan>
+    <description>
+    Auteur : &#169; C. Imberti. Licence : Creative commons by-nc-sa.<br />
+	Ce plugin active ou d&#233;sactive la d&#233;tection des t&#233;l&#233;phones mobiles et l'aiguillage vers le jeu de squelettes correspondant.
+	</description>
+	<prefix>cimobile</prefix>
+	<fonctions>cimobile_fonctions.php</fonctions>
+	<options>cimobile_options.php</options>
+
+</plugin>

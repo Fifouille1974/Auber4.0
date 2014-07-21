@@ -1,0 +1,37 @@
+<div class="formulaire_spip formulaire_editer formulaire_editer_article formulaire_editer_article-#ID_ARTICLE">
+[<p class='formulaire_ok'>(#ENV*{message_ok})</p>]
+[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+
+[(#ENV{editable})
+	<form action='#ENV{action}' method='post' name="formulaire">
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+	  	<input type='hidden' name='id_article' value='#ENV{id_article}' />
+	  
+		<ul class="editer">
+	    <li class="editer_texte obligatoire[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]">
+			[<span>(#ENV{_ciform_qui_edite})</span>]
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{texte})</span>]
+			[(#ENV**{_texte_trop_long,''})]
+			[(#PLUGIN{porte_plume}|non)
+			<script type="text/javascript" src="#CHEMIN{_js/cisf_barre_wiki.js}"></script>
+			<script type='text/javascript'>
+			<!--
+			if(document.getElementById) {document.write(bt);}
+			-->
+			</script>
+			]
+			<textarea name='texte' id='text_area' class='barre_inserer [(#CHARSET|!={utf-8}|oui)no_previsualisation]'[ lang='(#LANGUE)'] rows='28' cols='40' [(#ENV**{_browser_caret,''})]>[(#ENV**{texte})]</textarea>
+		</li>
+		</ul>
+		
+		<p>
+		<input type="submit" class="submit" value="<:bouton_enregistrer:>" title="<:bouton_enregistrer:>" />
+		<input type="button" value="<:ciform:annuler:>" onClick="document.location='[(#URL_PAGE{article}|parametre_url{id_article,#ENV{id_article}})]';" />
+		</p>
+
+	</form>
+]
+
+</div>

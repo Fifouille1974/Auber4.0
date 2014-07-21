@@ -1,0 +1,138 @@
+#CIPARAM_DOCTYPE
+<head>
+<BOUCLE_contenu(ARTICLES){id_article}>
+<title>[(#TITRE|supprimer_numero)][ - (#NOM_SITE_SPIP|textebrut)]</title>
+<link rel="schema.DC" href="http://purl.org/DC/elements/1.0/" />
+<meta name="DC.Title" content="[(#TITRE|supprimer_numero)]" />
+<meta name="DC.Creator" content="[(#NOM_SITE_SPIP)]" />
+<meta name="DC.Date" content="[(#DATE|affdate{'Y-m-d'})]" />
+<meta name="DC.Subject" content="<BOUCLE_motcle2(MOTS){id_article}{type!==Type de document}>#TITRE, </BOUCLE_motcle2>" />
+<meta name="DC.Format" content="text/html" />
+<meta name="DC.Language" content="#LANG" />
+<meta name="DC.Identifier" content="[(#URL_SITE_SPIP)/][(#URL_ARTICLE)]" />
+<meta name="DC.Type" content="<BOUCLE_typedoc(MOTS){id_article}{type==Type de document}>#TITRE, </BOUCLE_typedoc>" />
+<meta name="keywords" content="<BOUCLE_motcle(MOTS){id_article}{type!==Type de document}>#TITRE, </BOUCLE_motcle>" />
+<link href="#CHEMIN{_css/styleexceptions.css}" rel="stylesheet" type="text/css" />
+
+<link rel="alternate" type="application/rss+xml" title="<:cisquel:eq_rss_forum:> : [(#TITRE|supprimer_numero)]" href="[(#URL_PAGE{backend-forum-article}|parametre_url{id_article,#ID_ARTICLE})]" />
+<INCLURE{fond=noisettes/head}{lang}>
+
+[(#SET{ci_id_rubrique,[(#ID_RUBRIQUE|ci_rub_multirubricage{#ENV{id_rubrique}})]})]
+</head>
+
+<body>
+<INCLURE{fond=noisettes/haut}{lang}>
+<div id="pageArticleForum">
+<div id="milieu">
+	<div id="ext-main">
+		<div class="main">
+			<div id="gauche">
+				<INCLURE{fond=noisettes/recherche_gauche}{lang}>
+	
+			    [(#INCLURE{fond=navigation/article,id_article,id_rubrique=#GET{ci_id_rubrique},lang})]
+			</div>
+
+  			<div id="contenu">
+			<div class="main-content">
+				<h1 class="invisible"><:cisquel:eq_contenu:></h1>
+				<div id="boxnavpath"><div id="navpath">
+					<a href="[(#URL_PAGE{sommaire})]"><:cisquel:eq_accueil:></a>
+					<BOUCLE_rub_nav(RUBRIQUES){id_rubrique=#GET{ci_id_rubrique}}>
+					<BOUCLE_chem_nav(HIERARCHIE){id_rubrique}>
+					&gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a>
+					</BOUCLE_chem_nav>
+					&gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a>
+					</BOUCLE_rub_nav>
+				</div></div>
+				<div id="boxcentrale"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale">
+				<h2>[(#TITRE|supprimer_numero)]</h2>
+				<div class="dateart">
+				</div>
+			      	[<div class="texte">(#TEXTE)</div>]
+			<div class="action">
+			<a href="[(#PARAMETRES_FORUM|url_reponse_forum)]" rel="noindex,nofollow" title="<:cisquel:eq_prop_sujet:>"><:cisquel:eq_prop_sujet:></a>
+			</div>
+			<div class="navforum">
+			<div class="retour"><a href="#URL_RUBRIQUE" title="<:cisquel:eq_retour_liste_forums:>"><:cisquel:eq_retour_liste_forums:></a></div>
+			<div class="rssforum">
+			[(#PLUGIN{cinotif}|oui)
+				[(#CONFIG{cinotif_article}|=={non}|non)
+			<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{desabonner,''}|parametre_url{quoi,forumvalide})]" title="<:cisquel:abonner:>"><img src="#CHEMIN{_images/abonner.png}" alt="<:cisquel:abonner:>" /></a>
+			<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{desabonner,oui}|parametre_url{quoi,forumvalide})]" title="<:cisquel:desabonner:>" class="desabonner"><img src="#CHEMIN{_images/desabonner.png}" alt="<:cisquel:desabonner:>" /></a>
+				]
+			]			
+			<a rel="noindex,nofollow" href="[(#URL_PAGE{backend-forum-article}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_rss_forum:>"><img src="#CHEMIN{_images/rssforum.png}" alt="<:cisquel:eq_rss_forum:>" /></a>
+			</div>
+			<B_sujets>
+			[<div class="pagination">(#PAGINATION)</div>]
+			</div>
+           	<!-- les sujets -->
+            <div id="tableauforum">
+		<table summary="un forum" class="forum">
+			<thead>
+			<tr>
+				<th scope="col" id="col1" width="52%" class="forum"><:cisquel:eq_sujet:></th>
+				<th scope="col" id="col2" width="10%" class="forum"><:cisquel:eq_reponses:></th>
+				<th scope="col" id="col3" width="10%" class="forum"><:cisquel:eq_auteur:></th>
+				<th scope="col" id="col4" width="28%" class="forum"><:cisquel:eq_dernier_message:></th>
+			</tr>
+			</thead>
+	        <BOUCLE_sujets(FORUMS){id_article}{pagination 10}{par date}{inverse}>
+			<tr>
+				<td headers="col1" class="forumcoltexte">
+				<a href="[(#URL_PAGE{sujethierarchique}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{id_forum,#ID_FORUM})]" title="<:cisquel:eq_voir_sujet:>" class="titreforum">[(#TITRE|supprimer_numero)]</a>
+				</td>
+				<td headers="col2" align="center" class="forum">
+							#SET{ci_nb_reponses,0}
+							#SET{ci_date_ref,0}
+							#SET{ci_nom_ref,''}
+	        				<BOUCLE_nbre_reponses(FORUMS){id_parent}>
+								#SET{ci_nb_reponses,#GET{ci_nb_reponses}|plus{1}}
+								#SET{ci_date,#DATE|affdate{'YmdHis'}}
+								#SET{ci_diff,#GET{ci_date}|moins{#GET{ci_date_ref}}}
+								[(#GET{ci_diff}|>={0}|?{' '})
+									#SET{ci_date_ref,#GET{ci_date}}
+									#SET{ci_nom_ref,#NOM}
+								]
+									[(#SET{ci_id_msg,#ID_FORUM})]							
+		                        	<BOUCLE_recur_reponses(boucle_nbre_reponses)> </BOUCLE_recur_reponses>
+		                        	</BOUCLE_nbre_reponses>
+		                        	[(#GET{ci_nb_reponses})]
+				</td>
+				<td headers="col3" align="center" class="forum">
+	            			#NOM
+				</td>
+				<td headers="col4" align="center" class="forum">
+				<B_dernier>
+				<BOUCLE_dernier(FORUMS){id_parent}{par date}{inverse}{plat}{0,1}>
+				<:cisquel:eq_le:>&nbsp;[(#GET{ci_date_ref}|affdate{'d/m/Y'})] <:cisquel:eq_a:> [(#GET{ci_date_ref}|affdate{'H:i'})]<br/><:par_auteur:> #GET{ci_nom_ref} &nbsp;
+				<a href="[(#URL_PAGE{sujethierarchique}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{id_forum,#ID_PARENT#mess[(#GET{ci_id_msg})]})]" title="<:cisquel:eq_voir_message:>" class="lienmsg"><:cisquel:eq_voir_message:></a>
+				</BOUCLE_dernier></B_dernier>
+				<:cisquel:eq_le:>&nbsp;[(#DATE|affdate{'d/m/Y'}) ]<:cisquel:eq_a:>[ (#DATE|affdate{'H:i'})]<br /><:par_auteur:>[(#NOM)]&nbsp;
+				<a href="[(#URL_PAGE{sujethierarchique}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{id_forum,#ID_FORUM})]" title="<:cisquel:eq_voir_message:>" class="lienmsg"><:cisquel:eq_voir_message:></a>
+				<//B_dernier>
+				</td>
+			</tr>
+			</BOUCLE_sujets>
+		</table>
+		</div>            	
+			</B_sujets>
+			</div>
+			<//B_sujets>
+				
+				</div></div></div></div></div></div>
+			</div>
+			</div>
+			<div class='clearer'>&nbsp;</div>	
+		</div>
+	</div>
+</div>
+</div>
+[(#CIPARAM_ABONNEMENT_XITI|oui)[(#CIPARAM_ABONNEMENT_XITI|match{_images/void.gif}|non)[(#INCLURE{fond=noisettes/compteur_article,id_article})]]]
+
+	<INCLURE{fond=noisettes/pied}{lang}><INCLURE{fond=noisettes/pied_connexion}{self=#SELF}{lang}>
+
+</BOUCLE_contenu>
+</B_contenu>
+<INCLURE{fond=altern}>
+<//B_contenu>

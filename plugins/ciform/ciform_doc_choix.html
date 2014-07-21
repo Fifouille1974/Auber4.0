@@ -1,0 +1,89 @@
+#CACHE{0}
+[(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]
+#CIPARAM_DOCTYPE
+<head>
+<title>[(#NOM_SITE_SPIP|textebrut)]</title>
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+<meta name="robots" content="noindex, nofollow" />
+<link href="#CHEMIN{_css/ciform_style.css}" rel="stylesheet" type="text/css" />
+<link href="_css/styleformulaires.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="page">
+<BOUCLE_contenu(ARTICLES){id_article}>
+<div id="milieu">
+	<div id="ext-main">
+		<div class="main">
+
+  			<div id="contenu">
+			<div class="main-content">
+				<div id="boxnavpath"><div id="navpath">
+					<a href="[(#URL_PAGE{sommaire})]"><:ciform:accueil:></a>
+					<BOUCLE_chem_nav(HIERARCHIE){id_article}>
+					&gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a>
+					</BOUCLE_chem_nav>
+				</div></div>
+
+				<div id="boxcentrale"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale">
+					<h2>#TITRE</h2>
+					<div class="retour"><a href="[(#URL_PAGE{article}|parametre_url{id_article,#ID_ARTICLE})]" title="<:ciform:retour_article:>"><:ciform:retour_article:></a></div>
+
+					<BOUCLE_document(DOCUMENTS){id_article}{id_document}>
+					#SET{ci_nom_resapj,#ID_ARTICLE|ciform_nom_resapj{#ID_DOCUMENT}}
+					#SET{ci_time_resapj,#ID_ARTICLE|ciform_time_resapj{#ID_DOCUMENT}}
+
+					[(#GET{ci_nom_resapj}|!={''}|oui)
+						<div class="titreaction"><:ciform:wiki_resa1:></div>
+						<div class="titreaction">[<:ciform:wiki_doc_resa_nom:>(#GET{ci_nom_resapj})][<:ciform:wiki_doc_resa_time:>(#GET{ci_time_resapj})]</div>
+						<div class="texte"><:ciform:wiki_resa2:></div>
+						<div class="texte"><:ciform:wiki_resa3:></div>
+						<div class="texte"><:ciform:wiki_resa4:> #GET{ci_nom_resapj}.</div>
+						<div class="texte">&nbsp;</div>
+						<div class="texte">
+						<a href="#URL_DOCUMENT" class="document" title="<:ciform:wiki_resa5:> : [(#TITRE|supprimer_numero)] <:ciform:dans_fenetre:>"><:ciform:wiki_resa5:></a> [(#TITRE|supprimer_numero)]&nbsp;([<:ciform:format:> (#TYPE_DOCUMENT)][ - (#TAILLE|taille_en_octets)])
+						</div>
+					]
+
+					[(#GET{ci_nom_resapj}|=={''}|oui)
+						<div class="titreaction"><:ciform:wiki_resa6:></div>									
+						<div class="texte">
+						<a href="#URL_DOCUMENT" class="document" title="<:ciform:wiki_resa5:> : [(#TITRE|supprimer_numero)] <:ciform:dans_fenetre:>"><:ciform:wiki_resa5:></a> [(#TITRE|supprimer_numero)]&nbsp;([<:ciform:format:> (#TYPE_DOCUMENT)][ - (#TAILLE|taille_en_octets)])
+						</div>
+						<div class="texte"><:ciform:wiki_resa7:></div>
+						#SET{ciurlreserver,#URL_PAGE{ciform_doc_reserver}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{id_document,#ID_DOCUMENT}}
+						[(#SESSION{id_auteur}|?{' '}|oui) 
+						#SET{ciurl,#GET{ciurlreserver}}
+						]
+						[(#SESSION{id_auteur}|?{'',' '}|oui)
+						#SET{ciurl,#URL_PAGE{login}|parametre_url{url,#GET{ciurlreserver}}}
+						]
+						<div class="texte">
+						<a href="#GET{ciurl}" class="document" title="<:ciform:wiki_resa8:> : [(#TITRE|supprimer_numero)]"><:ciform:wiki_resa8:></a> [(#TITRE|supprimer_numero)]&nbsp;([<:ciform:format:> (#TYPE_DOCUMENT)][ - (#TAILLE|taille_en_octets)])
+						</div>
+						<div class="texte">&nbsp;</div>
+						<div class="texte"><:ciform:wiki_resa9:></div>
+						<div class="texte"><:ciform:wiki_resa10:></div>
+						<div class="texte"><:ciform:wiki_resa11:></div>
+						<div class="texte"><:ciform:wiki_resa12:></div>
+						<div class="texte"><:ciform:wiki_resa13:></div>
+					]
+					</BOUCLE_document>
+					
+				</div></div></div></div></div></div>
+				
+			</div>
+			</div>
+			<div class='clearer'>&nbsp;</div>	
+		</div>
+	</div>
+</div>
+<div id=pied>
+</div>
+ 
+</div>
+</BOUCLE_contenu>
+</B_contenu>
+<h2><:pass_erreur:> 404</h2>
+<//B_contenu>
+</body>
+</html>

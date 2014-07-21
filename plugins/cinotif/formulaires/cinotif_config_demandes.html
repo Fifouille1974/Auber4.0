@@ -1,0 +1,120 @@
+[(#SPIP_VERSION|>={3}|non)
+<div class='cadre cadre-formulaire-editer'>
+<div class="entete-formulaire">
+<h1><:cinotif:demandes_titre:></h1>
+</div>
+]
+
+<div class="formulaire_spip formulaire_configurer formulaire_demandes">
+[(#SPIP_VERSION|>={3}|oui)
+<h3 class='titrem'><:cinotif:demandes_titre:></h3>
+]
+	<!-- <br class='bugajaxie' /> -->
+	[<p class='reponse_formulaire reponse_formulaire_ok'>(#ENV**{message_ok})</p>]
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+
+			#SET{name,abo_tous}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer long_label editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}" style="width:330px;">[(#VAL{cinotif:}|concat{#GET{name}}|_T)]</label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<div class="choix">
+					<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="oui"
+					[(#ENV{#GET{name}}|=={oui}|oui)checked="checked"] />
+					<label for="#GET{name}_oui">
+					[(#ENV{#GET{name}}|=={oui}|oui)<b>]
+					<:item_oui:>
+					[(#ENV{#GET{name}}|=={oui}|oui)</b>]
+					</label>
+					&nbsp;&nbsp;
+					<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
+					[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] />
+					<label for="#GET{name}_non">
+					[(#ENV{#GET{name}}|=={oui}|non)<b>]
+					<:item_non:>
+					[(#ENV{#GET{name}}|=={oui}|non)</b>]
+					</label>
+				</div>
+			</li>
+			
+			#SET{name,abo_non_auth}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer long_label editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}" style="width:330px;">[(#VAL{cinotif:}|concat{#GET{name}}|_T)]</label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<div class="choix">
+					<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="oui"
+					[(#ENV{#GET{name}}|=={oui}|oui)checked="checked"] />
+					<label for="#GET{name}_oui">
+					[(#ENV{#GET{name}}|=={oui}|oui)<b>]
+					<:item_oui:>
+					[(#ENV{#GET{name}}|=={oui}|oui)</b>]
+					</label>
+					&nbsp;&nbsp;
+					<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
+					[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] />
+					<label for="#GET{name}_non">
+					[(#ENV{#GET{name}}|=={oui}|non)<b>]
+					<:item_non:>
+					[(#ENV{#GET{name}}|=={oui}|non)</b>]
+					</label>
+				</div>
+			</li>
+
+			#SET{name,auto_notif}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer long_label editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}" style="width:330px;">[(#VAL{cinotif:}|concat{#GET{name}}|_T)]</label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<div class="choix">
+					<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="oui"
+					[(#ENV{#GET{name}}|=={oui}|oui)checked="checked"] />
+					<label for="#GET{name}_oui">
+					[(#ENV{#GET{name}}|=={oui}|oui)<b>]
+					<:item_oui:>
+					[(#ENV{#GET{name}}|=={oui}|oui)</b>]
+					</label>
+					&nbsp;&nbsp;
+					<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
+					[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] />
+					<label for="#GET{name}_non">
+					[(#ENV{#GET{name}}|=={oui}|non)<b>]
+					<:item_non:>
+					[(#ENV{#GET{name}}|=={oui}|non)</b>]
+					</label>
+				</div>
+			</li>
+			
+			#SET{name,lien_abo_uniquement_en_page_accueil}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer long_label editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}" style="width:330px;">[(#VAL{cinotif:}|concat{#GET{name}}|_T)]</label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<div class="choix">
+					<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="oui"
+					[(#ENV{#GET{name}}|=={oui}|oui)checked="checked"] />
+					<label for="#GET{name}_oui">
+					[(#ENV{#GET{name}}|=={oui}|oui)<b>]
+					<:item_oui:>
+					[(#ENV{#GET{name}}|=={oui}|oui)</b>]
+					</label>
+					&nbsp;&nbsp;
+					<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
+					[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] />
+					<label for="#GET{name}_non">
+					[(#ENV{#GET{name}}|=={oui}|non)<b>]
+					<:item_non:>
+					[(#ENV{#GET{name}}|=={oui}|non)</b>]
+					</label>
+				</div>
+			</li>
+
+		</ul>		
+	  <p class='boutons'><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+</div>
+
+[(#SPIP_VERSION|>={3}|non)
+</div>
+]

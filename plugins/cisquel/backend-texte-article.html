@@ -1,0 +1,41 @@
+#CACHE{0}
+[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<?xml version="1.0"[ encoding="(#CHARSET)"]?>
+<rss version="0.91" xmlns:dc="http://purl.org/dc/elements/1.1/">
+
+
+<channel>
+	<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
+	<link>#URL_SITE_SPIP/</link>
+	<description></description>
+	<language>#LANG</language>
+
+	<image>
+		<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
+		<url>[(#LOGO_SITE_SPIP||extraire_attribut{src}|url_absolue|texte_backend)]</url>
+		<link>#URL_SITE_SPIP/</link>
+		<description></description>
+	</image>
+
+<!-- article specifique - syntaxe backend.php3?id_syndic_article=123 -->
+
+	<BOUCLE1(ARTICLES){id_article}>
+		<item>
+			<title>[(#TITRE*|ciparam_texte_export)]</title>
+			<link>#URL_SITE_SPIP/#URL_ARTICLE</link>
+			<date>#DATE</date>
+			<description>[(#DESCRIPTIF|texte_backend)]</description>
+			<content:encoded>[&lt;div class='rss_chapo'&gt;(#CHAPO|texte_backend)&lt;/div&gt;
+		][&lt;div class='rss_texte'&gt;(#TEXTE|
+			image_reduire{500,0}|texte_backend)&lt;/div&gt;
+		][&lt;hr /&gt;
+		&lt;div class='rss_notes'&gt;(#NOTES|texte_backend)&lt;/div&gt;
+		][&lt;div class='rss_ps'&gt;(#PS|texte_backend)&lt;/div&gt;]
+            <BOUCLE_documents1(DOCUMENTS){id_article}{par num titre}{mode=document}{doublons}><br />&lt;a href="[(#URL_DOCUMENT|url_absolue|unique)]"&gt;[(#TITRE|supprimer_numero)]&lt;/a&gt; [ : (#DESCRIPTIF)] ([<:cisquel:eq_format:> (#EXTENSION)][ - (#TAILLE|taille_en_octets)][ - (#DATE|affdate{'d/m/Y'})])</BOUCLE_documents1>
+            </content:encoded>
+			<author><BOUCLE23(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE23></author>
+		</item>
+	</BOUCLE1>
+
+</channel>
+
+</rss>

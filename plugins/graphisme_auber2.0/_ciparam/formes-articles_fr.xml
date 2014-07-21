@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<item><nom>_articlesmememotcle</nom><description>Avec des liens vers les articles ayant l'un de ses mots clés</description></item>
+<item><nom>_comarquage</nom><description>Le texte est issu d'un autre site par comarquage</description></item>
+<item><nom>_commentaire</nom><description>Article sur lequel on peut ajouter et lire des commentaires</description></item>
+<item><nom>_commentaireautrepage</nom><description>On peut ajouter et lire des commentaires sur une autre page</description></item>
+<item><nom>_commentaireplat</nom><description>Avec des commentaires sans ordre hiérarchique</description></item>
+<item><nom>_liensutiles</nom><description>Avec des liens vers les sites référencés dans la rubrique</description></item>
+<item><nom>_motcle</nom><description>Avec sa liste des mots-clés en bas de page</description></item>
+<item><nom>_photo</nom><description>Article sous forme de reportage photo</description></item>
+<item><nom>_photomosaique</nom><description>Reportage photo en mosaique</description></item>
+<item><nom>_phototheque</nom><description>Galerie de photos (photothèque)</description></item>
+<item><nom>_sommaireautomatique</nom><description>Avec un sommaire automatique des intertitres</description></item>
+<item><nom>_sommaireplat</nom><description>Avec un sommaire des intertitres cliquable (sans liste déroulante)</description></item>
+<item><nom>_signature</nom><description>Article avec recueil de signatures</description><statuts>webmestre</statuts></item>
+<item><nom>_inserthead</nom><description>Les librairies javascript sont incluses</description></item>
+

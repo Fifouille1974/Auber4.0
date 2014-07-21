@@ -1,0 +1,37 @@
+<plugin>
+	<nom>cirv : r&#233;dacteur valideur</nom>
+	<auteur>&#169; C. Imberti</auteur>
+	<icon>pyramides-32.png</icon>
+	<licence>[Creative commons by-nc-sa->http://creativecommons.org/licenses/by-nc-sa/2.0/fr/]</licence>
+	<lien></lien>
+	<version>1.11</version>
+	<version_base>1.0</version_base>
+	<etat>stable</etat>
+    <slogan>Auteur : &#169; C. Imberti. Licence : Creative commons by-nc-sa.</slogan>
+    <description>
+    Auteur : &#169; C. Imberti. Licence : Creative commons by-nc-sa. <br />
+    Ce plugin offre la possibilit&#233; d'autoriser certains r&#233;dacteurs &#224; publier leurs propres articles.
+    </description>
+	<prefix>cirv</prefix>
+	<install>base/cirv_install.php</install>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/cirv_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>cirv_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ciautoriser</nom>
+		<inclure>cirv_ciautoriser.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>afficher_complement_objet</nom>
+		<inclure>cirv_pipeline.php</inclure>
+	</pipeline>
+
+	<necessite id="SPIP" version='[2.0.9;]' />
+	<necessite id='ciautoriser' version='[1.0;]' />
+
+</plugin>

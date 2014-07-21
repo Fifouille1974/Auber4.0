@@ -1,0 +1,85 @@
+<BOUCLE_principale(BREVES) {id_breve}>
+<!DOCTYPE html>
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+]<!--[if lt IE 7 ]> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html lang="#LANG"class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]--> 
+<head>
+<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+<title>[(#TITRE|textebrut) - ][(#NOM_SITE_ITWX|textebrut)]</title>
+[<meta name="description" content="(#INTRODUCTION{150}|attribut_html)" />]
+<INCLURE{fond=inc/inc-head}>
+[(#REM) Lien vers le flux RSS des breves ]
+<link rel="alternate" type="application/rss+xml" title="<:dernieres_breves:>" href="#URL_PAGE{backend-breves}" />
+</head>
+
+<body id="top">
+<div id="smart">
+
+  [(#REM) BARRE DE NAVIGATION ]
+  <INCLURE{fond=inc/inc-navBar}/>   
+  
+  <div id="main">
+  
+  <INCLURE{fond=inc/ajax/formulaire_recherche}{env}{ajax}>
+
+  [(#REM) Contenu : corps de la breve ]
+  <div class="contenu">
+    <div class="cartouche">
+	 [(#LOGO_BREVE|image_reduire{120,100})]
+      <h1 class="#EDIT{titre}">#TITRE</h1>
+      <p><small><abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour) ][(#DATE|affdate)]</abbr></small></p>
+    </div><!--#cartouche-->
+    <br class="nettoyeur" />
+    [<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{0,0})</div>]        
+    [<p class="lien"><a href="(#URL_SITE)" target="_blank"><:voir_en_ligne:> : [(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+    [<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
+	<br />
+		
+  </div><!--#contenu-->
+  
+  [(#REM) Gestion du portfolio et des documents ]
+  [(#INCLURE{fond=inc/inc-documents}{id_breve}{env})]
+  
+  [(#REM) Forum de la breve ]
+  <a href="#forum" id="forum"></a> 
+  [(#PARAMETRES_FORUM|?{' '})<div class="grouplist"><:forum:forum:></div>
+  <div class="ticket">
+    <div class="repondre"><INCLURE{fond=inc/ajax/formulaire-breve}{env}{ajax}></div>
+	<INCLURE{fond=inc/inc-forum}{id_breve}{env}{ajax}{for=_for#ID_FORUM}/> 
+  </div>] 
+  
+  [(#REM) Breves dans la meme rubrique ] 
+  <INCLURE{fond=inc/inc-bre-listbre}{id_rubrique}{env}{ajax}{bre=_bre#ID_BREVE}/> 
+  
+  [(#REM) Menu de navigation mots-cles ]
+  <INCLURE{fond=inc/inc-bre-listmot}{id_rubrique}{env}{ajax}{mot=_mot#ID_MOT}/> 
+  
+  [(#REM) Menu de Rubriques ] 
+  <INCLURE{fond=inc/inc-rubriques}{id_rubrique}/> 
+  
+  [(#REM) Pied - Gestion du site ]
+  <div class="group" style="height:17px; border-bottom:1px solid #B9B9B9"></div>
+  <div class="ticket">
+    <div class="ticketmenu">
+      <ul>
+       [(#CONFIG{itwx/retoursom}|?{' '})
+		<li class="list-border"><a rel="start home" href="[(#URL_BREVE|parametre_url{'cimobile','web'})]"><:itwx:pageclassique:></a></li>]
+        <li><a rel="start home" href="#URL_PAGE{contact}"><:contact:></a></li>
+       [(#AUTORISER{ecrire})<li><a href="#EVAL{_DIR_RESTREINT_ABS}"><:espace_prive:></a></li>]
+       [(#AUTORISER{ecrire})<li><a href="#EVAL{_DIR_RESTREINT_ABS}?exec=breve&id_breve=#ID_BREVE"><:breves:breve:> #ID_BREVE</a></li>]
+       [(#SESSION{id_auteur}|?{' '})<li><a href="#URL_LOGOUT" rel="nofollow" style="background-image: none; text-align:center" class=""><:icone_deconnecter:></a></li>]
+      </ul>
+    </div>
+  </div>
+  
+  <INCLURE{fond=inc/inc-pied}/> 
+
+  </div><!--#main-->
+
+</div><!--#smart-->
+</body>
+</html>
+</BOUCLE_principale>

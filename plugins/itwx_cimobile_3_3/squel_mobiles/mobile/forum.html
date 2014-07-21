@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title><:poster_message:> - [(#NOM_SITE_ITWX|textebrut)]</title>
+<INCLURE{fond=inc/inc-head}>
+<meta name="robots" content="none" />
+</head>
+
+<body class="#LANG_DIR">
+<div id="mob">
+
+  [(#REM) TOOL BARRE ]
+  <INCLURE{fond=inc/inc-navBar}/> 
+  
+  [(#REM) Contenu : poster un message dans le forum ]
+  <div class="contenu">
+    <div class="cartouche">
+      <h1 class="entry-title"><:poster_message:></h1>
+    </div>
+    <div class="menu articles">
+      <h2><:en_reponse:></h2>
+	  
+            <BOUCLE_forum_parent(FORUMS) {id_forum}>
+            <h3>#TITRE</h3>
+            <small>[(#DATE|affdate_jourcourt)][&nbsp;(#DATE|heures)][:(#DATE|minutes)][, <:par_auteur:> (#NOM)]</small>
+            [<div class="introduction">(#INTRODUCTION|lignes_longues)</div>]
+            </BOUCLE_forum_parent>
+            
+            <BOUCLE_article(ARTICLES) {id_article}>
+            <h3>#TITRE</h3>
+            <small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small>
+            [<div class="introduction">(#INTRODUCTION)</div>]
+            </BOUCLE_article>
+            
+            <BOUCLE_breve(BREVES) {id_breve}>
+            <h3>#TITRE</h3>
+            <small>[(#DATE|affdate_jourcourt)]</small>
+            [<div class="introduction">(#INTRODUCTION)</div>]
+            </BOUCLE_breve>
+            
+            <//B_forum_parent>
+	  
+    </div>
+  </div><!--#contenu-->
+  
+  #FORMULAIRE_FORUM
+  
+  [(#REM) Pied ]
+  <div class="group" style="height:17px"></div>
+  <div id="pied">
+     <a href="http://www.spip.net/" title="<:site_realise_avec_spip:>"><img src="#CHEMIN{spip.png}" alt="SPIP" width="48" height="16" /></a> - <:itwx:copyright:>
+  </div>	
+
+</div><!--#page-->
+</body>
+</html>

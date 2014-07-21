@@ -1,0 +1,97 @@
+#CACHE{3600}
+<BOUCLE_principale(SITES){id_syndic}>
+<!DOCTYPE html>
+[(#REM) Les sites n'ont pas de "lang" a proprement parler ; on se base donc sur la langue de la rubrique qui les contient. Les articles syndiques, eux, ont une "lang". ]
+<BOUCLE_lang(RUBRIQUES){id_rubrique}><!-- Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7 ]> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html lang="#LANG"class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]--> </BOUCLE_lang>
+<head>
+<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+<title>[(#NOM_SITE|textebrut) - ][(#NOM_SITE_ITWX|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF|couper{150}|textebrut)" />]
+<INCLURE{fond=inc/inc-head}/>
+[(#REM) On demande aux moteurs de ne pas indexer cette page pour ne pas passer devant le site qu'on reference.]
+<meta name="robots" content="noindex" />
+</head>
+
+<body id="top">
+<div id="tab">
+
+ [(#REM) TOOL BARRE ]
+ <INCLURE{fond=inc/inc-navBar}>
+  
+  <div id="main">
+  
+  [(#REM) Hierarchie ]
+  <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{30})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</div>
+	
+  <div id="conteneur">
+
+  [(#REM) Contenu ]
+    <div class="contenu">
+	  
+        <div class="cartouche surlignable"> 
+		  [(#LOGO_SITE{#URL_SITE}|image_reduire{150,100})]
+          <h1 class="#EDIT{nom_site}">#NOM_SITE</h1>
+        </div>
+		
+        [<div class="#EDIT{descriptif} chapo surlignable">(#DESCRIPTIF)</div> ]
+        [<p class="#EDIT{url_site} hyperlien"><a href="#URL_SITE" target="_blank">(#URL_SITE|couper{80})</a></p> <br />]
+        
+        [(#REM) Articles issus de la syndication ] 
+		<INCLURE{fond=inc/inc-site-listartsynd}{env}{ajax}/> 
+
+	</div><!--#contenu-->
+	
+   [(#REM) Navigation ]
+    <div id="navigation">
+      <div class="group bord" style="height:13px"></div>
+	  
+      [(#REM) Autres sites web ]
+      <div id="navigation-a"> 
+	   <INCLURE{fond=inc/inc-site-listsite}{env}{ajax}/> 
+	  </div>
+	  
+      [(#REM) Menu de Rubriques ] 
+      [(#REM) Landscape mode  ]
+      <div id="navigation-c" class="display-landscape">
+	   <INCLURE{fond=inc/inc-rubriques}{id_rubrique}/> 
+	  </div>
+      [(#REM) Portrait mode  ]
+      <div id="navigation-e" class="display-portrait"> 
+	   <INCLURE{fond=inc/inc-rubriques}{id_rubrique}/> 
+	  </div>
+	  
+      <div id="navigation-b"> 
+	   [(#REM) Mots-cles ] 
+	   <INCLURE{fond=inc/inc-site-listmot}{env}{ajax}/>
+       [(#REM) Infos ]
+       <INCLURE{fond=inc/inc-infos}/> 
+      </div>
+	  
+    </div><!--#navigation-->
+	
+  </div><!--#conteneur-->
+  
+  [(#REM) Pied ]
+  <div id="pied"> 
+    <div class="group" style="height:13px;border-bottom: 1px solid #B9B9B9;"></div>
+	<div class="ticket">
+      <div class="ticketmenu"> 
+	    [(#CONFIG{itwx/classique}|?{' '})<a rel="start home" href="[(#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT}|parametre_url{'cimobile','web'})]"><:itwx:pageclassique:></a>]
+		[(#AUTORISER{ecrire})<a href="#EVAL{_DIR_RESTREINT_ABS}"><:espace_prive:></a>]
+		[(#SESSION{id_auteur}|?{' '})<a href="#URL_LOGOUT" rel="nofollow" style="background-image: none;text-align:center;padding: 10px 12px;"><:icone_deconnecter:></a>]
+      </div>
+    </div><!--#ticket-->
+	<INCLURE{fond=inc/inc-pied}/> 
+  </div><!--#pied-->
+  
+  </div><!--#main-->
+
+</div><!--#page-->
+</body>
+</html>
+</BOUCLE_principale>

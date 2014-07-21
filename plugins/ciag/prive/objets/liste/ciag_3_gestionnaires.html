@@ -1,0 +1,33 @@
+<B_liste>
+#SET{debut,#ENV{debutaut,#EVAL{_request("debutaut");}}}
+#ANCRE_PAGINATION
+<div class="liste-objets auteurs">
+<table class='spip liste'>
+<caption><strong class="caption"><:ciag:qui_gere_ce_groupe:></strong></caption>
+	<thead>
+		[<tr><td colspan="5"><p class='pagination'>(#GET{p})</p></td></tr>]
+
+		[<tr><td colspan="5"><p class='pagination'>(#PAGINATION{prive})</p></td></tr>]
+		<tr class='first_row'>
+			<th class='statut' scope='col'></th>
+			<th class='messagerie' scope='col'></th>
+			<th class='nom' scope='col'><:info_nom:></th>
+			<th class='email' scope='col'><:email:></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste(CIAG_GRPAUTEURS_GESTIONNAIRES auteurs){id_groupe}{par nom}{pagination #ENV{nb,10} aut}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='statut'>[(#STATUT|puce_statut{auteur})]</td>
+			<td class="messagerie">[<a href="(#ID_AUTEUR|ciag_3_auteur_lien_messagerie{#EN_LIGNE,#STATUT,#IMESSAGE})">[(#CHEMIN{images/m_envoi.gif}|balise_img{<:info_envoyer_message_prive:>})]</a>]</td>
+			<td class='nom[ (#NOM|non)vide]'>[(#LOGO_AUTEUR|image_reduire{20,26})]<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]"[ title="(#BIO*|couper{200}|attribut_html)"]>[(#RANG). ][(#NOM|sinon{<:texte_vide:>})]</a></td>
+			<td class='email'>[<a href='mailto:(#EMAIL)'>[(#EMAIL|couper{30})]</a>]</td>
+		</tr>
+	</BOUCLE_liste>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste>
+<div class="liste-objets auteurs"><strong class="caption"><:ciag:qui_gere_ce_groupe:></strong></div>
+<//B_liste>

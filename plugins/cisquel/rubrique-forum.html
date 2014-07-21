@@ -1,0 +1,120 @@
+#CIPARAM_DOCTYPE
+<head>
+<BOUCLE_contenu(RUBRIQUES){id_rubrique}>
+<title>[(#TITRE|supprimer_numero)][ - (#NOM_SITE_SPIP|textebrut)]</title>
+<link rel="schema.DC" href="http://purl.org/DC/elements/1.0/" />
+<meta name="DC.Title" content="[(#TITRE|supprimer_numero)]" />
+<meta name="DC.Creator" content="[(#NOM_SITE_SPIP)]" />
+<meta name="DC.Date" content="<BOUCLE_datesite(ARTICLES){par date}{inverse}{0,1}>[(#DATE|affdate{'Y-m-d'})]</BOUCLE_datesite>" />
+<meta name="DC.Subject" content="<BOUCLE_motcle2(MOTS){id_rubrique}{type!==Type de document}>#TITRE, </BOUCLE_motcle2>" />
+<meta name="DC.Format" content="text/html" />
+<meta name="DC.Language" content="#LANG" />
+<meta name="DC.Identifier" content="[(#URL_SITE_SPIP)/][(#URL_RUBRIQUE)]" />
+<meta name="DC.Type" content="<BOUCLE_typedoc(MOTS){id_rubrique}{type==Type de document}>#TITRE, </BOUCLE_typedoc>" />
+<meta name="keywords" content="<BOUCLE_motcle(MOTS){id_rubrique}{type!==Type de document}>#TITRE, </BOUCLE_motcle>" />
+ 
+<link href="#CHEMIN{_css/styleexceptions.css}" rel="stylesheet" type="text/css" />
+<link rel="alternate" type="application/rss+xml" title="#NOM_SITE_SPIP - <:cisquel:eq_actu:> - <:rubrique:> : [(#TITRE|supprimer_numero)]" href="[(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" />
+<link rel="alternate" type="application/rss+xml" title="<:cisquel:eq_rss_forums:> : [(#TITRE|supprimer_numero)]" href="[(#URL_PAGE{backend-forum-rubrique}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" />
+<INCLURE{fond=noisettes/head}{lang}>
+</head>
+
+<body>
+<INCLURE{fond=noisettes/haut}{lang}>
+<div id="pageRubForum">
+<div id="milieu">
+	<div id="ext-main">
+		 
+		<div class="main">
+			<div id="gauche">
+				<INCLURE{fond=noisettes/recherche_gauche}{lang}>
+	
+			    [(#INCLURE{fond=navigation/rubrique,id_rubrique,lang})]
+			</div>
+
+  			<div id="contenu">
+			<div class="main-content">
+				<h1 class="invisible"><:cisquel:eq_contenu:></h1>
+				<div id="boxnavpath"><div id="navpath">
+					<a href="[(#URL_PAGE{sommaire})]"><:cisquel:eq_accueil:></a>
+					<BOUCLE_chem_nav(HIERARCHIE){id_rubrique}>
+					&gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a>
+					</BOUCLE_chem_nav>
+					&gt; [(#TITRE|supprimer_numero)]
+				</div></div>
+				<div id="boxcentrale"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale">
+				<div class="rub">
+				<h2>[(#TITRE|supprimer_numero)]</h2>
+				<div class="dateart">
+				</div>
+			      	[<div class="texte">(#TEXTE)</div>]
+				[<div class="texte">(#NOTES)</div>]
+				</div>
+
+				<div class="rssforum rssforumrub">
+				[(#PLUGIN{cinotif}|oui)
+					[(#CONFIG{cinotif_rubrique}|=={non}|non)
+				<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-rubrique}|parametre_url{id_rubrique,#ID_RUBRIQUE}|parametre_url{desabonner,''}|parametre_url{quoi,forumvalide})]" title="<:cisquel:abonner:>"><img src="#CHEMIN{_images/abonner.png}" alt="<:cisquel:abonner:>" /></a>
+				<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-rubrique}|parametre_url{id_rubrique,#ID_RUBRIQUE}|parametre_url{desabonner,oui}|parametre_url{quoi,forumvalide})]" title="<:cisquel:desabonner:>" class="desabonner"><img src="#CHEMIN{_images/desabonner.png}" alt="<:cisquel:desabonner:>" /></a>
+					]
+				]
+				<a rel="noindex,nofollow" href="[(#URL_PAGE{backend-forum-rubrique}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" title="<:cisquel:eq_rss_forums:>"><img src="#CHEMIN{_images/rssforum.png}" alt="<:cisquel:eq_rss_forums:>" /></a>
+				</div>
+
+			            <div id="tableauforum">
+				<table summary="<:cisquel:eq_les_forums:>" class="forum">
+					<thead>
+					<tr>
+						<th scope="col" id="col1" width="52%" class="forum"><:cisquel:eq_forums:></th>
+						<th scope="col" id="col2" width="10%" class="forum"><:cisquel:eq_sujets:></th>
+						<th scope="col" id="col3" width="10%" class="forum"><:cisquel:eq_reponses:></th>
+						<th scope="col" id="col4" width="28%" class="forum"><:cisquel:eq_dernier_message:></th>
+					</tr>
+					</thead>
+				<BOUCLE_forums(ARTICLES){id_rubrique}{par #CITRI}{!par #CITRIINVERSE}{par num #CITRINUM}{doublons}>
+				<tr>
+					<td headers="col1" align="left" class="forumcoltexte"><a href="#URL_ARTICLE" title="<:cisquel:eq_voir_forum:> : [(#TITRE|supprimer_numero)]" class="titreforum">[(#TITRE|supprimer_numero)]</a>[<div class="texte">(#DESCRIPTIF)</div>]
+					</td>
+					<td headers="col2" align="center" class="forum">
+			        		<BOUCLE_sujets(FORUMS){id_article}></BOUCLE_sujets>
+			        		&nbsp;#TOTAL_BOUCLE<//B_sujets>
+					</td>
+					<td headers="col3" align="center" class="forum">
+		            			<BOUCLE_messages(FORUMS){id_article}{id_parent>0}{plat}></BOUCLE_messages>
+		            			&nbsp;#TOTAL_BOUCLE<//B_messages>
+					</td>
+					<td headers="col4" align="center" class="forum">
+				        <BOUCLE_dernier_message(FORUMS){id_article}{plat}{par date}{inverse}{0,1}>
+						<BOUCLE_parent(FORUMS){id_enfant}>
+							[(#SET{ci_id_sujet,#ID_FORUM})]
+            			</BOUCLE_parent>
+							[(#SET{ci_id_sujet,#ID_FORUM})]							
+						<//B_parent>
+						<:cisquel:eq_le:>&nbsp;[(#DATE|affdate{'d/m/Y'}) ]<:cisquel:eq_a:>[ (#DATE|affdate{'H:i'})]<br/><:par_auteur:>[(#NOM)]&nbsp;
+			            			<a href="[(#URL_PAGE{sujet}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{id_forum,[(#GET{ci_id_sujet})]#mess[(#ID_FORUM)]})]" title="<:cisquel:eq_voir_message:>" class="lienmsg"><:cisquel:eq_voir_message:></a>
+				        </BOUCLE_dernier_message>
+				            - 
+				        <//B_dernier_message>
+					</td>
+				</tr>
+				</BOUCLE_forums>
+				</table>
+				</div>
+
+				</div></div></div></div></div></div>
+			</div>
+			</div>
+			<div class='clearer'>&nbsp;</div>	
+		</div>
+		 
+	</div>
+</div>
+</div>
+[(#CIPARAM_ABONNEMENT_XITI|oui)[(#CIPARAM_ABONNEMENT_XITI|match{_images/void.gif}|non)[(#INCLURE{fond=noisettes/compteur_rubrique,id_rubrique})]]]
+
+<INCLURE{fond=noisettes/pied}{lang}><INCLURE{fond=noisettes/pied_connexion}{self=#SELF}{lang}>
+
+</BOUCLE_contenu>
+</B_contenu>
+<INCLURE{fond=altern}>
+<//B_contenu>

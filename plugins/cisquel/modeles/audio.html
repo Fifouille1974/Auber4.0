@@ -1,0 +1,68 @@
+<BOUCLE_tous (DOCUMENTS types_documents) {id_document=#ID} {tout}>
+
+
+[<!--(#REM) 
+
+	Document MP3 ?
+
+-->][(#TYPE_DOCUMENT|=={MP3}|?{' '})
+<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+<dt class='spip_doc_titre'>
+<object id="audioplayer#ID_DOCUMENT" type="application/x-shockwave-flash" data="#CHEMIN{_flash/mp3player.swf}" height="[(#ENV{height,20})]" width="[(#ENV{width,200})]">
+<param name="wmode" value="transparent" />
+<param name="movie" value="#CHEMIN{_flash/mp3player.swf}" />
+<param name="FlashVars" value="mp3=[(#URL_DOCUMENT|url_absolue)]&amp;bgcolor1=ffffff&amp;bgcolor2=cccccc&amp;buttoncolor=999999&amp;buttonovercolor=0&amp;slidercolor1=cccccc&amp;slidercolor2=999999&amp;loadingcolor=ffff00&amp;sliderovercolor=666666&amp;textcolor=0&amp;showstop=1&amp;showinfo=0&amp;width=200&amp;height=20&amp;showvolume=1&amp;volume=200[&amp;autoplay=(#ENV{autostart,0})]" />
+[<span><a href='(#URL_DOCUMENT)' rel='enclosure'>#URL_DOCUMENT</a></span>]
+</object>
+</dt>
+[<dd class='spip_doc_descriptif'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120})px;']>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</dd>]
+</dl>
+]
+
+
+[<!--(#REM) 
+
+	Sinon : document normal 
+	
+-->][(#TYPE_DOCUMENT|match{^(MP3)$}|?{'',' '})
+
+
+[(#REM) on trouvera plusieurs variable de hauteur/largeur
+- les balises #HAUTEUR et #LARGEUR
+- #ENV{hauteur} et {largeur} correspondant <emb|hauteur=xx...>
+- #GET{hauteur} et #GET{largeur} correspondent prioritairement a #ENV,
+  puis #LARGEUR/HAUTEUR sauf si il y a un controleur
+]
+#SET{hauteur,#ENV{hauteur,#HAUTEUR}} #SET{largeur,#ENV{largeur,#LARGEUR}}
+[(#REM)
+
+	Si la taille est zero, mettre une valeur par defaut 320x240
+
+][(#GET{hauteur}|plus{#GET{largeur}}|?{'',
+	[(#SET{largeur,320})][(#SET{hauteur,240})]
+})]
+[(#REM)
+	Pour quicktime il faut ajouter 16 pixels en hauteur
+	cf. http://article.gmane.org/gmane.comp.web.spip.zone/9231/match=quicktime
+
+][(#EXTENSION|=={mov}|?{#SET{hauteur,#GET{hauteur}|plus{16}}})]
+[(#ENV{controls}=={PlayButton}|?{#SET{hauteur,25},''})][
+ (#ENV{controls}=={PlayButton}|?{#SET{largeur,40},''})][
+ (#ENV{controls}=={PositionSlider}|?{#SET{hauteur,25},''})][
+ (#ENV{controls}=={PositionSlider}|?{#SET{largeur,#GET{largeur}|moins{40}},''})
+][(#INCLUS|=={embed}|?{[(#ENV{controls,''}|?{'',' '})
+<div class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})]'[
+style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{align,center}|=={center}|?{'',' '})[width:(#GET{largeur}|max{120})px]']>
+]})
+]
+<object width='#GET{largeur}' height='#GET{hauteur}'>
+<param name='movie' value='#URL_DOCUMENT' />
+<param name='src' value='#URL_DOCUMENT' />
+[(#ENV*|env_to_params)]
+<embed src='#URL_DOCUMENT' [(#ENV*|env_to_attributs)] width='#GET{largeur}' height='#GET{hauteur}'></embed></object>
+
+[<div class='spip_doc_titre'><strong>(#TITRE)</strong></div>][<div class='spip_doc_descriptif'>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</div>]</div>
+]
+</BOUCLE_tous>
+
+

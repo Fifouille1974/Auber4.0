@@ -1,0 +1,37 @@
+#CACHE{0}
+<!-- commentaires sur l'article -->
+[(#PARAMETRES_FORUM|?{''})]
+[(#ENV{accepter_forum}|=={non}|non)
+<div class="retour2"><a href="[(#URL_PAGE{forum}|parametre_url{id_article,#ID_ARTICLE})]" rel="noindex,nofollow" title="<:cisquel:eq_reagir_article:>"><:cisquel:eq_reagir:></a></div>
+]
+<div class="rssforum"><a rel="noindex,nofollow" href="[(#URL_PAGE{backend-forum-article}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_rss_commentaire:>"><img src="#CHEMIN{_images/rssforum.png}" alt="<:cisquel:eq_rss_commentaire:>" /></a></div>
+<B_forums>
+ <div class="entetecom"><:cisquel:eq_commentaires:></div>           	
+<div>
+<ul class="forum-total">
+<BOUCLE_forums(FORUMS){id_article}{plat}{par date}{inverse}>
+	<li>
+	<div class="forum-fil">
+		<div class="com">
+			<div class="ligne-com">
+			<div class="titresujet">&nbsp;#TITRE[, <:par_auteur:> (#NOM)] <a href="#URL_SITE" title="<:cisquel:eq_visiter_site:> [(#NOM_SITE|supprimer_numero)] <:cisquel:eq_ouvre_fenetre:>)" class="spip_out">[(#NOM_SITE|supprimer_numero)]</a>, <:cisquel:eq_le:> [(#DATE|affdate)]<:cisquel:eq_a:>[(#DATE|heures)]h[(#DATE|minutes)]</div>
+			<div class="textesujet">[(#TEXTE)]</div>
+
+			<B_docf1>
+			<div class="listedoc">
+			<ul>
+			<BOUCLE_docf1(DOCUMENTS){id_forum}>
+			<li><a href="#URL_DOCUMENT" onclick="xt_med('C','[(#ID_ARTICLE|ciparam_xtn2)]','[pj(#ID_ARTICLE)-][(#TITRE|supprimer_numero|ciparam_xtTraiter)]','T')" class="document" title="<:cisquel:eq_ouvre_document:> [(#TITRE|supprimer_numero)] <:cisquel:eq_dans_fenetre:>">[(#TITRE|supprimer_numero)]</a>&nbsp;([<:cisquel:eq_format:> (#EXTENSION)][ - (#TAILLE|taille_en_octets)][ - (#DATE|affdate{'d/m/Y'})])</li>
+			</BOUCLE_docf1>
+			</ul>
+			</div>
+			</B_docf1>
+
+			</div>
+		</div>
+	</div>
+	</li>
+	</BOUCLE_forums>
+</ul>
+</div>
+</B_forums>

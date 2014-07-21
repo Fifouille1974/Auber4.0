@@ -1,0 +1,93 @@
+<BOUCLE_contenu(RUBRIQUES){id_rubrique}>
+				<div class="titrerubart">[(#TITRE|supprimer_numero)]</div>
+				<div class="dateart">
+				</div>
+			      	[<div class="texte">(#TEXTE)</div>]
+				[<div class="texte">(#NOTES)</div>]
+			      	
+				<BOUCLE_sous_rubriques(RUBRIQUES){id_parent}{par num titre}>
+				<div class="listerub">
+					[<img src="(#LOGO_RUBRIQUE||image_reduire{44,0}|extraire_attribut{'src'})" alt=""  class="rightill" />]
+				      	<a href="#URL_RUBRIQUE" class="titresousrub">[(#TITRE|supprimer_numero)]</a>
+				      	[<div class="textesousrub">(#DESCRIPTIF)</div>]
+					<B_sous_sous_rubriques>
+					<div class="liens">
+					<ul>
+					<BOUCLE_sous_sous_rubriques(RUBRIQUES){id_parent}{par num titre}>
+					<li><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></li>
+					</BOUCLE_sous_sous_rubriques>
+					</ul>
+				      	</div>
+					</B_sous_sous_rubriques>
+					<div class="clearer">&nbsp;</div>
+				</div>
+				</BOUCLE_sous_rubriques>
+
+				[(#INCLURE{fond=noisettes/choix_page,id_rubrique,citri=#ENV{citri},_citri=#ENV{_citri},citri_n=#ENV{citri_n}})]
+
+				
+				
+		<BOUCLE_articles(ARTICLES){id_article}>
+		<h2>[(#TITRE|supprimer_numero)]</h2>
+	      	[<div class="texte">(#TEXTE)</div>]
+		<B_documents>
+		<div class="listedoc">
+		<ul>
+		<BOUCLE_documents(DOCUMENTS){id_article}{par num titre}{mode=document}{doublons}>
+		<li><a href="#URL_DOCUMENT" onclick="xt_med('C','[(#ID_ARTICLE|ciparam_xtn2)]','[pj(#ID_ARTICLE)-][(#TITRE|supprimer_numero|ciparam_xtTraiter)]','T')" class="document" title="<:cisquel:eq_ouvre_document:> [(#TITRE|supprimer_numero)] <:cisquel:eq_dans_fenetre:>">[(#TITRE|supprimer_numero)]</a>&nbsp;([<:cisquel:eq_format:> (#EXTENSION)][ - (#TAILLE|taille_en_octets)][ - (#DATE|affdate{'d/m/Y'})])[<span class="docdesc">(#DESCRIPTIF)</span>][<span class="docdesc">(#TAILLE|cisquel_temps_telechargement)</span>]</li>
+		</BOUCLE_documents>
+		</ul>
+		</div>
+		</B_documents>
+		[<div class="notes">(#NOTES)</div>]				
+		</BOUCLE_articles>
+		</B_articles>
+				
+				<BOUCLE_articles3(ARTICLES){id_rubrique}{par #CITRI}{!par #CITRIINVERSE}{par num #CITRINUM}{0,1}>
+				<h2>[(#TITRE|supprimer_numero)]</h2>
+			      	[<div class="texte">(#TEXTE)</div>]
+				<B_documents3>
+				<div class="listedoc">
+				<ul>
+				<BOUCLE_documents3(DOCUMENTS){id_article}{par num titre}{mode=document}{doublons}>
+				<li><a href="#URL_DOCUMENT" onclick="xt_med('C','[(#ID_ARTICLE|ciparam_xtn2)]','[pj(#ID_ARTICLE)-][(#TITRE|supprimer_numero|ciparam_xtTraiter)]','T')" class="document" title="<:cisquel:eq_ouvre_document:> [(#TITRE|supprimer_numero)] <:cisquel:eq_dans_fenetre:>">[(#TITRE|supprimer_numero)]</a>&nbsp;([<:cisquel:eq_format:> (#EXTENSION)][ - (#TAILLE|taille_en_octets)][ - (#DATE|affdate{'d/m/Y'})])[<span class="docdesc">(#DESCRIPTIF)</span>][<span class="docdesc">(#TAILLE|cisquel_temps_telechargement)</span>]</li>
+				</BOUCLE_documents3>
+				</ul>
+				</div>
+				</B_documents3>
+				[<div class="notes">(#NOTES)</div>]				
+				</BOUCLE_articles3>
+				</B_articles3>
+				
+						<BOUCLE_mot_sous_rubrique(MOTS){id_rubrique}{type=_multirubricage}{par titre}{0,1}>
+						    <B_article_sous_rubrique>
+						    <BOUCLE_article_sous_rubrique(ARTICLES){id_mot}>
+						    </BOUCLE_article_sous_rubrique>
+						    
+								<BOUCLE_mot_sous_rubrique_haut(MOTS){id_rubrique}{type=_multirubricage}{par titre}{0,1}>
+								    <BOUCLE_article_sous_rubrique_haut(ARTICLES){id_mot}{doublons}{par #CITRI}{!par #CITRIINVERSE}{par num #CITRINUM}{0,1}>
+								<h2>[(#TITRE|supprimer_numero)]</h2>
+							      	[<div class="texte">(#TEXTE)</div>]
+								<B_documents2>
+								<div class="listedoc">
+								<ul>
+								<BOUCLE_documents2(DOCUMENTS){id_article}{par num titre}{mode=document}{doublons}>
+								<li><a href="#URL_DOCUMENT" onclick="xt_med('C','[(#ID_ARTICLE|ciparam_xtn2)]','[pj(#ID_ARTICLE)-][(#TITRE|supprimer_numero|ciparam_xtTraiter)]','T')" class="document" title="<:cisquel:eq_ouvre_document:> [(#TITRE|supprimer_numero)] <:cisquel:eq_dans_fenetre:>">[(#TITRE|supprimer_numero)]</a>&nbsp;([<:cisquel:eq_format:> (#EXTENSION)][ - (#TAILLE|taille_en_octets)][ - (#DATE|affdate{'d/m/Y'})])[<span class="docdesc">(#DESCRIPTIF)</span>][<span class="docdesc">(#TAILLE|cisquel_temps_telechargement)</span>]</li>
+								</BOUCLE_documents2>
+								</ul>
+								</div>
+								</B_documents2>
+								[<div class="notes">(#NOTES)</div>]				
+								    </BOUCLE_article_sous_rubrique_haut>
+								</BOUCLE_mot_sous_rubrique_haut>
+						    
+						    </B_article_sous_rubrique>
+						</BOUCLE_mot_sous_rubrique>
+
+				<//B_articles3>
+				
+		<//B_articles>
+				
+				[(#INCLURE{fond=noisettes/choix_page,id_rubrique,citri=#ENV{citri},_citri=#ENV{_citri},citri_n=#ENV{citri_n}})]
+				
+</BOUCLE_contenu>

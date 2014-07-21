@@ -1,0 +1,12 @@
+<BOUCLE_site_invisible(SITES) {titre_mot = invisible} {doublons}></BOUCLE_site_invisible>
+
+<B_sites>      
+[(#ANCRE_PAGINATION|vider_attribut{name})]
+<h4 class="entry-title"><:sites_web:></h4>
+	<ul class="docs">				
+    <BOUCLE_sites(SITES) {id_rubrique} {par nom_site}{pagination 5 #ENV{site}}{doublons}>
+        <li><a href="[(#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT})]">#NOM_SITE</a></li>
+    </BOUCLE_sites>
+    </ul>   
+[<div class="pagination">(#PAGINATION)</div>]	<br />
+</B_sites>

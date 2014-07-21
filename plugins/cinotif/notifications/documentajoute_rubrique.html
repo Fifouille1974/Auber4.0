@@ -1,0 +1,16 @@
+[(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]
+<BOUCLE_doc(DOCUMENTS){id_document}>#SET{cititre,#FICHIER|basename}
+[(#VAL{cinotif:sujet_doc_ajoute}|_T{#ARRAY{nom_site_spip,#NOM_SITE_SPIP,titre,#GET{cititre}}}|nettoyer_titre_email)]
+
+<:cinotif:message_auto:>
+
+<:cinotif:doc_ajoute:>
+<:cinotif:doc:>[ : (#GET{cititre})] ([<:cisquel:eq_format:> (#EXTENSION)][ - (#TAILLE|taille_en_octets)])
+<:cinotif:ajoute_par:>[ "(#SESSION{nom})" ]</BOUCLE_doc>
+<BOUCLE_rub(RUBRIQUES){id_rubrique}><:cinotif:dans_rubrique:>[ (#TITRE|supprimer_numero)]
+[(#URL_SITE_SPIP)/spip.php?page=rubrique&id_rubrique=#ID_RUBRIQUE][(#URL_SITE_SPIP|cinotif_xtor)]
+
+
+
+</BOUCLE_rub>
+#FILTRE{supprimer_tags|filtrer_entites|trim}

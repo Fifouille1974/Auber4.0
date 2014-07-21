@@ -1,0 +1,33 @@
+<BOUCLE_contenu(ARTICLES){id_article}>
+				<h2>[(#TITRE|supprimer_numero)]</h2>
+				<div class="dateart">[(#DATE|affdate{'Ymd'}|=={[(#DATE_MODIF|affdate{'Ymd'})]}|?{<:cisquel:eq_publie_le:> [(#DATE|affdate)] ,<:cisquel:eq_publie_le:> [(#DATE|affdate)] (<:cisquel:eq_modifie_le:> [(#DATE_MODIF|affdate)]) })]
+				</div>
+			      	[<div class="texte">(#TEXTE)</div>]
+				<B_documents>
+				<div class="listedoc">
+				<ul>
+				<BOUCLE_documents(DOCUMENTS){id_article}{par num titre}{mode=document}{doublons}>
+				<li><a href="#URL_DOCUMENT" onclick="xt_med('C','[(#ID_ARTICLE|ciparam_xtn2)]','[pj(#ID_ARTICLE)-][(#TITRE|supprimer_numero|ciparam_xtTraiter)]','T')" class="document" title="<:cisquel:eq_ouvre_document:> [(#TITRE|supprimer_numero)] <:cisquel:eq_dans_fenetre:>">[(#TITRE|supprimer_numero)]</a>&nbsp;([<:cisquel:eq_format:> (#EXTENSION)][ - (#TAILLE|taille_en_octets)][ - (#DATE|affdate{'d/m/Y'})])[<span class="docdesc">(#DESCRIPTIF)</span>][<span class="docdesc">(#TAILLE|cisquel_temps_telechargement)</span>]</li>
+				</BOUCLE_documents>
+				</ul>
+				</div>
+				</B_documents>
+				[<div class="notes">(#NOTES)</div>]
+				
+				<!-- annonce du forum de l'article -->
+				<div class="navforum">
+				<BOUCLE_sujets(FORUMS){id_article}{plat}>
+				</BOUCLE_sujets>
+				[<span class="pagination">(#TOTAL_BOUCLE)</span>]
+				</B_sujets>
+				<BOUCLE_sujets2(FORUMS){id_article}{plat}{par date}{inverse}{0,1}>
+				[<span class="pagination"> <:cisquel:eq_commentaire_article:> - <:cisquel:eq_dernier_commentaire_le:> (#DATE|affdate) </span>
+				<div class="retour"><a href="[(#URL_PAGE{commentaire}|parametre_url{id_article,#ID_ARTICLE})]">  <:cisquel:eq_lire_commentaires:></a></div>]
+				</BOUCLE_sujets2>
+				<div class="retour"><a href="[(#URL_PAGE{commentaire}|parametre_url{id_article,#ID_ARTICLE})]"><:cisquel:eq_reagir_article:></a></div>
+				</B_sujets2>
+				<div class="retour"><a href="[(#URL_PAGE{commentaire}|parametre_url{id_article,#ID_ARTICLE})]"><:cisquel:eq_reagir_article:></a></div>
+				<//B_sujets2>
+				</div>
+								
+</BOUCLE_contenu>

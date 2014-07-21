@@ -1,0 +1,20 @@
+<paquet
+	prefix="itwx"
+	categorie="squelette"
+	version="3.3.1"
+	etat="test"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/img/logo_itwx.png"
+>	
+
+	<nom>iTwX Mobile pour cimobile</nom>
+
+	<auteur lien="http://twxdesign.com">Seds</auteur>
+	<auteur mail="mailto:cf@cannaweb.ch">Christian</auteur>
+
+	<pipeline nom="ajouter_onglets" inclure="pipelines/itwx_ajouter_onglets.php" />
+	<pipeline nom="insert_head_css" inclure="pipelines/itwx_insert_head_css.php" />
+	<pipeline nom="insert_head" inclure="pipelines/itwx_insert_head.php" />
+
+	<menu nom="itwx" titre="itwx:config_titre" parent="menu_squelette" icone="images/itwx_icon_20.png" action="configurer_itwx" />
+</paquet>

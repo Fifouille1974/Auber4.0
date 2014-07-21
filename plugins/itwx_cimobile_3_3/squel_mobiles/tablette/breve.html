@@ -1,0 +1,101 @@
+<BOUCLE_principale(BREVES) {id_breve}>
+<!DOCTYPE html>
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+]<!--[if lt IE 7 ]> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html lang="#LANG"class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]--> 
+<head>
+<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+<title>[(#TITRE|textebrut) - ][(#NOM_SITE_ITWX|textebrut)]</title>
+[<meta name="description" content="(#INTRODUCTION{150}|attribut_html)" />]
+<INCLURE{fond=inc/inc-head}>
+</head>
+
+<body id="top">
+<div id="tab">
+
+ [(#REM) TOOL BARRE ]
+ <INCLURE{fond=inc/inc-navBar}>
+  
+  <div id="main">
+  
+	[(#REM) Hierarchie ]
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/" ><:accueil_site:></a><BOUCLE_ariane(RUBRIQUES){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</div>	 
+	 
+	<div id="conteneur">
+	
+	[(#REM) Contenu : corps de la breve ]
+    <div class="contenu">
+  
+     <div class="cartouche surlignable"> 
+	 [(#LOGO_BREVE|image_reduire{180,150})]
+      <h1 class="#EDIT{titre}">#TITRE</h1>
+      <p><small><abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour) ][(#DATE|affdate)]</abbr></small></p>
+    </div><!--#cartouche-->
+	
+    <br class="nettoyeur" />
+
+    <div class="surlignable">
+    [<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{0,0})</div>]        
+    [<p class="lien"><a href="(#URL_SITE)" target="_blank"><:voir_en_ligne:> : [(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+    [<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
+	</div>
+	<br />
+
+  
+  [(#REM) Forum de la breve ]
+  <a href="#forum" id="forum"></a> 
+  [(#PARAMETRES_FORUM|?{' '})<div class="grouplist"><:forum:forum:></div>
+  <div class="ticket">
+    <div class="repondre"><INCLURE{fond=inc/ajax/formulaire-breve}{env}{ajax}></div>
+  </div>] 
+  <INCLURE{fond=inc/inc-forum}{id_breve}{env}{ajax}{for=_for#ID_FORUM}/> 
+		
+  </div><!--#contenu-->
+  
+
+  [(#REM) Navigation ]
+    <div id="navigation">
+      <div class="group bord" style="height:13px;border-bottom: 1px solid #B9B9B9;"></div>
+	  
+      [(#REM) Articles dans la meme rubrique ]
+      <div id="navigation-a"> <INCLURE{fond=inc/inc-bre-listbre}{id_rubrique}{env}{ajax}/> </div>
+	  
+      [(#REM) Menu de Rubriques ] 
+      [(#REM) Landscape mode  ]
+      <div id="navigation-c" class="display-landscape"> <INCLURE{fond=inc/inc-rubriques}{id_rubrique}/> </div>
+      [(#REM) Portait mode  ]
+      <div id="navigation-e" class="display-portrait"> <INCLURE{fond=inc/inc-rubriques}{id_rubrique}/> </div>
+	  
+      <div id="navigation-b">
+      [(#REM) Menu de navigation mots-cles ]
+	   <INCLURE{fond=inc/inc-bre-listmot}{id_rubrique}{env}{ajax}/>
+      [(#REM) Infos ]
+      <INCLURE{fond=inc/inc-infos}/> 
+      </div>
+	  
+    </div><!--#navigation-->
+		
+  </div><!--#conteneur-->
+  
+  [(#REM) Pied ]
+  <div id="pied"> 
+    <div class="group" style="height:13px;border-bottom: 1px solid #B9B9B9;"></div>
+	<div class="ticket">
+      <div class="ticketmenu"> 
+	    [(#CONFIG{itwx/classique}|?{' '})<a rel="start home" href="[(#URL_BREVE|parametre_url{'cimobile','web'})]"><:itwx:pageclassique:></a>]
+		[(#AUTORISER{ecrire})<a href="#EVAL{_DIR_RESTREINT_ABS}"><:espace_prive:></a>]
+		[(#SESSION{id_auteur}|?{' '})<br /><a href="#URL_LOGOUT" rel="nofollow" style="background-image: none;text-align:center;padding: 10px 12px;"><:icone_deconnecter:></a>]
+      </div>
+    </div><!--#ticket-->
+	<INCLURE{fond=inc/inc-pied}/> 
+  </div><!--#pied-->
+  
+  </div><!--#main-->
+
+</div><!--#page-->
+</body>
+</html>
+</BOUCLE_principale>

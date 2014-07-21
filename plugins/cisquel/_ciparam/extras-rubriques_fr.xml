@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<item><nom>freres</nom><description>Rubriques soeurs</description></item>
+<item><nom>freres_et_sitesreferences</nom><description>Rubriques soeurs et sites référencés</description></item>
+<item><nom>idem_accueil</nom><description>Idem page d'accueil</description></item>
+<item><nom>idem_accueil_ou_sp_accueil</nom><description>Idem page d'accueil ou sous page d'accueil</description></item>
+<item><nom>logo_seul</nom><description>Logo seul</description></item>
+<item><nom>sitesreferences</nom><description>Sites référencés</description></item>
+<item><nom>sitesreferences_ou_sp_accueil</nom><description>Sites référencés ou sous page d'accueil</description></item>
+<item><nom>vide</nom><description>Vide</description></item>

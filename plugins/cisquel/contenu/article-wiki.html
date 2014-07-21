@@ -1,0 +1,64 @@
+#CACHE{0}
+<BOUCLE_contenu(ARTICLES){id_article}>
+
+				<h2>[(#TITRE|supprimer_numero)]</h2>
+				<div class="dateart">[(#DATE|affdate{'Ymd'}|=={[(#DATE_MODIF|affdate{'Ymd'})]}|?{<:cisquel:eq_publie_le:> [(#DATE|affdate)] ,<:cisquel:eq_publie_le:> [(#DATE|affdate)] (<:cisquel:eq_modifie_le:> [(#DATE_MODIF|affdate)]) })]
+				</div>
+				
+				[<div class="texte">(#TEXTE|echappe_js)</div>]
+				
+				#SET{ciurlwikiediter,#URL_PAGE{article_wiki_editer}|parametre_url{id_article,#ID_ARTICLE}}
+				#SET{ciurlwikiupload,#URL_PAGE{ciform_wiki_upload}|parametre_url{id_article,#ID_ARTICLE}}
+				[(#SESSION{id_auteur}|?{' '}|oui) 
+					#SET{ciurl,#GET{ciurlwikiediter}}
+					#SET{ciurlupload,#GET{ciurlwikiupload}}
+				]
+				[(#SESSION{id_auteur}|?{'',' '}|oui)
+					#SET{ciurl,#URL_PAGE{login}|parametre_url{url,#GET{ciurlwikiediter}}}
+					#SET{ciurlupload,#URL_PAGE{login}|parametre_url{url,#GET{ciurlwikiupload}}}
+				]
+
+				<form method='post' action='#GET{ciurl}'>
+				<input type="hidden" name="id_article" value="[(#ID_ARTICLE)]" />
+				<input type='submit' name='submit' value="<:bouton_modifier:>" title="<:bouton_modifier:>" class='spip_bouton' />
+				</form>
+
+				[(#SPIP_VERSION|>={3}|oui)
+					[(#CONFIG{objets_versions}|oui)
+						[(#SET{civersions,[(#CONFIG{objets_versions}|unserialize)]})]
+				        [(#GET{civersions}|is_array|oui) 
+						[(#GET{civersions}|find{spip_articles}|oui)				
+						<div class="tout"><a href="[(#URL_PAGE{article_wiki_revision}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{lang,#LANG})]"><:cisquel:eq_historique_lien:></a></div>
+						]
+						]
+					]
+				]
+				[(#SPIP_VERSION|>={3}|non)
+					[(#CONFIG{articles_versions}|=={oui}|oui)
+					<div class="tout"><a href="[(#URL_PAGE{article_wiki_revision}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{lang,#LANG})]"><:cisquel:eq_historique_lien:></a></div>
+					]
+				]
+				
+
+
+				<B_documents>
+				<div class="listedoc listedocwiki">
+				<ul>
+				<BOUCLE_documents(DOCUMENTS){id_article}{par date}{mode=document}{doublons}>				
+				<li><a href="[(#URL_PAGE{ciform_doc_choix}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{id_document,#ID_DOCUMENT})]" onclick="xt_med('C','[(#ID_ARTICLE|ciparam_xtn2)]','[pj(#ID_ARTICLE)-][(#TITRE|supprimer_numero|ciparam_xtTraiter)]','T')" class="spip_in" style="padding-left:7px;" title="<:cisquel:eq_ouvre_document:> [(#TITRE|supprimer_numero)]">[(#TITRE|supprimer_numero)]</a>&nbsp;([<:cisquel:eq_format:> (#EXTENSION)][ - (#TAILLE|taille_en_octets)][ - (#DATE|affdate{'d/m/Y'})])[ <:cisquel:eq_ajoute_le:> (#DATE|affdate)]<:cisquel:eq_a:>[(#DATE|heures)]h[(#DATE|minutes)].
+				<span class="info_resa">[<:cisquel:wiki_doc_resa_nom:>(#ID_ARTICLE|ciform_nom_resapj{#ID_DOCUMENT})][<:cisquel:wiki_doc_resa_time:>(#ID_ARTICLE|ciform_time_resapj{#ID_DOCUMENT}).]</span>		
+				[<span class="docdesc">(#DESCRIPTIF)</span>][<span class="docdesc">(#TAILLE|cisquel_temps_telechargement)</span>]</li>
+				</BOUCLE_documents>
+				</ul>
+				</div>
+				</B_documents>
+
+				<div class="rssforum"><a rel="noindex,nofollow" href="[(#URL_PAGE{backend-document-article}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_rss_doc:>"><img src="#CHEMIN{_images/rssforum.png}" alt="<:cisquel:eq_rss_doc:>" /></a></div>				
+				
+				<form method='post' action='#GET{ciurlupload}'>
+				<input type="hidden" name="id_article" value="[(#ID_ARTICLE)]" />
+				<input type='submit' name='submit' value="<:cisquel:eq_joindre_document:>" title="<:cisquel:eq_joindre_document:>" class='spip_bouton' />
+				</form>
+				[<div class="notes">(#NOTES)</div>]
+								
+</BOUCLE_contenu>

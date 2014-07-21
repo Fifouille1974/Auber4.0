@@ -1,0 +1,79 @@
+[(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]
+#CIPARAM_DOCTYPE
+<head>
+<BOUCLE_title(ARTICLES){id_article}>
+<title>[(#TITRE|supprimer_numero)][ - (#NOM_SITE_SPIP|textebrut)]</title>
+[(#SET{ci_id_rubrique,[(#ID_RUBRIQUE|ci_rub_multirubricage{#ENV{id_rubrique}})]})]
+</BOUCLE_title>
+<meta name="robots" content="noindex, nofollow" />
+<link href="#CHEMIN{_css/styleexceptions.css}" rel="stylesheet" type="text/css" />
+<INCLURE{fond=noisettes/headsimple}{lang}>
+<style type="text/css">
+<!-- 
+body {background: #FFFFFF;}
+-->
+</style>
+<script type="text/javascript">
+<!--
+function printPage() {
+	window.print();
+	return false; 
+} 
+-->
+</script>
+</head>
+
+<body onload="printPage()">
+<div id="pageImprimer">
+<INCLURE{fond=noisettes/haut_print}{lang}>
+<div id="milieu">
+	<div id="ext-main">
+		<BOUCLE_contenu(ARTICLES){id_article}>
+		<div class="main">
+
+  			<div id="contenu">
+			<div class="main-content">
+				<h1 class="invisible"><:cisquel:eq_contenu:></h1>
+				<div id="boxnavpath"><div id="navpath">
+					<a href="[(#URL_PAGE{sommaire})]"><:cisquel:eq_accueil:></a>
+					<BOUCLE_rub_nav(RUBRIQUES){id_rubrique=#GET{ci_id_rubrique}}>
+					<BOUCLE_chem_nav(HIERARCHIE){id_rubrique}>
+					&gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a>
+					</BOUCLE_chem_nav>
+					&gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a>
+					</BOUCLE_rub_nav>
+				</div></div>
+
+				<h2>[(#TITRE|supprimer_numero)]</h2>
+				<div class="dateart">[(#DATE|affdate{'Ymd'}|=={[(#DATE_MODIF|affdate{'Ymd'})]}|?{<:cisquel:eq_publie_le:> [(#DATE|affdate)] ,<:cisquel:eq_publie_le:> [(#DATE|affdate)] (<:cisquel:eq_modifie_le:> [(#DATE_MODIF|affdate)]) })]
+				</div>
+			      	[<div class="texte">(#TEXTE)</div>]
+				<B_documents>
+				<div class="listedoc">
+				<ul>
+				<BOUCLE_documents(DOCUMENTS){id_article}{par num titre}{mode=document}{doublons}>
+				<li><a href="#URL_DOCUMENT" onclick="xt_med('C','[(#ID_ARTICLE|ciparam_xtn2)]','[pj(#ID_ARTICLE)-][(#TITRE|supprimer_numero|ciparam_xtTraiter)]','T')" class="document" title="<:cisquel:eq_ouvre_document:> [(#TITRE|supprimer_numero)] <:cisquel:eq_dans_fenetre:>">[(#TITRE|supprimer_numero)]</a>&nbsp;([<:cisquel:eq_format:> (#EXTENSION)][ - (#TAILLE|taille_en_octets)][ - (#DATE|affdate{'d/m/Y'})])[<span class="docdesc">(#DESCRIPTIF)</span>][<span class="docdesc">(#TAILLE|cisquel_temps_telechargement)</span>]</li>
+				</BOUCLE_documents>
+				</ul>
+				</div>
+				</B_documents>
+				[<div class="notes">(#NOTES)</div>]
+				
+			</div>
+			</div>
+			<div class='clearer'>&nbsp;</div>	
+		</div>
+		</BOUCLE_contenu>
+	</div>
+</div>
+<div id="pied">
+	<div id="copyright">
+	[<p>&copy;&nbsp;(#NOM_SITE_SPIP)</p>]
+	[<p><:cisquel:date_impression:> : (#DATE|affdate{'d/m/Y h:i:s'})</p>]
+	<p><:cisquel:adresse_page:> : [(#URL_SITE_SPIP)/][(#URL_ARTICLE)]</p>
+	</div>
+</div>
+
+</div>
+</body>
+</html>

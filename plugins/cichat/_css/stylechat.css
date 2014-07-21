@@ -1,0 +1,532 @@
+* {margin: 0;padding: 0;list-style: none;}
+
+/* Site Structure */
+
+body {
+	font: 75%/125% Tahoma, Arial, Helvetica, sans-serif;
+	text-align: center;
+	background: #f3f3f3;
+	color: #000;
+}
+
+#wrapper {
+	margin: 0.5em;
+	padding: 0;
+	background: #f9f9f9;
+	border: 1px solid #ddd;
+}
+
+
+#content {
+	margin: 0.5em;
+	text-align: left;
+}
+
+#main {
+	border-bottom: 1px solid #bbb;
+	padding-bottom: 0.33em;
+ 	margin-top: 0.5em;
+ 	width: 97%; 	
+}
+
+#statuswrap {
+	color: #999;
+ 	background: #f5f5f5;
+	border: 1px solid #ddd;
+	padding: 0.5em;
+	width: 11.25em;
+	font-size: 90%;
+	text-align: right;
+	float: left;
+}
+	
+
+#history #footer,
+	#log #footer,
+	#tips #footer,
+	#about #footer {
+		width: 76%;
+	}
+ 
+
+
+
+/* Links */
+
+a {
+	color: #039;
+	text-decoration: none;
+}
+a:focus,
+a:hover,
+a:active {
+	color: #444;
+}
+
+a[rel~="external"],
+a.external {
+	padding-right: 12px;
+	background: url(../_images/external.gif) no-repeat center right;
+}
+
+
+#home #nav-home a,
+#about #nav-about a,
+#tips #nav-tips a,
+#log #nav-log a {
+	color: #ff0;
+}
+
+#home #nav-home a:focus,
+#home #nav-home a:hover,
+#home #nav-home a:active,
+#about #nav-about a:focus,
+#about #nav-about a:hover,
+#about #nav-about a:active,
+#tips #nav-tips a:focus,
+#tips #nav-tips a:hover,
+#tips #nav-tips a:active,
+#log #nav-log a:focus,
+#log #nav-log a:hover,
+#log #nav-log a:active {
+	text-decoration: none;
+}
+
+#main a:link,
+#main a:visited,
+#preview a:link,
+#preview a:visited {
+	border-bottom: 1px dashed #96c;
+}
+
+#main a:focus,
+#main a:hover,
+#main a:active,
+#preview a:focus,
+#preview a:hover,
+#preview a:active { 
+	border-bottom: 1px solid #999;
+}
+
+#main .notice a {
+	color: #060;
+}
+
+#main .action a {
+	border: 0;
+	font-weight: bold;
+	color: #063;
+}
+
+#main .name a {
+	border: 0;
+}
+
+#main .action a:focus,
+#main .action a:hover,
+#main .action a:active {
+	cursor: help;
+	border: 0;
+}
+
+#history #main a,
+#tips #main a,
+#about #main a {
+}
+
+#main .top a { 
+	font-size: 90%;
+	border: 0 !important;
+}
+
+#main .top a:focus,
+#main .top a:hover,
+#main .top a:active {
+	text-decoration: underline;
+}
+
+
+
+/* Content */
+
+#main p {
+	float: left;
+	clear: left;
+	margin: 0.1em 0 0;
+	width: 100%;
+	display: inline;
+}
+
+.daystamp {
+	float: left;
+	clear: left;
+	width: 100%;
+	background: #36c;
+	color: #fff;	
+	border: 1px solid #369;
+	margin: 1em 0 0.5em;
+	font-size: 110%;
+}	
+
+.daystamp h4 {
+	font-size: 100%;
+	line-height: 100%;
+	margin: 0.33em 0 0.5em 1em;
+}
+
+.hourstamp {
+	float: left;
+	clear: left;
+	font-size: 95%;
+	color: #bbb;
+	margin: 0.5em 0 0.5em 11.9em;
+	display: inline;
+}
+
+#log .hourstamp {
+	margin-left: 12.2em;
+}
+
+.hourstamp h5 {
+	font-size: 95%;
+	margin: 0.1em 0.5em;
+}
+
+#main .name {
+	color: #039;
+	float: left;
+	text-align: right;
+	font-weight: bold;
+	width: 26%;
+	overflow:hidden;	
+}
+
+#log #main .name {
+	width: 27%;
+}
+
+#main .name a {
+	cursor: help;
+}
+
+#history #main .name,
+#tips #main .name,
+#about #main .name {
+	font-size: 110%;	
+	width: 7em;
+	padding: 1em 1em 0 0;
+}
+
+#main .message {
+	float: left;
+	padding-left: 0.5em;
+ 	width: 72%;	
+}
+
+#log #main .message {
+	width: 71%;
+}
+
+#main .message p {
+	clear: both;
+	margin: 0 1em 1em;
+	width: 23em;
+}
+
+#history #main .message,
+#tips #main .message,
+#about #main .message {
+	width: 25em;
+	padding: 1em 0 0;
+	margin: 0;
+ 	background: #e9e9f9;
+	border: 1px solid #ddd;
+	line-height: 150%;
+}
+
+#main .action {
+	font-style: italic;
+	color: #063;
+}
+
+.system {
+	color: #88b;
+	font-style: italic;
+}
+
+.system .name {
+	visibility: hidden;
+}
+
+.system .message {
+	padding-left: 0;
+}
+
+.notice {
+	background: #e6e6f6;
+	padding: 0.66em 0;
+	line-height: 1.5em;
+	color: #036;
+	font-weight: bold;
+}
+
+.notice .name {
+	color: #090 !important;
+	visibility: hidden;
+}
+
+.notice .message {
+	padding-left: 0;
+}
+
+.first {
+	margin-top: 0;
+}
+
+code, 
+kbd {
+	font-size: 130%;
+}
+
+code:hover,
+kbd:hover {
+	background: #ffff66;
+}
+
+#main .top {
+	border-top: 1px solid #ccc;
+	padding-top: 0.25em;
+	text-align: right;
+	clear: both;
+}
+
+#history p strong,
+#tips p strong,
+#about p strong {
+	color: #039;
+}
+
+#main .infobox {
+	float: left;
+	margin: 2em 0;
+}
+
+
+/* Form */
+
+#laceform {
+	margin: 0;
+	padding: 0;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	color: #039;
+	clear: both;
+}
+
+td {
+	padding-bottom: 0.66em;
+	vertical-align: bottom;
+}
+
+#laceform .name {
+	text-align: right;
+}
+
+.button {
+	padding: 0 0.33em;
+	margin-right: 0.33em;
+}
+
+.bump {
+	margin-left: 0.5em;
+}
+
+#name {
+	width: 9em;
+	text-align:center;
+	margin-right: 1em;
+	margin-left: 3em;
+	margin-top: 1em;
+}
+
+#text {
+	width: 82%;
+	white-space: nowrap;
+	text-align: left;
+	margin-top: 1em;
+}
+
+#say {
+	margin-left: 0.5em;
+	margin-top: 1em;
+}
+
+/* Lists */
+
+#main ul li {
+	float: left;
+	clear: left;
+	width: 100%;
+	padding: 0.1em 0;
+}
+
+#history #main ol,
+#tips #main ol {
+	margin:0 0 1em 4em;
+}
+
+#tips ol {
+	clear: both;
+}
+
+#history #main ol li,
+#tips #main ol li {
+	float: none;
+	margin: 0;
+	list-style: decimal outside;
+}
+
+#main ul.features {
+	margin: 0 0 1em 2em;
+	float: left;
+	display: inline;
+	width: 80%;
+}
+
+#main ul.features li {
+	margin: 0 0 0.5em 0 !important;
+	padding: 0 0 0 1em;
+	background: transparent url(../_images/check.gif) 0 0.5em no-repeat;
+}
+
+#main dl {
+	margin: 0.5em 2em;
+}
+#main dt {
+	padding-bottom: 0.25em;
+}
+
+#main dd {
+	margin: 0.33em 1em 1.5em;
+}
+
+#footer ul, #footer li {
+	float: left;
+}
+
+#footer li {
+	margin-right: 2em;
+}
+
+/* Other */
+
+#status img {
+	cursor: pointer;
+	cursor: hand;
+	vertical-align: bottom;
+	float: right;
+}
+
+#status #statustext {
+	float: left;
+	line-height: 100%;
+}
+
+.preview {
+	color: #036;
+	font-weight: bold;
+	vertical-align: top;
+	text-align: right;
+	padding-right: 1em;
+	border: 1px solid #ddd;
+	border-right: 0;
+}
+#preview {
+	color: #003;
+	border: 1px solid #ddd;
+	border-left: 0;
+	width: 100%;
+}
+
+.preview,
+#preview {
+	background: #e6e6e6;
+	padding-top: 0.5em;
+	padding-right: 1em;
+	margin-bottom: 0.5em
+}
+
+strong.timestamp {
+	cursor: help;
+}
+
+#welcome a:focus,
+#welcome a:hover,
+#welcome a:active {
+	border-bottom: 1px solid #999;
+}
+
+#welcome {
+	margin-bottom: 1em;
+	margin-left: 1.5em;
+	float: left;
+	color: #036;
+	display: none;
+}
+
+* html #welcome {
+	margin-left: 0.4em;
+}
+
+#home #welcome {
+display: block;
+}
+
+#welcome p {
+	width: 18.5em;
+	padding: 0.5em 1em;
+	margin: 0 2em 0 1em;
+	float: left;
+	background: #f0f0f0;
+	border: 1px solid #ccc;
+}
+
+#welcome .getthecode {
+	margin-left: 3.5em;
+}
+
+#welcome .keeptabs {
+}
+
+* html #wecome .keeptabs {
+	margin-right: 0;
+}
+
+#welcome p.intro {
+	width: auto;
+	height: auto;
+	margin: 0 4.5em 0 2.5em;
+}
+
+* html #welcome p.intro {
+	margin: 0;
+	}
+
+	
+#laceoutput {
+	border:1px;
+	solid #808080;
+	height:470px;
+	overflow:auto;
+}
+
+#laceoutput p {
+	width: 97%;
+}
+
+#lacecontrols textarea {
+	width: 97%;
+}

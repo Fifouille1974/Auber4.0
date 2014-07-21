@@ -1,0 +1,74 @@
+<div class='formulaire_spip formulaire_editer formulaire_editer_rubrique formulaire_editer_rubrique-#ENV{id_rubrique,nouveau}'>
+	<!-- <br class='bugajaxie' /> -->
+	[<p class='reponse_formulaire reponse_formulaire_ok'>(#ENV**{message_ok})</p>]
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+#SET{cidivstyle,'class="bouton36blanc"'}
+[(#SPIP_VERSION|>={3}|oui)
+#SET{cidivstyle,'style="border-top: 1px solid #999999;padding: 2px 0;"'}
+]
+		
+		<fieldset class="motcle">
+#SET{cimodifs,'oui'}
+#SET{ci_ec_non_geres,'oui'}
+#SET{cienregistrer,''}
+
+	<BOUCLE_groupe_col1(CIAG_GRPAUTEURS){par titre}>
+#SET{cimodif,'oui'}
+#SET{ci_ec_non_gere,'oui'}
+#SET{cichecked,''}
+#SET{cidisabled,''}
+[(#AUTORISER{modifier,groupeauteur,#ID_GROUPE}|non)				
+	#SET{cidisabled,' disabled="disabled" '}
+	#SET{cimodif,''}
+	#SET{cimodifs,''}
+]
+[(#ID_GROUPE|in_array{#ENV{tableau_groupes}}|oui)
+	#SET{cichecked,' checked="checked" '}
+]
+[(#ID_GROUPE|in_array{#ENV{groupes_avec_ec_non_gere}}|oui)
+	#SET{cidisabled,' disabled="disabled" '}
+	#SET{ci_ec_non_gere,''}
+	#SET{ci_ec_non_geres,''}
+]
+[(#GET{cidisabled}|non)
+	#SET{cienregistrer,'oui'}
+]
+
+
+	<div>
+	<input id="grp#ID_GROUPE" type="checkbox" value=#ID_GROUPE name='groupes[]' #GET{cichecked} #GET{cidisabled} />
+	<label for="grp#ID_GROUPE" [(#GET{cichecked}|oui)class="on"]>#TITRE</label>
+	<B_gest>(<BOUCLE_gest(CIAG_GRPAUTEURS_GESTIONNAIRES auteurs){id_groupe}{", "}>#NOM</BOUCLE_gest>)</B_gest>
+[(#GET{cimodif}|non)(2)]
+[(#GET{ci_ec_non_gere}|non)(3)]
+		 </div>
+[(#GET{cichecked}|oui)
+	[(#GET{cidisabled}|oui)
+		[(#REM) declarer en hidden pour le controle avec l'image avant ]
+		[(#ID_GROUPE|ciag_input_hidden{groupes})]
+	]
+]
+				  
+	</BOUCLE_groupe_col1>
+					
+	</fieldset>
+	<div #GET{cidivstyle}>
+	<BOUCLE_auteur(AUTEURS){id_auteur}{statut=5poubelle}>
+	<div><:ciag:auteur_poubelle:></div>
+	#SET{cienregistrer,''}
+	</BOUCLE_auteur>	
+	<div><:ciag:info_titre_gestionnaires:></div>
+	[(#GET{cimodifs}|non) <div>(2) <:ciag:info_modifier:></div>]
+	[(#GET{ci_ec_non_geres}|non) <div>(3) <:ciag:info_ciar_ec3:></div>]
+	</div>
+
+[(#GET{cienregistrer}|oui)
+	  <p class='boutons'><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+]
+	</div></form>
+</div>

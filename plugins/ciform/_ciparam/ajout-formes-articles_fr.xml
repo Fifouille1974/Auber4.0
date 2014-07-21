@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<item><nom>_questano</nom><description>Formulaire pour envoyer un message anonyme</description><statuts>webmestre</statuts></item>
+<item><nom>_questionner</nom><description>Formulaire pour poser une question</description><statuts>0minirezo</statuts></item>
+<item><nom>_contacter</nom><description>Formulaire de contact</description><statuts>0minirezo</statuts></item>
+<item><nom>_wiki</nom><description>Article modifiable par tous depuis le site public</description></item>

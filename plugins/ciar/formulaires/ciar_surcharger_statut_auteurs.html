@@ -1,0 +1,71 @@
+<div class='formulaire_spip formulaire_editer formulaire_editer_rubrique formulaire_editer_rubrique-#ENV{id_rubrique,nouveau}'>
+	<!-- <br class='bugajaxie' /> -->
+	[<p class='reponse_formulaire reponse_formulaire_ok'>(#ENV**{message_ok})</p>]
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='cimodif_img_avant' value='[(#ENV**{_liste_surcharges})]'>
+		<input type='hidden' name='id_rubrique' value=#ENV{id_rubrique}>
+		
+		<B_auteurs>
+		[<div class="folio"><div class="pagination">(#PAGINATION)</div></div>]
+		<div class="cadre cadre-liste">
+
+		<table summary='<:ciar:titre_tableau_droits:>' border=0 cellspacing=0 cellpadding=2 width='100%'>
+		<thead style="line-height: normal;">
+		<tr class="titrem">
+		<th id="col1" width='37%'><:ciar:auteurs:></th>
+		<th id="col2" class="verdana1" width='21%'><:ciar:droit_defaut:></th>
+		<th id="col3" class="verdana1" width='7%'><:ciar:titrecourt_6forum:></th>
+		<th id="col4" class="verdana1" width='7%'><:ciar:titrecourt_1comite:></th>
+		<th id="col5" class="verdana1" width='7%' [(#ENV{_pascirv})style="display:none;"]><:ciar:titrecourt_ciredval:></th>
+		<th id="col5b" class="verdana1" width='7%' [(#ENV{_pascirvt})style="display:none;"]><:ciar:titrecourt_ciredvaltout:></th>
+		<th id="col6" class="verdana1" width='7%'><:ciar:titrecourt_0minirezo:></th>
+		<th id="col7" class="verdana1" width='7%'><:ciar:titrecourt_eccma:></th>
+		</tr>
+		</thead>
+		<tbody>
+	 
+		<BOUCLE_auteurs(CIAR_AUTEURS_ACCES_RUBRIQUES auteurs){id_rubrique=#ENV{id_rubrique}} {par nom}{pagination #ENV{ci_pagination}}>
+#SET{cidisabled,''}
+[(#ID_AUTEUR|=={#SESSION{id_auteur}}|oui)#SET{cidisabled,'disabled="disabled"'}]
+[(#STATUT|=={6forum}|oui)#SET{cidisabled,'disabled="disabled"'}]
+
+#SET{cistatut,#STATUT}
+#SET{cistatutdefaut,#STATUT}
+[(#PLUGIN{cirv}|oui)
+	[(#CISTATUT|oui)
+		#SET{cistatut,#CISTATUT}
+		#SET{cistatutdefaut,#CISTATUT}
+	]
+]
+[(#CISTATUT_AUTEUR_RUB|oui)
+	#SET{cistatut,#CISTATUT_AUTEUR_RUB}
+]
+		
+		<tr class="tr_liste">
+		<td headers="col1" class="verdana1">#NOM</td>
+		<td headers="col2" class="arial1">[(#GET{cistatutdefaut}|ciar_statut_auteur)]</td>
+		<td headers="col3"><input name="st[[(#ID_AUTEUR)]]" type="radio" [(#GET{cistatut}|=={6forum}|oui)checked="checked"] value="6forum" #GET{cidisabled} /></td>
+		<td headers="col4"><input name="st[[(#ID_AUTEUR)]]" type="radio" [(#GET{cistatut}|=={1comite}|oui)checked="checked"] value="1comite" #GET{cidisabled} /></td>
+		
+		<td headers="col5" [(#ENV{_pascirv})style="display:none;"]><input name="st[[(#ID_AUTEUR)]]" type="radio" [(#GET{cistatut}|=={ciredval}|oui)checked="checked"] value="ciredval" #GET{cidisabled} [(#ENV{_pascirv})[(#GET{cidisabled}|non)disabled="disabled"]] /></td>
+
+		<td headers="col5b" [(#ENV{_pascirvt})style="display:none;"]><input name="st[[(#ID_AUTEUR)]]" type="radio" [(#GET{cistatut}|=={ciredvaltout}|oui)checked="checked"] value="ciredvaltout" #GET{cidisabled} [(#ENV{_pascirvt})[(#GET{cidisabled}|non)disabled="disabled"]] /></td>
+
+		<td headers="col6"><input name="st[[(#ID_AUTEUR)]]" type="radio" [(#GET{cistatut}|=={0minirezo}|oui)checked="checked"] value="0minirezo" #GET{cidisabled} /></td>
+		<td headers="col7"><input name="st[[(#ID_AUTEUR)]]" type="radio" [(#GET{cistatut}|=={eccma}|oui)checked="checked"] value="eccma" #GET{cidisabled} /></td>
+		</tr>
+		</BOUCLE_auteurs>
+					
+		</tbody>
+		</table>
+		</div>
+		</B_auteurs>
+					
+
+	  <p class='boutons'><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+</div>

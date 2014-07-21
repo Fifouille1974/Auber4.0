@@ -1,0 +1,18 @@
+#CACHE{0}[(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><html lang="#LANG" dir="LANG_DIR">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+</head>
+<body>
+<BOUCLE_article(ARTICLES){id_article}>
+<h1>[(#TITRE|supprimer_numero)]</h1>
+<BOUCLE_mots(FORUMS){id_article}{statut IN #ENV{cistatuts}}{plat}{par date}>
+<hr>
+<h2>[(#TITRE)]</h2>
+<div><:par_auteur:> : [(#NOM)] [(#EMAIL)]</div>
+<div>[(#DATE|affdate{'d/m/Y'})] [(#DATE|affdate{'H:i'})]</div>
+<div>[(#TEXTE)]</div>
+
+</BOUCLE_mots>
+</BOUCLE_article>
+</body>
+</html>

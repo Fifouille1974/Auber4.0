@@ -1,0 +1,69 @@
+#CACHE{0}
+[(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]
+#CIPARAM_DOCTYPE
+<head>
+<title>[(#NOM_SITE_SPIP|textebrut)]</title>
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+<meta name="robots" content="noindex, nofollow" />
+<link href="#CHEMIN{_css/ciform_style.css}" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+<BOUCLE_contenu(ARTICLES){id_article}>
+<div id="page">
+
+<div id="milieu">
+	<div id="ext-main">
+		<div class="main">
+
+  			<div id="contenu">
+			<div class="main-content">
+			
+				<div id="boxnavpath"><div id="navpath">
+					<a href="[(#URL_PAGE{sommaire}|parametre_url{var_mode,#GET{ci_previsu_rub}})]"><:ciform:accueil:></a>
+					<BOUCLE_chem_nav(HIERARCHIE){id_article}>
+					&gt; <a href="[(#URL_RUBRIQUE|parametre_url{var_mode,#GET{ci_previsu_rub}})]">[(#TITRE|supprimer_numero)]</a>
+					</BOUCLE_chem_nav>
+				</div></div>
+		
+				<div id="boxcentrale"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale">
+				<h2>#TITRE</h2>
+				<div class="retour"><a href="[(#URL_PAGE{article}|parametre_url{id_article,#ID_ARTICLE})]" title="<:ciform:retour_article:>"><:ciform:retour_article:></a></div>
+				
+				[(#REM) si ciparam verifier la forme de l'article ]
+				#SET{ciok,'oui'}
+				[(#PLUGIN{ciparam}|oui)
+					#SET{ciok,'non'}
+					[(#CIFORME|=={_wiki}|oui)
+						#SET{ciok,'oui'}
+					]
+				]
+				
+				[(#SESSION{id_auteur}|!={''}|oui)
+					[(#GET{ciok}|=={oui}|oui)
+						#FORMULAIRE_CIFORM_DOC_MODIFIER{#ENV{show_docs}, #ID_ARTICLE, #ID_RUBRIQUE, #URL_PAGE{article,id_article=#ID_ARTICLE&id_rubrique=#ID_RUBRIQUE}}
+					]
+					[(#GET{ciok}|=={non}|oui)
+						<h2><:avis_acces_interdit:></h2>
+					]
+				]
+
+				</div></div></div></div></div></div>
+
+				
+			</div>
+			</div>
+			<div class='clearer'>&nbsp;</div>	
+		</div>
+	</div>
+</div>
+<div id=pied>
+</div>
+ 
+</div>
+</BOUCLE_contenu>
+</B_contenu>
+<h2><:pass_erreur:> 404</h2>
+<//B_contenu>
+</body>
+</html>

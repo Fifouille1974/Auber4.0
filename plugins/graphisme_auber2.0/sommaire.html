@@ -1,0 +1,746 @@
+#CACHE{3600}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html dir="#LANG_DIR" lang="#LANG"><head>
+#INSERT_HEAD
+#INSERT_HEAD_CSS
+<script type="text/javascript">
+
+</script>
+<title>[(#NOM_SITE_SPIP|textebrut)]</title>
+<link rel="schema.DC" href="http://purl.org/DC/elements/1.0/">
+<meta name="DC.Title" content="#NOM_SITE_SPIP">
+<meta name="DC.Creator" content="[(#NOM_SITE_SPIP)]">
+<meta name="DC.Date" content="<BOUCLE_datesite(ARTICLES){par date}{inverse}{0,1}>[(#DATE|annee)-][(#DATE|mois)-][(#DATE|jour)]</BOUCLE_datesite>">
+<meta name="DC.Subject" content="#CIPARAM_MOTCLE_ACCUEIL">
+<meta name="DC.Format" content="text/html">
+<meta name="DC.Language" content="fr">
+<meta name="DC.Identifier" content="[(#URL_SITE_SPIP)]">
+<meta name="keywords" content="#CIPARAM_MOTCLE_ACCUEIL">
+<link rel="alternate" type="application/rss+xml" title="#NOM_SITE_SPIP - <:cisquel:eq_actu:>" href="[(#URL_PAGE{backend-actu})]">
+<link href="plugins/graphisme_auber2.0/_images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+
+
+<INCLURE{fond=noisettes/head}{lang}>
+<script src="http://jwpsrv.com/library/JvFcpKj0EeOGxSIACrqE1A.js"></script>
+</head>
+<body>
+
+<INCLURE{fond=noisettes/haut}{lang}>
+<div id="milieu">
+	<div id="ext-main">
+		<div class="main">
+			<div id="gauche" style="overflow:visible;">
+				<INCLURE{fond=noisettes/recherche_gauche}{lang}>
+	
+			    <INCLURE{fond=navigation/sommaire}{lang}>		
+				<div id="contact">
+                <div><a href="http://intranet.mairie-aubervilliers.fr/auber4.0/spip.php?article280"><img src="plugins/graphisme_auber2.0/_images/tel.png" alt="" border="0" title="Allo Mairie"> </a></div>
+          <div class="tel"><a href="http://intranet.mairie-aubervilliers.fr/auber4.0/spip.php?article280"><img src="plugins/graphisme_auber2.0/_images/message.png" alt="" border="0" title="Ecrire à la mairie d'Aubervilliers"> </a></div>
+          </div>
+          
+                <div id="lien_partenaires">
+                <h2>Liens partenaires</h2>
+                
+               	<!-- <a href="http://www.aubervilliers.fr/article5276.html" title="Aubervilliers, une ville en mouvement"><img src="plugins/graphisme_auber2.0/_images/images_gauche/auber_en_mouvement.jpg"/></a> -->
+                <a href="http://rythmesscolaires.aubervilliers.fr/" title="Nouveaux rythmes scolaires - La réforme à Aubervilliers"><img src="plugins/graphisme_auber2.0/_images/images_gauche/rythmes_scolaires.jpg"/></a>
+             	<a href="http://rythmesscolaires.aubervilliers.fr/"> <p style="font-size:0.7em"> Nouveaux rythmes scolaires - La réforme à Aubervilliers</p></a>
+                <a href="http://www.plainecommune.fr/page/p-422/art_id-/" title="Le numéro vert de l'espace public"> <img src="plugins/graphisme_auber2.0/_images/images_gauche/allo_agglo.jpg"/></a>
+                <a href="http://www.aubervilliers.fr/actu90720.html" title="ma-residence.fr"><img src="plugins/graphisme_auber2.0/_images/images_gauche/ma-residence.jpg"/></a>
+                <a href="http://www.aubervilliers.fr/article690.html" title="Démarche Qualiville"><img src="plugins/graphisme_auber2.0/_images/images_gauche/logo-qualiville.jpg" /></a>
+                <a href="http://www.aubervilliers.fr/rubrique152.html" title="Infos sur Plaine Commune"><img src="plugins/graphisme_auber2.0/_images/images_gauche/plainecommune.jpg"/></a>
+                <a href="http://www.plainecommune.fr/page/p-138/art_id-1461/actu_id-260" title="PEPS : vos annonces gratuites"><img src="plugins/graphisme_auber2.0/_images/images_gauche/peps.jpg" /></a>
+                <a href="http://www.plainecommune.fr/page/p-138/art_id-1461/actu_id-260"><p style="font-size:0.7em"> Vos annonces gratuites
+                <br>Le numéro vert de l'espace public</p></a>
+                <a href="http://www.velib.fr/" title="Le vélo en libre service vers Paris"  title=""><img src="plugins/graphisme_auber2.0/_images/images_gauche/logo-velib.jpg"/></a>
+                <a href="http://www.velib.fr/"><p style="font-size:0.7em">Le vélo en libre service vers Paris</p></a>
+                <a href="http://www.mediatheques-plainecommune.fr/" title="Le réseau des médiathèques de l'Agglo"><img src="plugins/graphisme_auber2.0/_images/images_gauche/logo_mediatheques.jpg" /></a>
+               	<a href="http://www.mediatheques-plainecommune.fr/"><p style="font-size:0.7em"> Le réseau des médiathèques de l'Agglo</p></a>
+              	<a href="http://www.aubervilliers.fr/epiceas.html" title="Aubervilliers.fr promeut l'économie solidaire"><img src="plugins/graphisme_auber2.0/_images/images_gauche/epiceas.jpg"/></a>
+                <a href="http://www.aubervilliers.fr/epiceas.html"><p style="font-size:0.7em">Aubervilliers.fr promeut l'économie solidaire</p></a>
+                </div>
+                
+			</div>
+
+  			<div id="contenu">
+            
+			<div class="main-content">
+				<h1 class="invisible"><:cisquel:eq_accueil:></h1>
+	
+<!-- 				<div id="messagedeservice">
+				<B_articles_permanents>
+				
+				<div id="boxtitreactu1"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale">
+<div class="event_title">L'événement</div><div class="trait2"></div>			
+
+<BOUCLE_articles_permanents(ARTICLES){raccourci=_portail_permanent}{par date}{inverse}>
+
+<div class="actu">
+				[<a href="#URL_ARTICLE"><img src="(#LOGO_ARTICLE||extraire_attribut{'src'}|)" alt="<:cisquel:eq_illustration:>"  class="img_evenement"></a>] </div>
+				<div class="listeactu1" id="titre_event"><a href="#URL_ARTICLE" class="lien">[(#TITRE|supprimer_numero)]</a>
+					<div class="texte">#INTRODUCTION</div>
+                   
+				</div>
+				</BOUCLE_articles_permanents>
+				<div class="clearer"></div>
+				</div></div></div></div></div></div>
+				</B_articles_permanents>
+				</div> -->
+				
+				
+	<div id="messagedeservice">
+    <div class="alaune_title">A la une</div><div class="trait6"></div>	
+    <div class="slider_accueil"> [(#MODELE{nivoslider}{id_nivoslider=91552})] </div>
+    </div>
+    
+				<!-- <BOUCLE_actu_titre(ARTICLES){raccourci=_portail_actu}{par date}{inverse}{0,1}> -->
+				<div id="boxtitreactu"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale">
+				<h2>Actualités</h2><div class="trait3"></div>
+				 </div></div></div></div></div></div> 
+				
+				<div id="boxactu"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale"> 
+				<div class="listeactu">
+				<!--</BOUCLE_actu_titre> -->
+
+				<BOUCLE_permanent_haut(ARTICLES){raccourci=_portail_permanent_haut}{par date}{inverse}>
+				<div class="actu">
+					<div id="img_event"><div class="titreactu-event"><a href="#URL_ARTICLE" class="lien-event">[(#TITRE|supprimer_numero)]</a></div>
+					
+					[<a href="#URL_ARTICLE"><img src="(#LOGO_ARTICLE||extraire_attribut{'src'})" alt="<:cisquel:eq_illustration:>"  class="leftill2"></a>]
+					 </div>
+					<div class="texte">[(#CHAPO|sinon{#TEXTE|couper{200}})]</div>
+				</div>
+				</BOUCLE_permanent_haut>
+
+				 <BOUCLE_actu(ARTICLES){raccourci=_portail_actu}{par date} {inverse}{ciparam_nombreactu}>
+				<div class="actu">
+					[<a href="#URL_ARTICLE"><img src="(#LOGO_ARTICLE||extraire_attribut{'src'})" alt="<:cisquel:eq_illustration:>"  class="leftill"></a>]
+					<div class="titreactu"><a href="#URL_ARTICLE" class="lien">[(#TITRE|supprimer_numero)]</a></div> 
+					<div>#DESCRIPTIF</div>
+                    <div class="texte">[(#CHAPO|sinon{#TEXTE|couper{200}})]</div>
+				</div>
+				</BOUCLE_actu>
+				
+				<BOUCLE_permanent_bas(ARTICLES){raccourci=_portail_permanent_bas}{par date}{inverse}>
+				<div class="actu">
+					[<a href="#URL_ARTICLE"><img src="(#LOGO_ARTICLE||extraire_attribut{'src'})" alt="<:cisquel:eq_illustration:>"  class="leftill"></a>]
+					<div class="titreactu"><a href="#URL_ARTICLE" class="lien">[(#TITRE|supprimer_numero)]</a></div> 
+					<div class="texte">[(#CHAPO|sinon{#TEXTE|couper{200}})]</div>
+				</div>
+				</BOUCLE_permanent_bas>
+
+				<div class="clearer"></div>
+
+				<BOUCLE_actu_pied(ARTICLES){raccourci=_portail_actu}{par date}{inverse}{0,1}>
+				<!-- <div class="tout"><a href="[(#URL_PAGE{archive_article}|parametre_url{lang,#LANG})]"><:cisquel:eq_toute_actu:></a></div> -->
+				</BOUCLE_actu_pied>
+				</div>
+				</div></div></div></div></div></div>
+				</B_actu_pied>
+					
+
+					
+				<BOUCLE_centre_actu_rubrique(RUBRIQUES){raccourci=_tous_les_dossiers3}{par num titre}{0,1}>
+				
+				
+				<div id="boxdossier"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale">
+				<div id="dossier">
+				<h2>Actualités</h2><div class="trait3"></div>
+				</BOUCLE_centre_actu_rubrique>				
+				<BOUCLE_centre_actu_lienrub(RUBRIQUES){raccourci=_portail_dossiers_rub}{par num titre}{0,1}>
+					<B_dossiers3col3_actu>
+					<div class="colonne1">
+					<BOUCLE_dossiers3col3_actu(RUBRIQUES){raccourci=_portail_dossiers_rub}{par num titre}{1/2}>
+					<div class="actu">
+					[<a href="#URL_ARTICLE"><img src="(#LOGO_RUBRIQUE||extraire_attribut{'src'})" alt="<:cisquel:eq_illustration:>"  class="leftill"></a>]
+					<div class="titreactu"><a href="#URL_RUBRIQUE" class="lien">[(#TITRE|supprimer_numero)]</a></div>
+					<div class="texte">#DESCRIPTIF</div>
+					</div>
+					</BOUCLE_dossiers3col3_actu>
+					</div>
+					</B_dossiers3col3_actu>
+					
+					<B_dossiers3col4_actu>
+					<div class="colonne2">
+					<BOUCLE_dossiers3col4_actu(RUBRIQUES){raccourci=_portail_dossiers_rub}{par num titre}{2/2}>
+					<div class="actu">
+					[<a href="#URL_ARTICLE"><img src="(#LOGO_RUBRIQUE||extraire_attribut{'src'})" alt="<:cisquel:eq_illustration:>"  class="leftill"></a>]
+					<div class="titreactu"><a href="#URL_RUBRIQUE" class="lien">[(#TITRE|supprimer_numero)]</a></div>
+					<div class="texte">#DESCRIPTIF</div>
+					</div>
+					</BOUCLE_dossiers3col4_actu>
+					</div>
+					</B_dossiers3col4_actu>
+					<div class='clearer'>&nbsp;</div>	
+				</BOUCLE_centre_actu_lienrub>
+
+				<BOUCLE_centre_actu_article(ARTICLES){raccourci=_portail_dossiers_actu}{par titre}{0,1}>
+				
+				<BOUCLE_permanent_haut_actu(ARTICLES){raccourci=_portail_permanent_haut_actu}{par date}{inverse}>
+				<div class="actu_pratique">
+					<div id="img_event"><div class="titreactu-event"><a href="#URL_ARTICLE" class="lien-event">[(#TITRE|supprimer_numero)]</a></div>
+					
+					[<a href="#URL_ARTICLE"><img src="(#LOGO_ARTICLE||extraire_attribut{'src'})" alt="<:cisquel:eq_illustration:>"  class="leftill2"></a>]
+					 </div>
+					<div class="texte">[(#CHAPO|sinon{#TEXTE|couper{200}})]</div>
+				</div>
+				</BOUCLE_permanent_haut_actu>
+				
+					<B_dossiers3col1_actu>
+					<div class="colonne1">
+					<BOUCLE_dossiers3col1_actu(ARTICLES){raccourci=_portail_dossiers_actu}{par titre}{1/2}>
+					<div class="actu">
+					[<a href="#URL_ARTICLE"><img src="(#LOGO_ARTICLE||extraire_attribut{'src'})" alt="<:cisquel:eq_illustration:>"  class="leftill"></a>]
+					<div class="titreactu"><a href="#URL_ARTICLE" class="lien">[(#TITRE|supprimer_numero)]</a></div>
+					<div class="texte">[(#CHAPO|sinon{#TEXTE|couper{200}})]</div>
+					</div>
+					</BOUCLE_dossiers3col1_actu>
+					</div>
+					</B_dossiers3col1_actu>
+					
+					<B_dossiers3col2_actu>
+					<div class="colonne2">
+					<BOUCLE_dossiers3col2_actu(ARTICLES){raccourci=_portail_dossiers_actu} {par titre}{2/2}>
+					<div class="actu">
+					[<a href="#URL_ARTICLE"><img src="(#LOGO_ARTICLE||extraire_attribut{'src'})" alt="<:cisquel:eq_illustration:>"  class="leftill"></a>]
+					<div class="titreactu"><a href="#URL_ARTICLE" class="lien">[(#TITRE|supprimer_numero)]</a></div>
+					<div class="texte">[(#CHAPO|sinon{#TEXTE|couper{200}})]</div>
+					</div>
+					</BOUCLE_dossiers3col2_actu>
+					</div>
+					</B_dossiers3col2_actu>
+                    
+				<B_sites3_syndic_actu>
+				<div id="boxsyndic"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale">
+				<div class="listeactu">
+				<h2>Les dernières actualités d'aubervilliers.fr</h2>
+				<BOUCLE_sites3_syndic_actu(SITES){raccourci=_portail_syndication}{syndication=oui}{par num nom_site}>
+				
+				<BOUCLE_syndic3_actu(SYNDIC_ARTICLES){id_syndic}{par date}{inverse}{0,3}>
+				<div class="actu">
+                <div class="titreactu"><a href="#URL_ARTICLE" class="lien">[(#TITRE|supprimer_numero)]</a></div> 
+					<div class="texte">#DESCRIPTIF</div>
+				</div>
+				</BOUCLE_syndic3_actu>
+				</BOUCLE_sites3_syndic_actu>
+				</div>
+				</div></div></div></div></div></div>#SPIP_CRON
+				</B_sites3_syndic_actu>
+				
+					<div class='clearer'>&nbsp;</div>	
+				</BOUCLE_centre_actu_article>
+				
+		        <BOUCLE_centre3_rubrique_pied_actu(RUBRIQUES){raccourci=_tous_les_dossiers3}{par num titre}{0,1}>
+				</div>
+                <BOUCLE_comtitre3_actu(ARTICLES){raccourci=_portail_commentaire}{0,1}>
+				<div id="boxcommentaire"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale">
+				<div class="listeactu">
+				<h2><:cisquel:eq_dernier_commentaire:></h2>
+				<div class="actu">
+				</BOUCLE_comtitre3_actu>
+				
+				[(#SET{ci_moins_trente, [(#CIPARAM_MAINTENANT|affdate{'Ymd'}|intval|moins{30})]})]
+				<BOUCLE_commentaire3_actu(FORUMS){plat}{par date}{inverse}{0,1}>
+				[(#SET{ci_date_forum, [(#DATE|affdate{'Ymd'}|intval)]})]
+				<B_artcom3_actu>
+				<BOUCLE_artcom3_actu(ARTICLES){id_article}{raccourci=_portail_commentaire}>
+				[(#GET{ci_date_forum}|>{#GET{ci_moins_trente}}|oui)
+					<div class="titreactu"><a href="#URL_ARTICLE" class="lien">[(#TITRE|supprimer_numero)]</a></div> 
+				]
+				</BOUCLE_artcom3_actu>
+				[(#GET{ci_date_forum}|>{#GET{ci_moins_trente}}|oui)
+					<div class="texte">#TITRE (le&nbsp;[(#DATE|jour)]/[(#DATE|mois)]/[(#DATE|annee)]<:cisquel:eq_a:>[(#DATE|heures)]h[(#DATE|minutes)][ par&nbsp;(#NOM)])</div>
+					<div class="texte">[(#TEXTE|couper{200})]</div>
+				]
+				</B_artcom3_actu>
+				</BOUCLE_commentaire3_actu>
+
+				<BOUCLE_compied3_actu(ARTICLES){raccourci=_portail_commentaire}{0,1}>
+				</div>
+				</div>
+				<div class="tout"><a href="[(#URL_PAGE{archive_commentaire})]"><:cisquel:eq_tous_commentaires:></a></div>
+				</div></div></div></div></div></div>
+				</BOUCLE_compied3_actu>
+				</div></div></div></div></div></div>
+		        </BOUCLE_centre3_rubrique_pied_actu>
+					
+					
+				<BOUCLE_centre_rubrique(RUBRIQUES){raccourci=_tous_les_dossiers}{par num titre}{0,1}>
+				<div id="boxdossier"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale">
+				<div id="dossier">
+				<h2>[(#TITRE|supprimer_numero)]</h2><div class="trait4"></div>
+				</BOUCLE_centre_rubrique>	
+
+				
+				
+				<BOUCLE_centre_lienrub(RUBRIQUES){raccourci=_portail_dossiers_rub}{par num titre}{0,1}>
+					<B_dossierscol3>
+					<div class="colonne1">
+					<BOUCLE_dossierscol3(RUBRIQUES){raccourci=_portail_dossiers_rub}{par num titre}{1/2}>
+					<div class="actu">
+					[<a href="#URL_ARTICLE"><img src="(#LOGO_RUBRIQUE||extraire_attribut{'src'})" alt="<:cisquel:eq_illustration:>"  class="leftill"></a>]
+					<div class="titreactu"><a href="#URL_RUBRIQUE" class="lien">[(#TITRE|supprimer_numero)]</a></div>
+					<div class="texte">#DESCRIPTIF</div>
+					</div>
+					</BOUCLE_dossierscol3>
+					</div>
+					</B_dossierscol3>
+					
+					<B_dossierscol4>
+					<div class="colonne2">
+					<BOUCLE_dossierscol4(RUBRIQUES){raccourci=_portail_dossiers_rub}{par num titre}{2/2}>
+					<div class="actu">
+					[<a href="#URL_ARTICLE"><img src="(#LOGO_RUBRIQUE||extraire_attribut{'src'})" alt="<:cisquel:eq_illustration:>"  class="leftill"></a>]
+					<div class="titreactu"><a href="#URL_RUBRIQUE" class="lien">[(#TITRE|supprimer_numero)]</a></div>
+					<div class="texte">#DESCRIPTIF</div>
+					</div>
+					</BOUCLE_dossierscol4>
+					</div>
+					</B_dossierscol4>
+					<div class='clearer'>&nbsp;</div>	
+				</BOUCLE_centre_lienrub>
+
+				<BOUCLE_centre_article(ARTICLES){raccourci=_portail_dossiers}{par date}{inverse}{0,1}>
+					
+					<BOUCLE_permanent_haut_sortir(ARTICLES){raccourci=_portail_permanent_haut_sortir}{par date}{inverse}>
+				<div class="actu_sortir">
+					<div id="img_event"><div class="titreactu-event"><a href="#URL_ARTICLE" class="lien-event">[(#TITRE|supprimer_numero)]</a></div>
+					
+					[<a href="#URL_ARTICLE"><img src="(#LOGO_ARTICLE||extraire_attribut{'src'})" alt="<:cisquel:eq_illustration:>"  class="leftill2"></a>]
+					 </div>
+					<div class="texte">[(#CHAPO|sinon{#TEXTE|couper{200}})]</div>
+				</div>
+				</BOUCLE_permanent_haut_sortir>
+					
+					<B_dossierscol1>
+					<div class="colonne1">
+					<BOUCLE_dossierscol1(ARTICLES){raccourci=_portail_dossiers}{par date}{inverse}{1/2}>
+					<div class="actu">
+					[<a href="#URL_ARTICLE"><img src="(#LOGO_ARTICLE||extraire_attribut{'src'})" alt="<:cisquel:eq_illustration:>"  class="leftill"></a>]
+					<div class="titreactu"><a href="#URL_ARTICLE" class="lien">[(#TITRE|supprimer_numero)]</a></div>
+					<div class="texte">[(#CHAPO|sinon{#TEXTE|couper{200}})]</div>
+					</div>
+					</BOUCLE_dossierscol1>
+					</div>
+					</B_dossierscol1>
+					
+					<B_dossierscol2>
+					<div class="colonne2">
+					<BOUCLE_dossierscol2(ARTICLES){raccourci=_portail_dossiers}{par date}{inverse}{2/2}>
+					<div class="actu">
+					[<a href="#URL_ARTICLE"><img src="(#LOGO_ARTICLE||extraire_attribut{'src'})" alt="<:cisquel:eq_illustration:>"  class="leftill"></a>]
+					<div class="titreactu"><a href="#URL_ARTICLE" class="lien">[(#TITRE|supprimer_numero)]</a></div>
+					<div class="texte">[(#CHAPO|sinon{#TEXTE|couper{200}})]</div>
+					</div>
+					</BOUCLE_dossierscol2>
+					</div>
+					</B_dossierscol2>
+                    
+				<B_sites_syndic>
+				<div id="boxsyndic"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale">
+				<div class="listeactu">
+				<h2>Les dernières actualités d'aubervilliers.fr</h2>
+				<BOUCLE_sites_syndic(SITES){raccourci=_portail_syndication}{syndication=oui}{par num nom_site}>
+				
+				<BOUCLE_syndic(SYNDIC_ARTICLES){id_syndic}{par date}{inverse}{0,3}>
+				<div class="actu">
+                <div class="titreactu"><a href="#URL_ARTICLE" class="lien">[(#TITRE|supprimer_numero)]</a></div> 
+					<div class="texte">#DESCRIPTIF</div>
+				</div>
+				</BOUCLE_syndic>
+				</BOUCLE_sites_syndic>
+				</div>
+				</div></div></div></div></div></div>#SPIP_CRON
+				</B_sites_syndic>
+				
+					<div class='clearer'>&nbsp;</div>	
+				</BOUCLE_centre_article>
+				
+		        <BOUCLE_centre_rubrique_pied(RUBRIQUES){raccourci=_tous_les_dossiers}{par num titre}{0,1}>
+				</div>
+                <BOUCLE_comtitre(ARTICLES){raccourci=_portail_commentaire}{0,1}>
+				<div id="boxcommentaire"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale">
+				<div class="listeactu">
+				<h2><:cisquel:eq_dernier_commentaire:></h2>
+				<div class="actu">
+				</BOUCLE_comtitre>
+				
+				[(#SET{ci_moins_trente, [(#CIPARAM_MAINTENANT|affdate{'Ymd'}|intval|moins{30})]})]
+				<BOUCLE_commentaire(FORUMS){plat}{par date}{inverse}{0,1}>
+				[(#SET{ci_date_forum, [(#DATE|affdate{'Ymd'}|intval)]})]
+				<B_artcom>
+				<BOUCLE_artcom(ARTICLES){id_article}{raccourci=_portail_commentaire}>
+				[(#GET{ci_date_forum}|>{#GET{ci_moins_trente}}|oui)
+					<div class="titreactu"><a href="#URL_ARTICLE" class="lien">[(#TITRE|supprimer_numero)]</a></div> 
+				]
+				</BOUCLE_artcom>
+				[(#GET{ci_date_forum}|>{#GET{ci_moins_trente}}|oui)
+					<div class="texte">#TITRE (le&nbsp;[(#DATE|jour)]/[(#DATE|mois)]/[(#DATE|annee)]<:cisquel:eq_a:>[(#DATE|heures)]h[(#DATE|minutes)][ par&nbsp;(#NOM)])</div>
+					<div class="texte">[(#TEXTE|couper{200})]</div>
+				]
+				</B_artcom>
+				</BOUCLE_commentaire>
+
+				<BOUCLE_compied(ARTICLES){raccourci=_portail_commentaire}{0,1}>
+				</div>
+				</div>
+				<div class="tout"><a href="[(#URL_PAGE{archive_commentaire})]"><:cisquel:eq_tous_commentaires:></a></div>
+				</div></div></div></div></div></div>
+				</BOUCLE_compied>
+				</div></div></div></div></div></div>
+		        </BOUCLE_centre_rubrique_pied>
+                
+                <BOUCLE_centre2_rubrique(RUBRIQUES){raccourci=_tous_les_dossiers2}{par num titre}{0,1}>
+				
+				
+				<div id="boxdossier"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale">
+				<div id="dossier">
+				<h2>[(#TITRE|supprimer_numero)]</h2><div class="trait5"></div>
+				</BOUCLE_centre2_rubrique>				
+				<BOUCLE_centre2_lienrub(RUBRIQUES){raccourci=_portail_dossiers_rub}{par num titre}{0,1}>
+					<B_dossiers2col3>
+					<div class="colonne1">
+					<BOUCLE_dossiers2col3(RUBRIQUES){raccourci=_portail_dossiers_rub}{par num titre}{1/2}>
+					<div class="actu">
+					[<a href="#URL_ARTICLE"><img src="(#LOGO_RUBRIQUE||extraire_attribut{'src'})" alt="<:cisquel:eq_illustration:>"  class="leftill"></a>]
+					<div class="titreactu"><a href="#URL_RUBRIQUE" class="lien">[(#TITRE|supprimer_numero)]</a></div>
+					<div class="texte">#DESCRIPTIF</div>
+					</div>
+					</BOUCLE_dossiers2col3>
+					</div>
+					</B_dossiers2col3>
+					
+					<B_dossiers2col4>
+					<div class="colonne2">
+					<BOUCLE_dossiers2col4(RUBRIQUES){raccourci=_portail_dossiers_rub}{par num titre}{2/2}>
+					<div class="actu">
+					[<a href="#URL_ARTICLE"><img src="(#LOGO_RUBRIQUE||extraire_attribut{'src'})" alt="<:cisquel:eq_illustration:>"  class="leftill"></a>]
+					<div class="titreactu"><a href="#URL_RUBRIQUE" class="lien">[(#TITRE|supprimer_numero)]</a></div>
+					<div class="texte">#DESCRIPTIF</div>
+					</div>
+					</BOUCLE_dossiers2col4>
+					</div>
+					</B_dossiers4col4>
+					<div class='clearer'>&nbsp;</div>	
+				</BOUCLE_centre2_lienrub>
+
+				<BOUCLE_centre2_article(ARTICLES){raccourci=_portail_dossiers2}{par titre}{0,1}>
+				
+				<BOUCLE_permanent_haut_projets(ARTICLES){raccourci=_portail_permanent_haut_projets}{par date}{inverse}>
+				<div class="actu_projet">
+					<div id="img_event"><div class="titreactu-event"><a href="#URL_ARTICLE" class="lien-event">[(#TITRE|supprimer_numero)]</a></div>
+					
+					[<a href="#URL_ARTICLE"><img src="(#LOGO_ARTICLE||extraire_attribut{'src'})" alt="<:cisquel:eq_illustration:>"  class="leftill2"></a>]
+					 </div>
+					<div class="texte">[(#CHAPO|sinon{#TEXTE|couper{200}})]</div>
+				</div>
+				</BOUCLE_permanent_haut_projets>
+				
+					<B_dossiers2col1>
+					<div class="colonne1">
+					<BOUCLE_dossiers2col1(ARTICLES){raccourci=_portail_dossiers2}{par titre}{1/2}>
+					<div class="actu">
+					[<a href="#URL_ARTICLE"><img src="(#LOGO_ARTICLE||extraire_attribut{'src'})" alt="<:cisquel:eq_illustration:>"  class="leftill"></a>]
+					<div class="titreactu"><a href="#URL_ARTICLE" class="lien">[(#TITRE|supprimer_numero)]</a></div>
+					<div class="texte">[(#CHAPO|sinon{#TEXTE|couper{200}})]</div>
+					</div>
+					</BOUCLE_dossiers2col1>
+					</div>
+					</B_dossiers2col1>
+					
+					<B_dossiers2col2>
+					<div class="colonne2">
+					<BOUCLE_dossiers2col2(ARTICLES){raccourci=_portail_dossiers2} {par titre}{2/2}>
+					<div class="actu">
+					[<a href="#URL_ARTICLE"><img src="(#LOGO_ARTICLE||extraire_attribut{'src'})" alt="<:cisquel:eq_illustration:>"  class="leftill"></a>]
+					<div class="titreactu"><a href="#URL_ARTICLE" class="lien">[(#TITRE|supprimer_numero)]</a></div>
+					<div class="texte">[(#CHAPO|sinon{#TEXTE|couper{200}})]</div>
+					</div>
+					</BOUCLE_dossiers2col2>
+					</div>
+					</B_dossiers2col2>
+                    
+				<B_sites2_syndic>
+				<div id="boxsyndic"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale">
+				<div class="listeactu">
+				<h2>Les dernières actualités d'aubervilliers.fr</h2>
+				<BOUCLE_sites2_syndic(SITES){raccourci=_portail_syndication}{syndication=oui}{par num nom_site}>
+				
+				<BOUCLE_syndic2(SYNDIC_ARTICLES){id_syndic}{par date}{inverse}{0,3}>
+				<div class="actu">
+                <div class="titreactu"><a href="#URL_ARTICLE" class="lien">[(#TITRE|supprimer_numero)]</a></div> 
+					<div class="texte">#DESCRIPTIF</div>
+				</div>
+				</BOUCLE_syndic2>
+				</BOUCLE_sites2_syndic>
+				</div>
+				</div></div></div></div></div></div>#SPIP_CRON
+				</B_sites2_syndic>
+				
+					<div class='clearer'>&nbsp;</div>	
+				</BOUCLE_centre2_article>
+				
+		        <BOUCLE_centre2_rubrique_pied(RUBRIQUES){raccourci=_tous_les_dossiers2}{par num titre}{0,1}>
+				</div>
+                <BOUCLE_comtitre2(ARTICLES){raccourci=_portail_commentaire}{0,1}>
+				<div id="boxcommentaire"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale">
+				<div class="listeactu">
+				<h2><:cisquel:eq_dernier_commentaire:></h2>
+				<div class="actu">
+				</BOUCLE_comtitre2>
+				
+				[(#SET{ci_moins_trente, [(#CIPARAM_MAINTENANT|affdate{'Ymd'}|intval|moins{30})]})]
+				<BOUCLE_commentaire2(FORUMS){plat}{par date}{inverse}{0,1}>
+				[(#SET{ci_date_forum, [(#DATE|affdate{'Ymd'}|intval)]})]
+				<B_artcom2>
+				<BOUCLE_artcom2(ARTICLES){id_article}{raccourci=_portail_commentaire}>
+				[(#GET{ci_date_forum}|>{#GET{ci_moins_trente}}|oui)
+					<div class="titreactu"><a href="#URL_ARTICLE" class="lien">[(#TITRE|supprimer_numero)]</a></div> 
+				]
+				</BOUCLE_artcom2>
+				[(#GET{ci_date_forum}|>{#GET{ci_moins_trente}}|oui)
+					<div class="texte">#TITRE (le&nbsp;[(#DATE|jour)]/[(#DATE|mois)]/[(#DATE|annee)]<:cisquel:eq_a:>[(#DATE|heures)]h[(#DATE|minutes)][ par&nbsp;(#NOM)])</div>
+					<div class="texte">[(#TEXTE|couper{200})]</div>
+				]
+				</B_artcom2>
+				</BOUCLE_commentaire2>
+
+				<BOUCLE_compied2(ARTICLES){raccourci=_portail_commentaire}{0,1}>
+				</div>
+				</div>
+				<div class="tout"><a href="[(#URL_PAGE{archive_commentaire})]"><:cisquel:eq_tous_commentaires:></a></div>
+				</div></div></div></div></div></div>
+				</BOUCLE_compied2>
+				</div></div></div></div></div></div>
+		        </BOUCLE_centre2_rubrique_pied>
+				
+				
+				
+				<BOUCLE_centre3_rubrique(RUBRIQUES){raccourci=_tous_les_dossiers3}{par num titre}{0,1}>
+				
+				
+				<div id="boxdossier"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale">
+				<div id="dossier">
+				<h2>[(#TITRE|supprimer_numero)]</h2><div class="trait8"></div>
+				</BOUCLE_centre3_rubrique>				
+				<BOUCLE_centre3_lienrub(RUBRIQUES){raccourci=_portail_dossiers_rub}{par num titre}{0,1}>
+					<B_dossiers3col3>
+					<div class="colonne1">
+					<BOUCLE_dossiers3col3(RUBRIQUES){raccourci=_portail_dossiers_rub}{par num titre}{1/2}>
+					<div class="actu">
+					[<a href="#URL_ARTICLE"><img src="(#LOGO_RUBRIQUE||extraire_attribut{'src'})" alt="<:cisquel:eq_illustration:>"  class="leftill"></a>]
+					<div class="titreactu"><a href="#URL_RUBRIQUE" class="lien">[(#TITRE|supprimer_numero)]</a></div>
+					<div class="texte">#DESCRIPTIF</div>
+					</div>
+					</BOUCLE_dossiers3col3>
+					</div>
+					</B_dossiers3col3>
+					
+					<B_dossiers3col4>
+					<div class="colonne2">
+					<BOUCLE_dossiers3col4(RUBRIQUES){raccourci=_portail_dossiers_rub}{par num titre}{2/2}>
+					<div class="actu">
+					[<a href="#URL_ARTICLE"><img src="(#LOGO_RUBRIQUE||extraire_attribut{'src'})" alt="<:cisquel:eq_illustration:>"  class="leftill"></a>]
+					<div class="titreactu"><a href="#URL_RUBRIQUE" class="lien">[(#TITRE|supprimer_numero)]</a></div>
+					<div class="texte">#DESCRIPTIF</div>
+					</div>
+					</BOUCLE_dossiers3col4>
+					</div>
+					</B_dossiers3col4>
+					<div class='clearer'>&nbsp;</div>	
+				</BOUCLE_centre3_lienrub>
+
+				<BOUCLE_centre3_article(ARTICLES){raccourci=_portail_dossiers3}{par titre}{0,1}>
+				
+				<BOUCLE_permanent_haut_projets3(ARTICLES){raccourci=_portail_permanent_haut_pratique}{par date}{inverse}>
+				<div class="actu_pratique">
+					<div id="img_event"><div class="titreactu-event"><a href="#URL_ARTICLE" class="lien-event">[(#TITRE|supprimer_numero)]</a></div>
+					
+					[<a href="#URL_ARTICLE"><img src="(#LOGO_ARTICLE||extraire_attribut{'src'})" alt="<:cisquel:eq_illustration:>"  class="leftill2"></a>]
+					 </div>
+					<div class="texte">[(#CHAPO|sinon{#TEXTE|couper{200}})]</div>
+				</div>
+				</BOUCLE_permanent_haut_projets3>
+				
+					<B_dossiers3col1>
+					<div class="colonne1">
+					<BOUCLE_dossiers3col1(ARTICLES){raccourci=_portail_dossiers3}{par titre}{1/2}>
+					<div class="actu">
+					[<a href="#URL_ARTICLE"><img src="(#LOGO_ARTICLE||extraire_attribut{'src'})" alt="<:cisquel:eq_illustration:>"  class="leftill"></a>]
+					<div class="titreactu"><a href="#URL_ARTICLE" class="lien">[(#TITRE|supprimer_numero)]</a></div>
+					<div class="texte">[(#CHAPO|sinon{#TEXTE|couper{200}})]</div>
+					</div>
+					</BOUCLE_dossiers3col1>
+					</div>
+					</B_dossiers3col1>
+					
+					<B_dossiers3col2>
+					<div class="colonne2">
+					<BOUCLE_dossiers3col2(ARTICLES){raccourci=_portail_dossiers3} {par titre}{2/2}>
+					<div class="actu">
+					[<a href="#URL_ARTICLE"><img src="(#LOGO_ARTICLE||extraire_attribut{'src'})" alt="<:cisquel:eq_illustration:>"  class="leftill"></a>]
+					<div class="titreactu"><a href="#URL_ARTICLE" class="lien">[(#TITRE|supprimer_numero)]</a></div>
+					<div class="texte">[(#CHAPO|sinon{#TEXTE|couper{200}})]</div>
+					</div>
+					</BOUCLE_dossiers3col2>
+					</div>
+					</B_dossiers3col2>
+                    
+				<B_sites3_syndic>
+				<div id="boxsyndic"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale">
+				<div class="listeactu">
+				<h2>Les dernières actualités d'aubervilliers.fr</h2>
+				<BOUCLE_sites3_syndic(SITES){raccourci=_portail_syndication}{syndication=oui}{par num nom_site}>
+				
+				<BOUCLE_syndic3(SYNDIC_ARTICLES){id_syndic}{par date}{inverse}{0,3}>
+				<div class="actu">
+                <div class="titreactu"><a href="#URL_ARTICLE" class="lien">[(#TITRE|supprimer_numero)]</a></div> 
+					<div class="texte">#DESCRIPTIF</div>
+				</div>
+				</BOUCLE_syndic3>
+				</BOUCLE_sites3_syndic>
+				</div>
+				</div></div></div></div></div></div>#SPIP_CRON
+				</B_sites3_syndic>
+				
+					<div class='clearer'>&nbsp;</div>	
+				</BOUCLE_centre3_article>
+				
+		        <BOUCLE_centre3_rubrique_pied(RUBRIQUES){raccourci=_tous_les_dossiers3}{par num titre}{0,1}>
+				</div>
+                <BOUCLE_comtitre3(ARTICLES){raccourci=_portail_commentaire}{0,1}>
+				<div id="boxcommentaire"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale">
+				<div class="listeactu">
+				<h2><:cisquel:eq_dernier_commentaire:></h2>
+				<div class="actu">
+				</BOUCLE_comtitre3>
+				
+				[(#SET{ci_moins_trente, [(#CIPARAM_MAINTENANT|affdate{'Ymd'}|intval|moins{30})]})]
+				<BOUCLE_commentaire3(FORUMS){plat}{par date}{inverse}{0,1}>
+				[(#SET{ci_date_forum, [(#DATE|affdate{'Ymd'}|intval)]})]
+				<B_artcom3>
+				<BOUCLE_artcom3(ARTICLES){id_article}{raccourci=_portail_commentaire}>
+				[(#GET{ci_date_forum}|>{#GET{ci_moins_trente}}|oui)
+					<div class="titreactu"><a href="#URL_ARTICLE" class="lien">[(#TITRE|supprimer_numero)]</a></div> 
+				]
+				</BOUCLE_artcom3>
+				[(#GET{ci_date_forum}|>{#GET{ci_moins_trente}}|oui)
+					<div class="texte">#TITRE (le&nbsp;[(#DATE|jour)]/[(#DATE|mois)]/[(#DATE|annee)]<:cisquel:eq_a:>[(#DATE|heures)]h[(#DATE|minutes)][ par&nbsp;(#NOM)])</div>
+					<div class="texte">[(#TEXTE|couper{200})]</div>
+				]
+				</B_artcom3>
+				</BOUCLE_commentaire3>
+
+				<BOUCLE_compied3(ARTICLES){raccourci=_portail_commentaire}{0,1}>
+				</div>
+				</div>
+				<div class="tout"><a href="[(#URL_PAGE{archive_commentaire})]"><:cisquel:eq_tous_commentaires:></a></div>
+				</div></div></div></div></div></div>
+				</BOUCLE_compied3>
+				</div></div></div></div></div></div>
+		        </BOUCLE_centre3_rubrique_pied>
+				
+				
+                <div id="dossier">
+                <h2>Vidéos</h2><div class="trait7"></div>
+               <br /> <div id="myElement"></div>
+
+<script>
+    jwplayer("myElement").setup({
+      playlist: "http://intranet.mairie-aubervilliers.fr/auber3.0/jwplayer/test.xml",
+height: 233,
+    listbar: {
+        position: 'right',
+        size: 230
+    },
+    width: 600
+    });
+</script>
+<!-- </br></br>
+<A HREF="http://intranet.mairie-aubervilliers.fr/auber3.0/spip.php?rubrique161" class="lien">Voir également les dernières vidéos d'Albertivi</A> --></div>
+			</div>
+			</div>
+			<div class='clearer'>&nbsp;</div>	
+		</div>
+  
+		<div id="droite">
+		<INCLURE{fond=extra/sommaire}{lang}>
+        <div class="reseau-sociaux">
+		
+		<h2>Auber <br />en réseau</h2>
+      
+  <table cellspacing="5" style="margin-left:20px;">
+
+       		 <tr>
+        		<td><a href="https://www.facebook.com/aubervilliers93"><img src="plugins/graphisme_auber2.0/_images/img_reseau_soc/facebook.png" title="Suivez-nous sur Facebook"/></a></td><td><a href="https://twitter.com/aubervilliers93"><img src="plugins/graphisme_auber2.0/_images/img_reseau_soc/twitter.png" title="Suivez-nous sur Twitter"/></a></td><td><a href="http://www.flickr.com/photos/93aubervilliers/"><img src="plugins/graphisme_auber2.0/_images/img_reseau_soc/flickr.png" title="Nos photos sur Flickr"/></a></td>
+        	</tr>
+            
+       		<tr>
+        		<td><a href="https://plus.google.com/u/0/b/116910168404242077196/116910168404242077196/posts"><img src="plugins/graphisme_auber2.0/_images/img_reseau_soc/google.png" title="Suivez-nous sur Google +"/></a></td><td><a href="http://www.vimeo.com/albertivi"><img src="plugins/graphisme_auber2.0/_images/img_reseau_soc/vimeo.png" title="Nos vidéos sur Viméo"/></a></td><td><a href="https://www.youtube.com/user/93aubervilliers"><img src="plugins/graphisme_auber2.0/_images/img_reseau_soc/youtube.png" title="Nos vidéos sur Youtube"/></a></td>
+        	</tr>
+        </table>
+   </div>
+   <div id="auber_sur_web">
+    	<h2>Auber sur le web</h2>
+   	<ul>
+        <li><img src="plugins/graphisme_auber2.0/NAVPICS/telelocale.gif" alt="" border="0"><a href="http://albertivi.aubervilliers.fr" target="_blank" class="colornoir"> La télé locale</a></li>
+        <li><img src="plugins/graphisme_auber2.0/NAVPICS/obseng.gif" alt="" border="0"><a href="http://ode.aubervilliers.fr" target="_blank" class="colornoir"> L'Observatoire des &nbsp;&nbsp;engagements</a></li>
+        <li><img src="plugins/graphisme_auber2.0/NAVPICS/shanghai.gif" alt="" border="0"><a href="http://shanghai2010.aubervilliers.fr" target="_blank" class="colornoir"> Shanghai 2010</a></li>
+        <li><img src="plugins/graphisme_auber2.0/NAVPICS/pij.gif" alt="" border="0"><a href="http://pij.aubervilliers.fr" target="_blank" class="colornoir"> Point Information &nbsp;&nbsp;Jeunesse</a></li>
+        <li><img src="plugins/graphisme_auber2.0/NAVPICS/agenda.gif" alt="" border="0"><a href="http://agenda21.aubervilliers.fr" target="_blank" class="colornoir"> Agenda 21</a></li>
+        <li><img src="plugins/graphisme_auber2.0/NAVPICS/culture.gif" alt="" border="0"><a href="http://culture.aubervilliers.fr" target="_blank" class="colornoir"> Portail culturel</a></li>
+        <li><img src="plugins/graphisme_auber2.0/NAVPICS/edupop.gif" alt="" border="0"><a href="http://educationpopulaire.aubervilliers.fr" target="_blank" class="colornoir"> Éducation populaire</a></li>
+        <li><img src="plugins/graphisme_auber2.0/NAVPICS/solidactive.gif" alt="" border="0"><a href="http://solidaritesactives.aubervilliers.fr" target="_blank" class="colornoir"> Solidarités actives</a></li>
+        <li><img src="plugins/graphisme_auber2.0/NAVPICS/rythmes.gif" alt="" border="0"><a href="http://rythmesscolaires.aubervilliers.fr" target="_blank" class="colornoir"> Nouveaux rythmes &nbsp;&nbsp;scolaires</a></li>
+    </ul>
+   </div>  
+   
+   <div id="blogs_quartiers">
+    	<h2>Blogs de quartiers</h2>
+   	<ul>
+        <li><img src="plugins/graphisme_auber2.0/NAVPICS/valles.gif" alt="" border="0"><a href="http://valles-lafrette.aubervilliers.fr" target="_blank" class="colornoir"> Vallès La Frette</a></li>
+        <li><img src="plugins/graphisme_auber2.0/NAVPICS/centreville.gif" alt="" border="0"><a href="http://centreville-victorhugo.aubervilliers.fr" target="_blank" class="colornoir"> Centre ville Victor Hugo</a></li>
+        <li><img src="plugins/graphisme_auber2.0/NAVPICS/paulbert.gif" alt="" border="0"><a href="http://paulbert.aubervilliers.fr" target="_blank" class="colornoir"> Paul Bert</a></li>
+        <li><img src="plugins/graphisme_auber2.0/NAVPICS/firmin.gif" alt="" border="0"><a href="http://firmingemier-sadicarnot-republique.aubervilliers.fr" target="_blank" class="colornoir"> Firmin Gémier Sadi &nbsp;&nbsp;Carnot République</a></li>
+        <li><img src="plugins/graphisme_auber2.0/NAVPICS/robespierre.gif" alt="" border="0"><a href="http://robespierre-cochennec-peri.aubervilliers.fr" target="_blank" class="colornoir"> Robespierre Cochennec &nbsp;&nbsp;Péri</a></li>
+        <li><img src="plugins/graphisme_auber2.0/NAVPICS/maladrerie.gif" alt="" border="0"><a href="http://maladrerie-emiledubois.aubervilliers.fr" target="_blank" class="colornoir"> Maladrerie Emile Dubois</a></li>
+        <li><img src="plugins/graphisme_auber2.0/NAVPICS/landy.gif" alt="" border="0"><a href="http://landy-plaine-marcreux-pressense.aubervilliers.fr" target="_blank" class="colornoir"> Landy Plaine Marcreux &nbsp;&nbsp;Pressensé</a></li>
+        <li><img src="plugins/graphisme_auber2.0/NAVPICS/vilette.gif" alt="" border="0"><a href="http://villette-quatrechemins.aubervilliers.fr" target="_blank" class="colornoir"> Villette Quatre Chemins</a></li>
+    </ul>
+   </div>
+        </div>
+        </div>
+        </div>
+
+<script>
+$(function(){
+  $('#enhaut').click(function() {
+    $('html,body').animate({scrollTop: 0}, 'slow');
+  });
+
+  $(window).scroll(function(){
+     if($(window).scrollTop()<900){
+        $('#enhaut').fadeOut();
+     }else{
+        $('#enhaut').fadeIn();
+     }
+  });
+});
+</script>
+         
+   <div id="enhaut" class="blochaut" style="display:none"> </div>
+
+
+
+   
+
+
+ 
+
+
+<div id=pied>
+<h1 class="invisible"><:cisquel:eq_pied_page:></h1>
+<INCLURE{fond=noisettes/compteur_sommaire}>  
+
+	<div id="outils">
+	<:cisquel:eq_maj_le:> <BOUCLE_datemaj(ARTICLES){par date}{inverse}{0,1}>[(#DATE|affdate{'d/m/Y'})] |</BOUCLE_datemaj>
+	<INCLURE{fond=noisettes/pied}{self=#SELF}{lang}>

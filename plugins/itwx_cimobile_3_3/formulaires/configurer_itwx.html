@@ -1,0 +1,139 @@
+<!-- autoriser=configurer -->
+<!-- refus=<:cfg:refus_configuration_administrateur:> -->
+<!-- nom=itwx -->
+
+<div class='formulaire_spip formulaire_configurer formulaire_configurer_#FORM' id='formulaire_configurer_#FORM'>
+ [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+ [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+  <form method="post" action="#ENV{action}">
+    <div> #ACTION_FORMULAIRE{#ENV{action}}
+      
+      
+      [(#REM) Choix du theme ]
+	  <div class="theme">
+      <p class="explication" style="font-size:12px; font-weight:bold; background:#CCC; margin-top:1em"><img src='#CHEMIN{prive/img/color_15.png}' alt="" /> <:itwx:config_legend:></p>
+
+      <table summary="">
+        <tr>
+          <td><input type="radio" name="color" value="bleu"[ checked="(#ENV{color}|=={bleu}|?{checked})"]/>
+            <:itwx:bleu:><br /><a href='#CHEMIN{prive/img/capture_bleu.png}' class='mediabox'> <img src='#CHEMIN{prive/img/capture_bleu75.png}' alt='<:itwx:bleu:>'/></a> </td>
+          <td><input type="radio" name="color" value="nb"[ checked="(#ENV{color}|=={nb}|?{checked})"]/>
+            <:itwx:noirblanc:><br /><a href='#CHEMIN{prive/img/capture_nb.png}' class='mediabox'> <img src='#CHEMIN{prive/img/capture_nb75.png}' alt='<:itwx:noirblanc:>'/></a> </td>
+          <td><input type="radio" name="color" value="vert" [ checked="(#ENV{color}|=={vert}|?{checked})"]/>
+            <:itwx:vert:><br /><a href='#CHEMIN{prive/img/capture_vert.png}' class='mediabox'> <img src='#CHEMIN{prive/img/capture_vert75.png}' alt='<:itwx:vert:>'/></a> </td>
+        </tr>
+      </table>
+      <table summary="">
+        <tr>
+          <td><input type="radio" name="color" value="mauve" [ checked="(#ENV{color}|=={mauve}|?{checked})"]/>
+            <:itwx:mauve:><br /><a href='#CHEMIN{prive/img/capture_mauve.png}' class='mediabox'> <img src='#CHEMIN{prive/img/capture_mauve75.png}' alt='mauve'/></a> </td>
+          <td><input type="radio" name="color" value="rouge" [ checked="(#ENV{color}|=={rouge}|?{checked})"]/>
+            <:itwx:rouge:><br /><a href='#CHEMIN{prive/img/capture_rouge.png}' class='mediabox'> <img src='#CHEMIN{prive/img/capture_rouge75.png}' alt='rouge'/></a> </td>
+          <td><input type="radio" name="color" value="orange" [ checked="(#ENV{color}|=={orange}|?{checked})"]/>
+            <:itwx:orange:><br /><a href='#CHEMIN{prive/img/capture_orange.png}' class='mediabox'> <img src='#CHEMIN{prive/img/capture_orange75.png}' alt='orange'/></a> </td>
+        </tr>
+      </table>
+      <p style="text-align:center;color:#666666;font-style:italic"><:itwx:affiche:></p> 
+
+       </div>
+
+
+      [(#REM) Configuration switcher ]
+      <p class="explication" style="font-size:12px; font-weight:bold; background:#CCC"><img src='#CHEMIN{prive/img/config_15.png}' alt=""/> <:itwx:skel_titre:></p>
+	   <div class="itwx_option" style="padding: 0.5em">
+
+		<input type="checkbox" name="nosmart" [(#ENV{nosmart}|oui)checked="checked"] />
+		<label><:itwx:nosmart:></label>
+		<br />
+		<input type="checkbox" name="notab" [(#ENV{notab}|oui)checked="checked"] />
+		<label><:itwx:notab:></label>
+		<br />
+        <br />
+		<input type="checkbox" name="classique" [(#ENV{classique}|oui)checked="checked"] />
+		<label><:itwx:retour_sommaire:></label>
+	   
+		[(#CONFIG{itwx/classique}|?{' '})
+        <div class="comment" style="margin:0.5em 0;padding: 0.3em 0.5em"><:itwx:switcher_comment:></div>]
+		
+
+      <table summary="">
+        <tr>
+          <td class="label"><label class="mode"><:itwx:redirection:></label></td>
+          <td class="select"><select name="redirection" class="select">
+              <option value="automatique"[ selected="(#ENV{redirection}|=={automatique}|?{selected})"]><:itwx:automatique:></option>
+              <option value="notification"[ selected="(#ENV{redirection}|=={notification}|?{selected})"]><:itwx:notification:></option>
+            </select></td>
+        </tr>
+      </table>
+		
+       </div>
+	  
+      [(#REM) Configuration squelettes ]
+      <p class="explication" style="font-size:12px; font-weight:bold; background:#CCC"><img src='#CHEMIN{prive/img/itwx_15.png}' alt="" /> <:itwx:itwxnom_titre:></p>
+	   <div style="padding: 0 0.5em 0.5em 0.5em">
+        <p class="comment"><:itwx:itwxnom_comment:></p>
+		<ul>
+	     <li>
+		  <p class="explication" style="font-style:italic"><:itwx:itwxnom_explication:></p>
+ 	      <label><:info_nom_site:></label>
+          <input type="text" name="idItwxnom" class="text" id="itwxnom" size="35" value="#ENV{idItwxnom}" />
+         </li>
+        </ul>
+		
+		<input type="checkbox" name="auteurs" [(#ENV{auteurs}|oui)checked="checked"] />
+		<label><:itwx:auteurs_sommaire:></label>
+		<br />
+		<input type="checkbox" name="rubriques" [(#ENV{rubriques}|oui)checked="checked"] />
+		<label><:itwx:rubriques_sommaire:></label>
+		<br />
+		<input type="checkbox" name="mots" [(#ENV{mots}|oui)checked="checked"] />
+		<label><:itwx:mots_sommaire:></label>
+		<br />
+		<br />
+		
+		[(#PLUGIN{socialtags}|oui)
+		<input type="checkbox" name="itwxsocialtags" [(#ENV{itwxsocialtags}|oui)checked="checked"] />
+		<label><:itwx:itwxsocialtags:></label>
+		<br />]
+		[(#PLUGIN{googleplus1}|oui)
+		<input type="checkbox" name="itwxgoogleplus1" [(#ENV{itwxgoogleplus1}|oui)checked="checked"] />
+		<label><:itwx:itwxgoogleplus1:></label>
+		<br />]
+
+		<input type="checkbox" name="cssperso" [(#ENV{cssperso}|oui)checked="checked"] />
+		<label><:itwx:css_perso:></label>
+
+		[(#CONFIG{itwx/cssperso}|?{' '})
+		<ul>
+ 		 <p class="comment" style="font-style:italic"><:itwx:css_perso_explication:></p>
+        <li>
+		  <label><:itwx:css_itwx_perso:></label>
+          <textarea name="idItwxcssperso" id="itwxcssperso" class='text' rows='4' cols='40'>[(#ENV{"idItwxcssperso"})]</textarea>
+         </li>
+        </ul>]
+
+		<div class="itwx_option">
+ 	     <table summary="">
+	        <tr>
+	          <td class="label"><label class="mode"><:itwx:appletouchactiv:></label></td>
+	          <td class="select"><select name="appletouchactiv" class="select">
+	              <option value="noicon"[ selected="(#ENV{appletouchactiv}|=={noicon}|?{selected})"]><:itwx:noicon:></option>
+	              <option value="icondefaut"[ selected="(#ENV{appletouchactiv}|=={icondefaut}|?{selected})"]><:itwx:icondefaut:></option>
+	              <option value="iconprecompose"[ selected="(#ENV{appletouchactiv}|=={iconprecompose}|?{selected})"]><:itwx:iconprecompose:></option>
+	            </select></td>
+	        </tr>
+	      </table>
+		</div>
+		
+       </div>
+
+      <p class="boutons">
+        <input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" class="submit" />
+      </p>
+	  
+    </div>
+	
+  </form>
+</div>
+
+<p class="reponse_formulaire_itwx"><img src='#CHEMIN{prive/img/alert.gif}' alt=""/> <:itwx:config_alerte:></p>

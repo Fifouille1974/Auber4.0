@@ -1,0 +1,58 @@
+#CACHE{10}
+[(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+[<link href="(#CHEMIN{_css/style_cilien.css})" rel="stylesheet" type="text/css" />]
+</head>
+<body>
+<?php
+include_spip('inc/presentation');
+
+if (isset($GLOBALS['visiteur_session']['id_auteur']) && $GLOBALS['visiteur_session']['id_auteur']) {
+	$url_retour = generer_url_ecrire("accueil");
+} else {
+	$url_retour = generer_url_public("sommaire");	
+}
+
+if (spip_version()>=3) {
+	$icone_retour = icone_verticale(_T('cilien:retour'), $url_retour, "article-24.png", "rien.gif",$GLOBALS['spip_lang_left']);
+} else {
+	$icone_retour = icone_inline(_T('cilien:retour'), $url_retour, "article-24.gif", "rien.gif",$GLOBALS['spip_lang_left']);
+}
+
+echo '<div class="cadretitre">'.$icone_retour.
+	'<div class="titre">'._T('cilien:tous_les_liens').'</div>
+	<div class="clearer"></div>
+	</div>';
+
+?>
+<div class='info'><:cilien:texte_verifier_liens:></div>
+<div class='info'><:cilien:texte_verifier_liens2:></div>
+
+#SET{cigetonglet,'article'}
+[(#ENV{onglet}|=={rubrique}|oui)#SET{cigetonglet,'rubrique'}]
+[(#ENV{onglet}|=={site}|oui)#SET{cigetonglet,'site'}]
+#SET{self,#SELF}
+
+<div class='onglets_lien'>
+<ul>
+<li class='onglet_article'><a href="[(#GET{self}|parametre_url{onglet,article})]" [(#GET{cigetonglet}|=={article}|oui)class="on"][(#GET{cigetonglet}|non)class="on"]><:articles:></a></li>
+<li class='onglet_rubrique'><a href="[(#GET{self}|parametre_url{onglet,rubrique})]" [(#GET{cigetonglet}|=={rubrique}|oui)class="on"]><:rubriques:></a></li>
+<li class='onglet_site'><a href="[(#GET{self}|parametre_url{onglet,site})]" [(#GET{cigetonglet}|=={site}|oui)class="on"]><:cilien:sites_references:></a></li>
+</ul>
+<div class="clearer"></div>
+</div>
+
+[(#GET{cigetonglet}|=={article}|oui)
+	<INCLURE{fond=contenu/cilien_article,env}>
+]
+[(#GET{cigetonglet}|=={rubrique}|oui)
+	<INCLURE{fond=contenu/cilien_rubrique,env}>
+]
+[(#GET{cigetonglet}|=={site}|oui)
+	<INCLURE{fond=contenu/cilien_site,env}>
+]
+
+</body>
+</html>

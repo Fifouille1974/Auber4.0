@@ -1,0 +1,160 @@
+#CACHE{3600}
+#CIPARAM_DOCTYPE
+#INSERT_HEAD
+#INSERT_HEAD_CSS
+<head>
+<BOUCLE_contenu(ARTICLES){id_article}>
+<title>[(#TITRE|supprimer_numero)][ - (#NOM_SITE_SPIP|textebrut)]</title>
+<link rel="schema.DC" href="http://purl.org/DC/elements/1.0/" />
+<meta name="DC.Title" content="[(#TITRE|supprimer_numero)]" />
+<meta name="DC.Creator" content="[(#NOM_SITE_SPIP)]" />
+<meta name="DC.Date" content="[(#DATE|affdate{'Y-m-d'})]" />
+<meta name="DC.Subject" content="<BOUCLE_motcle2(MOTS){id_article}{type!==Type de document}>#TITRE, </BOUCLE_motcle2>" />
+<meta name="DC.Format" content="text/html" />
+<meta name="DC.Language" content="#LANG" />
+<meta name="DC.Identifier" content="[(#URL_SITE_SPIP)/][(#URL_ARTICLE)]" />
+<meta name="DC.Type" content="<BOUCLE_typedoc(MOTS){id_article}{type==Type de document}>#TITRE, </BOUCLE_typedoc>" />
+<meta name="keywords" content="<BOUCLE_motcle(MOTS){id_article}{type!==Type de document}>#TITRE, </BOUCLE_motcle>" />
+<INCLURE{fond=noisettes/head}{lang}>
+#SET{ci_large,''}
+<BOUCLE_large(ARTICLES){id_article}{raccourci=_large}>
+#SET{ci_large,'oui'}
+[<link href="(#CHEMIN{_css/style_large.css})" rel="stylesheet" type="text/css" />]
+</BOUCLE_large>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+
+[(#SET{ci_id_rubrique,[(#ID_RUBRIQUE|ci_rub_multirubricage{#ENV{id_rubrique}})]})]
+
+#SET{ci_reagir,''}
+<BOUCLE_reagir(ARTICLES){id_article}{raccourci=_reagir}>
+#SET{ci_reagir,'oui'}
+<link rel="alternate" type="application/rss+xml" title="<:cisquel:eq_rss_forum:> : [(#TITRE|supprimer_numero)]" href="[(#URL_PAGE{backend-forum-article}|parametre_url{id_article,#ID_ARTICLE})]" />
+</BOUCLE_reagir>
+
+[(#GET{ci_reagir}|non)
+#SET{ci_commentaire, #ARRAY{0,_commentaire,1,_commentaireautrepage}} 
+[(#CIFORME|in_array{#GET{ci_commentaire}}|oui)
+<link rel="alternate" type="application/rss+xml" title="<:cisquel:eq_rss_forum:> : [(#TITRE|supprimer_numero)]" href="[(#URL_PAGE{backend-forum-article}|parametre_url{id_article,#ID_ARTICLE})]" />
+]
+]
+
+</head>
+
+<body>
+<INCLURE{fond=noisettes/haut}{lang}>
+<div id="milieu">
+	<div id="ext-main">
+		<div class="main">
+			<div id="gauche">
+				<INCLURE{fond=noisettes/recherche_gauche}{lang}>
+	
+			    [(#INCLURE{fond=navigation/article,id_article,id_rubrique=#GET{ci_id_rubrique},lang})]
+			</div>
+
+  			<div id="contenu">
+			<div class="main-content">
+				<h1 class="invisible"><:cisquel:eq_contenu:></h1>
+				
+				<BOUCLE_navpath(ARTICLES){id_article}{id_parent!=94}{doublons}>
+				<div id="boxnavpath"><div id="navpath">
+					<a href="[(#URL_PAGE{sommaire})]"><:cisquel:eq_accueil:></a>
+					<BOUCLE_rub_nav(RUBRIQUES){id_rubrique=#GET{ci_id_rubrique}}>
+					<BOUCLE_chem_nav(HIERARCHIE){id_rubrique}>
+					&gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a>
+					</BOUCLE_chem_nav>
+					&gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a>
+					</BOUCLE_rub_nav>
+				</div></div>
+				</BOUCLE_navpath>
+				
+				<BOUCLE_navpathactu(ARTICLES){id_article}{id_parent=94}{doublons}>
+				<div id="boxnavpath"><div id="navpath">
+					<a href="[(#URL_PAGE{sommaire})]"><:cisquel:eq_accueil:></a>
+					<BOUCLE_rub_navactu(RUBRIQUES){id_rubrique=#GET{ci_id_rubrique}}>
+					<BOUCLE_chem_navactu(HIERARCHIE){id_rubrique}>
+					&gt; [(#TITRE|supprimer_numero)]
+					</BOUCLE_chem_navactu>
+					&gt; [(#TITRE|supprimer_numero)]
+					</BOUCLE_rub_navactu>
+				</div></div>
+				</BOUCLE_navpathactu>
+				[(#GET{ci_large}|oui)
+[(#INCLURE{fond=noisettes/blocoutil_article,id_article,id_rubrique=#GET{ci_id_rubrique},titremail=[(#TITRE|supprimer_numero|ciparam_filtre_mailto{#CHARSET})]}{lang})]
+]
+				<div id="boxcentrale"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale">
+				
+				<INCLURE{fond=contenu/article}{id_article}{env}{lang}>
+
+				[(#GET{ci_reagir}|oui)
+				[(#INCLURE{fond=noisettes/commentaire,id_article,lang})]
+				]
+								
+		    	<!-- <div class="o2paj"><a href="#entete" title="<:cisquel:eq_haut_page:>"><:cisquel:eq_haut_page:></a></div> -->
+				</div></div></div></div></div></div>
+			</div>
+			
+			<div> </div>
+			<div id="fb-root"></div>
+				<script>(function(d, s, id) {
+				  var js, fjs = d.getElementsByTagName(s)[0];
+				  if (d.getElementById(id)) return;
+				  js = d.createElement(s); js.id = id;
+				  js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.0";
+				  fjs.parentNode.insertBefore(js, fjs);
+				}(document, 'script', 'facebook-jssdk'));
+				</script>
+				
+				<script type="text/javascript" src="https://apis.google.com/js/plusone.js">
+					{lang: 'fr'}
+				</script>
+			<section class="barsociaux">
+				<div class="fb-share-button" data-type="button_count"></div>
+				
+				<div class="btntwitter">
+					<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="aubervilliers93" data-lang="fr">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+				</div>
+				
+				<div class="googleplus">
+					<g:plusone></g:plusone>
+				</div>
+			</section>
+			</div>
+			<div class='clearer'>&nbsp;</div>	
+		</div>
+        [(#GET{ci_large}|non)
+		<div id="droite">
+		[(#GET{ci_id_rubrique}|cisquel_logo_ari)]
+		[(#INCLURE{fond=extra/article,id_article,id_rubrique=#GET{ci_id_rubrique},lang})]
+		</div>
+        ]
+	</div>
+</div>
+<script>
+$(function(){
+  $('#enhaut').click(function() {
+    $('html,body').animate({scrollTop: 0}, 'slow');
+  });
+
+  $(window).scroll(function(){
+     if($(window).scrollTop()<900){
+        $('#enhaut').fadeOut();
+     }else{
+        $('#enhaut').fadeIn();
+     }
+  });
+});
+</script>
+         
+   <div id="enhaut" class="blochaut" style="display:none"> </div>
+
+<div id="pied">
+<h1 class="invisible"><:cisquel:eq_pied_page:></h1>
+[(#CIPARAM_ABONNEMENT_XITI|oui)[(#CIPARAM_ABONNEMENT_XITI|match{_images/void.gif}|non)[(#INCLURE{fond=noisettes/compteur_article,id_article})]]]
+
+<div id="outils">
+<:cisquel:eq_maj_le:> [(#DATE|affdate{'d/m/Y'})] | 
+	<INCLURE{fond=noisettes/pied}{lang}><INCLURE{fond=noisettes/pied_connexion}{self=#SELF}{lang}>
+</BOUCLE_contenu>
+</B_contenu>
+<INCLURE{fond=altern}>
+<//B_contenu>

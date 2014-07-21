@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<item><nom>_masquer_dans_menu_dynamique</nom><description>Masque cette rubrique dans le menu dynamique</description></item>
+<item><nom>_masquer_dans_plan</nom><description>Masque cette rubrique dans le plan du site</description></item>
+<item><nom>_portail_dossiers_rub</nom><description>Page d'accueil : raccourci dans la colonne centrale ("dossiers" ...)</description></item>
+<item><nom>_portail_droite</nom><description>Page d'accueil : raccourci dans la colonne de droite</description></item>
+<item><nom>_portail_droite_titre_bloc_2col_logo</nom><description>Page d'accueil : titre d'un bloc (2 col. logo) colonne droite</description></item>
+<item><nom>_portail_droite_titre_bloc_grandlogo</nom><description>Page d'accueil : titre d'un bloc (grand logo) colonne droite</description></item>
+<item><nom>_portail_droite_titre_bloc_lien</nom><description>Page d'accueil : titre d'un bloc (lien) dans la colonne de droite</description></item>
+<item><nom>_portail_droite_titre_bloc_logo</nom><description>Page d'accueil : titre d'un bloc (logo) dans la colonne de droite</description></item>
+<item><nom>_portail_droite_titre_bloc_texte</nom><description>Page d'accueil : bloc texte d'article dans la colonne de droite</description></item>
+<item><nom>_portail_droite_titre_bloc_titretexte</nom><description>Page d'accueil : bloc titre et texte d'article dans la colonne de droite</description></item>
+<item><nom>_portail_gauche</nom><description>Page d'accueil : raccourci dans la colonne de gauche</description></item>
+<item><nom>_portail_gauche_titre_bloc</nom><description>Page d'accueil : titre d'un bloc dans la colonne de gauche</description></item>
+<item><nom>_souspageaccueil_centre</nom><description>Sous page d'accueil : titre colonne centrale ("Dossier" ou autre)</description></item>
+<item><nom>_souspageaccueil_centre_rub</nom><description>Sous page d'accueil : raccourci dans la colonne centrale ("dossiers" ...)</description></item>
+<item><nom>_souspageaccueil_droite</nom><description>Sous page d'accueil : raccourci dans la colonne de droite</description></item>
+<item><nom>_souspageaccueil_droite_titre_bloc_2col_logo</nom><description>Sous page d'accueil : titre d'un bloc (2 col. logo) colonne droite</description></item>
+<item><nom>_souspageaccueil_droite_titre_bloc_grandlogo</nom><description>Sous page d'accueil : titre d'un bloc (grand logo) colonne droite</description></item>
+<item><nom>_souspageaccueil_droite_titre_bloc_lien</nom><description>Sous page d'accueil : titre d'un bloc (lien) dans colonne droite</description></item>
+<item><nom>_souspageaccueil_droite_titre_bloc_logo</nom><description>Sous page d'accueil : titre d'un bloc (logo) dans colonne droite</description></item>
+<item><nom>_souspageaccueil_droite_titre_bloc_texte</nom><description>Sous page d'accueil : bloc texte d'article dans la colonne de droite</description></item>
+<item><nom>_souspageaccueil_droite_titre_bloc_titretexte</nom><description>Sous page d'accueil : bloc titre et texte d'article dans la colonne de droite</description></item>
+<item><nom>_souspageaccueil_gauche</nom><description>Sous page d'accueil : raccourci dans la colonne de gauche</description></item>
+<item><nom>_souspageaccueil_gauche_titre_bloc</nom><description>Sous page d'accueil : titre d'un bloc dans la colonne de gauche</description></item>
+<item><nom>_tous_les_dossiers</nom><description>Page d'accueil : titre colonne centrale ("Dossiers" ou autre)</description></item>
+<item><nom>_large</nom><description>Sans la colonne de droite</description></item>

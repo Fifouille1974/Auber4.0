@@ -1,0 +1,98 @@
+body {
+    background-color: #FFFFFF;
+    color: #000000;
+    font-family: Verdana,Geneva,Arial,Helvetica,sans-serif;
+    margin: 0;
+}
+
+/* Structure generale des formulaires
+----------------------------------------------- */
+.formulaire_spip {width: 480px; font-size: 0.7em; clear: both; margin: 2em; padding: 0; border: 0; text-align: left; }
+form { margin: 0; padding: 0; } /* Bug IE/Win */
+
+/* Fieldset */
+fieldset { clear: both; margin: 0 0 1em 0; padding: 5px; border: 1px solid; width : 99%; background-color: #efefef;}
+fieldset legend { margin: 0; padding: 0; font-weight: bold; background-color: #fff; color: #333; } /* Preciser la couleur des legend et du fond pour IE/Win */
+fieldset fieldset { margin-top: 1em; }
+fieldset fieldset legend { font-weight: normal; }
+
+/* Explications */
+.explication { margin: 0.50em 0; color: #444; }
+
+/* Lignes */
+ul { margin: 0; padding: 0; list-style: none; }
+ul li { clear: both; margin: 0; padding: 0.50em 0; }
+
+/* Labels */
+label { display: block; margin-bottom:3px; text-align: left; color: #444; font-weight: bold; /* pour IE/Win */ position: relative;  }
+li p { margin-top: 0; margin-bottom: 0; }
+
+.choix label{display:inline;font-weight:normal;}
+.choix input.radio,
+.choix input.checkbox {width:auto;}
+
+
+/* Champs de saisie */
+input.text { width: 99%; border: 1px inset; }
+textarea { width: 99%; border: 1px inset; }
+select { width: 99%; }
+
+/* Boutons */
+.boutons { clear: both; margin: 0; padding: 0; text-align: right; }
+.boutons input { margin-left: 1em; }
+.boutons input, input.submit {}
+
+
+/* Reponses, previsu et erreurs
+----------------------------------------------- */
+
+/* Champs obligatoires */
+li.obligatoire {}
+li.obligatoire label {}
+
+/* Previsualisation du message */
+fieldset.previsu { margin-bottom: 2em; padding: 1em; border: 2px dashed #F57900; }
+fieldset.previsu legend { padding: 0 0.50em; font-weight: bold; color: #F57900; }
+fieldset.previsu li { padding: 3px; border: none; }
+
+/* Reponse du formulaire */
+.reponse_formulaire { font-weight: bold; color: #e86519; }
+fieldset.reponse_formulaire { border-color: #e86519; font-weight: normal; }
+fieldset.reponse_formulaire.reponse_formulaire legend { color: #F57900; } /* Preciser la couleur des legend et du fond pour IE/Win */
+
+/* * Erreurs */
+li.erreur .erreur_message { display: block; color: #C30; font-weight: bold; }
+li.erreur input.text,li.erreur textarea { background-color: #FCC; border-style: solid; border-color: #C30; }
+.reponse_formulaire_erreur { margin: 0; color: #C30; font-weight: bold; }
+
+/* * OK */
+.reponse_formulaire_ok { margin: 0; color: #53AD20; font-weight: bold; }
+
+
+/* Choix 
+---------------------------- */
+.choix {margin: 1em 0;}
+
+.choix label {
+	clear: both;
+	padding: 0 0 5px 0;
+	color: #484848;
+	font-weight: normal;
+	text-align: justify;
+}
+
+* html .textechk input {
+	margin: -4px -3px -3px -4px;  /* hack uniquement interprété par IE Win+Mac */
+}
+
+/* Divers 
+---------------------------- */
+.fermer {float: right; margin: 5px;}
+.fermer a {color: #000000;font-size: 0.8em;}
+
+.retour {text-align: center;}
+.retour a {color: #000000;}
+
+.interdit {color: #000000;font-size: 2em;}
+
+.info {margin-bottom: 0px;}

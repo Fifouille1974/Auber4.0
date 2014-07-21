@@ -1,0 +1,19 @@
+[(#ENV{masquer}|!={oui}|oui)
+<div class='ajax'>
+<div class="formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'>
+    	<div class='cadre_padding'>
+
+			<label for="cirangse"><:ciparam:rang:></label>
+			<input type='text' name='cirangse' id='cirangse' value="[(#ENV{_cirangse})]" size='3' maxlength='3' >
+			<span><input id="valider_cirangse" class="visible_au_chargement fondo spip_xx-small" type="submit" value="<:bouton_valider:>" style="visibility: visible;"/></span>
+	  	</div>
+	  	
+		#ACTION_FORMULAIRE{#ENV{action}}
+	  	
+	</form>
+</div>
+</div>
+]

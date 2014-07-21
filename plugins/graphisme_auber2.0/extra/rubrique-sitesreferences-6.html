@@ -1,0 +1,64 @@
+#CACHE{24*3600}
+
+<script src="http://code.jquery.com/jquery-1.10.2.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+ $('#plusgrand').click(function(){
+	curSize= parseInt($('.texte').css('font-size')) + 2;
+  if(curSize<=17)
+        $('.texte').css('font-size', curSize);
+        $('#chapeau').css('font-size', curSize);
+        $('.rub > h2').css('font-size', curSize);
+        $('.listerub').css('font-size', curSize);
+        $('.listeart').css('font-size', curSize);
+        }); 
+		
+  $('#pluspetit').click(function(){ 
+        curSize= parseInt($('.texte').css('font-size')) - 2;
+  if(curSize>=9)
+        $('.texte').css('font-size', curSize); 
+		$('#chapeau').css('font-size', curSize);
+        $('.rub > h2').css('font-size', curSize);
+        $('.listerub').css('font-size', curSize);
+        $('.listeart').css('font-size', curSize);
+  });
+});
+  </script>
+			<div id="menu2">
+			
+				<div class="blocoutil">
+				
+				
+					<div id="plusgrand" title="Augmenter la taille de la police"></div>
+					<div id="pluspetit" title="Réduire la taille de la police"></div>
+					<a rel="noindex,nofollow" href="javascript:chainemail('[(#NOM_SITE_SPIP|ciparam_filtre_mailto{#CHARSET})]  [(#TITRE|supprimer_numero|ciparam_filtre_mailto{#CHARSET})]')" title="<:cisquel:eq_envoyer_courriel:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami" target="_blank"><div id="envcourriel"><BOUCLE_type(RUBRIQUES) {id_rubrique} {0,1}> #TIPAFRIEND</BOUCLE_type></div><!-- <:cisquel:eq_envoyer_courriel:> -->
+					</a>
+					<a rel="noindex,nofollow" href="[(#URL_PAGE{article_print}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_imprimer_page:>" class="imprimer"><div id="iconeimprimer"></div></a>
+				
+
+</div>
+<BOUCLE_rub_principal_image(RUBRIQUES) {id_rubrique=6}>
+<div id="syndication_de_site">
+<h2>Images Flickr</h2>
+
+<BOUCLE_articlesyndic_image(SYNDIC_ARTICLES) {id_rubrique=6}{age<180} {par date}{inverse} {0,5}>
+<div class="syndic">
+		 <a href="#URL_ARTICLE" class="lien_syndic" target="_blank"><h1>[(#TITRE*)]</h1>
+  	<!-- [<div class="enclosures">(#TAGS|afficher_enclosures)</div>] -->
+	
+	[(#DESCRIPTIF
+   |extraire_balise{img}
+   |image_reduire{160,auto}
+   |inserer_attribut{alt,[(#TITRE|textebrut|couper{60})]}
+   |inserer_attribut{align,''}
+)]
+  </a>
+  	<!-- [<div class="texte">(#DESCRIPTIF|couper{100})<br class="nettoyeur" /></div>] -->
+</div>
+</BOUCLE_articlesyndic_image>
+</div>
+
+
+</div>
+
+</BOUCLE_rub_principal_image>

@@ -1,0 +1,62 @@
+#CACHE{0}[(#RECHERCHE|cisquel_recherche_autorise|cisquel_accesinterdit)]
+
+#SET{cimno,'cisquelmnogosearch'}	
+#SET{cioptions,''}	
+[(#ENV{recherche_avancee}|=={oui}|oui)
+	#SET{cioptions,'oui'}
+]
+
+#SET{citri,''}
+#SET{citriinverse,'points'}
+#SET{cidebut,'0000-01-01'}
+#SET{cifin,'9000-01-01'}
+
+#SET{tableautri, #ARRAY{0,date}} 
+#SET{tableautriinverse, #ARRAY{0,datedesc}} 
+
+[(#ENV{tri}|in_array{#GET{tableautri}}|oui)
+	#SET{citri,#ENV{tri}}
+]
+[(#ENV{tri}|in_array{#GET{tableautriinverse}}|oui)
+	[(#SET{citriinverse,[(#ENV{tri}|substr{0,-4})]})]
+]
+[(#ENV{age}|intval|>{0}|oui)
+	[(#SET{cidebut,[(#ENV{age}|cisquel_age_vers_date|sinon{0000-01-01})]})]
+]
+[(#ENV{datedebut}|cisquel_verifier_et_convertir_date|oui)
+	#SET{cidebut, #ENV{datedebut}|cisquel_verifier_et_convertir_date|sinon{0000-01-01}}	
+]
+[(#ENV{datefin}|cisquel_verifier_et_convertir_date|oui)
+	#SET{cifin, #ENV{datefin}|cisquel_verifier_et_convertir_date|sinon{9000-01-01}}	
+]
+
+#SET{cidebut,#GET{cidebut}' 00:00:00'}
+#SET{cifin,#GET{cifin}' 23:59:59'}
+
+
+
+	<B_articles>
+
+<h2><:articles:> (#GRAND_TOTAL)</h2>
+[<div class="folio"><div class="pagination">(#PAGINATION)</div></div>]
+	<p class="enteteresult">#GRAND_TOTAL <strong><:cisquel:articles_trouves:></strong></p>
+	
+	<BOUCLE_articles(ARTICLES) {recherche} {par #GET{citri}} {!par #GET{citriinverse}} {date>=#GET{cidebut}} {date<=#GET{cifin}} {pagination}>
+<div class="item">
+<p class="titreresult"><a href="[(#URL_ARTICLE)]">[(#TITRE|supprimer_numero)]</a> (<:cisquel:eq_publie_le:> [(#DATE|affdate{'d/m/Y'})])</p>
+<p class="path"><a href="[(#URL_PAGE{sommaire})]"><:cisquel:eq_accueil:></a>
+<BOUCLE_nav(ARTICLES){id_article}>
+<BOUCLE_chem_nav(HIERARCHIE){id_article}>
+&gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a>
+</BOUCLE_chem_nav>
+</BOUCLE_nav>
+</p>
+[<div class="texte">(#DESCRIPTIF)</div>]                
+<div class="clearer"></div>
+</div>
+</BOUCLE_articles>
+[<div class="folio"><div class="pagination">(#PAGINATION)</div></div>]
+	</B_articles>
+	<h2><:articles:></h2>
+	<p class="enteteresult">0 <strong><:cisquel:articles_trouves:></strong></p>
+	<//B_articles>

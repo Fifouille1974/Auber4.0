@@ -1,0 +1,15 @@
+<BOUCLE_breve_invisible(BREVES) {titre_mot = invisible} {doublons}></BOUCLE_breve_invisible>
+
+<B_breves>
+<a id="pagination_breves"></a>
+<div class="group"><:breves:breves:> (#GRAND_TOTAL)</div>		
+	<BOUCLE_breves(BREVES) {recherche} {par points}{inverse}{pagination 5}{doublons}>
+	<div class="listmenu">
+	<ul class="docs">				
+        <li><a href="#URL_BREVE">#TITRE[ &ndash; (#DATE|affdate_jourcourt)]</a></li>
+	</ul>
+	</div>
+	</BOUCLE_breves>
+[<div class="pagination">(#PAGINATION)</div>]	
+<br />
+</B_breves>

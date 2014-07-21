@@ -1,0 +1,13 @@
+<B_breves>       
+<a id="pagination_breves"></a>
+<div class="group"><:breves:breves:></div>		
+	<div class="listmenu">
+    <ul class="docs">
+    <BOUCLE_breves(BREVES) {id_mot} {par titre} {pagination 5 #ENV{bre}}>
+        <li><a href="#URL_BREVE">#TITRE[ &ndash; (#DATE|affdate_jourcourt)]</a></li>
+	</BOUCLE_breves>
+    </ul>
+    </div>
+[<div class="pagination">(#PAGINATION)</div>]
+<br />
+</B_breves>

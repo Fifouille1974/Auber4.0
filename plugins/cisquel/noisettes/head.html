@@ -1,0 +1,24 @@
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+
+[<link href="(#CHEMIN{_css/style_site.css})" rel="stylesheet" type="text/css" />]
+[<link href="(#CHEMIN{_css/style_impression.css})" rel="stylesheet" type="text/css" media="print" />]
+[<link href="(#CHEMIN{_css/style_perso.css})" rel="stylesheet" type="text/css" />]
+[<link href="(#CHEMIN{_images/favicon.ico})" rel="shortcut icon" type="image/x-icon" />]
+
+[<script type="text/javascript" src="(#CHEMIN{_js/menu_v1_1-[(#LANG)].js})"></script>]
+<script type="text/javascript">
+#VAL{<!-- }
+
+<BOUCLE_masquer(RUBRIQUES){raccourci=_masquer_dans_menu_dynamique}{doublons}{par id_rubrique}></BOUCLE_masquer>
+#SET{cirub_niv1, #ARRAY{}}
+#SET{ciwhere_niv1, #ARRAY{}}
+<BOUCLE_niv1(RUBRIQUES){id_parent=0}{doublons}{par id_parent}{par num titre}>[(#SET{cirub_niv1, #GET{cirub_niv1}|push{#ARRAY{id_parent,#ID_PARENT,id_rubrique,#ID_RUBRIQUE,titre,#TITRE}}})][(#SET{ciwhere_niv1, #GET{ciwhere_niv1}|push{#ID_RUBRIQUE}})]</BOUCLE_niv1>
+#SET{cirub_niv2, #ARRAY{}}
+#SET{ciwhere_niv2, #ARRAY{}}
+<BOUCLE_niv2(RUBRIQUES){id_parent IN #GET{ciwhere_niv1}}{doublons}{par id_parent}{par num titre}>[(#SET{cirub_niv2, #GET{cirub_niv2}|push{#ARRAY{id_parent,#ID_PARENT,id_rubrique,#ID_RUBRIQUE,titre,#TITRE}}})][(#SET{ciwhere_niv2, #GET{ciwhere_niv2}|push{#ID_RUBRIQUE}})]</BOUCLE_niv2>
+#SET{cirub_niv3, #ARRAY{}}
+<BOUCLE_niv3(RUBRIQUES){id_parent IN #GET{ciwhere_niv2}}{doublons}{par id_parent}{par num titre}>[(#SET{cirub_niv3, #GET{cirub_niv3}|push{#ARRAY{id_parent,#ID_PARENT,id_rubrique,#ID_RUBRIQUE,titre,#TITRE}}})]</BOUCLE_niv3>
+[var menu_contenu ='(#GET{cirub_niv1}|ciparam_menu{#GET{cirub_niv2},#GET{cirub_niv3}})';]
+
+#VAL{ -->}
+</script>

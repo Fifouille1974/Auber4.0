@@ -1,0 +1,2 @@
+#CACHE{0}"Date","Heure","Titre","Texte","Auteur","Email","Statut"<BOUCLE_article(ARTICLES){id_article}><BOUCLE_mots(FORUMS){id_article}{statut IN #ENV{cistatuts}}{plat}{par date}>
+"[(#DATE|affdate{'d/m/Y'})]","[(#DATE|affdate{'H:i'})]","[(#TITRE*|ciimport_filtre_forum_csv)]","[(#TEXTE*|ciimport_filtre_forum_csv)]","[(#AUTEUR*|ciimport_filtre_forum_csv)]","[(#EMAIL|ciimport_filtre_forum_csv)]","[(#STATUT)]"</BOUCLE_mots></BOUCLE_article>

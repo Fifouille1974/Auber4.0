@@ -1,0 +1,39 @@
+#SET{tableaustatut,#ARRAY{1,''}}
+[(#CONFIG{cinotif_formulaire}|in_array{#ARRAY{0,theme,1,simple}}|oui)
+	#SET{tableaustatut, #ARRAY{1,publie,2,prepa,3,sansnotif,4,ferme}}
+]
+
+<BOUCLE_email(CINOTIF_ABONNES){id_abonne}>
+#EMAIL
+[(#ID_AUTEUR|>{0}|oui)
+[ -  n° <:cinotif:titre_auteur:> : (#ID_AUTEUR)]
+]
+</BOUCLE_email>
+<B_abo>
+<div style="margin:4px 0px 10px 0px;">
+#PAGINATION
+</div>
+<table cellspacing="0" cellpadding="2" style="width: 100%; border: 0px none;" class="arial2">
+<tbody>
+<tr style="background-color:#eee;">
+<th style="width: 30%;"><:cinotif:titre_objet:></th>
+<th style="width: 50%;"><:cinotif:abonnements:></th>
+<th style="width: 20%;"><:cinotif:titre_statut:></th>
+</tr>
+<BOUCLE_abo(CINOTIF_ABONNEMENTS cinotif_evenements){id_abonne}{!par objet}{par id_objet}{tout}{cinotif_evenements.statut IN #GET{tableaustatut}}{pagination 50}>
+[<tr class="tr_liste" style="background-color:#fff;"><td style="border:none;"></td><td style="border:none;">(#URL_MULTISITE)</td><td style="border:none;"></td></tr>]
+<tr class="tr_liste" style="background-color:#fff;">
+<td><a href="[(#OBJET|cinotif_url_public{#ID_OBJET})]">#OBJET [(#ID_OBJET|?{#ID_OBJET,''})]</a></td><td>[<a href="[(#URL_ECRIRE{cinotif_suiviabonnes,id_evenement=#ID_EVENEMENT})]">(#VAL{cinotif:}|concat{#QUOI}|_T)</a>]</td><td>[(#VAL{cinotif:}|concat{#STATUT}|_T)]</td>
+</tr>
+</BOUCLE_abo>
+</tbody>
+</table>
+<div style="margin:10px 0px 4px 0px;">
+#PAGINATION
+</div>
+<em class='attention'><:cinotif:clic_email_pour_voir_abonnes:></em>
+<em class='attention'><:cinotif:clic_objet_pour_le_voir:></em>
+<div><em class='attention'><:cinotif:legende_publie:></em></div>
+</B_abo>
+<h3><:avis_aucun_resultat:></h3>
+<//B_abo>

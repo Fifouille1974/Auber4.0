@@ -1,0 +1,82 @@
+#CACHE{0}
+			<div id="menu2">
+				<h1 class="invisible"><:cisquel:eq_menu_droite:></h1>
+			<BOUCLE_parent_rubriques(RUBRIQUES){id_rubrique}>
+				#SET{ci_id_rubrique_multi_droite, #ID_RUBRIQUE}
+				#SET{ci_li,''}
+				#SET{ci_mots_droite, #ARRAY{}}
+				<BOUCLE_mot_sous_rubrique(MOTS){id_rubrique}{type=_multirubricage}{par titre}>
+				[(#SET{ci_mots_droite, #GET{ci_mots_droite}|push{#ID_MOT}})]
+				</BOUCLE_mot_sous_rubrique>
+				<div class="boxtitredroite"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><h2>[(#TITRE|supprimer_numero)]</h2></div></div></div></div></div>
+				<div class="bloc2">
+				<ul>
+				<B_articles_multi_droite>
+				#SET{ci_li,'oui'}
+			    <BOUCLE_articles_multi_droite(ARTICLES){id_mot IN #GET{ci_mots_droite}}{doublons}{par #CITRI}{!par #CITRIINVERSE}{par num #CITRINUM}>
+				<li><a href="[(#URL_ARTICLE|parametre_url{id_rubrique,#GET{ci_id_rubrique_multi_droite}})]" [class="(#EXPOSE)"]>[(#TITRE|supprimer_numero)]</a></li>
+			    </BOUCLE_articles_multi_droite>
+				
+				<B_articles_rubrique_droite>
+				#SET{ci_li,'oui'}
+				<BOUCLE_articles_rubrique_droite(ARTICLES){id_rubrique}{doublons}{par #CITRI}{!par #CITRIINVERSE}{par num #CITRINUM}>
+				<li><a href="#URL_ARTICLE" [class="(#EXPOSE)"]>[(#TITRE|supprimer_numero)]</a></li>
+				</BOUCLE_articles_rubrique_droite>
+				
+				[(#GET{ci_li}|non)
+				<li></li>
+				]
+				</ul>
+				</div>
+			</BOUCLE_parent_rubriques>
+
+				<B_multirubricage_mot_droite>
+				<div class="boxtitredroite"><div class="blc"><div class="brc"><div class="tlc"><div class="trc">
+					<h2><:cisquel:eq_autres_rubriques:></h2>
+				</div></div></div></div></div>
+					<div class="bloc2">
+						<ul>
+						<BOUCLE_multirubricage_mot_droite(MOTS){id_article}{type=_multirubricage}>
+						<BOUCLE_multirubricage_rubrique_droite(RUBRIQUES){id_mot}{doublons}>
+						 <li><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></li>
+						</BOUCLE_multirubricage_rubrique_droite>
+						</BOUCLE_multirubricage_mot_droite>
+						</ul>
+					</div>
+				</B_multirubricage_mot_droite>
+				<B_mot_article_droite>
+				<div class="boxtitredroite"><div class="blc"><div class="brc"><div class="tlc"><div class="trc">
+					<h2><:cisquel:eq_voir_aussi:></h2>
+				</div></div></div></div></div>
+					<div class="bloc2">
+						<ul>
+						<BOUCLE_mot_article_droite(MOTS){id_article}{par titre}>
+						<BOUCLE_article_lie_droite(ARTICLES){id_mot}{exclus}{doublons}{par num titre}>
+						<li><a href="#URL_ARTICLE" <BOUCLE_nouvelle_fenetre(ARTICLES){id_article}{raccourci=_nouvelle_fenetre}>class="spip_out" title="<:cisquel:eq_voir_article:> (<:cisquel:eq_ouvre_fenetre:>)" </BOUCLE_nouvelle_fenetre> >[(#TITRE|supprimer_numero)]</a></li>
+						</BOUCLE_article_lie_droite>
+						</BOUCLE_mot_article_droite>
+						</ul>
+					</div>
+				</B_mot_article_droite>
+				[<div class="visuel"><img src="(#LOGO_ARTICLE||extraire_attribut{'src'})" alt="" /></div>]
+				<div class="blocoutil">
+				<a rel="noindex,nofollow" href="javascript:chainemail('[(#NOM_SITE_SPIP|ciparam_filtre_mailto{#CHARSET})]  [(#TITRE|supprimer_numero|ciparam_filtre_mailto{#CHARSET})]')" title="<:cisquel:eq_envoyer_courriel:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><:cisquel:eq_envoyer_courriel:></a>
+				<a href="[(#URL_PAGE{article_print}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_imprimer_page:>" class="imprimer"><:cisquel:eq_imprimer:></a>
+
+				[(#PLUGIN{cinotif}|oui)
+					[(#CONFIG{cinotif_article}|=={non}|non)
+				<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:abonner:>" class="abonner"><:cisquel:abonner:></a>
+				<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-article}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{desabonner,oui})]" title="<:cisquel:desabonner:>" class="desabonner"><:cisquel:desabonner:></a>
+					]
+				]
+
+				<BOUCLE_reader(ARTICLES){raccourci=_reader_acrobat_ou_autre}{par num titre}>
+				<a rel="noindex,nofollow" href="[(#URL_ARTICLE)]" class="acrobat">[<img src="(#LOGO_ARTICLE||image_reduire{19,0}|extraire_attribut{'src'})" alt="" border="0" />][<span>(#TITRE|supprimer_numero)</span>]</a>
+				</BOUCLE_reader>		
+				</div>
+				[(#ID_RUBRIQUE|cisquel_rubrique_ec|=={oui}|oui)
+				<div class="blocoutil">
+				<a rel="noindex,nofollow" href="[(#URL_PAGE{envoi_membre}|parametre_url{id_article,#ID_ARTICLE})]" title="<:cisquel:eq_envoyer_membres:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><:cisquel:eq_envoyer_membres:></a>
+				</div>
+				]
+			</div>

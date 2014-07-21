@@ -1,0 +1,23 @@
+#CACHE{0}
+[(#REM) Pour respecter le droit de voir ou non certains liens
+	il faut une boucle articles, une boucle rubriques, une boucles sites
+	avec des jointures sur cilien 
+]
+
+[(#REM) Les objets ne sont pas cliquables afin qu'un eventuel
+	outil de verification de lien ne les visite pas.
+]
+
+<h1><:cilien:sites_references_publies:></h1>
+<:cilien:listeajour:>
+
+<B_syndic>
+[<div class="folio"><div class="pagination">(#PAGINATION{page_cilien})</div></div>]
+<ul><li>
+<BOUCLE_syndic(SITES){statut=publie}{par url_site,id_syndic}{pagination 400}>
+[(#URL_SITE|unique|oui)</li><li><a href='[(#URL_SITE)]'>[(#URL_SITE)]</a>] (<:info_site_reference_2:> #ID_SYNDIC)
+</BOUCLE_syndic>
+</li></ul>
+</B_syndic>
+<h3><:avis_aucun_resultat:></h3>
+<//B_syndic>

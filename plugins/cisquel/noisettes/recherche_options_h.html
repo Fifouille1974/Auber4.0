@@ -1,0 +1,108 @@
+#CACHE{0}
+
+#SET{cimno,'cisquelmnogosearch'}	
+#SET{cioptions,''}	
+[(#ENV{recherche_avancee}|=={oui}|oui)
+	#SET{cioptions,'oui'}
+]
+
+#SET{cimontri,''}
+#SET{ciage,''}
+#SET{cidatedebut,''}
+#SET{cidatefin,''}
+
+#SET{tableautritoussens, #ARRAY{0,date,1,datedesc}}
+
+[(#ENV{tri}|in_array{#GET{tableautritoussens}}|oui)
+	#SET{cimontri,#ENV{tri}}
+]
+[(#ENV{age}|intval|>{0}|oui)
+	[(#SET{ciage,[(#ENV{age}|intval)]})]
+]
+[(#ENV{datedebut}|oui)
+	#SET{cidatedebut,#ENV{datedebut}|cisquel_verifier_et_convertir_date}
+]
+[(#ENV{datefin}|oui)
+	#SET{cidatefin,#ENV{datefin}|cisquel_verifier_et_convertir_date}
+]
+
+[(#SET{cirecherche,[(#RECHERCHE|cisquel_filtrer_recherche)]})]
+
+
+<a href="[(#GET{cioptions}|oui)[(#SELF|parametre_url{recherche_avancee,non})]][(#GET{cioptions}|non)[(#SELF|parametre_url{recherche_avancee,oui}|parametre_url{'recherche',#GET{cirecherche}}|parametre_url{'tri',#GET{cimontri}}|parametre_url{'age',#GET{ciage}}|parametre_url{'datedebut',#GET{cidatedebut}}|parametre_url{'datefin',#GET{cidatefin}})]]" onclick="Javascript:ci_show_hide('recherche_options_h'); return false;" [(#VAL{cisqueloptionsrecherchecolcentrale}|cisquel_config|=={oui}|non)style="display: none;"]><:cisquel:recherche_avancee:></a>
+
+
+<div id="recherche_options_h" [(#GET{cioptions}|non)style="display: none;"]>
+
+		
+			<div class="options">
+					<label class="labeloption" for="tri"><:cisquel:tri:></label>
+					<select id="tri" name="tri">
+						<option value="" [(#ENV{tri}|non)selected="selected"]><:cisquel:parpertinence:></option>
+						<option value="datedesc" [(#ENV{tri}|=={datedesc}?{selected="selected"})]><:cisquel:pardatedesc:></option>
+						<option value="date" [(#ENV{tri}|=={date}?{selected="selected"})]><:cisquel:pardate:></option>
+					</select>
+			</div>
+		
+			<div class="options">
+					<label class="labeloption" for="age"><:cisquel:depuis:></label>
+					<select id="age" name="age">
+						<option value="" [(#ENV{age}|non)selected="selected"]><:cisquel:dateindif:></option>
+						<option value="2" [(#ENV{age}|=={2}?{selected="selected"})]>2 <:date_jours:></option>
+						<option value="7" [(#ENV{age}|=={7}?{selected="selected"})]>7 <:date_jours:></option>
+						<option value="15" [(#ENV{age}|=={15}?{selected="selected"})]>15 <:date_jours:></option>
+						<option value="31" [(#ENV{age}|=={31}?{selected="selected"})]>1 <:date_mois:></option>
+						<option value="91" [(#ENV{age}|=={91}?{selected="selected"})]>3 <:date_mois:></option>
+						<option value="182" [(#ENV{age}|=={182}?{selected="selected"})]>6 <:date_mois:></option>
+						<option value="365" [(#ENV{age}|=={365}?{selected="selected"})]>1 <:cisquel:date_an:></option>
+					</select>
+			</div>
+				
+			<div class="options">
+					<div><:cisquel:periode:></div>
+					<label for="datedebut" class="datedebut"><:cisquel:datedebut:> <:cisquel:format_date:></label>
+					<input type="text" class="date" name="datedebut" id="datedebut" value="[(#ENV{datedebut}|cisquel_verifier_date)]" />
+					<div class="clearer">&nbsp;</div>
+					<label for="datefin" class="datefin"><:cisquel:datefin:> <:cisquel:format_date:></label>
+					<input type="text" class="date" name="datefin" id="datefin" value="[(#ENV{datefin}|cisquel_verifier_date)]" />
+					<div class="clearer"></div>
+			</div>
+			
+			[(#SET{les_typesdoc,[(#ENV|cisquel_typesdoc)]})]
+			<B_typesdoc>
+			<div class="options">
+					<label for="typedoch" class="labeloption"><:cisquel:doc_format:></label>
+					<select id="typedoch" name="typedoc">
+						<option value="" [(#ENV{typedoc}|non)selected="selected"]><:cisquel:doc_tous:></option>
+					<BOUCLE_typesdoc(TYPES_DOCUMENTS){extension IN #GET{les_typesdoc}}{par extension}>
+						<option value="#EXTENSION" [(#ENV{typedoc}|=={#EXTENSION}?{selected="selected"})]>[(#EXTENSION|cisquel_typesdoclib)]</option>
+					</BOUCLE_typesdoc>	
+					</select>
+			</div>
+			</B_typesdoc>
+			
+	[(#LANG|cisquel_choixelargirrecherche|=={oui}|oui)
+			<div class="options">
+					<div><:cisquel:elargir_recherche:></div>
+					<div class="radiov">
+					<input id="el_non" type="radio" name="elargir" [(#ENV{elargir}|non)checked="checked"] value="" />
+					<label for="el_non" [(#ENV{elargir}|non) class="gras"]><:cisquel:elargir_non:></label>
+					</div> 
+				
+					[(#VAL{cisquelchoixrecherchesiteetdocuments}|cisquel_config|=={oui}|oui)
+					<div class="radiov">
+					<input id="el_doc" type="radio" name="elargir" [(#ENV{elargir}|=={doc}|oui)checked="checked"] value="doc" />
+					<label for="el_doc" [(#ENV{elargir}|=={doc}|oui) class="gras"]><:cisquel:elargir_doc:>[(#SESSION{id_auteur}|oui) <:cisquel:non_proteges:>]</label>
+					</div> 
+					]
+					
+					[(#VAL{cisquelchoixrecherchetouslessites}|cisquel_config|=={oui}|oui)
+					<div class="radiov">
+					<input id="el_toussites" type="radio" name="elargir" [(#ENV{elargir}|=={toussites}|oui)checked="checked"] value="toussites" />
+					<label for="el_toussites" [(#ENV{elargir}|=={toussites}|oui) class="gras"]><:cisquel:elargir_toussites:>[(#SESSION{id_auteur}|oui) <:cisquel:non_proteges:>]</label>
+					</div> 
+					]
+			</div>
+	]
+		
+</div>

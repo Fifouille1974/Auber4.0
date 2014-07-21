@@ -1,0 +1,114 @@
+<?php
+/* ----------------------------------------------
+Le present fichier de parametrage doit etre renomme _config_cisquel.php
+puis place dans le dossier /config de SPIP
+ou bien il doit etre renomme _config_commun_cisquel.php
+puis place dans le dossier du plugin.
+
+Si les deux fichiers sont presents,
+le contenu de celui present dans /config est prioritaire car il est propre au site
+(le fichier _config_cisquel.php est charge apres le fichier _config_commun_cisquel.php).
+Cela permet d'avoir les parametres communs a tous les sites dans _config_commun_cisquel.php
+et les parametres propres a un site dans _config_cisquel.php
+
+Parametres de configuration pour CISQUEL :
+
+// Afficher le lien « recherche avancee » dans la page des resultats de le recherche 
+// valeurs possible : 'oui', 'non' (la valeur par defaut est 'oui')
+// Exemple :
+$GLOBALS['ciconfig']['cisqueloptionsrecherchecolcentrale'] = 'non';
+
+// Afficher les criteres de recherche dans la colonne de gauche de la page des résultats de le recherche 
+// valeurs possible : 'oui', 'non' (la valeur par defaut est 'oui')
+// Exemple :
+$GLOBALS['ciconfig']['cisqueloptionsrecherchecolgauche'] = 'non';
+
+// Afficher le choix par defaut d'elargir la recherche
+// valeurs possible : 'oui', 'non' (la valeur par defaut est 'non')
+// Exemple :
+$GLOBALS['ciconfig']['cisquelchoixelargirrecherche'] = 'oui';
+
+// tableau des choix d'elargir la recherche selon le type de debut ou de fin d'adresse d'appel du site SPIP
+// Exemple :
+$GLOBALS['ciconfig']['cisquelchoixelargirrecherche_selon_host'] = array('extranet.' => 'non');
+
+// Afficher le choix d'elargir une recherche au contenu des documents du site
+// valeurs possible : 'oui', 'non' (la valeur par defaut est 'non')
+// Exemple :
+$GLOBALS['ciconfig']['cisquelchoixrecherchesiteetdocuments'] = 'oui';
+
+// Afficher le choix d'elargir une recherche a tous les sites et au contenu de leurs documents
+// valeurs possible : 'oui', 'non' (la valeur par defaut est 'non')
+// Exemple :
+$GLOBALS['ciconfig']['cisquelchoixrecherchetouslessites'] = 'oui';
+
+// Moteur de recherche elargie par defaut
+// valeurs possible : 'mnogosearch', 'google' (la valeur par defaut est 'google')
+// Exemple :
+$GLOBALS['ciconfig']['cisquelmoteur'] = 'mnogosearch';
+
+// Tableau des moteurs de recherche elargie selon le type de terminaison de l'adresse d'appel du site SPIP
+// valeurs possible des moteurs : 'mnogosearch', 'google'
+// Exemple :
+$GLOBALS['ciconfig']['cisquelmoteurs_selon_host'] = array('.i2' => 'mnogosearch', '.gouv.fr' => 'google');
+
+// URL du moteur de recherche elargie par defaut (sans http://)
+// Exemples :  'www.google.fr/search', 'recherche.....i2/index.mno'
+// la valeur par defaut est 'www.google.fr/search'
+$GLOBALS['ciconfig']['cisquelmoteururl'] = 'www.google.fr/search';
+
+// Tableau des URLS du moteur de recherche elargie selon le type de terminaison de l'adresse d'appel du site SPIP
+// Exemple :
+$GLOBALS['ciconfig']['cisquelmoteursurls_selon_host'] = array('.i2' => 'recherche.....i2/index.mno');
+
+// Domaine de recherche eventuel pour la recherche elargie a tous les sites (utile pour google uniquement)
+// Exemple :
+$GLOBALS['ciconfig']['cisqueldomainetoussites'] = '.developpement-durable.gouv.fr';
+
+// Tableau de certains parametres de mnogosearch (uniquement ceux qui figurent dans l'exemple suivant)
+// les valeurs par defaut sont celles qui figurent dans l'exemple suivant
+// Exemple :
+$GLOBALS['ciconfig']['cisquelmnogosearch'] = array(
+'avancee' => '',
+'s' => 'R',
+'ps' => '15',
+'cat' => '',
+'wf' => '0A8A0000AAF7FACC1',
+'fmt' => 'long',
+'ftm' => 'long',
+'tl' => 'yes',
+'m' => 'all',
+'categorie' => '',
+'type' => '',
+'dp' => '0',
+'dt' => 'back');
+
+// Affiner la recherche pour les types de documents (hors html) suivants (mettre l'extension en minuscules sans le point)
+// Attention : les libelles doivent etre independants de la langue (fr, es, de)
+$GLOBALS['ciconfig']['cisqueltypesdocuments'] = array('pdf'=>'Adobe PDF (*.pdf)','odt'=>'OpenOffice Text (*.odt)');
+
+// Types de documents (hors html) indexes par mnogosearch (mettre l'extension en minuscules sans le point)
+// valeur par defaut : array('pdf','odt','doc');
+// Exemple :
+$GLOBALS['ciconfig']['cisquelmnotypesdocuments'] = array('pdf','odt','doc');
+
+// Par defaut, l'ordre de recherche du HOST dans les variables HTTP est : 'HTTP_X_FORWARDED_SERVER','SERVER_NAME','HTTP_HOST'
+// Si l'hebergeur n'est pas compatible avec cet ordre, on peut definir l'ordre a prendre en compte.
+// Exemple :
+$GLOBALS['ciconfig']['cisquelhostordre'] = array('HTTP_X_FORWARDED_SERVER','SERVER_NAME','HTTP_HOST');
+
+// Option qui necessite le template de mnogosearch du MEDDTL
+// Afficher dans la page (et pas par redirection) les resultats trouves par mnogosearch pour ce site
+// valeurs possible : 'oui', 'non' (la valeur par defaut est 'non')
+// Exemple :
+$GLOBALS['ciconfig']['cisquelgetmnosite'] = 'oui';
+
+// Option qui necessite le template de mnogosearch du MEDDTL
+// Afficher dans la page (et pas par redirection) les resultats trouves par mnogosearch pour TOUS les sites
+// valeurs possible : 'oui', 'non' (la valeur par defaut est 'non')
+// Exemple :
+$GLOBALS['ciconfig']['cisquelgetmnotoussites'] = 'oui';
+
+----------------------------------------------- */
+
+?>

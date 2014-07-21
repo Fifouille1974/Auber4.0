@@ -1,0 +1,16 @@
+#CACHE{0}
+		<BOUCLE_colonne_gauche(RUBRIQUES){id_rubrique}{id_parent!=0}>
+		<div id="menu1">
+		<h1 class="invisible"><:cisquel:eq_menu_gauche:></h1>
+			<BOUCLE_parent_rubriques_gauche(RUBRIQUES){id_enfant}>
+				<div class="boxtitregauche"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><h2>[(#TITRE|supprimer_numero)]</h2></div></div></div></div></div>
+			</BOUCLE_parent_rubriques_gauche>
+			<B_autres_rubriques_gauche>
+				<ul>
+				<BOUCLE_autres_rubriques_gauche(RUBRIQUES){meme_parent}{par num titre}>
+				<li><a href="#URL_RUBRIQUE" [class="(#EXPOSE)"]>[(#TITRE|supprimer_numero)]</a></li>
+				</BOUCLE_autres_rubriques_gauche>
+				</ul>
+			</B_autres_rubriques_gauche>
+		</div>
+		</BOUCLE_colonne_gauche>

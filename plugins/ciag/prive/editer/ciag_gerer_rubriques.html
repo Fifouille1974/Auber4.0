@@ -1,0 +1,14 @@
+<div class='cadre cadre-formulaire-editer'>
+<div class="entete-formulaire">
+[(#SPIP_VERSION|>={3}|oui)
+	[(#URL_ECRIRE{ciag_groupe_auteurs,id_groupe=#ENV{new}}|ciag_icone_verticale{<:icone_retour:>,rubrique,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+]
+[(#SPIP_VERSION|>={3}|non)
+	#ENV**{icone_retour}
+]
+
+[<:ciag:rubriques_de_ce_groupe:>
+<h1>(#ENV{titre})</h1>]
+</div>
+#FORMULAIRE_CIAG_GERER_RUBRIQUES{#ENV{new},#ENV{redirect},#ENV{config_fonc}}
+</div>

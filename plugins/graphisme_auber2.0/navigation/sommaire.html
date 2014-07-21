@@ -1,0 +1,81 @@
+				<div id="menu1">
+				<h1 class="invisible"><:cisquel:eq_menu_gauche:></h1>
+					<BOUCLE_colonne_gauche(RUBRIQUES){raccourci=_portail_gauche_titre_bloc}{par num titre}>
+    					<div class="boxtitregauche"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><h2>[(#TITRE|supprimer_numero)]</h2></div></div></div></div></div>
+						<ul>
+						<BOUCLE_sous_rubrique_gauche(RUBRIQUES){id_parent}{raccourci=_portail_gauche}{par num titre}>
+						<li><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></li>
+						</BOUCLE_sous_rubrique_gauche>
+						<BOUCLE_article_gauche(ARTICLES){id_rubrique}{raccourci=_portail_gauche}{par num titre}>
+						<li><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a></li>
+						</BOUCLE_article_gauche>
+						<BOUCLE_sites_gauche(SITES){id_rubrique}{raccourci=_portail_gauche}{par num nom_site}>
+						<li><a href="#URL_SITE" title="<:cisquel:eq_visiter_site:> [(#NOM_SITE|supprimer_numero)] (<:cisquel:eq_ouvre_fenetre:>)" class="spip_out">[(#NOM_SITE|supprimer_numero)]</a></li>
+						</BOUCLE_sites_gauche>
+						</ul>
+						
+						
+					</BOUCLE_colonne_gauche>
+					
+				<div id="icone_pratique">
+					<LINK rel=stylesheet type="text/css" href="plugins/graphisme_auber2.0/_css/style-pratique.css">
+					<script src="plugins/graphisme_auber2.0/_js/script-icono.js"></script>
+					<h2>Pratique</h2>
+
+					<!--PREMIERE LIGNE -->
+					<a href="http://intranet.mairie-aubervilliers.fr/auber4.0/spip.php?rubrique42"><div id="agenda_icon"><img src="plugins/graphisme_auber2.0/ICONES/png/icone-agenda.png" />
+					<span class="legend agenda-legend">Agenda</span></a></div>
+					<span id="bulle_agenda" class="invisible"><div class="arrow-up-agenda"></div>Les <strong>sorties culturelles</strong> de la ville d'Aubervilliers</span>
+
+
+					<a href="http://intranet.mairie-aubervilliers.fr/auber4.0/spip.php?rubrique1722"><div id="plan_icon"><img src="plugins/graphisme_auber2.0/ICONES/png/icone-plan.png" />
+					<span class="legend plan-legend">Plans</span></a></div>
+					<span id="bulle_plan" class="invisible"><div class="arrow-up-plan"></div>Les <strong>plans</strong> de la ville d'Aubervilliers</span>
+
+					<a href="http://intranet.mairie-aubervilliers.fr/auber4.0/spip.php?rubrique224"><div id="travaux_icon"><img src="plugins/graphisme_auber2.0/ICONES/png/icone-travaux.png" />
+					<span class="legend travaux-legend">Travaux</span></a></div>
+					<span id="bulle_travaux" class="invisible"><div class="arrow-up-travaux"></div>Aubervilliers, en pleine évolution. Les <strong>travaux</strong> sur la ville.</span>
+
+					<!--DEUXIEME LIGNE -->
+					<a href="http://intranet.mairie-aubervilliers.fr/auber4.0/spip.php?rubrique28"><div id="demarches_icon"><img src="plugins/graphisme_auber2.0/ICONES/png/icone-demarches.png" />
+					<span class="legend demarches-legend">Démarches </span></a></div>
+					<span id="bulle_demarches" class="invisible"><div class="arrow-up-demarches"></div>Les <strong>démarches administratives</strong> à Aubervilliers</span>
+
+					<a href="http://intranet.mairie-aubervilliers.fr/auber4.0/spip.php?rubrique36"><div id="quartier_icon"><img src="plugins/graphisme_auber2.0/ICONES/png/icone-quartier.png" />
+					<span class="legend quartier-legend">Quartiers</span></a></div>
+					<span id="bulle_quartier" class="invisible"><div class="arrow-up-quartier"></div>Les <strong>quartiers</strong> d'Aubervilliers</span>
+
+					<a href="http://intranet.mairie-aubervilliers.fr/auber4.0/spip.php?article4644"><div id="circulation_icon"><img src="plugins/graphisme_auber2.0/ICONES/png/icone-circulation.png" />
+					<span class="legend circulation-legend">Circulation</span></a></div>
+					<span id="bulle_circulation" class="invisible"><div class="arrow-up-circulation"></div>La <strong>circulation</strong> à Aubervilliers</span>
+
+					<!--TROISIEME LIGNE -->
+					<a href="http://intranet.mairie-aubervilliers.fr/auber4.0/spip.php?rubrique306"><div id="archives_icon"><img src="plugins/graphisme_auber2.0/ICONES/png/icone-archives.png" />
+					<span class="legend archives-legend">Archives </span></a></div>
+					<span id="bulle_archives" class="invisible"><div class="arrow-up-archives"></div>Les <strong>archives</strong> à Aubervilliers</span>
+
+					<a href="http://intranet.mairie-aubervilliers.fr/auber4.0/spip.php?rubrique6"><div id="images_icon"><img src="plugins/graphisme_auber2.0/ICONES/png/icone-image.png" />
+					<span class="legend images-legend">Images</span></a></div>
+					<span id="bulle_images" class="invisible"><div class="arrow-up-images"></div>Les <strong>images</strong> d'Aubervilliers</span>
+
+					<a href="http://intranet.mairie-aubervilliers.fr/auber4.0/spip.php?rubrique99"><div id="videos_icon"><img src="plugins/graphisme_auber2.0/ICONES/png/icone-videos.png" />
+					<span class="legend videos-legend">Vidéos</span></a></div>
+					<span id="bulle_videos" class="invisible"><div class="arrow-up-videos"></div>La <strong>vidéo</strong> à Aubervilliers</span>
+
+					<!--QUATRIEME LIGNE -->
+					<a href="http://intranet.mairie-aubervilliers.fr/auber4.0/spip.php?article104"><div id="urgences_icon"><img src="plugins/graphisme_auber2.0/ICONES/png/icone-urgences.png" />
+					<span class="legend urgences-legend">Urgences </span></a></div>
+					<span id="bulle_urgences" class="invisible"><div class="arrow-up-urgences"></div>Les <strong>Urgences</strong> à Aubervilliers</span>
+
+					<a href="http://intranet.mairie-aubervilliers.fr/auber4.0/spip.php?rubrique137"><div id="proprete_icon"><img src="plugins/graphisme_auber2.0/ICONES/png/icone-proprete.png" />
+					<span class="legend proprete-legend">Propreté</span></a></div>
+					<span id="bulle_proprete" class="invisible"><div class="arrow-up-proprete"></div>La <strong>Propreté</strong> d'Aubervilliers</span>
+
+					<a href="http://intranet.mairie-aubervilliers.fr/auber4.0/spip.php?article4885"><div id="rss_icon"><img src="plugins/graphisme_auber2.0/ICONES/png/icone-rss.png" />
+					<span class="legend rss-legend">RSS</span></a></div>
+					<span id="bulle_rss" class="invisible"><div class="arrow-up-rss"></div>Les <strong>Flux RSS</strong> de la ville d'Aubervilliers</span>
+
+					</div>
+                    
+                
+				</div>

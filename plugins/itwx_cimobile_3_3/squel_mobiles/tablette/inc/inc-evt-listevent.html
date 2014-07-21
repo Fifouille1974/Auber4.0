@@ -1,0 +1,39 @@
+<B_evt_list>
+<a id='pagination_evt_list'></a>
+  <div class="group bord"><:itwx:evenements:></div>
+	<div class="menu agenda">
+	<ul>				
+	<BOUCLE_evt_list(EVENEMENTS){par date}{age_fin<0} {pagination}>
+		<li class="hentry_published" onclick="window.location.href='[(#URL_PAGE{evenement}|parametre_url{id_evenement,#ID_EVENEMENT})]'">
+			<span class="published">
+			[(#DATE_DEBUT|jour)] 	
+			[(#DATE_DEBUT|nom_mois|couper{3})]	
+								
+			[(#DATE_DEBUT|jour|=={[(#DATE_FIN|jour)]}|?{
+						
+			[(#HORAIRE|=={oui}|?{- 
+			[(#REM) memes heures ?]
+			[(#DATE_DEBUT|=={#DATE_FIN}|?{<small>
+			[(#DATE_DEBUT|heures)]:[(#DATE_DEBUT|minutes)]</small>,''})]
+			[(#REM) pas memes heures ?]
+			[(#DATE_DEBUT|!={#DATE_FIN}|?{<small>
+			[(#DATE_DEBUT|heures)]:[(#DATE_DEBUT|minutes)] /
+			[(#DATE_FIN|heures)]:[(#DATE_FIN|minutes)]</small>,''})]
+			,''})]
+			,
+			[(#HORAIRE|=={oui}|?{<small>-
+			[(#DATE_DEBUT|heures)]:[(#DATE_DEBUT|minutes)]</small>,''})] /
+			[(#DATE_FIN|jour)] [(#DATE_FIN|nom_mois|couper{3})]	
+			[(#HORAIRE|=={oui}|?{<small>-
+			[(#DATE_FIN|heures)]:[(#DATE_FIN|minutes)]</small>
+			,''})]
+			})]
+			</span>
+			<br />
+        <a href="[(#URL_PAGE{evenement}|parametre_url{id_evenement,#ID_EVENEMENT})]"[ class="(#EXPOSE)"]>[(#TITRE|supprimer_numero)]</a>
+		</li>
+	</BOUCLE_evt_list>
+	</ul>
+	</div>
+[<div class="pagination">(#PAGINATION)</div>]
+</B_evt_list>

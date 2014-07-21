@@ -1,0 +1,11 @@
+  <BOUCLE_menu_rubrique_invisible(RUBRIQUES) {racine} {titre_mot = invisible} {doublons}></BOUCLE_menu_rubrique_invisible>
+  <B_rubriques>
+  <div class="group"><:rubriques:></div>	
+   <div class="listmenu">	
+    <ul>
+    <BOUCLE_rubriques(RUBRIQUES) {racine} {par num titre, titre}{doublons}>		
+     <li><a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></li>
+    </BOUCLE_rubriques>
+    </ul>
+   </div>
+  </B_rubriques>

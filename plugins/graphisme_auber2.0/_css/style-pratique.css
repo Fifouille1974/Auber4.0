@@ -1,0 +1,376 @@
+#agenda_icon, #plan_icon, #travaux_icon, #proprete_icon, #demarches_icon, #quartier_icon, #circulation_icon, #archives_icon, #images_icon, #videos_icon, #urgences_icon, #rss_icon {
+	width:36px;
+	height:36px;
+	float:left;
+ 	margin-top:10px;
+	margin-left:1px; 
+}
+
+#icone_pratique, #aubermensuel {
+	width:154px;
+	height:260px;
+	/*background-color:red;*/
+	border:1px solid #3f6eb4;
+	border-radius:4px;
+	margin-left:10px;
+	padding-top: 2px;
+}
+
+#icone_pratique strong{
+	color: #03a8ae;
+}
+
+#bulle_newsletter strong{
+	color: #03a8ae;
+}
+
+#aubermensuel {
+	margin-top:	10px;
+}
+
+
+/* ICONES */
+#agenda_icon{
+	margin-left: 10px;
+	margin-right: 5px;
+	text-align: center;
+}
+
+#plan_icon{
+	margin-left: 8px;
+	margin-right: 5px;
+	text-align: center;
+}
+
+#travaux_icon{
+	margin-left: 8px;
+	margin-right: 5px;
+	text-align: center;
+}
+
+#proprete_icon{
+	margin-left: 8px;
+	margin-right: 5px;
+	text-align: center;
+	margin-top:20px;
+}
+
+#demarches_icon{
+	margin-left: 10px;
+	margin-right: 5px;
+	text-align: center;	
+	margin-top:20px;
+	
+}
+
+#quartier_icon {
+	margin-left: 8px;
+	margin-right: 5px;
+	text-align: center;
+	margin-top:20px;
+}
+
+#circulation_icon {
+	margin-left: 8px;
+	margin-right: 5px;
+	text-align: center;
+	margin-top:20px;
+}
+
+#archives_icon{
+	margin-left: 10px;
+	margin-right: 5px;
+	text-align: center;
+	margin-top:20px;
+	
+}
+
+#images_icon {
+	margin-left: 8px;
+	margin-right: 5px;
+	text-align: center;
+	margin-top:20px;
+}
+
+#videos_icon {
+	margin-left: 8px;
+	margin-right: 5px;
+	text-align: center;
+	margin-top:20px;
+}
+
+#urgences_icon {
+	margin-left: 10px;
+	margin-right: 5px;
+	text-align: center;
+	margin-top:20px;
+}
+
+#rss_icon {
+	margin-left: 8px;
+	margin-right: 5px;
+	text-align: center;
+	margin-top:20px;
+}
+
+/*LEGENDES */
+
+.demarches-legend {
+	margin-left: -6px;
+}
+
+.circulation-legend {
+	margin-left:-5px
+}
+
+.proprete-legend{
+	margin-left:-2px;
+}
+
+.urgences-legend{
+	margin-left:-2px;
+}
+
+.image-legend{
+	margin-left:-2px;
+}
+
+#icone_pratique > div > a > img {
+	padding-bottom: 2px;
+}
+
+#icone_pratique h2, #aubermensuel h2 {
+	font-size: 0.75em;
+	color: #FFFFFF;
+	font-weight: bold;
+	background: #3f6eb4;
+	border-top: 1px solid #6c96c6;
+	padding: 2px 6px;
+	border-radius: 4px 4px 0 0;
+	margin-left: -1px;
+	margin-top: -3px;
+	width: 142px;
+}
+
+span.legend {
+	font-size:0.593749rem;
+	font-family:Arial;
+	margin-top:2px;
+}
+
+#icone_pratique a {
+	font-size:9px;
+	font-family:Arial;
+	color:black;
+	text-decoration:none;
+}
+
+#icone_pratique a:hover {
+	font-size:9px;
+	font-family:Arial;
+	color:#3f6eb4;
+	text-decoration:underline;
+}
+/* BULLES */
+
+#bulle_agenda, #bulle_plan, #bulle_travaux {
+	width: 200px;
+	height: 25px;
+	position: absolute;
+	background-color: white;
+	font-family:Arial;
+	font-size:13px;
+	padding: 12px 7px 4px 7px;
+	margin-top:71px;
+	margin-left:-45px;
+	border-radius:2px;
+	-webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.68);
+	-moz-box-shadow:    2px 2px 5px 0px rgba(0, 0, 0, 0.68);
+	box-shadow:         2px 2px 5px 0px rgba(0, 0, 0, 0.68);	
+	border: 3px solid #6083B6;
+	z-index: 999;
+}
+
+#bulle_demarches, #bulle_quartier, #bulle_circulation {
+	width: 200px;
+	height: 25px;
+	position: absolute;
+	background-color: white;
+	font-family:Arial;
+	font-size:13px;
+	padding: 12px 7px 4px 7px;
+	margin-top:128px;
+	margin-left:-45px;
+	border-radius:2px;
+	-webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.68);
+	-moz-box-shadow:    2px 2px 5px 0px rgba(0, 0, 0, 0.68);
+	box-shadow:         2px 2px 5px 0px rgba(0, 0, 0, 0.68);	
+	border: 3px solid #6083B6;
+	z-index: 999;
+}
+
+#bulle_archives, #bulle_images, #bulle_videos {
+	width: 200px;
+	height: 25px;
+	position: absolute;
+	background-color: white;
+	font-family:Arial;
+	font-size:13px;
+	padding: 12px 7px 4px 7px;
+	margin-top:183px;
+	margin-left:-45px;
+	border-radius:2px;
+	-webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.68);
+	-moz-box-shadow:    2px 2px 5px 0px rgba(0, 0, 0, 0.68);
+	box-shadow:         2px 2px 5px 0px rgba(0, 0, 0, 0.68);	
+	border: 3px solid #6083B6;
+	z-index: 999;
+}
+
+#bulle_urgences, #bulle_proprete, #bulle_rss {
+	width: 200px;
+	height: 25px;
+	position: absolute;
+	background-color: white;
+	font-family:Arial;
+	font-size:13px;
+	padding: 12px 7px 4px 7px;
+	margin-top:240px;
+	margin-left:-45px;
+	border-radius:2px;
+	-webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.68);
+	-moz-box-shadow:    2px 2px 5px 0px rgba(0, 0, 0, 0.68);
+	box-shadow:         2px 2px 5px 0px rgba(0, 0, 0, 0.68);	
+	border: 3px solid #6083B6;
+	z-index: 999;
+}
+
+/*ARROW*/
+
+.arrow-up-agenda, .arrow-up-plan, .arrow-up-travaux {
+	background-image:url('../ICONES/png/arrow.png');
+	background-repeat:no-repeat;
+	width: 30px; 
+	height: 15px; /* 
+	border-left: 7px solid transparent;
+	border-right: 7px solid transparent;
+	border-bottom: 7px solid #6083B6; */
+	margin-top:-27px;
+	padding-bottom: 5px;
+}
+
+.arrow-up-agenda{
+	margin-left:50px;
+}
+
+.arrow-up-plan {
+	margin-left:100px;
+}
+
+.arrow-up-travaux {
+	margin-left:150px;
+}
+
+
+.arrow-up-demarches, .arrow-up-quartier, .arrow-up-circulation {
+	background-image:url('../ICONES/png/arrow.png');
+	background-repeat:no-repeat;
+	width: 30px; 
+	height: 15px; /* 
+	border-left: 7px solid transparent;
+	border-right: 7px solid transparent;
+	border-bottom: 7px solid #6083B6; */
+	margin-top:-27px;
+	padding-bottom: 5px;
+}
+
+.arrow-up-demarches{
+	margin-left:50px;
+}
+
+.arrow-up-quartier {
+	margin-left:100px;
+}
+
+.arrow-up-circulation {
+	margin-left:150px;
+}
+
+
+.arrow-up-archives, .arrow-up-images, .arrow-up-videos {
+	background-image:url('../ICONES/png/arrow.png');
+	background-repeat:no-repeat;
+	width: 30px; 
+	height: 15px; /* 
+	border-left: 7px solid transparent;
+	border-right: 7px solid transparent;
+	border-bottom: 7px solid #6083B6; */
+	margin-top:-27px;
+	padding-bottom: 5px;
+}
+
+.arrow-up-archives{
+	margin-left:50px;
+}
+
+.arrow-up-images {
+	margin-left:100px;
+}
+
+.arrow-up-videos {
+	margin-left:150px;
+}
+
+.arrow-up-urgences, .arrow-up-proprete, .arrow-up-rss, .arrow-up-newsletter {
+	background-image:url('../ICONES/png/arrow.png');
+	background-repeat:no-repeat;
+	width: 30px; 
+	height: 15px; /* 
+	border-left: 7px solid transparent;
+	border-right: 7px solid transparent;
+	border-bottom: 7px solid #6083B6; */
+	margin-top:-27px;
+	padding-bottom: 5px;
+}
+
+.arrow-up-urgences{
+	margin-left:50px;
+}
+
+.arrow-up-proprete {
+	margin-left:100px;
+}
+
+.arrow-up-rss {
+	margin-left:150px;
+}
+
+.arrow-up-newsletter{
+	margin-left:90px;
+}
+
+.visible{
+	display:block !important;
+}
+
+.invisible{
+	display:none;
+}
+
+#bulle_newsletter {
+width: 200px;
+height: 40px;
+position: absolute;
+background-color: white;
+font-family: Arial;
+font-size: 13px;
+padding: 12px 7px 4px 7px;
+margin-top: 0px;
+margin-left: -26px;
+/* border-radius: 2px; */
+-webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.68);
+-moz-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.68);
+box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.68);
+border: 3px solid #6083B6;
+z-index: 999;
+}

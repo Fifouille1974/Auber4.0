@@ -1,0 +1,18 @@
+#CACHE{365*24*3600}				
+	<form method="get" action="">
+	<input type="hidden" name="page" value="archive_article" />
+	<select name="date">
+	<option value="" selected="selected"><:cisquel:eq_choisir_une_annee:>&nbsp;&nbsp;</option>
+		<BOUCLE_art_dernier(ARTICLES){raccourci=_portail_actu}{par date}{inverse}{0,1} >
+		[(#SET{derniere_annee,[(#DATE|annee)]})]
+		</BOUCLE_art_dernier>
+         
+		<BOUCLE_art_premier(ARTICLES){raccourci=_portail_actu}{par date}{0,1} >
+		[(#SET{premiere_annee,[(#DATE|annee)]})]
+		</BOUCLE_art_premier>
+
+		[(#GET{premiere_annee}|ciparam_select_annees{#GET{derniere_annee}})]
+
+	</select>
+	<input type="submit" name="masquable" value="OK" title="OK" />
+	</form>

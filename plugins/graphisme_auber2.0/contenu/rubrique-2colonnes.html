@@ -1,0 +1,81 @@
+<BOUCLE_contenu(RUBRIQUES){id_rubrique}>
+				<div class="rub">
+				<h2>[(#TITRE|supprimer_numero)]</h2>
+			      	[<div class="texte">(#TEXTE)</div>]
+				[<div class="texte">(#NOTES)</div>]
+				</div>
+			      	
+				<div class="listerub1sur2">
+				<BOUCLE_sous_rubriques_col1(RUBRIQUES){id_parent}{par num titre} {inverse}{1/2}>
+				<div class="listerub">
+				<li>
+				<!-- 	[<img src="(#LOGO_RUBRIQUE||image_reduire{44,0}|extraire_attribut{'src'})" alt=""  class="rightill" />] -->
+				      	<a href="#URL_RUBRIQUE" class="titresousrub" class="puce">[(#TITRE|supprimer_numero)]</a>
+				      	[<div class="textesousrub">(#DESCRIPTIF)</div>]
+						
+				</li>
+					<B_sous_sous_rubriques_col1>
+					<div class="liens">
+					<ul>
+					<BOUCLE_sous_sous_rubriques_col1(RUBRIQUES){id_parent}{par num titre} {inverse}>
+					
+					<li><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></li>
+					</BOUCLE_sous_sous_rubriques_col1>
+					</ul>
+				      	</div>
+					</B_sous_sous_rubriques_col1>
+					<div class="clearer">&nbsp;</div>
+				</div>
+				</BOUCLE_sous_rubriques_col1>
+				</div>
+
+				<div class="listerub2sur2">
+				<BOUCLE_sous_rubriques_col2(RUBRIQUES){id_parent}{par num titre} {inverse}{2/2}>
+				<div class="listerub">
+				<li>
+					<!-- [<img src="(#LOGO_RUBRIQUE||image_reduire{44,0}|extraire_attribut{'src'})" alt=""  class="rightill" />] -->
+				      	
+						<a href="#URL_RUBRIQUE" class="titresousrub">[(#TITRE|supprimer_numero)]</a>
+				      	[<div class="textesousrub">(#DESCRIPTIF)</div>]
+				</li>
+					<B_sous_sous_rubriques_col2>
+					<div class="liens">
+					<ul>
+					<BOUCLE_sous_sous_rubriques_col2(RUBRIQUES){id_parent}{par num titre} {inverse}>
+					<li><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></li>
+					</BOUCLE_sous_sous_rubriques_col2>
+					</ul>
+				      	</div>
+					</B_sous_sous_rubriques_col2>
+					<div class="clearer">&nbsp;</div>
+				</div>
+				</BOUCLE_sous_rubriques_col2>
+				</div>
+
+				<div class='clearer'>&nbsp;</div>	
+
+				#SET{ci_mots, #ARRAY{}}
+				<BOUCLE_mot_sous_rubrique(MOTS){id_rubrique}{type=_multirubricage}{par titre}>
+				[(#SET{ci_mots, #GET{ci_mots}|push{#ID_MOT}})]
+				</BOUCLE_mot_sous_rubrique>
+				
+				#SET{ci_id_rubrique_multi, #ID_RUBRIQUE}
+			    <BOUCLE_article_sous_rubrique(ARTICLES){id_mot IN #GET{ci_mots}}{doublons}{par #CITRI}{!par #CITRIINVERSE}{par num #CITRINUM}>
+				<div class="listeart">
+					[<img src="(#LOGO_ARTICLE||image_reduire{44,0}|extraire_attribut{'src'})" alt=""  class="rightill" />]
+				      	<a href="[(#URL_ARTICLE|parametre_url{id_rubrique,#GET{ci_id_rubrique_multi}})]" class="titreartliste">[(#TITRE|supprimer_numero)]</a>
+				      	[<div class="texte">(#INTRODUCTION)</div>]
+				 <div class="clearer">&nbsp;</div>    	
+				</div>
+			    </BOUCLE_article_sous_rubrique>
+				
+				<BOUCLE_articles(ARTICLES){id_rubrique}{doublons}{par #CITRI}{!par #CITRIINVERSE}{par num #CITRINUM}>
+				<div class="listeart">
+					[<img src="(#LOGO_ARTICLE||image_reduire{44,0}|extraire_attribut{'src'})" alt=""  class="rightill" />]
+				      	<a href="#URL_ARTICLE" <BOUCLE_nouvelle_fenetre(ARTICLES){id_article}{raccourci=_nouvelle_fenetre}>class="spip_out titreartliste"</BOUCLE_nouvelle_fenetre></B_nouvelle_fenetre>class="titreartliste"<//B_nouvelle_fenetre> >[(#TITRE|supprimer_numero)]</a>
+				      	[<div class="texte">(#INTRODUCTION)</div>]
+				 <div class="clearer">&nbsp;</div>    	
+				</div>
+				</BOUCLE_articles>
+				
+</BOUCLE_contenu>

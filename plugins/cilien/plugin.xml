@@ -1,0 +1,37 @@
+<plugin>
+	<nom>cilien : Liste des liens</nom>
+	<auteur>&#169; C. Imberti</auteur>
+	<icon>pyramides-32.png</icon>
+	<licence>[Creative commons by-nc-sa->http://creativecommons.org/licenses/by-nc-sa/2.0/fr/]</licence>
+	<lien></lien>	
+	<version>1.0</version>
+	<version_base>1.0</version_base>
+	<etat>stable</etat>
+    <slogan>Auteur : &#169; C. Imberti. Licence : Creative commons by-nc-sa.</slogan>
+	<description>
+    Auteur : &#169; C. Imberti. Licence : Creative commons by-nc-sa.<br />
+	Ce plugin maintient une liste des liens ins&#233;r&#233;s dans le contenu &#233;ditorial
+	</description>
+	<prefix>cilien</prefix>
+	<install>base/cilien_install.php</install>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/cilien_tables.php</inclure>
+	</pipeline>	
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/cilien_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_gauche</nom>
+		<inclure>cilien_pipelines.php</inclure>
+	</pipeline>
+
+    <bouton id='ciliengerer' parent='configuration'>
+	<icone>cilien-icone.png</icone>
+		<titre>Liste des liens</titre>
+		<url>ciliengerer</url>
+	</bouton>
+
+	<necessite id="SPIP" version='[2.0.9;]' />
+</plugin>

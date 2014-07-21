@@ -1,0 +1,12 @@
+[(#REM)
+
+	Presenter les regles du jeu du forum sur abonnement
+	avec un lien vers la connexion / l'inscription / le rappel
+
+]
+<fieldset>
+	<legend><:Forum:> <:bouton_radio_modere_abonnement:></legend>
+	<p class="explication"><:cisquel:pour_acceder:></p>
+	&#91;<a href="[(#URL_PAGE{login}|parametre_url{url,#SELF})]"><:login:></a>&#93;
+	&#91;<a href="[(#URL_PAGE{sommaire})]" title="<:cisquel:eq_retour_accueil:>"><:cisquel:eq_retour_accueil:></a>&#93;
+</fieldset>

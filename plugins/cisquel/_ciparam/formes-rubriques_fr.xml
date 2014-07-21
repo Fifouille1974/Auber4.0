@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<item><nom>_2colonnes</nom><description>Les sous rubriques sont présentées sur 2 colonnes</description></item>
+<item><nom>_3colonnes</nom><description>Les sous rubriques sont présentées sur 3 colonnes</description></item>
+<item><nom>_avecactualite</nom><description>Rubrique avec gestion des actualités</description></item>
+<item><nom>_calendrier</nom><description>Calendrier</description></item>
+<item><nom>_cartesites</nom><description>Avec une image cliquable dans le texte de la rubrique (dépt, ...)</description></item>
+<item><nom>_cartesites2</nom><description>Avec une image cliquable dans le texte (une liste déroulante)</description></item>
+<item><nom>_cartesites3</nom><description>Avec une image cliquable dans le texte (sans liste déroulante)</description></item>
+<item><nom>_espacededie</nom><description>Forme Espace dédié</description></item>
+<item><nom>_etablissements</nom><description>Pour présenter une liste d'établissements ou autre</description></item>
+<item><nom>_etablissements2</nom><description>Pour présenter une liste d'établissements ou autre (variante)</description></item>
+<item><nom>_forum</nom><description>Forums (avec un forum par article)</description></item>
+<item><nom>_forumhierarchique</nom><description>Forums hiérarchiques (en plus on peut répondre à une réponse)</description></item>
+<item><nom>_multirubricage</nom><description>Rubrique simulant un multirubricage</description></item>
+<item><nom>_multirubricagetrirubrique</nom><description>Rubrique simulant un multirubricage (tri par rubrique)</description></item>
+<item><nom>_redirection</nom><description>Redirection : affiche directement le dernier article (redirection)</description></item>
+<item><nom>_sansarticle</nom><description>Les sous rubriques et les articles ne sont pas affichés</description></item>
+<item><nom>_souspageaccueil</nom><description>Forme de sous page d'accueil (paramétrable)</description></item>
+<item><nom>_syndication</nom><description>Consacrée aux actualités d'autres sites par syndication</description></item>
+<item><nom>_syndicationtexte</nom><description>Affiche le texte d'un article d'un autre site par syndication</description></item>
+<item><nom>_tableau</nom><description>Tableau : présente les articles dans un tableau</description></item>
+<item><nom>_textearticle</nom><description>Affiche directement le texte de ses articles</description></item>
+<item><nom>_textearticlepagination</nom><description>Affiche directement le texte de ses articles (avec pagination)</description></item>
+<item><nom>_textearticleunparpage</nom><description>Affiche directement le texte de ses articles (un par page)</description></item>
+<item><nom>_inserthead</nom><description>Les librairies javascript sont incluses</description></item>
+<item><nom>_inverse</nom><description>Avec les articles avant les sous rubriques</description></item>
+<item><nom>_syndicationinverse</nom><description>Consacrée aux actualités d'autres sites par syndication (en premier)</description></item>

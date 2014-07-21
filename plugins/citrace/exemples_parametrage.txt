@@ -1,0 +1,48 @@
+// Exemples de parametrage du plugin citrace
+
+
+// Les constantes suivantes peuvent etre placees dans un fichier d'options (mes_options.php ou le fichier d'options d'un plugin)
+// ATTENTION : il est inutile se declarer une de ces constantes si la valeur par defaut convient
+
+
+// Pour definir la periode de rotation des fichiers de trace
+// valeur par defaut : 'mois'
+// valeurs possibles : 'mois' ou 'semaine' ou 'jour'
+// Exemple :
+// define('_CITRACE_PERIODE_ROTATION','mois');
+
+
+// Pour definir le nombre de rotation des fichiers de trace
+// C'est le nombre de periodes qui seront conservees (en plus de la periode en cours)
+// valeur par defaut : 12 si la periode de rotation est 'mois', 52 si 'semaine', 365 si 'jour'
+// valeurs possibles : un nombre entier strictement superieur a zero
+// Exemple :
+// define('_CITRACE_NOMBRE_ROTATIONS',12);
+
+
+// Pour definir la taille maximale en Ko du fichier de trace en cours
+// valeur par defaut : 10000
+// valeurs possibles : un nombre entier (en Ko) strictement superieur a zero
+// Exemple :
+// define('_CITRACE_TAILLE_MAX',10000);
+
+
+// Pour definir si on compresse les fichiers de trace (sauf celui en cours)
+// valeur par defaut : 'oui'
+// valeurs possibles : 'oui' ou 'non'
+// Exemple :
+// define('_CITRACE_COMPRESSE','oui');
+
+
+// Pour definir le repertoire de stockage des fichiers de trace
+// valeur par defaut : 'tmp'
+// valeurs possibles : le nom d'un repertoire (avec son chemin a partir de la racine du site)
+// ATTENTION : ce repertoire doit exister et etre accessible en ecriture pour SPIP
+// Exemple :
+// define('_CITRACE_REPERTOIRE','tmp/trace');
+
+
+// Pour definir l'ordre de recherche personnalisee de l'adresse IP (utile en cas de reverse proxy)
+// valeur par defaut : array('HTTP_X_FORWARDED_FOR','REMOTE_ADDR')
+// Exemple :
+// define('_CI_ORDRE_IP',array('HTTP_X_FORWARDED_FOR','REMOTE_ADDR'));

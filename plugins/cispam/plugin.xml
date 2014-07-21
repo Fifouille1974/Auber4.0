@@ -1,0 +1,36 @@
+<plugin>
+<nom>cispam : Antispam pour les commentaires (forums)</nom>
+<auteur>Cedric Morin (plugin nospam) + C. Imberti (adaptation de nospam)</auteur>
+<icon>pyramides-32.png</icon>
+<licence>GPL</licence>
+<version>1.24</version>
+<etat>stable</etat>
+<description>
+Antispam pour les commentaires par adaptation du plugin NOSPAM.
+En option, il peut supprimer le code HTML dans les forums (voire dans les articles, rubriques, ...).
+</description>
+<prefix>cispam</prefix>
+<pipeline>
+	<nom>pre_edition</nom>
+	<inclure>cispam_pipelines.php</inclure>
+</pipeline>
+<pipeline>
+	<nom>recuperer_fond</nom>
+	<inclure>cispam_pipelines.php</inclure>
+</pipeline>
+<pipeline>
+	<nom>formulaire_charger</nom>
+	<inclure>cispam_pipelines.php</inclure>
+</pipeline>
+<pipeline>
+	<nom>formulaire_verifier</nom>
+	<inclure>cispam_pipelines.php</inclure>
+</pipeline>
+<pipeline>
+	<nom>declarer_tables_interfaces</nom>
+	<inclure>cispam_pipelines.php</inclure>
+</pipeline>
+
+<necessite id="SPIP" version="[2.0.0;]" />
+<necessite id="safehtml" version="[1.0.0;]" />
+</plugin>

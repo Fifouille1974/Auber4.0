@@ -1,0 +1,49 @@
+<div class='cadre cadre-formulaire-editer'>
+<div class="entete-formulaire">
+[(#SPIP_VERSION|>={3}|oui)
+	[(#URL_ECRIRE{ciag_groupe_auteurs,id_groupe=#ENV{new}}|ciag_icone_verticale{<:icone_retour:>,auteur,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+]
+[(#SPIP_VERSION|>={3}|non)
+	#ENV**{icone_retour}
+]
+
+[<:ciag:auteurs_de_ce_groupe:>
+<h1>(#ENV{titre})</h1>
+<em class='attention' style='color: red;'><:ciag:auteurs_precaution:>
+[(#PLUGIN{ciar}|oui) (1)]
+</em>
+]
+</div>
+
+#SET{cidivstyle,'class="bouton36blanc"'}
+[(#SPIP_VERSION|>={3}|oui)
+#SET{cidivstyle,'style="background-color: #FFFFFF; border: 1px solid #999999; padding: 10px;"'}
+]
+
+#SET{cierreur,''}
+
+[(#PLUGIN{ciar}|oui)
+
+	[(#REM) si le groupe d'auteurs a une rubrique EC que l'on n'a pas le droit de gerer]
+
+	[(#ENV{new}|ciag_grp_contient_ec_pas_gerer|oui)
+		[(#SET{cierreur,<:ciag:info_ciar_ec3:>})]
+	]	
+]
+[(#GET{cierreur}|non)
+#FORMULAIRE_CIAG_GERER_AUTEURS{#ENV{new},#ENV{ci_pagination},#ENV{ci_debut_auteur},#ENV{redirect},#ENV{config_fonc}}
+]
+
+[(#GET{cierreur}|oui)
+	<div #GET{cidivstyle}>
+	#GET{cierreur}
+	</div>
+]
+[(#GET{cierreur}|non)
+	[(#PLUGIN{ciar}|oui)
+		<div #GET{cidivstyle}>
+		<div>(1) <:ciag:info_ciar_auteurs:></div>
+		</div>
+	]
+]
+</div>

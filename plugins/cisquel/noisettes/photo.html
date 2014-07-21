@@ -1,0 +1,54 @@
+#CACHE{0}
+
+[(#SET{ci_num_suiv,[(#ENV{debut_image}|intval|plus{1})]})]
+[(#SET{ci_page_suiv,[(#GET{ci_num_suiv}|div{12})]})]
+[(#SET{ci_vign_suiv,[(#GET{ci_page_suiv}|intval|mult{12})]})]
+[(#SET{ci_num_prec,[(#ENV{debut_image}|intval|moins{1})]})]
+[(#SET{ci_page_prec,[(#GET{ci_num_prec}|div{12})]})]
+[(#SET{ci_vign_prec,[(#GET{ci_page_prec}|intval|mult{12})]})]
+
+[(#SET{ci_num_items,[(#ENV{ci_num_items}|intval)]})]
+
+[(#SET{ci_page,[(#ENV{debut_image}|div{12})]})]
+[(#SET{ci_vign,[(#GET{ci_page}|intval|mult{12})]})]
+
+[(#SET{ci_id_rubrique,[(#ENV{id_rubrique}|intval)]})]
+
+<!--[(#REM) image redimensionnee au plus en 400px]-->
+<BOUCLE_image(DOCUMENTS){id_article}{extension==jpg|png|gif}{mode=document}{par titre}{#GET{ci_num_prec},1}>
+<div class="retour"><a href="[(#URL_PAGE{article}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{id_rubrique,#GET{ci_id_rubrique}}|parametre_url{debut_vignette,[(#ENV{debut_vignette})]})]" title="<:icone_retour:>"><:icone_retour:></a></div>
+<div class="phototeque_image">
+		
+<div class="phototeque_navimage">
+[(#GET{ci_num_items}|>{0}|oui)
+	[(#EVAL{[(#GET{ci_num_suiv})]}|>{0}|oui)
+		[(#ENV{defilement}|!={auto}|oui)
+			<div class="photo_nav_gauche"><a href="[(#SELF|parametre_url{'defilement','auto'}|parametre_url{'debut_vignette',[(#GET{ci_vign})]}|parametre_url{'debut_image',[(#ENV{debut_image})]})]" title="D&eacute;filement automatique">D&eacute;filement automatique</a></div>
+		]
+		[(#ENV{defilement}|=={auto}|oui)
+			<div class="photo_nav_gauche"><a href="[(#SELF|parametre_url{'defilement','manuel'}|parametre_url{'debut_vignette',[(#GET{ci_vign})]}|parametre_url{'debut_image',[(#ENV{debut_image})]})]" title="D&eacute;filement automatique">Stopper le d&eacute;filement</a></div>
+		]
+		<div class="photo_nav_droite">&nbsp;</div>
+		[(#GET{ci_num_prec}|>{0}|oui)
+			<span><a href="[(#SELF|parametre_url{'debut_image',[(#GET{ci_num_prec})]}|parametre_url{'debut_vignette',[(#GET{ci_vign_prec})]})]" title="<:precedent:>"><:precedent:></a></span>
+		]
+	]
+	<span>&nbsp; [(#ENV{debut_image})]/[(#GET{ci_num_items})]&nbsp;</span>
+	[(#EVAL{[(#GET{ci_num_items})]-[(#GET{ci_num_suiv})]}|>={0}|oui)
+		<span><a href="[(#SELF|parametre_url{'debut_image',[(#GET{ci_num_suiv})]}|parametre_url{'debut_vignette',[(#GET{ci_vign_suiv})]})]" title="<:suivant:>"><:suivant:></a></span>
+	]
+	
+]
+
+</div>
+<div>
+<div class="clearer">&nbsp;</div>
+<a href="[(#URL_PAGE{affiche_image}|parametre_url{id_document,#ID_DOCUMENT})]" onclick="window.open(this.href, 'affiche_image', 'height=[(#HAUTEUR)], width=[(#LARGEUR)], top=20, left=20, toolbar=no, menubar=no, location=no, resizable=yes, scrollbars=yes, status=no'); return false;"  title="<:cisquel:eq_lien_image_gd_format:> [(#TITRE|supprimer_numero)]"><img src="[(#FICHIER|image_reduire{400,400}|extraire_attribut{src})]" alt="<:cisquel:eq_lien_image_gd_format:>" /></a>
+<div class='clearer'></div>
+<a href="[(#URL_PAGE{affiche_image}|parametre_url{id_document,#ID_DOCUMENT})]" onclick="window.open(this.href, 'affiche_image', 'height=[(#HAUTEUR)], width=[(#LARGEUR)], top=20, left=20, toolbar=no, menubar=no, location=no, resizable=yes, scrollbars=yes, status=no'); return false;" title="<:cisquel:eq_lien_image_gd_format:>">[<span class="titrephoto">(#TITRE|supprimer_numero)</span>]</a>[<div class="descphoto">(#DESCRIPTIF)</div>]
+<div class="taillephoto">#LARGEUR X #HAUTEUR | [(#TAILLE|taille_en_octets)][ - (#DATE|affdate{'d/m/Y'})]</div>
+<div class="taillephoto">(L'image est redimensionn&eacute;e afin de tenir dans un carr&eacute; de 400 pixels, un clic sur l'image ou son titre permet de la voir en taille r&eacute;elle)</div>                                   
+<div class="clearer">&nbsp;</div>
+</div>
+</div>
+</BOUCLE_image>

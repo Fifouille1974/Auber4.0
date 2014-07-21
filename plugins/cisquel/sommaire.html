@@ -1,0 +1,221 @@
+#CACHE{3600}
+#CIPARAM_DOCTYPE
+<head>
+<title>[(#NOM_SITE_SPIP|textebrut)]</title>
+<link rel="schema.DC" href="http://purl.org/DC/elements/1.0/" />
+<meta name="DC.Title" content="#NOM_SITE_SPIP" />
+<meta name="DC.Creator" content="[(#NOM_SITE_SPIP)]" />
+<meta name="DC.Date" content="<BOUCLE_datesite(ARTICLES){par date}{inverse}{0,1}>[(#DATE|affdate{'Y-m-d'})]</BOUCLE_datesite>" />
+<meta name="DC.Subject" content="#CIPARAM_MOTCLE_ACCUEIL" />
+<meta name="DC.Format" content="text/html" />
+<meta name="DC.Language" content="#LANG" />
+<meta name="DC.Identifier" content="[(#URL_SITE_SPIP)]" />
+<meta name="keywords" content="#CIPARAM_MOTCLE_ACCUEIL" />
+<link rel="alternate" type="application/rss+xml" title="#NOM_SITE_SPIP - <:cisquel:eq_actu:>" href="[(#URL_PAGE{backend-actu})]" />
+<INCLURE{fond=noisettes/head}{lang}>
+</head>
+<body>
+<INCLURE{fond=noisettes/haut}{lang}>
+<div id="milieu">
+	<div id="ext-main">
+		<div class="main">
+			<div id="gauche">
+				<INCLURE{fond=noisettes/recherche_gauche}{lang}>
+	
+			    <INCLURE{fond=navigation/sommaire}{lang}>
+			</div>
+
+  			<div id="contenu">
+			<div class="main-content">
+				<h1 class="invisible"><:cisquel:eq_accueil:></h1>
+	
+				<div id="messagedeservice">
+				<B_articles_permanents>
+				<h2 class="invisible"><:cisquel:eq_message_bienvenue:></h2>
+				<div id="boxpermanent"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale">
+				<BOUCLE_articles_permanents(ARTICLES){raccourci=_portail_permanent}{par date}{inverse}>
+				<div class="texte">[(#TEXTE)]</div>
+				</BOUCLE_articles_permanents>
+				<div class="clearer"></div>
+				</div></div></div></div></div></div>
+				</B_articles_permanents>
+				</div>
+	
+				<BOUCLE_actu_titre(ARTICLES){raccourci=_portail_actu}{par date}{inverse}{0,1}>
+				<div id="boxtitreactu"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale">
+				<h2><:cisquel:eq_actu:></h2>
+				</div></div></div></div></div></div>
+				
+				<div id="boxactu"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale">
+				<div class="listeactu">
+				</BOUCLE_actu_titre>
+
+				<BOUCLE_permanent_haut(ARTICLES){raccourci=_portail_permanent_haut}{par date}{inverse}>
+				<div class="actu">
+					[<img src="(#LOGO_ARTICLE||image_reduire{44,0}|extraire_attribut{'src'})" alt=""  class="leftill" />]
+					<div class="titreactu"><a href="#URL_ARTICLE" class="lien">[(#TITRE|supprimer_numero)]</a></div> 
+					<div class="texte">#DESCRIPTIF</div>
+				</div>
+				</BOUCLE_permanent_haut>
+
+				<BOUCLE_actu(ARTICLES){raccourci=_portail_actu}{par date}{inverse}{ciparam_nombreactu}>
+				<div class="actu">
+					[<img src="(#LOGO_ARTICLE||image_reduire{44,0}|extraire_attribut{'src'})" alt=""  class="leftill" />]
+					<div class="titreactu"><a href="#URL_ARTICLE" class="lien">[(#TITRE|supprimer_numero)]</a></div> 
+					<div class="texte">#DESCRIPTIF<span class="dateactu"> <:cisquel:eq_publie_le:>&nbsp;[(#DATE|nom_jour)]&nbsp;[(#DATE|jour)]&nbsp;[(#DATE|nom_mois)]&nbsp;[(#DATE|annee)]</span></div>
+				</div>
+				</BOUCLE_actu>
+				
+				<BOUCLE_permanent_bas(ARTICLES){raccourci=_portail_permanent_bas}{par date}{inverse}>
+				<div class="actu">
+					[<img src="(#LOGO_ARTICLE||image_reduire{44,0}|extraire_attribut{'src'})" alt=""  class="leftill" />]
+					<div class="titreactu"><a href="#URL_ARTICLE" class="lien">[(#TITRE|supprimer_numero)]</a></div> 
+					<div class="texte">#DESCRIPTIF</div>
+				</div>
+				</BOUCLE_permanent_bas>
+
+				<div class="clearer"></div>
+
+				<BOUCLE_actu_pied(ARTICLES){raccourci=_portail_actu}{par date}{inverse}{0,1}>
+				<div class="tout"><a href="[(#URL_PAGE{archive_article}|parametre_url{lang,#LANG})]"><:cisquel:eq_toute_actu:></a></div>
+				</BOUCLE_actu_pied>
+				</div>
+				</div></div></div></div></div></div>
+				</B_actu_pied>
+					
+				<B_sites_syndic>
+				<div id="boxsyndic"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale">
+				<div class="listeactu">
+				<h2><:cisquel:eq_actu_autres_sites:></h2>
+				<BOUCLE_sites_syndic(SITES){raccourci=_portail_syndication}{syndication=oui}{par num nom_site}>
+				<a href="#URL_SITE" title="<:cisquel:eq_visiter_site:> [(#NOM_SITE|supprimer_numero)] (<:cisquel:eq_ouvre_fenetre:>)" class="spip_out titresite">[(#NOM_SITE|supprimer_numero)]</a>
+				<BOUCLE_syndic(SYNDIC_ARTICLES){id_syndic}{par date}{inverse}{0,5}>
+				<div class="actu">
+					<div class="titreactu"><a href="#URL_ARTICLE" class="spip_out lien">[(#TITRE|supprimer_numero)]</a></div> 
+					<div class="texte">#DESCRIPTIF</div>
+				</div>
+				</BOUCLE_syndic>
+				</BOUCLE_sites_syndic>
+				</div>
+				</div></div></div></div></div></div>
+				<!-- SPIP-CRON --><div style="background-image: url('spip.php?action=cron');"></div>
+				</B_sites_syndic>
+
+				<BOUCLE_comtitre(ARTICLES){raccourci=_portail_commentaire}{0,1}>
+				<div id="boxcommentaire"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale">
+				<div class="listeactu">
+				<h2><:cisquel:eq_dernier_commentaire:></h2>
+				<div class="actu">
+				</BOUCLE_comtitre>
+				
+				[(#SET{ci_moins_trente, [(#CIPARAM_MAINTENANT|affdate{'Ymd'}|intval|moins{30})]})]
+				<BOUCLE_commentaire(FORUMS){plat}{par date}{inverse}{0,1}>
+				[(#SET{ci_date_forum, [(#DATE|affdate{'Ymd'}|intval)]})]
+				#SET{ciidarticle,0}
+				[(#SPIP_VERSION|>={3}|oui)
+					[(#OBJET|=={article}|oui)
+						[(#SET{ciidarticle,[(#ID_OBJET|intval)]})]
+					]
+				]
+				[(#SPIP_VERSION|>={3}|non)
+					[(#SET{ciidarticle,[(#ID_ARTICLE|intval)]})]
+				]
+				
+				<B_artcom>
+				<BOUCLE_artcom(ARTICLES){id_article=#GET{ciidarticle}}{raccourci=_portail_commentaire}>
+				[(#GET{ci_date_forum}|>{#GET{ci_moins_trente}}|oui)
+					<div class="titreactu"><a href="#URL_ARTICLE" class="lien">[(#TITRE|supprimer_numero)]</a></div> 
+				]
+				</BOUCLE_artcom>
+				[(#GET{ci_date_forum}|>{#GET{ci_moins_trente}}|oui)
+					<div class="texte">#TITRE (le&nbsp;[(#DATE|affdate{'d/m/Y'}) ]<:cisquel:eq_a:>[ (#DATE|affdate{'H:i'})][ par&nbsp;(#NOM)])</div>
+					<div class="texte">[(#TEXTE|couper{200})]</div>
+				]
+				</B_artcom>
+				</BOUCLE_commentaire>
+
+				<BOUCLE_compied(ARTICLES){raccourci=_portail_commentaire}{0,1}>
+				</div>
+				</div>
+				<div class="tout"><a href="[(#URL_PAGE{archive_commentaire})]"><:cisquel:eq_tous_commentaires:></a></div>
+				</div></div></div></div></div></div>
+				</BOUCLE_compied>
+
+				<BOUCLE_centre_rubrique(RUBRIQUES){raccourci=_tous_les_dossiers}{par num titre}{0,1}>
+				<div id="boxdossier"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale">
+				<div id="dossier">
+				<h2>[(#TITRE|supprimer_numero)]</h2>
+				</BOUCLE_centre_rubrique>				
+				<BOUCLE_centre_lienrub(RUBRIQUES){raccourci=_portail_dossiers_rub}{par num titre}{0,1}>
+					<B_dossierscol3>
+					<div class="colonne1">
+					<BOUCLE_dossierscol3(RUBRIQUES){raccourci=_portail_dossiers_rub}{par num titre}{1/2}>
+					<div class="actu">
+					[<img src="(#LOGO_RUBRIQUE||image_reduire{44,0}|extraire_attribut{'src'})" alt=""  class="leftill">]
+					<div class="titreactu"><a href="#URL_RUBRIQUE" class="lien">[(#TITRE|supprimer_numero)]</a></div>
+					<div class="texte">#DESCRIPTIF</div>
+					</div>
+					</BOUCLE_dossierscol3>
+					</div>
+					</B_dossierscol3>
+					
+					<B_dossierscol4>
+					<div class="colonne2">
+					<BOUCLE_dossierscol4(RUBRIQUES){raccourci=_portail_dossiers_rub}{par num titre}{2/2}>
+					<div class="actu">
+					[<img src="(#LOGO_RUBRIQUE||image_reduire{44,0}|extraire_attribut{'src'})" alt=""  class="leftill">]
+					<div class="titreactu"><a href="#URL_RUBRIQUE" class="lien">[(#TITRE|supprimer_numero)]</a></div>
+					<div class="texte">#DESCRIPTIF</div>
+					</div>
+					</BOUCLE_dossierscol4>
+					</div>
+					</B_dossierscol4>
+					<div class='clearer'>&nbsp;</div>	
+				</BOUCLE_centre_lienrub>
+
+				<BOUCLE_centre_article(ARTICLES){raccourci=_portail_dossiers}{par date}{inverse}{0,1}>
+					<B_dossierscol1>
+					<div class="colonne1">
+					<BOUCLE_dossierscol1(ARTICLES){raccourci=_portail_dossiers}{par date}{inverse}{1/2}>
+					<div class="actu">
+					[<img src="(#LOGO_ARTICLE||image_reduire{44,0}|extraire_attribut{'src'})" alt=""  class="leftill" />]
+					<div class="titreactu"><a href="#URL_ARTICLE" class="lien">[(#TITRE|supprimer_numero)]</a></div>
+					<div class="texte">#DESCRIPTIF</div>
+					</div>
+					</BOUCLE_dossierscol1>
+					</div>
+					</B_dossierscol1>
+					
+					<B_dossierscol2>
+					<div class="colonne2">
+					<BOUCLE_dossierscol2(ARTICLES){raccourci=_portail_dossiers}{par date}{inverse}{2/2}>
+					<div class="actu">
+					[<img src="(#LOGO_ARTICLE||image_reduire{44,0}|extraire_attribut{'src'})" alt=""  class="leftill" />]
+					<div class="titreactu"><a href="#URL_ARTICLE" class="lien">[(#TITRE|supprimer_numero)]</a></div>
+					<div class="texte">#DESCRIPTIF</div>
+					</div>
+					</BOUCLE_dossierscol2>
+					</div>
+					</B_dossierscol2>
+					<div class='clearer'>&nbsp;</div>	
+				</BOUCLE_centre_article>
+				
+		        <BOUCLE_centre_rubrique_pied(RUBRIQUES){raccourci=_tous_les_dossiers}{par num titre}{0,1}>
+				</div>
+				</div></div></div></div></div></div>
+		        </BOUCLE_centre_rubrique_pied>
+			</div>
+			</div>
+			<div class='clearer'>&nbsp;</div>	
+		</div>
+  
+		<div id="droite">
+		<INCLURE{fond=extra/sommaire}{lang}>
+		</div>
+      
+	</div>
+</div>
+[(#CIPARAM_ABONNEMENT_XITI|oui)[(#CIPARAM_ABONNEMENT_XITI|match{_images/void.gif}|non)[(#INCLURE{fond=noisettes/compteur_sommaire})]]]
+
+	<INCLURE{fond=noisettes/pied}{datesite=oui}{lang}><INCLURE{fond=noisettes/pied_connexion}{self=#SELF}{lang}>
+	

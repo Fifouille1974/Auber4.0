@@ -1,0 +1,51 @@
+<div id="page">
+<div id="entete">
+<h1 class="invisible"><:cisquel:eq_haut_page:></h1>
+
+	<div id="haut" style="background: #FFFFFF url([(#CIPARAM_IMAGE_BANDEAU)]) no-repeat left top;">
+
+	<div class="blc"><div class="brc"><div class="tlc"><div class="trc">
+		<div class="BandeauHaut">
+		<div id="top">
+			<a href="#contenu" accesskey="C"><span class="invisible"><:cisquel:eq_aller_contenu:></span></a>
+			<a href="[(#URL_PAGE{sommaire})]" accesskey="H"><span class="invisible"><:cisquel:eq_retour_accueil:></span></a>
+		</div>
+		<div id="nomdusite">
+		<a href="[(#URL_PAGE{sommaire})]" title="<:cisquel:eq_retour_accueil:>">#CIPARAM_NOM_BANDEAU</a>
+		</div>
+		</div>	
+	</div></div></div></div>
+	</div>
+</div>
+
+<!-- Menu -->
+<div id="boxmenuhaut">
+<div class="blc"><div class="brc"><div class="tlc"><div class="trc">
+<div id="menuprincipal">
+<h2 class="invisible"><:cisquel:eq_menu_principal:></h2>
+    <table>
+        <tr>
+                <td></td>
+                <td><a href="[(#URL_PAGE{sommaire}|parametre_url{lang,#LANG})]" title="<:cisquel:eq_retour_accueil:>"><:cisquel:eq_accueil:></a></td>
+	<BOUCLE_masquer(RUBRIQUES){raccourci=_masquer_dans_menu_dynamique}{doublons}{par id_rubrique}>
+	</BOUCLE_masquer>
+	<BOUCLE_menu_haut(RUBRIQUES){racine}{doublons}{par num titre}{lang_select=non}>
+                <B_sous_rub1>
+                <BOUCLE_sous_rub1(RUBRIQUES){id_parent}{doublons}{par num titre}{lang_select=non}>
+                </BOUCLE_sous_rub1>
+                <td><a href="#URL_RUBRIQUE" onmouseover="buttonMouseover(event, 'menuRub#ID_RUBRIQUE');">[(#TITRE|supprimer_numero)]</a></td>
+                </B_sous_rub1>
+                <td><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></td>
+                <//B_sous_rub1>
+	</BOUCLE_menu_haut>
+        </tr>
+    </table>
+</div>
+</div></div></div></div>
+</div>
+
+<script type='text/javascript'>
+<!--
+if(document.getElementById && typeof(menu_contenu) != "undefined") {document.write(menu_contenu);}
+-->
+</script>

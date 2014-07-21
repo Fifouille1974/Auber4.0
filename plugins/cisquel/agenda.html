@@ -1,0 +1,50 @@
+#CIPARAM_DOCTYPE
+<head>
+<title><:icone_agenda:>[ - (#NOM_SITE_SPIP|textebrut)]</title>
+<meta name="robots" content="noindex, nofollow" />
+<link href="#CHEMIN{_css/styleexceptions.css}" rel="stylesheet" type="text/css" />
+<INCLURE{fond=noisettes/head}{lang}>
+<link rel="stylesheet" href="#CHEMIN{agenda.css}" type="text/css" /> 
+<script type="text/javascript" src="#EVAL{_DIR_JAVASCRIPT}layer.js"> </script> 
+<script type="text/javascript" src="#EVAL{_DIR_JAVASCRIPT}presentation.js"> </script>
+
+<style type="text/css" media="screen">
+<!--
+table.calendrier-large {width: 45em;}
+table.calendrier td > a {font-size: 0.9em;}
+table.calendrier td > a + a {font-size: 0.9em;}
+-->
+</style>
+
+</head>
+
+<body class="page_agenda">
+<INCLURE{fond=noisettes/haut}{lang}>
+<div id="milieu">
+	<div id="ext-main">
+		<div class="main">
+
+  			<div id="contenu">
+			<div class="main-content">
+				<h1 class="invisible"><:cisquel:eq_contenu:></h1>
+				<div id="boxnavpath"><div id="navpath">
+					<a href="[(#URL_PAGE{sommaire})]"><:cisquel:eq_accueil:></a>&gt; <:icone_agenda:>
+				</div></div>
+				<div id="boxcentrale"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale">
+				<div class="rub">
+				<h2><:icone_agenda:></h2>
+				</div>
+				 <div>
+
+[(#ENV{type, mois}|agenda_connu)<INCLURE {fond=agenda_#ENV{type,mois}} {type} {delais=900} {annee} {mois} {jour} {echelle} {partie_cal} {theme}>]
+
+				</div>
+				</div></div></div></div></div></div>
+			</div>
+			</div>
+		<div class="clearer"></div>				
+		</div>
+	</div>
+</div>
+	<INCLURE{fond=noisettes/pied}{lang}><INCLURE{fond=noisettes/pied_connexion}{self=#SELF}{lang}>
+	

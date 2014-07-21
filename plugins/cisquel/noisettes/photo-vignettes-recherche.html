@@ -1,0 +1,10 @@
+#CACHE{0}[(#RECHERCHE|cisquel_recherche_autorise|cisquel_accesinterdit)]
+[(#SET{ci_id_rubrique,[(#ENV{id_rubrique}|intval)]})]
+<B_recherche>
+[<div class="pagination">(#PAGINATION)</div>]
+<BOUCLE_recherche(DOCUMENTS){id_article}{extension==jpg|png|gif}{mode=document}{par titre}{recherche}{pagination 12}>
+<div class="phototeque_vignette">
+<a href="[(#URL_PAGE{article}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{id_rubrique,#GET{ci_id_rubrique}}|parametre_url{recherche,[(#RECHERCHE|texte_script)]}|parametre_url{debut_vignette,[(#ENV{debut_vignette})]}|parametre_url{debut_image,[(#COMPTEUR_BOUCLE)]})]" title="[(#TITRE|supprimer_numero)]" style="background: transparent url([(#FICHIER|image_reduire{110,110}|extraire_attribut{src})]) no-repeat scroll center center; display:block; height:128px;"><img height="128" width="128" src="#CHEMIN{_images/transparent1x1.png}" alt="<:cisquel:eq_lien_image_gd_format:>" /></a>
+</div>
+</BOUCLE_recherche>
+</B_recherche>

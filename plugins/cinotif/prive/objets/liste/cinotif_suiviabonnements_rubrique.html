@@ -1,0 +1,36 @@
+#SET{tableaustatut,#ARRAY{1,''}}
+[(#CONFIG{cinotif_formulaire}|in_array{#ARRAY{0,theme,1,simple}}|oui)
+	#SET{tableaustatut, #ARRAY{1,publie,2,prepa,3,sansnotif,4,ferme}}
+]
+
+<B_abo>
+<div style="margin:4px 0px 10px 0px;">
+#PAGINATION
+</div>
+<table cellspacing="0" cellpadding="2" style="width: 100%; border: 0px none;" class="arial2">
+<tbody>
+<tr style="background-color:#eee;">
+<th style="width: 30%;"><:cinotif:titre_objet:></th>
+<th style="width: 70%;"><:cinotif:abonnements:></th>
+</tr>
+<BOUCLE_abo(CINOTIF_EVENEMENTS){objet=rubrique}{id_objet=#ENV{new}}{!par objet}{par id_objet}{par quoi}{statut IN #GET{tableaustatut}}{pagination 50}>
+[<tr class="tr_liste" style="background-color:#fff;"><td style="border:none;"></td><td style="border:none;">(#URL_MULTISITE)</td></tr>]
+<tr class="tr_liste" style="background-color:#fff;">
+<td>#OBJET [(#ID_OBJET|?{#ID_OBJET,''})]</td><td>[<a href="[(#URL_ECRIRE{cinotif_suiviabonnes,id_evenement=#ID_EVENEMENT}|parametre_url{ciretour,rubrique-#ENV{new}})]">(#VAL{cinotif:}|concat{#QUOI}|_T)</a>]</td>
+</tr>
+</BOUCLE_abo>
+</tbody>
+</table>
+
+<div style="margin:10px 0px 4px 0px;">
+#PAGINATION
+</div>
+<div><em class='attention'><:cinotif:clic_email_pour_voir_abonnes:></em></div>
+<div><em class='attention'><:cinotif:abonnes_rubrique:></em></div>
+[(#ENV{rub_ec}|=={oui}|oui)<div><em class='attention'><:cinotif:abonnes_rubrique_ec:></em></div>]
+<div><em class='attention'><:cinotif:legende_publie:></em></div>
+</B_abo>
+<:cinotif:abonnes_rubrique_aucun:>
+[(#ENV{rub_ec}|=={oui}|oui)<br/><br/><em class='attention'><:cinotif:abonnes_rubrique_ec:></em>]
+<h3><:avis_aucun_resultat:></h3>
+<//B_abo>

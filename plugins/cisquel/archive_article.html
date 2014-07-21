@@ -1,0 +1,72 @@
+#CACHE{30*24*3600}
+#CIPARAM_DOCTYPE
+<head>
+<title><:cisquel:eq_toute_actu:>[ - (#NOM_SITE_SPIP|textebrut)]</title>
+<meta name="robots" content="noindex, nofollow" />
+<link href="#CHEMIN{_css/styleexceptions.css}" rel="stylesheet" type="text/css" />
+<INCLURE{fond=noisettes/head}{lang}>
+</head>
+
+<body>
+<INCLURE{fond=noisettes/haut}{lang}>
+<div id="pageArchive">
+<div id="milieu">
+	<div id="ext-main">
+		<div class="main">
+			<div id="gauche">
+				<INCLURE{fond=noisettes/recherche_gauche}{lang}>
+	
+			    <INCLURE{fond=navigation/sommaire}{lang}>
+			</div>
+
+  			<div id="contenu">
+			<div class="main-content">
+				<h1 class="invisible"><:cisquel:eq_contenu:></h1>
+				<div id="boxnavpath"><div id="navpath">
+					<a href="[(#URL_PAGE{sommaire})]"><:cisquel:eq_accueil:></a>&gt; <:cisquel:eq_toute_actu:>
+				</div></div>
+				<div id="boxcentrale"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale">
+				<div class="rub">
+				<h2><:cisquel:eq_actu_de:> [(#DATE|annee)]</h2>
+				</div>
+				<div class="folio"><div class="choixpage">
+				<INCLURE{fond=noisettes/archive_article_annee}{lang}>
+				</div></div>
+
+				<div class="actubox">
+				<BOUCLE_ANNEE(ARTICLES){raccourci=_portail_actu}{annee_relatif=0}{par date}{inverse} >
+				<BOUCLE_premierdumois(ARTICLES){id_article}{doublons}>
+				<div class="titremois">[(#DATE|nom_mois)] [(#DATE|annee)]</div>
+					<div class="actu">
+					[<img src="(#LOGO_ARTICLE||image_reduire{44,0}|extraire_attribut{'src'})" alt=""  class="leftill" />]
+					<div class="titreactu"><a href="#URL_ARTICLE" class="lien">[(#TITRE|supprimer_numero)]</a></div> 
+					<div class="texte">#DESCRIPTIF</div>
+					<div class="clearer">&nbsp;</div>
+					</div>
+				</BOUCLE_premierdumois>
+				<BOUCLE_MOIS(ARTICLES){raccourci=_portail_actu}{mois_relatif=0}{doublons}{par date}{inverse} >
+					<div class="actu">
+					[<img src="(#LOGO_ARTICLE||image_reduire{44,0}|extraire_attribut{'src'})" alt=""  class="leftill" />]
+					<div class="titreactu"><a href="#URL_ARTICLE" class="lien">[(#TITRE|supprimer_numero)]</a></div> 
+					<div class="texte">#DESCRIPTIF</div>
+					<div class="clearer">&nbsp;</div>
+					</div>
+				</BOUCLE_MOIS>
+				</BOUCLE_ANNEE>
+				</div>
+				    
+				<div class="folio"><div class="choixpage">
+				<INCLURE{fond=noisettes/archive_article_annee}{lang}>
+				</div></div>
+
+				</div></div></div></div></div></div>
+
+			</div>
+			</div>
+		<div class="clearer"></div>			
+		</div>
+	</div>
+</div>
+</div>
+	<INCLURE{fond=noisettes/pied}{lang}><INCLURE{fond=noisettes/pied_connexion}{self=#SELF}{lang}>
+	

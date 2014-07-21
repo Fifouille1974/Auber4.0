@@ -1,0 +1,135 @@
+#CIPARAM_DOCTYPE
+<head>
+<BOUCLE_contenu(RUBRIQUES){id_rubrique}>
+<title>[(#TITRE|supprimer_numero)][ - (#NOM_SITE_SPIP|textebrut)]</title>
+<link rel="schema.DC" href="http://purl.org/DC/elements/1.0/" />
+<meta name="DC.Title" content="[(#TITRE|supprimer_numero)]" />
+<meta name="DC.Creator" content="[(#NOM_SITE_SPIP)]" />
+<meta name="DC.Date" content="<BOUCLE_datesite(ARTICLES){par date}{inverse}{0,1}>[(#DATE|affdate{'Y-m-d'})]</BOUCLE_datesite>" />
+<meta name="DC.Subject" content="<BOUCLE_motcle2(MOTS){id_rubrique}{type!==Type de document}>#TITRE, </BOUCLE_motcle2>" />
+<meta name="DC.Format" content="text/html" />
+<meta name="DC.Language" content="#LANG" />
+<meta name="DC.Identifier" content="[(#URL_SITE_SPIP)/][(#URL_RUBRIQUE)]" />
+<meta name="DC.Type" content="<BOUCLE_typedoc(MOTS){id_rubrique}{type==Type de document}>#TITRE, </BOUCLE_typedoc>" />
+<meta name="keywords" content="<BOUCLE_motcle(MOTS){id_rubrique}{type!==Type de document}>#TITRE, </BOUCLE_motcle>" />
+ 
+<link rel="alternate" type="application/rss+xml" title="#NOM_SITE_SPIP - <:cisquel:eq_actu:> - <:rubrique:> : [(#TITRE|supprimer_numero)]" href="[(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" />
+<INCLURE{fond=noisettes/head}{lang}>
+</head>
+
+<body>
+<INCLURE{fond=noisettes/haut}{lang}>
+<div id="pageRubCartesites">
+<div id="milieu">
+	<div id="ext-main">
+		 
+		<div class="main">
+			<div id="gauche">
+				<INCLURE{fond=noisettes/recherche_gauche}{lang}>
+	
+			    [(#INCLURE{fond=navigation/rubrique,id_rubrique,lang})]
+			</div>
+
+  			<div id="contenu">
+			<div class="main-content">
+				<h1 class="invisible"><:cisquel:eq_contenu:></h1>
+				<div id="boxnavpath"><div id="navpath">
+					<a href="[(#URL_PAGE{sommaire})]"><:cisquel:eq_accueil:></a>
+					<BOUCLE_chem_nav(HIERARCHIE){id_rubrique}>
+					&gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a>
+					</BOUCLE_chem_nav>
+					&gt; [(#TITRE|supprimer_numero)]
+				</div></div>
+				<div id="boxcentrale"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale">
+				<div class="rub">
+				<h2>[(#TITRE|supprimer_numero)]</h2>
+				<div class="dateart">
+				</div>
+			      	[<div class="texte">(#TEXTE|ciparam_texte_sans_nbsp)</div>]
+				[<div class="texte">(#NOTES)</div>]
+				</div>
+			      	
+				
+			    	<div class="o2paj"><a href="#entete" title="<:cisquel:eq_haut_page:>"><:cisquel:eq_haut_page:></a></div>
+				</div></div></div></div></div></div>
+			</div>
+			</div>
+			<div class='clearer'>&nbsp;</div>	
+		</div>
+		<div id="droite">
+		[(#ID_RUBRIQUE|cisquel_logo_ari)]
+			<div id="menu2">
+				<h1 class="invisible"><:cisquel:eq_menu_droite:></h1>
+				<BOUCLE_droite_rubrique(RUBRIQUES){id_rubrique}>
+				[<div class="visuel"><img src="(#LOGO_RUBRIQUE||extraire_attribut{'src'})" alt="" /></div>]
+				<div class="blocoutil">
+				<a rel="noindex,nofollow" href="javascript:chainemail('[(#NOM_SITE_SPIP|ciparam_filtre_mailto{#CHARSET})]  [(#TITRE|supprimer_numero|ciparam_filtre_mailto{#CHARSET})]')" title="<:cisquel:eq_envoyer_courriel:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><:cisquel:eq_envoyer_courriel:></a>
+				<a rel="noindex,nofollow" href="[(#URL_PAGE{rubrique_print_cartesites}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" title="<:cisquel:eq_imprimer_page:>" class="imprimer"><:cisquel:eq_imprimer:></a>
+
+				[(#PLUGIN{cinotif}|oui)
+					[(#CONFIG{cinotif_rubrique}|=={non}|non)
+				<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-rubrique}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" title="<:cisquel:abonner:>" class="abonner"><:cisquel:abonner:></a>
+				<a rel="noindex,nofollow" href="[(#URL_PAGE{abonnement-rubrique}|parametre_url{id_rubrique,#ID_RUBRIQUE}|parametre_url{desabonner,oui})]" title="<:cisquel:desabonner:>" class="desabonner"><:cisquel:desabonner:></a>
+					]
+				]
+				
+				<BOUCLE_reader(ARTICLES){raccourci=_reader_acrobat_ou_autre}{par num titre}>
+				<a href="[(#URL_ARTICLE)]" class="acrobat">[<img src="(#LOGO_ARTICLE||image_reduire{19,0}|extraire_attribut{'src'})" alt="" border="0" />][<span>(#TITRE|supprimer_numero)</span>]</a>
+				</BOUCLE_reader>
+				</div>
+				[(#ID_RUBRIQUE|cisquel_rubrique_ec|=={oui}|oui)
+				<div class="blocoutil">
+				<a href="[(#URL_PAGE{liste_membre}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" title="<:cisquel:eq_liste_membres:> (<:cisquel:eq_ouvre_messagerie:>)" class="envoiami"><:cisquel:eq_liste_membres:></a>
+				</div>
+				]
+				<B_derniers_sites>
+				<div class="boxtitredroite"><div class="blc"><div class="brc"><div class="tlc"><div class="trc">
+				<h2><:cisquel:eq_sites:></h2>
+				</div></div></div></div></div>
+				<p class="label"><:cisquel:eq_derniers_sites_en_ligne:>&nbsp;:</p>
+				<div class="bloc2">
+					<ul>
+						<BOUCLE_derniers_sites(ARTICLES){id_rubrique}{par date}{inverse}{0,6}>
+						<li><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a></li>
+						</BOUCLE_derniers_sites>
+					</ul>
+				</div>
+				</B_derniers_sites>
+
+				<div class="boxtitredroite"><div class="blc"><div class="brc"><div class="tlc"><div class="trc">
+				<h2><:cisquel:eq_acces_direct:></h2>
+				</div></div></div></div></div>
+				<div class="bloc2">
+				<form name="accesnum" action="Javascript:goToSelectURL('accesnum','num_dep');" method="get" >
+				<label for="num_dep" class="label"><:cisquel:eq_par_numero:></label>
+				<select name="num_dep" id="num_dep">
+				<option value="" selected="selected"><:cisquel:eq_choisissez:></option>
+				<BOUCLE_numero(ARTICLES){id_rubrique}{par num titre}>
+				[(#SPIP_VERSION|>={3}|oui)
+				<option value="#URL_ARTICLE">[(#TITRE*|typo)]</option>
+				]
+				[(#SPIP_VERSION|>={3}|non)
+				<option value="#URL_ARTICLE">[(#TITRE)]</option>
+				]
+				</BOUCLE_numero>
+				</select>
+				<input name="validaccesnum" id="validaccesnum" type="submit" alt="<:bouton_valider:>" value="Ok" class="ok_normal" />
+				</form>
+				
+				</div>
+				</BOUCLE_droite_rubrique>				
+			</div>
+		<div class="clearer"></div>
+		</div>
+		 
+	</div>
+</div>
+</div>
+[(#CIPARAM_ABONNEMENT_XITI|oui)[(#CIPARAM_ABONNEMENT_XITI|match{_images/void.gif}|non)[(#INCLURE{fond=noisettes/compteur_rubrique,id_rubrique})]]]
+
+	<INCLURE{fond=noisettes/pied}{lang}><INCLURE{fond=noisettes/pied_connexion}{self=#SELF}{lang}>
+
+</BOUCLE_contenu>
+</B_contenu>
+<INCLURE{fond=altern}>
+<//B_contenu>

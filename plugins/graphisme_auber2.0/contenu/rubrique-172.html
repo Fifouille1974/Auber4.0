@@ -1,0 +1,78 @@
+<BOUCLE_contenu172(RUBRIQUES){id_rubrique}>
+				<div class="rub">
+				<h2>[(#TITRE|supprimer_numero)]</h2>
+			      	[<div class="texte rubtxt">(#TEXTE)</div>]
+				[<div class="texte rubtxt">(#NOTES)</div>]
+				</div>
+			    <div class="listerub">
+				<div class="listerub1sur2">
+				       <BOUCLE_affichersousrubrique(RUBRIQUES){id_parent} {par num titre} {1/2}>
+                          	<B_galeries>
+                          	<p class="rubtitle"><b>[(#TITRE|supprimer_numero)]</b></p>
+				   <BOUCLE_galeries(ARTICLES) {id_rubrique} {age>=0} {doublons} {par num titre}>
+				       <li><a href="#URL_ARTICLE" class="titresousrub">[(#TITRE|supprimer_numero)]</a></li>
+				   </BOUCLE_galeries>
+				</B_galeries>
+				<B_sous_galeries>
+				<p><b>[(#TITRE|supprimer_numero)]</b></p>
+                          	<ul>
+                          	   <BOUCLE_sous_galeries(RUBRIQUES) {id_parent} {par num titre}>
+				       [<li><b>(#TITRE|supprimer_numero)</b>]
+				       <B_galeries2>
+				           <BOUCLE_galeries2(ARTICLES) {id_rubrique} {age>=0} {doublons} {par num titre}>
+				               <li><a href="#URL_ARTICLE" class="titresousrub">[(#TITRE|supprimer_numero)]</a></li>
+				           </BOUCLE_galeries2>
+				       </B_galeries2>
+				       <B_sous_sous_galeries>
+				           <BOUCLE_sous_sous_galeries(RUBRIQUES) {id_parent} {par num titre}>
+					   	[<li><b>(#TITRE|supprimer_numero)</b>]
+						        <B_galeries3>
+							    <BOUCLE_galeries3(ARTICLES) {id_rubrique} {age>=0} {doublons} {par num titre}>
+							        <li><a href="#URL_ARTICLE" class="titresousrub">[(#TITRE|supprimer_numero)]</a></li>
+							    </BOUCLE_galeries3>
+							</B_galeries3>
+						</li>
+					   </BOUCLE_sous_sous_galeries>
+				       </B_sous_sous_galeries></li>
+				   </BOUCLE_sous_galeries>
+				</B_sous_galeries>
+				</BOUCLE_affichersousrubrique>
+				</div>
+				</div>
+				
+			    <div class="listerub">
+				<div class="listerub2sur2">
+				       <BOUCLE_affichersousrubriquecol2(RUBRIQUES){id_parent} {par num titre} {2/2}>
+                          	<B_galeriescol2>
+                          	<p class="rubtitle"><b>[(#TITRE|supprimer_numero)]</b></p>
+				   <BOUCLE_galeriescol2(ARTICLES) {id_rubrique} {age>=0} {doublons} {par num titre}>
+				       <li><a href="#URL_ARTICLE" class="titresousrub">[(#TITRE|supprimer_numero)]</a></li>
+				   </BOUCLE_galeriescol2>
+				</B_galeriescol2>
+				<B_sous_galeriescol2>
+				<p><b>[(#TITRE|supprimer_numero)]</b></p>
+                          	   <BOUCLE_sous_galeriescol2(RUBRIQUES) {id_parent} {par num titre}>
+				       [<li><b>(#TITRE|supprimer_numero)</b>]
+				       <B_galeries2col2>
+				           <BOUCLE_galeries2col2(ARTICLES) {id_rubrique} {age>=0} {doublons} {par num titre}>
+				               <li><a href="#URL_ARTICLE" class="titresousrub">[(#TITRE|supprimer_numero)]</a></li>
+				           </BOUCLE_galeries2col2>
+				       </B_galeries2col2>
+				       <B_sous_sous_galeriescol2>
+				           <BOUCLE_sous_sous_galeriescol2(RUBRIQUES) {id_parent} {par num titre}>
+					   	[<li><b>(#TITRE|supprimer_numero)</b>]
+						        <B_galeries3col2>
+							    <BOUCLE_galeries3col2(ARTICLES) {id_rubrique} {age>=0} {doublons} {par num titre}>
+							        <li><a href="#URL_ARTICLE" class="titresousrub">[(#TITRE|supprimer_numero)]</a></li>
+							    </BOUCLE_galeries3col2>
+							</B_galeries3col2>
+						</li>
+					   </BOUCLE_sous_sous_galeriescol2>
+				       </B_sous_sous_galeriescol2></li>
+				   </BOUCLE_sous_galeriescol2>
+				</B_sous_galeriescol2>
+				</BOUCLE_affichersousrubriquecol2>
+				</div>
+				</div>
+
+</BOUCLE_contenu172>

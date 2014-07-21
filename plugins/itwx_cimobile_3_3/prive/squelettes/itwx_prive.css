@@ -1,0 +1,26 @@
+.formulaire_spip, .formulaire_spip * { font-size: 99% !important; }
+.formulaire_spip fieldset { border: 0; }
+.formulaire_spip legend { background: none; font-weight: bold; }
+.formulaire_spip .explication { padding: 5px; background: none; border: 0; }
+.formulaire_spip .explication img { vertical-align: top }
+.formulaire_spip li .explication { padding: 0; font-size: .9em !important; line-height: 1; color: #666; }
+.formulaire_spip table { text-align:center; width:100%; border:0; padding: 0.5em 0;}
+.formulaire_spip .theme table tr td {width:33%;text-align:center;}
+.formulaire_spip .theme table tr td a {text-align:center;}
+.formulaire_spip .theme table tr td input { margin-top:0em; }
+.formulaire_spip .theme table tr td a img { vertical-align: text-top; width:75px;height:113px; }
+
+.formulaire_spip .itwx_option table tr td.label {width:50%;text-align:center;}
+.formulaire_spip .itwx_option table tr td.select {width:30%}
+.formulaire_spip .itwx_option table tr {margin-top:2em;}
+.formulaire_spip .itwx_option table tr td a {text-align:center;}
+.formulaire_spip .itwx_option table tr td input { margin-top:; }
+.formulaire_spip .itwx_option table tr td a img { vertical-align: text-top; width:75px;height:113px; }
+
+.formulaire_spip .comment {background:#E5E5E5;margin:0.9em 0.4em;padding: 0.5em 0.7em; font-size: .9em !important}
+.formulaire_spip .theme {margin: 0}
+.formulaire_spip .theme .tr {margin: 0 0.5em}
+.formulaire_spip .theme .tr .td {width:30%;}
+.formulaire_spip .theme ul li {width:30%;text-align:center;}
+
+.cadre-info {background:#E5E5E5;margin:0;padding: 1em; font-size: .9em !important; border: 2px outset #000}

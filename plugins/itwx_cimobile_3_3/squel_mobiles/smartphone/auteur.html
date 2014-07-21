@@ -1,0 +1,73 @@
+<BOUCLE_principale(AUTEURS) {id_auteur}>
+<!DOCTYPE html>
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+]<!--[if lt IE 7 ]> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html lang="#LANG"class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]--> 
+<head>
+<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+<title>[(#NOM|textebrut) - ][(#NOM_SITE_ITWX|textebrut)]</title>
+[<meta name="description" content="(#BIO|couper{150}|attribut_html)" />]
+<INCLURE{fond=inc/inc-head}>
+[(#REM) Lien vers le flux RSS des articles de l'auteur ]
+<link rel="alternate" type="application/rss+xml" title="[(#NOM|textebrut)]" href="[(#URL_PAGE{backend}|parametre_url{id_auteur,#ID_AUTEUR})]" />
+</head>
+
+<body id="top">
+<div id="smart">
+ 
+  [(#REM) BARRE DE NAVIGATION ]
+  <INCLURE{fond=inc/inc-navBar}/>   
+  
+  <div id="main">
+  
+  <INCLURE{fond=inc/ajax/formulaire_recherche}{env}{ajax}>
+
+  [(#REM) Contenu principal : affichage de l'auteur ]
+  <div class="contenu">
+    <div class="vcard">[(#REM) microformat vcard]
+      <div class="cartouche">
+	   [(#LOGO_AUTEUR|image_reduire{120,100})]
+        <h1 class="#EDIT{qui} fn">#NOM</h1>
+      </div>
+      [<div class="#EDIT{bio} texte note">(#BIO)</div>]
+      [<p class="#EDIT{hyperlien} hyperlien"><a href="(#URL_SITE)" target="_blank"><:voir_en_ligne:> : [(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>] 
+	 </div>
+  </div><!--#contenu-->
+  
+  [(#REM) Articles de l'auteur ] 
+  <INCLURE{fond=inc/inc-aut-listart}{id_auteur}{env}{ajax}{art=_art#ID_ARTICLE}/> 
+  
+  [(#REM) Ecrire a l'auteur ]
+  #FORMULAIRE_ECRIRE_AUTEUR
+  
+  [<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
+  
+  [(#REM) Autres auteurs ] 
+  <INCLURE{fond=inc/inc-aut-listaut}{env}{ajax}{aut=_aut#ID_AUTEUR}/> 
+  
+  [(#REM) Pied - Gestion du site ]
+  <div class="group" style="height:17px; border-bottom:1px solid #B9B9B9"></div>
+  <div class="ticket">
+    <div class="ticketmenu">
+      <ul>
+       [(#CONFIG{itwx/retoursom}|?{' '})
+		<li class="list-border"><a rel="start home" href="[(#URL_AUTEUR|parametre_url{'cimobile','web'})]"><:itwx:pageclassique:></a></li>]
+        <li><a rel="start home" href="#URL_PAGE{contact}"><:contact:></a></li>
+       [(#AUTORISER{ecrire})<li><a href="#EVAL{_DIR_RESTREINT_ABS}"><:espace_prive:></a></li>]
+       [(#AUTORISER{ecrire})<li><a href="#EVAL{_DIR_RESTREINT_ABS}?exec=auteur&id_auteur=#ID_AUTEUR"><:auteur:> #ID_AUTEUR</a></li>]
+       [(#SESSION{id_auteur}|?{' '})<li><a href="#URL_LOGOUT" rel="nofollow" style="background-image: none; text-align:center" class=""><:icone_deconnecter:></a></li>]
+      </ul>
+    </div>
+  </div>
+  
+  <INCLURE{fond=inc/inc-pied}/> 
+
+  </div><!--#main-->
+
+</div><!--#smart-->
+</body>
+</html>
+</BOUCLE_principale>

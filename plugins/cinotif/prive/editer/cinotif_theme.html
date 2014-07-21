@@ -1,0 +1,13 @@
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+[(#SPIP_VERSION|>={3}|oui)
+	[(#URL_ECRIRE{cinotif_config}|cinotif_icone_verticale{<:icone_retour:>,rubrique,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+]
+[(#SPIP_VERSION|>={3}|non)
+	#ENV**{icone_retour}
+]
+<:cinotif:titre_theme:>
+[<h1>(#ENV{titre})</h1>]
+</div>
+#FORMULAIRE_CINOTIF_THEME{#ENV{new},#ENV{redirect},#ENV{config_fonc}}
+</div>

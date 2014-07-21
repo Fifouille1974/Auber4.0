@@ -1,0 +1,140 @@
+[(#SPIP_VERSION|>={3}|non)
+<div class='cadre cadre-formulaire-editer'>
+<div class="entete-formulaire">
+<h1><:cinotif:sympa_titre:></h1>
+</div>
+]
+
+<div class="formulaire_spip formulaire_configurer formulaire_demandes">
+[(#SPIP_VERSION|>={3}|oui)
+<h3 class='titrem'><:cinotif:sympa_titre:></h3>
+]
+	<div class="cadre_padding"><:cinotif:info_sympa:></div>
+	<!-- <br class='bugajaxie' /> -->
+	[<p class='reponse_formulaire reponse_formulaire_ok'>(#ENV**{message_ok})</p>]
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+
+		#SET{name,sympa_actif}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+
+		<fieldset>
+		<ul>
+			<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]" style="padding-left:15px;">
+				<div>[(#VAL{cinotif:}|concat{#GET{name}}|_T)]</div>	
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<div class="choix">
+					<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="oui" [(#ENV{#GET{name}}|=={oui}|oui)checked="checked"] [(#SPIP_VERSION|>={3}|oui)onchange="if ($(this).prop('checked')) $('#config_sympa').show('fast');"] [(#SPIP_VERSION|>={3}|non)onclick="changeVisible(this.checked, 'config_sympa', 'block', 'none');"] [(#ENV{disabled_sympa_actif})] />
+					<label for="#GET{name}_oui">
+					[(#ENV{#GET{name}}|=={oui}|oui)<b>]
+					<:item_oui:>
+					[(#ENV{#GET{name}}|=={oui}|oui)</b>]
+					</label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non" [(#ENV{#GET{name}}|=={oui}|non)checked="checked"] [(#SPIP_VERSION|>={3}|oui)onchange="if ($(this).prop('checked')) $('#config_sympa').hide('fast');"] [(#SPIP_VERSION|>={3}|non)onclick="changeVisible(this.checked, 'config_sympa', 'none', 'block');"] [(#ENV{disabled_sympa_actif})] />
+					<label for="#GET{name}_non">
+					[(#ENV{#GET{name}}|=={oui}|non)<b>]
+					<:item_non:>
+					[(#ENV{#GET{name}}|=={oui}|non)</b>]
+					</label>
+				</div>
+			</li>
+			</ul>
+		</fieldset>
+		
+		<div id="config_sympa" [(#ENV{#GET{name}}|=={oui}|non)style='display:none;']>
+		
+		#SET{name,abo_sympa}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+		
+		<fieldset>
+		<ul>
+			<li class="editer editer_[(#GET{name})][ (#GET{erreurs}|oui)erreur]" style="padding-left:15px;">
+				<div>[(#VAL{cinotif:}|concat{#GET{name}}|_T)]</div>	
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<div class="choix">
+					<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="oui" [(#ENV{#GET{name}}|=={oui}|oui)checked="checked"] [(#SPIP_VERSION|>={3}|oui)onchange="if ($(this).prop('checked')) $('#adresses_sympa').show('fast');"] [(#SPIP_VERSION|>={3}|non)onclick="changeVisible(this.checked, 'adresses_sympa', 'block', 'none');"] [(#ENV{disabled_abo_sympa})] />
+					<label for="#GET{name}_oui">
+					[(#ENV{#GET{name}}|=={oui}|oui)<b>]
+					<:item_oui:>
+					[(#ENV{#GET{name}}|=={oui}|oui)</b>]
+					</label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non" [(#ENV{#GET{name}}|=={oui}|non)checked="checked"] [(#SPIP_VERSION|>={3}|oui)onchange="if ($(this).prop('checked')) $('#adresses_sympa').hide('fast');"] [(#SPIP_VERSION|>={3}|non)onclick="changeVisible(this.checked, 'adresses_sympa', 'none', 'block');"] [(#ENV{disabled_abo_sympa})] />
+					<label for="#GET{name}_non">
+					[(#ENV{#GET{name}}|=={oui}|non)<b>]
+					<:item_non:>
+					[(#ENV{#GET{name}}|=={oui}|non)</b>]
+					</label>
+				</div>
+			</li>
+			</ul>
+		</fieldset>
+
+		<fieldset id="adresses_sympa" [(#ENV{#GET{name}}|=={oui}|non)style='display:none;']>
+		<ul>
+			    <li class='editer_adresse_sympa [ (#ENV**{erreurs}|table_valeur{adresse_sympa}|oui)erreur] editer_type_input'>
+					<label for='adresse_sympa'><:cinotif:label_adresse_sympa:></label>
+					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{adresse_sympa})</span>]
+					<input type='text' class='text' name='adresse_sympa' id='adresse_sympa' value='[(#ENV{adresse_sympa})]' [(#ENV{disabled_adresse_sympa})]/>
+			    </li>
+				
+			    <li class='editer_adresse_proprio_liste_sympa [ (#ENV**{erreurs}|table_valeur{adresse_proprio_liste_sympa}|oui)erreur] editer_type_input'>
+					<label for='adresse_proprio_liste_sympa'><:cinotif:label_adresse_proprio_liste_sympa:></label>
+					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{adresse_proprio_liste_sympa})</span>]
+					<input type='text' class='text' name='adresse_proprio_liste_sympa' id='adresse_proprio_liste_sympa' value='[(#ENV{adresse_proprio_liste_sympa})]'  [(#ENV{disabled_adresse_proprio_liste_sympa})] />
+			    </li>
+		</ul>
+		</fieldset>
+		    
+
+		#SET{name,typenotif}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+		<fieldset>
+		<ul>
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]" style="padding-left:15px;">
+				<div><:cinotif:typenotif_info:></div>	
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+					<div class="choix">
+						<input type="radio" name="#GET{name}" id="#GET{name}_sympa" value="sympa"
+						[(#ENV{#GET{name}}|=={sympa}|oui)checked="checked"] [(#ENV{disabled_typenotif})] />
+						<label for="#GET{name}_sympa">
+						[(#ENV{#GET{name}}|=={sympa}|oui)<b>]
+						<:cinotif:typenotif_sympa:>
+						[(#ENV{#GET{name}}|=={sympa}|oui)</b>]
+						</label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="#GET{name}" id="#GET{name}_aucun" value="aucun"
+						[(#ENV{#GET{name}}|=={aucun}|oui)checked="checked"] [(#ENV{disabled_typenotif})] />
+						<label for="#GET{name}_aucun">
+						[(#ENV{#GET{name}}|=={aucun}|oui)<b>]
+						<:cinotif:typenotif_aucun:>
+						[(#ENV{#GET{name}}|=={aucun}|oui)</b>]
+						</label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="#GET{name}" id="#GET{name}_abonnes" value="abonnes"
+						[(#ENV{#GET{name}}|=={abonnes}|oui)checked="checked"] [(#ENV{disabled_typenotif})] />
+						<label for="#GET{name}_abonnes">
+						[(#ENV{#GET{name}}|=={abonnes}|oui)<b>]
+						<:cinotif:typenotif_abonnes:>
+						[(#ENV{#GET{name}}|=={abonnes}|oui)</b>]
+						</label>
+					</div>
+			</li>
+		</ul>
+		</fieldset>
+		
+		</div>
+
+	  <p class='boutons'><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+</div>
+
+[(#SPIP_VERSION|>={3}|non)
+</div>
+]

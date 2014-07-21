@@ -1,0 +1,747 @@
+[(#HTTP_HEADER{Content-type: text/html; charset=utf-8})]
+[(#SESSION{id_auteur}|!={''}|oui)
+<?php
+
+/* 
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the 
+ * Free Software Foundation; either version 2 of the License, or (at your
+ * option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but 
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General
+ * Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+
+
+// Initialize the form's name value to be overridden during session init.
+global $name;
+$name = '';
+
+$cichemin = find_in_path('cichat_common.php');
+include_once($cichemin);
+
+if ($name == '')
+	$name = "#SESSION{login}";
+
+// This is only ever used if XMLHttpRequest is not accessible (JavaScript disabled, etc.)
+// Otherwise, Lace just passes through it unaffected.
+laceListener(false);
+
+$ciurlchatpost = find_in_path('cichat_post.php');
+
+?>
+]
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><html dir="#LANG_DIR" lang="#LANG">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+[(#SESSION{id_auteur}|?{'',' '})
+	[(#REM) <!-- Auteur non connecte -->]
+	[<link rel="stylesheet" href="(#CHEMIN{spip_style.css}|direction_css)" type="text/css" media="all" />]
+	[<link rel="stylesheet" href="(#CHEMIN{minipres.css}|direction_css)" type="text/css" media="all" />]
+]
+
+[(#SESSION{id_auteur}|!={''}|oui)
+	<link href="#CHEMIN{_css/stylechat.css}" rel="stylesheet" type="text/css">
+]
+
+<title>Chat</title>
+
+<script type="text/javascript">
+var lace_id_article = '';
+<BOUCLE_id(ARTICLES){id_article}>
+lace_id_article = '#ID_ARTICLE';
+</BOUCLE_id>
+var name = '#SESSION{login}';
+var ciurlchatpost = '<?php echo $ciurlchatpost; ?>';
+
+var message_transmission 	= '<:cichat:info_chat_transmission:>';
+var message_pause 			= '<:cichat:info_chat_pause:>';
+var message_stop 			= '<:cichat:info_chat_stop:>';
+var message_double_post 	= '<:cichat:info_chat_double_post:>';
+
+var lace_timeout     = '10';
+var lace_interval    = '20';
+var lace_name_cookie = 'cichat';
+var lace_url_rel     = '';
+
+
+// Load Lace
+addEvent(window, 'load', init, false);
+
+function init() {
+	if (document.getElementById('lacecontrols')) {
+		var LaceObj = new Lace(lace_interval, lace_timeout);
+	}
+}
+
+function addEvent(obj, evType, fn, useCapture) {
+	if (obj.addEventListener) {
+		obj.addEventListener(evType, fn, useCapture);
+		return true;
+	} else if (obj.attachEvent) {
+		var r = obj.attachEvent("on" + evType, fn);
+		return r;
+	} else {
+		return false;
+	}
+}
+
+function setCookie(name, value, expires, path, domain, secure) {
+    document.cookie= name + "=" + escape(value) +
+        ((expires) ? "; expires=" + expires.toGMTString() : "") +
+        ((path) ? "; path=" + path : "") +
+        ((domain) ? "; domain=" + domain : "") +
+        ((secure) ? "; secure" : "");
+}
+
+
+function Lace(defaultInterval, timeout) {
+  	// Member functions
+	this.init          = laceInit;
+	this.start         = laceStart;
+	this.stop          = laceStop;
+ 	this.send          = laceSend;
+ 	this.get           = laceGet;
+ 	this.handleSend    = laceHandleSend;
+ 	this.handleGet     = laceHandleGet;
+ 	this.httpObject    = laceHttpObject;
+ 	this.insertResults = laceInsertResults; 
+// 	this.previewUpdate = lacePreviewUpdate;
+ 	this.timerStart    = laceTimerStart;
+ 	this.timerStop     = laceTimerStop;
+ 	this.timerReset    = laceTimerReset;
+ 	this.timerSet      = laceTimerSet;
+ 	this.timerStep     = laceTimerStep;
+ 	this.setActive     = laceSetActive;
+ 	this.resetInputs   = laceResetInputs;
+ 	this.disableInputs = laceDisableInputs;
+ 	this.enableInputs  = laceEnableInputs;
+ 	this.removeAllChildNodes = laceRemoveAllChildNodes;
+ 	
+ 	this.setName = laceSetName;
+
+	// Fire it up!
+ 	this.init(defaultInterval, timeout);
+}
+
+function laceInit(defaultInterval, timeout) {
+	// Inititialize member variables
+	this.interval   = 0;
+	this.defaultInterval = defaultInterval * 1000; // Default interval if IntervalManager is not present
+	this.url        = ciurlchatpost;
+	this.nameObj    = document.getElementById('name');
+	this.textObj    = document.getElementById('text');
+	this.laceDomRef = document.getElementById('laceoutput');
+	this.laceDomRef.scrollTop += this.laceDomRef.scrollHeight;
+	
+	var thisObj = this;
+/*	
+	// Initialize Live Preview if present
+	if (window.Preview) {
+		this.PreviewObj = new Preview('preview');
+		// Javascript has scope issues with using 'this'
+		// inside of an anonymous function, so we use a
+		// copy of 'this' (thisObj)
+		this.textObj.onkeyup = function() { thisObj.previewUpdate(thisObj.textObj.value); };
+	}
+*/	
+	
+	//Inititalize Interval Manager if present
+	if (window.IntervalManager) {
+		this.intManObj = new IntervalManager(timeout);
+	}
+	
+	// Turn off AutoComplete for the text box
+	this.textObj.setAttribute('autocomplete', 'off');
+	this.textObj.focus();
+	
+	// Used for detecting updates
+	this.hash = 'default hash';
+	
+	// Used for detecting redundant/double posts
+	this.lastPost = '';
+	
+	// Lace state and timer properties
+	this.isActive = false;
+	this.interval = false;
+	
+	// XMLHttpRequest!
+	this.httpSendObj = this.httpObject();
+	this.httpGetObj  = this.httpObject();
+	
+	// Set the internal name change monitor
+	this.name = encodeURIComponent(this.nameObj.value);
+	
+	// Start Lace if XMLHttpRequest is present.  Also, we need 
+	// to use encodeURIComponent.  Sorry IE5.0...
+	if (this.httpSendObj !== false && this.httpGetObj !== false && window.encodeURIComponent) {
+
+		// Connect the form to XMLHttpRequest
+		document.getElementById('laceform').onsubmit = function() {thisObj.send(); return false;};
+	
+		// Activate Lace
+		this.start();
+	}
+}
+
+function laceDisableInputs()
+{
+	this.inputsDisabled = true;
+	this.textObj.value = message_transmission;
+	this.textObj.disabled = true;
+	var say = document.getElementById('say');
+	say.disabled = true;
+}
+
+function laceEnableInputs()
+{
+	if (!this.inputsDisabled)
+		return;
+		
+	this.inputsDisabled = false;	
+	clearTimeout(this.waitMsgTimer);
+	this.textObj.value = '';
+	this.textObj.disabled = false;
+	var say = document.getElementById('say');
+	say.disabled = false;
+	this.textObj.focus();
+}
+
+// Reset user inputs
+function laceResetInputs()
+{
+	// Clear field value - even in Safari
+	this.textObj.blur();
+	this.textObj.value='';
+	this.textObj.focus();
+	
+//	this.previewUpdate('');
+}
+
+function laceSetName(name)
+{
+	if (name != this.name)
+	{
+		var oldName = this.name;
+		this.name = name;
+		
+		date = new Date();
+		setCookie(lace_name_cookie, name, date.getTime() + 2592000, lace_url_rel);
+		//alert(simpleRequest('users.php', 'remove='+oldName));
+	}
+}
+
+function laceSend () {
+	var thisObj = this;
+	var id_article    = encodeURIComponent(lace_id_article);
+	var name    = encodeURIComponent(this.nameObj.value);
+	var text    = encodeURIComponent(this.textObj.value);
+	
+ 	// No redundant/duplicate posts
+	if (this.lastPost != '' && text == this.lastPost)
+ 	{
+ 		this.resetInputs();
+ 		alert(message_double_post);
+ 		this.get();
+ 		return;
+ 	}
+	
+	if (name !== '' && text !== '') {
+		if (this.httpSendObj.readyState === 4 || this.httpSendObj.readyState === 0) {
+			this.setName(name);
+			this.lastPost = text;
+			this.resetInputs();
+			//this.waitMsgTimer = setTimeout(function () {thisObj.disableInputs();}, 1200);
+
+			var param = 'id_article=' + id_article + '&name=' + name + '&text=' + text;
+			this.httpSendObj.open('POST', this.url, true);
+			this.httpSendObj.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8');
+			this.httpSendObj.onreadystatechange = function () { thisObj.handleSend(); };
+			this.httpSendObj.send(param);
+		}else {
+			setTimeout(function () { thisObj.send(); }, 1000);
+		}
+	}
+}
+
+function laceHandleSend () {
+	if (this.isActive === false)
+		return;
+			
+	if (this.httpSendObj.readyState === 4) {
+		// useful for debugging
+		//alert(this.httpSendObj.responseText);
+		this.timerReset();
+		this.get();
+	}
+}
+
+function laceGet (system) {
+	if (this.httpGetObj.readyState === 4 || this.httpGetObj.readyState === 0) {
+		var id_article    = encodeURIComponent(lace_id_article);
+		var param = 'id_article=' + id_article + '&hash=' + encodeURIComponent(this.hash);
+		// Even though we're retrieving data, we still use
+		// a POST request for security reasons.
+		this.httpGetObj.open('POST', this.url, true);
+		this.httpGetObj.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8');		
+		var thisObj = this;
+		this.httpGetObj.onreadystatechange = function () { thisObj.handleGet(system); };
+		this.httpGetObj.send(param);
+	}
+}
+
+function laceHandleGet (system) {
+	if (this.httpGetObj.readyState === 4) {
+		var response = this.httpGetObj.responseText;
+		// Very useful for debugging
+		//alert(response);
+		if (response !== null && typeof(response) != "undefined" && response.length > 0) {
+			this.removeAllChildNodes(this.laceDomRef);
+			this.insertResults();
+this.laceDomRef.scrollTop += this.laceDomRef.scrollHeight;
+		}
+		//this.enableInputs();
+		this.timerStep(system);
+	}
+}
+
+function laceStart() {
+	this.setActive(true);
+	this.timerStart();
+}
+
+function laceStop() {
+	if (this.timerStop() === true) {
+		this.setActive(false);
+		alert(message_stop);
+	}
+}
+
+function laceToggle() {
+	if (this.isActive === false) {
+		this.start();
+	} else {
+		this.stop();
+	}
+}
+
+
+/* Lace's timer functions.
+ * These functions should be better
+ * abstracted into the IntervalManager.
+ */
+function laceTimerStart() {
+	if (this.isActive === false) {
+		return false;
+	}
+	
+	if (this.intManObj) {
+		var interval = this.intManObj.reset();
+		this.timerSet(interval);
+		return true;
+	} else {
+		// Use the default interval
+		// if IntervalManager isn't present
+		this.timerSet(this.defaultInterval);
+	}
+	
+	return false;
+}
+
+function laceTimerStop(prompt) {
+	if (this.isActive === false) {
+		return true;
+	}
+	
+	if (this.intManObj) {
+		if (prompt === true) {
+			this.timerStop();
+			var reset = confirm(message_pause);
+			
+			if (reset === true) {
+				this.timerReset();
+				this.get();
+				return false;
+			} else {
+				 return this.stop();
+			}
+		}
+		
+		clearInterval(this.timerID);
+		this.interval = false;
+		return true;
+	}
+	
+	return false;
+}
+
+function laceTimerSet(interval) {
+	if (this.isActive === false) {
+		return false;
+	}
+
+	this.interval = interval;
+	var thisObj = this;
+	clearInterval(this.timerID);
+	this.timerID = setInterval(function () { thisObj.get(true); }, interval);
+	
+	return true;
+}	
+
+function laceTimerReset() {
+	if (this.isActive === false) {
+		return false;
+	}
+	if (this.intManObj) {
+		var interval = this.intManObj.reset();
+		return this.timerSet(interval);
+	} else {
+		this.timerStart();
+	}
+	
+	return false;
+}
+
+function laceTimerStep(system) {
+	if (this.isActive === false) {
+		if (system !== true) {
+			return this.start();
+		}			
+		else {
+			return false;
+		}
+	}
+
+	if (this.intManObj) {
+		var interval = this.intManObj.step();
+		if (interval !== false) {
+			return this.timerSet(interval);
+		} else {
+			return this.timerStop(true);
+		}
+	}
+	return false;
+}
+
+/* DOM madness */
+function laceInsertResults() {
+	// Records are separated by four pipes ||||
+	var results = this.httpGetObj.responseText.split('||||');
+	this.hash   = results[0];
+	
+	for (var i = 1; i < results.length; i++) {
+		var first;
+		// Fields are separated by two pipes ||
+		var fields = results[i].split('||');
+		
+		if (fields[0].indexOf('date') !== -1) {
+			// fields[0] = id attribute
+			// fields[1] = date string (a * prefix denotes that it's 
+			//                          class attribute is 'first')
+			first = (fields[1].indexOf('*') === 0) ? true : false;
+			var dayDiv = document.createElement('div');
+			var h4 = document.createElement('h4');
+
+			var dayClass = (first) ? 'daystamp first' : 'daystamp';
+
+			dayDiv.setAttribute('id', fields[0]);
+			dayDiv.setAttribute('class', dayClass);
+			dayDiv.setAttribute('className', dayClass);
+			
+			var dayString = (first) ? fields[1].substring(1) : fields[1];
+			var date = document.createTextNode(dayString);
+			
+			h4.appendChild(date);
+			dayDiv.appendChild(h4);
+//			this.laceDomRef.appendChild(dayDiv);
+			continue;
+		}
+		
+		if (fields[0].indexOf('hour') !== -1) {
+			// fields[0] = id attribute
+			// fields[1] = hour string (a * prefix denotes that it's 
+			//                          class attribute is 'first')			
+			first  = (fields[1].indexOf('*') === 0) ? true : false;
+			var hourDiv = document.createElement('div');
+			var h5 = document.createElement('h5');
+			
+			var hourClass = (first) ? 'hourstamp first' : 'hourstamp';
+
+			hourDiv.setAttribute('id', fields[0]);
+			hourDiv.setAttribute('class', hourClass);
+			hourDiv.setAttribute('className', hourClass);
+			
+			var hourString = (first) ? fields[1].substring(1) : fields[1];
+			var hour = document.createTextNode(hourString);
+			
+			h5.appendChild(hour);
+			hourDiv.appendChild(h5);
+//			this.laceDomRef.appendChild(hourDiv);
+			continue;
+		}
+		
+		// fields[0] = id attribute
+		// fields[1] = time string
+		// fields[2] = name (a * prefix denotes an action, a ! denotes a notice)
+		// fields[3] = text                       
+		var p       = document.createElement('p');
+		var nameDiv = document.createElement('span');
+		var textDiv = document.createElement('span');
+		
+		var timeStr = fields[1];
+		var textStr = fields[3];
+		
+		if (fields[2]) {	
+		var action = (fields[2].indexOf('*') === 0) ? true : false;
+		var notice = (fields[2].indexOf('!') === 0) ? true : false;
+		var nameStr = (action || notice) ? fields[2].substring(1) : fields[2];
+		}
+		
+		// System messages appear as an action by the user Lace
+		var system = (action && nameStr == 'Lace');
+		
+		//p.setAttribute('id', 'msg_' + fields[0] + '_' + i);
+		if (notice) {
+			p.setAttribute('class', 'notice');
+			p.setAttribute('className', 'notice');
+		}
+		if (system) {
+			p.setAttribute('class', 'system');
+			p.setAttribute('className', 'system');
+			action = false;
+		}			
+		nameDiv.setAttribute('class', 'name');
+		nameDiv.setAttribute('className', 'name');
+		var className = (action) ? 'message action' : 'message';
+		textDiv.setAttribute('class', className);
+		textDiv.setAttribute('className', className);
+			
+		// After all that DOM junk, we settle for innerHTML
+		// as there may be HTML in textStr that we want to keep.
+		nameDiv.innerHTML = (action || notice && nameStr != 'Lace') ? '&nbsp;' :  ' <a title="' + timeStr + '">' + nameStr + '</a> ';
+		textDiv.innerHTML = (action || notice && nameStr != 'Lace') ? '<a title="' + timeStr + '">' + nameStr + '</a> ' + textStr : textStr;
+
+		p.appendChild(nameDiv);
+		p.appendChild(textDiv);
+		this.laceDomRef.appendChild(p);
+	}
+this.laceDomRef.scrollTop += this.laceDomRef.scrollHeight;
+}
+
+function laceRemoveAllChildNodes(parent) {
+	while (parent.hasChildNodes()) {
+		var removed = parent.removeChild(parent.firstChild);
+	}
+	return true;
+}
+
+/* Create an XMLHttpRequest Object */
+function laceHttpObject () {
+	var xmlhttp = false;
+	/*@cc_on
+	@if (@_jscript_version >= 5)
+	try {
+		xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+	} catch (e) {
+		try {
+			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		} catch (E) {
+			xmlhttp = false;
+		}
+	}
+	@else
+	xmlhttp = false;
+	@end @*/
+	if (!xmlhttp && typeof XMLHttpRequest!='undefined') {
+	    try {
+	    	xmlhttp = new XMLHttpRequest();
+	    } catch (e) {
+	    	xmlhttp = false;
+	    }
+	}		
+	return xmlhttp;
+}
+/*
+function lacePreviewUpdate (text) {
+	if (this.PreviewObj) {
+		this.PreviewObj.update(text);
+	}
+}
+*/
+function laceSetActive(active) {
+	var img  = document.getElementById('statusimage');
+	var text = document.getElementById('statustext');
+	
+	if (active === true) {
+//		img.setAttribute('src', './_images/pause.gif');
+//		img.setAttribute('alt', 'Stop');
+//		img.setAttribute('title', 'Click to stop');
+		
+		this.isActive  = true;
+//		text.innerHTML = 'Lace is active.';
+		
+		// Issues arose after prolonged use of the XMLHttpRequest object where
+		// XMLHttpRequest would hang or crash the browser.
+		//
+		// Re-initializing the XMLHttpRequest object appears to have solved that problem.
+		this.httpGetObj  = this.httpObject();
+		this.httpSendObj = this.httpObject();
+		
+		// Don't necessarily need this, but for some reason
+		// it helps browsers redraw the screen, and removes
+		// an intermittent bug where the Status Display
+		// would fall out of view
+		this.get();
+	} else if (active === false) {
+		img.setAttribute('src', './_images/play.gif');
+		img.setAttribute('alt', 'Start');
+		img.setAttribute('title', 'Click to start');
+		
+		this.httpGetObj  = null;
+		this.httpSendObj = null;		
+		
+		this.isActive = false;
+		text.innerHTML  = 'Lace is stopped.';
+		clearInterval(this.timerID);
+	}
+}
+
+
+/* Simple, fire and forget XHR */
+function simpleRequest(url, params) {
+	req = laceHttpObject();
+	req.open('POST', url, false);
+	req.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8');	
+	req.send(params);
+	if (req.responseText.indexOf('|') == -1)
+		return req.responseText;
+	else
+		return req.responseText.split('|');
+}
+
+
+
+function IntervalManager(timeout) {
+	
+	this.init  = intervalManagerInit;
+	this.reset = intervalManagerReset;
+	this.add   = intervalManagerAdd;
+	this.step  = intervalManagerStep;
+	this.get   = intervalManagerGet;
+	
+	this.init(timeout);
+}
+	
+function intervalManagerInit (timeout) {
+	this._timeout  = timeout * 60;
+	this._min      = 4;
+	this._step     = 0.2;
+	this._duration = 0;
+	this._count    = 0;
+	
+	this._interval = this._min;
+}
+
+function intervalManagerReset() {
+	this._interval = this._min;
+	this._duration = 0;	
+	this._count    = 0;
+		
+	return this.get();
+}
+
+function intervalManagerAdd (amt) {
+	this._interval += amt;
+	this._duration += this._interval;		
+	this._count++;	
+}
+
+function intervalManagerStep() {
+	// Timer has reached the _timeout limit
+	if (this._duration >= this._timeout) {
+		return false;
+	}
+
+	var increment = Math.round(this._step * this._count);
+	
+	this.add(increment);
+	return this.get();
+}
+
+function intervalManagerGet () {
+	return this._interval * 1000;
+}
+</script>
+
+
+</head>
+<B_contenu>
+<BOUCLE_contenu(ARTICLES){id_article}>
+<body class="page_login">
+<div id="home">
+<div id="minipres">
+
+[(#SESSION{id_auteur}|!={''}|oui)
+
+	#SET{ciok,'oui'}
+	[(#PLUGIN{ciparam}|oui)
+		#SET{ciok,'non'}
+		[(#CIFORME|=={_chat}|oui)
+			#SET{ciok,'oui'}
+		]
+	]
+	
+	[(#GET{ciok}|=={oui}|oui)
+	<div id="wrapper">
+		<div id="content">
+			
+			<div id="main">
+				<div id="laceoutput">
+					<?php printFileContentsHTML(); ?>
+				</div>
+			</div>
+			
+			<form name="laceform" id="laceform" action="./cichat_test.php?id_article=#ID_ARTICLE" method="post">
+			<div id="lacecontrols">
+					<textarea name="text" id="text" rows="3"></textarea>
+					<p><input type="submit" name="say" id="say" value="<:icone_envoyer_message:>" class="button">
+					<input type="hidden" name="name" id="name" value="#SESSION{login}" ></p>
+	
+			</div>
+			</form>
+			
+		</div>
+	</div>
+	]
+
+]
+
+[(#SESSION{id_auteur}|=={''}|oui)
+	#LOGIN_PUBLIC
+
+	<p class="retour">
+		&#91;<a href="#URL_SITE_SPIP/"><:login_retoursitepublic:></a>&#93;
+	</p>
+	
+]
+
+</div>
+</div>
+</body>
+</BOUCLE_contenu>
+</B_contenu>
+<body>
+<br>
+<h1><:info_page_interdite:></h1>
+</body>
+<//B_contenu>
+
+
+</html>

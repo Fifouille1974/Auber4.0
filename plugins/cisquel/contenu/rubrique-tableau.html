@@ -1,0 +1,74 @@
+<BOUCLE_contenu(RUBRIQUES){id_rubrique}>
+				<div class="rub">
+				<h2>[(#TITRE|supprimer_numero)]</h2>
+				<div class="dateart">[<:cisquel:eq_publie_le:> (#DATE|affdate)]
+				</div>
+			      	[<div class="texte">(#TEXTE)</div>]
+				[<div class="texte">(#NOTES)</div>]
+				</div>
+			      	
+				<BOUCLE_sous_rubriques(RUBRIQUES){id_parent}{par num titre}>
+				<div class="listerub">
+					[<img src="(#LOGO_RUBRIQUE||image_reduire{44,0}|extraire_attribut{'src'})" alt=""  class="rightill" />]
+				      	<a href="#URL_RUBRIQUE" class="titresousrub">[(#TITRE|supprimer_numero)]</a>
+				      	[<div class="textesousrub">(#DESCRIPTIF)</div>]
+					<B_sous_sous_rubriques>
+					<div class="liens">
+					<ul>
+					<BOUCLE_sous_sous_rubriques(RUBRIQUES){id_parent}{par num titre}>
+					<li><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></li>
+					</BOUCLE_sous_sous_rubriques>
+					</ul>
+				      	</div>
+					</B_sous_sous_rubriques>
+					<div class="clearer">&nbsp;</div>
+				</div>
+				</BOUCLE_sous_rubriques>
+
+			            	<div id="tableau">
+				<table summary="<:cisquel:eq_les_articles:>" class="forme">
+				<thead>
+				<tr>
+				<th scope="col" id="col1" width="10%" class="forme"><:date:></th>
+				<th scope="col" id="col2" width="25%" class="forme"><:cisquel:eq_titre:></th>
+				<th scope="col" id="col3" width="45%" class="forme"><:cisquel:eq_descriptif:></th>
+				<th scope="col" id="col4" width="20%" class="forme"><:cisquel:eq_documents:></th>
+				</tr>
+				</thead>
+				
+				#SET{ci_mots, #ARRAY{}}
+				<BOUCLE_mot_sous_rubrique(MOTS){id_rubrique}{type=_multirubricage}{par titre}>
+				[(#SET{ci_mots, #GET{ci_mots}|push{#ID_MOT}})]
+				</BOUCLE_mot_sous_rubrique>
+				
+				#SET{ci_id_rubrique_multi, #ID_RUBRIQUE}
+			    <BOUCLE_article_sous_rubrique(ARTICLES){id_mot IN #GET{ci_mots}}{doublons}{par #CITRI}{!par #CITRIINVERSE}{par num #CITRINUM}>
+				<tr>
+				<td headers="col1" class="forme">[(#DATE|affdate{'d/m/Y'})]</td>
+				<td headers="col2" class="forme">
+				<a href="[(#URL_ARTICLE|parametre_url{id_rubrique,#GET{ci_id_rubrique_multi}})]" class="lien">[(#TITRE|supprimer_numero)]</a></td>
+				<td headers="col3" class="formecoltexte">[<div class="texte">(#DESCRIPTIF)</div>]</td>
+				<td headers="col4" class="forme">
+				<BOUCLE_documents2(DOCUMENTS){id_article}{par num titre}{mode=document}{doublons}>
+				<a href="#URL_DOCUMENT" onclick="xt_med('C','[(#ID_ARTICLE|ciparam_xtn2)]','[pj(#ID_ARTICLE)-][(#TITRE|supprimer_numero|ciparam_xtTraiter)]','T')" title="<:cisquel:eq_ouvre_document:> [(#TITRE|supprimer_numero)] <:cisquel:eq_dans_fenetre:>" class="spip_out" class="lien">[(#TITRE|supprimer_numero)]</a>[: (#DESCRIPTIF)] ([<:cisquel:eq_format:> (#EXTENSION)][ - (#TAILLE|taille_en_octets)][ - (#DATE|affdate{'d/m/Y'})])
+				</BOUCLE_documents2>
+				</td>
+				</tr>
+				    </BOUCLE_article_sous_rubrique>
+				
+				<BOUCLE_articles(ARTICLES){id_rubrique}{doublons}{par #CITRI}{!par #CITRIINVERSE}{par num #CITRINUM}>
+				<tr>
+				<td headers="col1" class="forme">[(#DATE|affdate{'d/m/Y'})]</td>
+				<td headers="col2" class="forme"><a href="#URL_ARTICLE" <BOUCLE_nouvelle_fenetre(ARTICLES){id_article}{raccourci=_nouvelle_fenetre}>class="spip_out lien"</BOUCLE_nouvelle_fenetre></B_nouvelle_fenetre>class="lien"<//B_nouvelle_fenetre> >[(#TITRE|supprimer_numero)]</a></td>
+				<td headers="col3" class="formecoltexte">[<div class="texte">(#DESCRIPTIF)</div>]</td>
+				<td headers="col4" class="forme">
+				<BOUCLE_documents(DOCUMENTS){id_article}{par num titre}{mode=document}{doublons}>
+				<a href="#URL_DOCUMENT" onclick="xt_med('C','[(#ID_ARTICLE|ciparam_xtn2)]','[pj(#ID_ARTICLE)-][(#TITRE|supprimer_numero|ciparam_xtTraiter)]','T')" title="<:cisquel:eq_ouvre_document:> [(#TITRE|supprimer_numero)] <:cisquel:eq_dans_fenetre:>" class="spip_out lien">[(#TITRE|supprimer_numero)]</a>[: (#DESCRIPTIF)] ([<:cisquel:eq_format:> (#EXTENSION)][ - (#TAILLE|taille_en_octets)][ - (#DATE|affdate{'d/m/Y'})])
+				</BOUCLE_documents>
+				</td>
+				</tr>
+				</BOUCLE_articles>
+				</table>
+				</div>
+				                
+</BOUCLE_contenu>

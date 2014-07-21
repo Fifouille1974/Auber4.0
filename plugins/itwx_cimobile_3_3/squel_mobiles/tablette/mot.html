@@ -1,0 +1,105 @@
+<BOUCLE_principale(MOTS) {id_mot}>
+<!DOCTYPE html>
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+]<!--[if lt IE 7 ]> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html lang="#LANG"class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]--> 
+<head>
+<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+<title>[(#TITRE|textebrut) - ][(#NOM_SITE_ITWX|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF|couper{150}|attribut_html)" />]
+<INCLURE{fond=inc/inc-head}/>
+[(#REM) Lien vers le flux RSS des articles du mot cle ]
+<link rel="alternate" type="application/rss+xml"[ title="(#TITRE|attribut_html)"] href="[(#URL_PAGE{backend}|parametre_url{id_mot,#ID_MOT})]" />
+</head>
+
+<body id="top">
+<div id="tab">
+
+ [(#REM) TOOL BARRE ]
+ <INCLURE{fond=inc/inc-navBar}>
+  
+  <div id="main">
+  
+  [(#REM) Hierarchie ]
+  <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <a href="#URL_PAGE{lesmots}"><:mots_clefs:></a> &gt; <strong class="on">#TITRE</strong></div>
+  
+  <div id="conteneur">
+
+  [(#REM) Contenu ]
+    <div class="contenu"> 
+	
+	[(#REM) Mot-cle ]
+        <div class="cartouche"> [(#LOGO_MOT|image_reduire{200,150})]
+          <div class="surlignable">
+		  [<h1>(#TITRE)</h1><br />]</div>
+        </div><!--#cartouche-->
+		
+        <div class="surlignable">
+		 [<div class="#EDIT{chapo} chapo">(#DESCRIPTIF|image_reduire{0,0})</div>]			
+         [<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{0,0})</div>] 
+		</div>
+        <br class="nettoyeur" />
+		
+        [(#REM) Articles lies au mot-cle ] 
+		<INCLURE{fond=inc/inc-mot-listart}{env}{ajax}{art=_art#ID_ARTICLE}/> 
+		
+		[(#REM) Breves liees au mot-cle ] 
+		<INCLURE{fond=inc/inc-mot-listbre}{env}{ajax}{bre=_bre#ID_BREVE}/> 
+		
+		[(#REM) Rubriques liees au mot-cle ] 
+		<INCLURE{fond=inc/inc-mot-listrub}{env}{ajax}{rub=_rub#ID_RUBRIQUE}/> 
+		
+		[(#REM) Sites web lies au mot-cle ] 
+		<INCLURE{fond=inc/inc-mot-listsite}{env}{ajax}{site=_site#ID_SYNDIC}/> 
+		
+    </div><!--#contenu-->
+	
+  [(#REM) Navigation ]
+	<div id="navigation">
+	  <div class="group bord" style="height:13px"></div>
+	  
+      [(#REM) Autres mots-cles ]
+      <div id="navigation-a"> <INCLURE{fond=inc/inc-mot-listmot}{env}{ajax}{mot=_mot#ID_MOT}/> </div>
+	  
+      <div id="navigation-b"> 
+      [(#REM) Infos ]
+      <INCLURE{fond=inc/inc-infos_mots}/> 
+      </div>
+	  
+		[(#REM) Menu de Rubriques ] 
+		 [(#REM) Landscape mode  ]
+		 <div id="navigation-c" class="display-landscape">		
+		  <INCLURE{fond=inc/inc-rubriques}{id_rubrique}/> 
+		 </div>
+
+		 [(#REM) Portrait mode  ]
+		 <div id="navigation-e" class="display-portrait">		
+		  <INCLURE{fond=inc/inc-rubriques}{id_rubrique}/> 
+		 </div>
+		  
+    </div><!--#navigation-->
+	
+  </div><!--#conteneur-->
+  
+  [(#REM) Pied ]
+  <div id="pied"> 
+    <div class="group" style="height:13px;border-bottom: 1px solid #B9B9B9;"></div>
+	<div class="ticket">
+      <div class="ticketmenu"> 
+	    [(#CONFIG{itwx/classique}|?{' '})<a rel="start home" href="[(#URL_MOT|parametre_url{'cimobile','web'})]"><:itwx:pageclassique:></a>]
+		[(#AUTORISER{ecrire})<a href="#EVAL{_DIR_RESTREINT_ABS}"><:espace_prive:></a>]
+		[(#SESSION{id_auteur}|?{' '})<a href="#URL_LOGOUT" rel="nofollow" style="background-image: none;text-align:center;padding: 10px 12px;"><:icone_deconnecter:></a>]
+      </div>
+    </div><!--#ticket-->
+	<INCLURE{fond=inc/inc-pied}/> 
+  </div><!--#pied-->
+  
+  </div><!--#main-->
+
+</div><!--#page-->
+</body>
+</html>
+</BOUCLE_principale>

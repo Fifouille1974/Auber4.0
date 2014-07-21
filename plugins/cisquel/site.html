@@ -1,0 +1,69 @@
+[(#REM)
+	Un cache plus court, pour la boucle syndic_articles
+]#CACHE{3600}
+<BOUCLE_principale(SITES){id_syndic}>
+#CIPARAM_DOCTYPE
+<head>
+<title>[(#NOM_SITE|textebrut)][ - (#NOM_SITE_SPIP|textebrut)]</title>
+<meta name="robots" content="noindex, nofollow" />
+<link href="#CHEMIN{_css/styleexceptions.css}" rel="stylesheet" type="text/css" />
+<INCLURE{fond=noisettes/head}{lang}>
+<link rel="stylesheet" href="#CHEMIN{agenda.css}" type="text/css" /> 
+<script type="text/javascript" src="#EVAL{_DIR_JAVASCRIPT}layer.js"> </script> 
+<script type="text/javascript" src="#EVAL{_DIR_JAVASCRIPT}presentation.js"> </script> 
+</head>
+
+<body class="page_agenda">
+<INCLURE{fond=noisettes/haut}{lang}>
+<div id="milieu">
+	<div id="ext-main">
+		<div class="main">
+
+  			<div id="contenu">
+			<div class="main-content">
+				<h1 class="invisible"><:cisquel:eq_contenu:></h1>
+				<div id="boxnavpath"><div id="navpath">
+					<a href="[(#URL_PAGE{sommaire})]"><:cisquel:eq_accueil:></a>&gt; [(#NOM_SITE)]
+				</div></div>
+				<div id="boxcentrale"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale">
+				
+        <div class="cartouche">
+            <a href="#URL_SITE">[(#LOGO_SITE|image_reduire{150,100})]</a>
+            <h2><a href="#URL_SITE" class="spip_out">#NOM_SITE</a></h2>
+        </div>
+
+        [<div class="chapo">(#DESCRIPTIF)</div>]
+
+        [(#REM) Articles issus de la syndication ]
+        <B_articles>
+            #ANCRE_PAGINATION
+[(#SPIP_VERSION|>={3}|oui)
+            <div class="texte"><:sites:titre_articles_syndiques:></div>
+]
+[(#SPIP_VERSION|>={3}|non)
+            <div class="texte"><:titre_articles_syndiques:></div>
+]
+                <BOUCLE_articles(SYNDIC_ARTICLES) {id_syndic} {age<180} {par date}{inverse} {pagination 5}>
+				<div class="listeart"><a href="#URL_ARTICLE" class="spip_out titreartliste">[(#TITRE|supprimer_numero)]</a>
+				[<div class="texte"><:cisquel:eq_publie_le:>&nbsp;(#DATE|affdate_jourcourt)</div>]
+		      	[<div class="texte">(#DESCRIPTIF|image_reduire{300})</div>]
+				</div>
+                </BOUCLE_articles>
+            [<p class="pagination">(#PAGINATION)</p>]
+        </div>
+		<!-- SPIP-CRON --><div style="background-image: url('spip.php?action=cron');"></div>
+        </B_articles>
+        
+        [<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
+				
+				
+				</div></div></div></div></div></div>
+			</div>
+			</div>
+		<div class="clearer"></div>				
+		</div>
+	</div>
+</div>
+<INCLURE{fond=noisettes/pied}{lang}><INCLURE{fond=noisettes/pied_connexion}{self=#SELF}{lang}>
+	
+</BOUCLE_principale>

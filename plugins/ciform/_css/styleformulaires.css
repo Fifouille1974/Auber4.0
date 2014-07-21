@@ -1,0 +1,608 @@
+/* -----------------------------------------------------------------------------
+  Formulaires de saisie sur le site public
+-------------------------------------------------------------------------------- */
+
+#milieuf2 {
+	margin: 0;
+	padding: 0;
+}
+
+#milieuf2 .main {
+	float: left;
+	width: 97%;
+	position: relative;
+	z-index: 0;
+}
+
+#milieuf2 #contenu {
+	float:right;
+	width:98%;
+}
+
+
+/* ------ article -----*/
+#menu2 .visuel img {
+	margin: 0 0 10px 6px;
+	width: 145px;
+}
+
+#menu2 a.envoiami {
+	line-height:1.5em;
+	display:block;
+	margin: 0px 0px 0px 6px;
+	padding: 0px 0px 0.5em 20px;
+	background: url(../_images/picto_envoie.gif) no-repeat 0px 2px;
+	color: #484848;
+	text-decoration: none;
+}	
+
+
+#gauche {
+ 	width: 180px;
+}
+#menu1 {
+	position: relative;  /* indispensable pour IE 5.5 et 6 */	
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	margin: 83px 0px 0px 0px;
+	font-size: 1em;
+	width: 180px;
+}
+#menu1 .boxtitregauche {
+    margin: 0px 0px 0px 0px;
+}
+#menu1 h2 {
+	font-size: 0.7em;
+	color: #FFFFFF;
+	font-weight: bold;
+	padding: 0.25em 0px 0.25em 6px;
+	margin: 0 0px 0px 0px;
+	width: 100%;
+}
+#menu1 ul {
+	margin-left: 0px;
+	padding: 2px 0 2em 0px;
+	list-style-type: none;
+	position: relative;  /* indispensable pour IE 5.5 */
+}
+#menu1 ul li {
+	cursor:pointer;
+	background: none;
+	border: 0;
+	padding: 1px;
+	margin: 4px 0px 4px 0px;
+	color: rgb(80, 80, 80);
+}
+
+#menu2 {
+	padding: 3px;
+	margin: 72px 0px 0px 0px;
+	width: 170px;
+}
+#menu2 a {
+	color: #656565;
+	display: block;
+	margin: 5px 0px 5px 0px;
+	text-decoration: none;
+}
+#menu2 a:hover {
+	text-decoration: underline;
+}
+input#titre {
+	margin: 0px;
+	font-size: 0.8em;
+	font-weight: bold;
+	width: 100%;
+}
+.cadreoptions {
+	border: 1px solid #7F9DB9;
+	padding: 3px 5px 3px 5px;
+	margin: 10px 0px 0px 0px;
+}
+.cadredocument {
+	border: 1px solid #7F9DB9;
+	padding: 3px 5px 0px 5px;
+	margin: 10px 0px 0px 0px;
+}
+
+fieldset.statut {
+	display:block;
+	margin: 5px 0px 5px 0px;
+	font-size: 0.7em;
+	border: 1px solid #7F9DB9;
+	width: 100%;
+}
+legend.statut {
+	color: #484848;
+}
+label.prepa {
+	font-weight: bold;
+	border-bottom: 5px solid #F4F4F4;
+}
+label.prop {
+	font-weight: bold;
+	border-bottom: 5px solid #FFF1C6;
+}
+label.publie {
+	font-weight: bold;
+	border-bottom: 5px solid #B4E8C5;
+}
+label.poubelle {
+	font-weight: bold;
+	border-bottom: 5px solid #000000;
+}
+label.refuse {
+	font-weight: bold;
+	border-bottom: 5px solid #FFA4A4;
+}
+div.radio {
+	display: block;
+	float: left;
+    margin: 5px 5px 5px 5px;
+    padding:0px 0px 3px 0px;
+}
+div.radiov {
+	display: block;
+    margin: 5px 5px 5px 5px;
+    padding:0px 0px 3px 0px;
+}
+* html div.radiov {
+	margin: 1px 2px 1px 1px;  /* hack uniquement interprété par IE Win+Mac */
+}
+
+label.radio {
+	display: block;
+	float: left;
+    margin: 0px 0px 0px 0.3em;
+    padding: 0.2em 0px 0.2em 0px;
+}
+input.radio {
+	display: block;
+	float: left;
+    margin: 0.1em 0px 0px 0px;
+}
+
+.cadrebouton {
+	border: 1px solid rgb(48, 48, 48);
+	padding: 1px;
+	margin: 6px 10px 0px 0px;
+	color: rgb(80, 80, 80);
+	float: left;
+}
+.cadrevaliderarticle {
+	clear: both;
+	text-align: right;
+	margin: 6px 0px 0px 0px;
+	padding: 6px 0px 0px 0px;
+}
+.cadrevalider {
+	clear: both;
+	text-align: right;
+	margin: 6px 0px 15px 0px;
+}
+.cadrevalider2 {
+	clear: both;
+	margin: 6px 0px 15px 0px;
+}
+.ftitre1 {
+	display: block;
+	font-size: 0.7em;
+	margin: 15px 0 0.5em 0;
+	color: #484848;
+	line-height: 1.1em;
+	text-align: justify;	
+}
+.gras {
+	font-weight: bold;
+}
+#contenu textarea {
+	width: 100%;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	color: #484848;
+	text-align: justify;
+	font-size: 0.7em;
+	line-height: 1.1em;
+}
+.bouton_valider { 
+	padding: 3px 0px 3px 0px;
+	margin-left: 10px;
+	font-size: 0.8em;
+}
+.bouton_normal { 
+	padding: 3px 3px 3px 3px;
+	font-size: 0.8em;
+}
+.bouton_pj { 
+	cursor:pointer;
+	padding: 5px 5px 5px 20px;
+	background: url(../_images/icones/attachment.gif) no-repeat 5px 2px;
+	color: #484848;
+	font-size: 0.7em;
+	border: 0;
+}
+.bouton_img { 
+	cursor:pointer;
+	padding: 5px 10px 5px 30px;
+	background: url(../_images/icones/image-24.gif) no-repeat 5px 0px;
+	color: #484848;
+	font-size: 0.7em;
+	border: 0;
+}
+.bouton_supprimg { 
+	cursor:pointer;
+	padding: 5px 10px 5px 30px;
+	background: url(../_images/icones/supprimer.gif) no-repeat 5px 0px;
+	color: #484848;
+	font-size: 0.7em;
+	border: 0;
+}
+
+
+.bloc_action_pj {
+}
+.bouton_doc_remplacer {
+	cursor:pointer;
+	font-size: 1em;
+	color:#005FB8;
+	background-color: #FFFFFF;
+	border: none;
+	overflow: visible;	
+}
+.bouton_doc_modifier { 
+	cursor:pointer;
+	font-size: 1em;
+	color:#005FB8;
+	background-color: #FFFFFF;
+	border: none;
+	overflow: visible;	
+}
+.bouton_doc_supprimer { 
+	cursor:pointer;
+	font-size: 1em;
+	color:#005FB8;
+	background-color: #FFFFFF;
+	border: none;
+	overflow: visible;	
+}
+
+.bouton_option { 
+	cursor:pointer;
+	margin: 4px 0px 4px 0px;
+	color: #484848;
+	background-color: #FFFFFF;
+	font-size: 0.7em;
+	border: 0;
+	display:block;
+	width:170px;
+	text-align: left;
+}
+.cadreoption {
+	cursor:pointer;
+	border: 0;
+	padding: 1px;
+	margin: 4px 0px 4px 0px;
+	color: rgb(80, 80, 80);
+}
+.texteoption {
+	cursor:pointer;
+	text-align: left;
+	color: #484848;
+	font-size: 0.7em;
+	border: 0;
+	width:169px;
+	padding: 0px 0px 0px 32px;
+	height: auto;
+	min-height: 24px;
+}
+* html .texteoption {
+	height: 24px; /* hack uniquement interprété par IE Win+Mac */
+}
+
+
+.bt_auteur {background: url(../_images/icones/auteur-24.gif) no-repeat 5px 0px;}
+.bt_calendrier {background: url(../_images/icones/agenda-24.gif) no-repeat 5px 0px;}
+.bt_date {background: url(../_images/icones/cal-today.gif) no-repeat 5px 0px;}
+.bt_forme {background: url(../_images/icones/breve-24.gif) no-repeat 5px 0px;}
+.bt_forum {background: url(../_images/icones/forum-interne-24.gif) no-repeat 5px 0px;}
+.bt_logo {background: url(../_images/icones/image-24.gif) no-repeat 5px 0px;}
+.bt_revision {background: url(../_images/icones/historique-24.gif) no-repeat 5px 0px;}
+.bt_motcle {background: url(../_images/icones/mot-cle-24.gif) no-repeat 5px 0px;}
+.bt_petition {background: url(../_images/icones/forum-admin-24.gif) no-repeat 5px 0px;}
+.bt_raccourci {background: url(../_images/icones/tout-site-24.gif) no-repeat 5px 0px;}
+.bt_redirection {background: url(../_images/icones/site-24.gif) no-repeat 5px 0px;}
+.bt_rubrique {background: url(../_images/icones/rubrique-24.gif) no-repeat 5px 0px;}
+.bt_statistique {background: url(../_images/icones/statistiques-24.gif) no-repeat 5px 0px;}
+.bt_gererforum {background: url(../_images/icones/suivi-forum-24.gif) no-repeat 5px 0px;}
+.bt_gererpetition {background: url(../_images/icones/suivi-petition-24.gif) no-repeat 5px 0px;}
+.bt_voirenligne {background: url(../_images/icones/racine-24.gif) no-repeat 5px 0px;}
+.bt_previsu {background: url(../_images/icones/racine-24.gif) no-repeat 5px 0px;}
+.bt_multipj {background: url(../_images/icones/attachment.gif) no-repeat 10px 3px;}
+.bt_referpj {background: url(../_images/icones/attachment.gif) no-repeat 10px 3px;}
+.bt_envoimembre { 
+	padding: 0px 0px 0px 22px;
+	background: url(../_images/picto_envoie.gif) no-repeat 5px 8px;
+	color: #484848;
+	font-size: 0.7em;
+	border: 0;
+}
+* html .bt_envoimembre {
+	/* hack uniquement interprété par IE Win+Mac */
+	padding: 0px 0px 0px 22px;
+	margin: 0 0 0 3px;
+	background: url(../_images/picto_envoie.gif) no-repeat 2px 5px;
+}
+
+#tableaupj {margin: 10px 0px 6px 0px; font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;}
+#tableaupj table.forme { width:100%; border: 1px solid #7F9DB9;border-collapse: collapse;}
+#tableaupj th.forme {font-size: 0.7em; color:#484848; font-weight: normal; line-height: 1.1em; padding: 2px 1px;border: 1px solid #7F9DB9; text-align: center;}
+#tableaupj td.forme { font-size: 0.7em; padding: 3px 1px 3px 1px;color: #484848;line-height: 1.1em;border: 1px solid #7F9DB9;}
+#tableaupj td.formecoltexte { font-size: 0.7em; padding: 3px 1px 3px 1px; border: 1px solid #7F9DB9;}
+#tableaupj a.lien {color: #005FB8;text-decoration: underline;}
+#tableaupj a.lien:hover {text-decoration: none;}
+
+.image_reduite {
+	margin: 1px 4px 1px 4px; 
+	width: 44px;
+	border: 0px;
+}
+.raccourci_left { text-align: left;}
+.raccourci_center { text-align: center;}
+.raccourci_right { text-align: right;}
+
+/* ------ document -----*/
+
+
+#contenu #tableaupj a.document {
+	padding-left: 4px;
+}
+
+#contenu #tableaupj a.gisehleft {
+	padding-left: 0px;
+}
+
+#contenu a.gisehleft {
+	padding-left: 0px;
+}
+
+
+fieldset.document {
+	font-size: 0.7em;
+	border: 0px solid #7F9DB9;
+}
+
+.hidden { display:none; }
+
+
+#liste2col .colonne1 {
+	float: left;
+	width: 48%;
+}
+#liste2col .colonne2 {
+	float: right;
+	width: 48%;
+}
+
+#liste3col .colonne1 {
+	float: left;
+	width: 300px;
+}
+#liste3col .colonne2 {
+	float: left;
+	width: 300px;
+}
+#liste3col .colonne3 {
+	float: left;
+	width: 300px;
+}
+
+fieldset.motcle {
+	display:block;
+	margin: 5px 0px 5px 0px;
+	padding: 8px;
+	border: 1px solid #7F9DB9;
+	width: 100%;
+}
+legend.motcle {
+	font-size: 0.7em;
+	color: #484848;
+}
+.motcle label{
+	margin-left: 5px;
+}
+.gras {
+	font-weight: bold;
+}
+.fondseldate { 
+	border: 1px solid #C0CAD4; 
+	width: 100px;
+}
+.multipj {
+	margin : 10px 0px;
+}
+
+.titreaction {
+	font-weight: bold;
+	color: #484848;
+	font-size: 0.8em;
+	margin: 30px 0px 10px 0px;
+}
+
+.cifondl { 
+	padding: 3px; 
+	background-color: #e4e4e4;
+	border: 1px solid #C0CAD4; 
+	background-position: center bottom; 
+	float: none;
+}
+
+select.cifondl {
+	padding: 0px;
+	background-color: #ffffff; 
+}
+
+#menu2 .blocoutilform {
+	position: relative;  /* indispensable pour IE 5.5 */
+	padding: 0.25em 0px 0px 0px;
+	font-size: 0.7em;
+	border-top: 1px solid #005FB8;
+}
+
+#menu2 .blocoutilform2 {
+	position: relative;  /* indispensable pour IE 5.5 */
+	padding: 0.25em 0px 10px 5px;
+	font-size: 0.7em;
+	border-top: 1px solid #005FB8;
+}
+
+#menu2 a.envoiami:hover {
+	text-decoration: none;
+}
+
+#menu2 .blocoutilform2 a:hover {
+	text-decoration: none;
+}
+
+#contenu .textechk {
+	font-size: 0.7em;
+	padding: 0 0 5px 0;
+	color: #484848;
+	text-align: justify;	
+}
+
+* html .textechk input {
+	margin: -4px -3px -3px -4px;  /* hack uniquement interprété par IE Win+Mac */
+}
+
+
+
+/*==========  rubart  ==============*/
+#rubart {
+}
+
+#rubart ul {
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;
+	line-height: 1px;
+}
+
+#rubart ul.plansite ul { 
+	list-style-type: none;
+	margin: 0px;
+	padding: 0 0 0 1.5em;
+}
+
+#rubart li { 
+	margin: 0px;
+	padding: 0px;
+}
+
+#rubart div.plansecteur {
+	height: 1.5em;
+	margin: 0.5em 0px 0.5em;
+	padding: 0px 0px 0px 10px;
+}
+
+#rubart div.planrubniv1 {
+	height: 1.3em;
+	margin: 0.5em 0px 0px 0px;
+	padding: 0px 0px 0px 10px;
+}
+
+#rubart div.planrub { 
+	color: #484848;
+	height: 1.2em;	
+	margin: 0px;
+	padding: 0px 0px 0px 10px;
+	font-weight: normal;
+}
+
+#contenu .texte { border: 0px; }
+
+.cierreur {
+	font-size: 0.7em;
+	font-weight: bold;
+	margin: 1em 0 1em 0;
+	color: #F80000;
+	line-height: 1.1em;
+	text-align: justify;	
+}
+
+#pageDatePublication fieldset li {
+  list-style: none;
+  padding: 5px;
+}
+
+#pageDatePublication fieldset label {
+	margin: 0px;
+	padding: 0 0 3px 0;
+	display: block;
+	font-size: 0.7em;
+}
+
+#pageDatePublication fieldset input#datepublication {
+	vertical-align: middle;
+	display: inline;
+}
+
+#pageDateCalendrier fieldset label.datecalendrier {
+	margin: 0px;
+	padding: 0 0 3px 0;
+	display: block;
+	font-size: 0.7em;
+}
+
+#pageDateCalendrier fieldset input#datecalendrier {
+	vertical-align: middle;
+	display: inline;
+}
+
+.calendar * { margin: 0; padding: 0; border: 0; font-family: Tahoma, serif; font-weight: normal; color: #000; }
+.calendar .invalidday a, .calendar .invalidday a:hover { color: #ccc; background: #fff; cursor: default; }
+.calendar .selectedday { background: #ddd; }
+.calendar .today { font-weight: bold; color: #f00; }
+.calendar a { padding: 0 2px; color: #000; text-decoration: none; }
+.calendar a:hover { background: #bbb; }
+.calendar table { border-collapse: collapse; font-size: 90%; }
+.calendar tbody td { width: 20px; }
+.calendar td, .calendar th { padding: 1px; text-align: center; }
+.calendar thead td { border-bottom: 1px solid #aaa; }
+.calendar thead td { font-weight: bold; }
+.calendar thead th a { font-size: 95%; font-weight: bold; }
+.calendar thead th { padding: 2px 0; vertical-align: middle; background: #ddd; }
+.calendar { padding-bottom: 2px; border: 1px solid #aaa; font-size: small; background: #fff; }
+.calendaricon { cursor: pointer; display: inline; vertical-align: middle;}
+.calendarlink, .calendaricon { margin: 0 5px; }
+
+.aidecadregris { 
+	background: #FFFFE1 url(../_images/ampoule.gif) no-repeat 2px 4px;
+	border: 1px solid #B1B1B1;
+	padding: 5px 5px 5px 17px;
+	margin: 20px 0 10px 2px;
+	font-size: 0.7em;	
+}
+span.spip_barre img {
+	vertical-align:middle;
+	padding: 3px;
+	margin: 0px;
+	background-color: #eeeeee;
+	border-right: 1px solid #C0CAD4;
+}
+
+.cicadre-r {
+	margin-top: 14px;
+	background-color: white;
+	border: 1px solid #666666;
+	-moz-border-radius: 8px;
+}
+
+.cicadre-padding {
+	font-family: verdana, arial, helvetica, sans;
+	font-size: 12px;
+	padding: 6px;
+	position: relative;
+}
+
+.arial0 { 
+	font-family: Arial, Sans, sans-serif;
+	font-size: 10px;
+}

@@ -1,0 +1,30 @@
+<?php
+/* ----------------------------------------------
+Parametres de configuration pour CISPAM :
+
+// Pour enlever le code HTML dans les forums publics
+// lors de l'enregistrement d'un commentaire
+// valeurs possibles : 'supprimer' ou 'echapper'
+$GLOBALS['ciconfig']['cispam_forum_html_amont'] = 'supprimer';
+
+// Pour enlever le code HTML dans les forums publics lors de l'affichage de commentaires
+// ainsi que pour toute balise utilisant safehtml
+// valeurs possibles : 'supprimer' ou 'echapper'
+$GLOBALS['ciconfig']['cispam_forum_html_aval'] = 'supprimer';
+
+// Pour enlever le code HTML dans les autres objets (articles, rubriques, etc.)
+// lors de leur enregistrement (creation ou modification)
+// valeurs possibles : 'supprimer' ou 'echapper'
+$GLOBALS['ciconfig']['cispam_autresobjets_html_amont'] = 'supprimer';
+
+// Pour les autres objets, l'action intervient uniquement en amont
+// afin de ne pas surcharger des fichiers importants de SPIP
+
+// contourner l'incompatibilite de SPIP avec les reverses proxy
+// ordre de la recherche de l'adresse IP (la premiere recherche fructueuse 
+// l'emporte)
+$GLOBALS['ciconfig']['cispam_ip_ordre'] = array('HTTP_X_FORWARDED_FOR'); 
+
+----------------------------------------------- */
+
+?>

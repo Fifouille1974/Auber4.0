@@ -1,0 +1,41 @@
+[(#SPIP_VERSION|>={3}|non)
+<div class='cadre cadre-formulaire-editer'>
+<div class="entete-formulaire">
+<h1><:cinotif:config_evenements:></h1>
+</div>
+]
+
+<div class="formulaire_spip formulaire_configurer formulaire_config_evenements">
+[(#SPIP_VERSION|>={3}|oui)
+<h3 class='titrem'><:cinotif:config_evenements:></h3>
+]
+	<!-- <br class='bugajaxie' /> -->
+	[<p class='reponse_formulaire reponse_formulaire_ok'>(#ENV**{message_ok})</p>]
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+#SET{cidisabled,''}
+[(#CONFIG{articles_versions}|=={non}|oui)
+	#SET{cidisabled,' disabled="disabled" '}
+]
+
+		<div class="cadre_padding">
+			<p><:cinotif:legend_config:></p>
+			[<p>(#GET{cidisabled}|oui)<:cinotif:legend_config_revision:></p>]
+		
+			[(#VAL{1}|cinotif_config_checkbox)]
+								
+			
+			<div><em class='attention'><:cinotif:legende_publie:></em></div>
+		</div>
+
+	  <p class='boutons'><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+</div>
+
+[(#SPIP_VERSION|>={3}|non)
+</div>
+]

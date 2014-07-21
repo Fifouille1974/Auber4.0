@@ -1,0 +1,57 @@
+[(#SPIP_VERSION|>={3}|oui)	
+#SET{cirub,'rubrique'}
+]
+[(#SPIP_VERSION|>={3}|non)	
+#SET{cirub,'naviguer'}
+]
+
+<div class='cadre cadre-formulaire-editer'>
+<div class="entete-formulaire">
+[(#SPIP_VERSION|>={3}|oui)
+	#SET{ciretour,#GET{cirub}}
+	[(#ENV{retour}|=={ciar_rubrique_protection}|oui)
+		#SET{ciretour,'ciar_rubrique_protection'}
+	]
+	[(#ENV{redirect}|ciag_icone_verticale{<:icone_retour:>,rubrique,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+]
+[(#SPIP_VERSION|>={3}|non)
+	#ENV**{icone_retour}
+]
+
+[<:ciag:grpauteurs_rubrique:>
+<h1>(#ENV{titre})</h1>]
+</div>
+
+#SET{cidivstyle,'class="bouton36blanc"'}
+[(#SPIP_VERSION|>={3}|oui)
+#SET{cidivstyle,'style="background-color: #FFFFFF; border: 1px solid #999999; padding: 10px;"'}
+]
+
+#SET{cierreur,''}
+
+[(#PLUGIN{ciar}|oui)
+
+	[(#REM) si la rubrique est un EC il faut etre eccma de la rubrique]
+
+	[(#ENV{new}|ciag_ec_non_gere|oui)
+		[(#SET{cierreur,<:ciag:info_ciar_ec1:>})]
+	]
+	
+	[(#REM) si la rubrique est dans un EC (mais sans etre l'EC) ne pas lancer ce formulaire]
+		
+	[(#ENV{new}|ciag_rub_ec|oui)
+		[(#ENV{new}|ciag_rub_ec_direct|non)
+			[(#SET{cierreur,<:ciag:info_ciar_ec2:>})]
+		]
+	]
+]
+
+[(#GET{cierreur}|non)
+#FORMULAIRE_CIAG_GERER_GRPAUTEURS_RUBRIQUE{#ENV{new},#ENV{redirect},#ENV{config_fonc}}
+]
+[(#GET{cierreur}|oui)
+	<div #GET{cidivstyle}>
+	#GET{cierreur}
+	</div>
+]
+</div>

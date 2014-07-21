@@ -1,0 +1,16 @@
+<div class='cadre cadre-formulaire-editer'>
+<div class="entete-formulaire">
+[(#SPIP_VERSION|>={3}|oui)
+	[(#URL_ECRIRE{ciag_groupe_auteurs,id_groupe=#ENV{new}}|ciag_icone_verticale{<:icone_retour:>,auteur,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+]
+[(#SPIP_VERSION|>={3}|non)
+	#ENV**{icone_retour}
+]
+
+[<:ciag:gestionnaires_de_ce_groupe:>
+<h1>(#ENV{titre})</h1>
+<em class='attention' style='color: red;'><:ciag:gestionnaires_precaution:></em>
+]
+</div>
+#FORMULAIRE_CIAG_GERER_GESTIONNAIRES{#ENV{new},#ENV{ci_pagination},#ENV{ci_debut_auteur},#ENV{redirect},#ENV{config_fonc}}
+</div>

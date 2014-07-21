@@ -1,0 +1,31 @@
+#CACHE{0}
+[(#AUTORISER{configurer,itwx}|sinon_interdire_acces)]
+<h1><:itwx:config_itwx:></h1>
+<div class="ajax">
+	#FORMULAIRE_CONFIGURER_ITWX
+</div>
+
+<!--#navigation-->
+<br /><br /><br />
+<br /><br /><br />
+<br /><br />
+<div class='cadre-info' style="margin:0; padding:0 1em 1.5em 1em; font-size:0.9em">
+<img src='../plugins/itwxmobile/prive/img/logo_itwx.png' width='70' height='70' alt='iTwX Mobile' style='float:right;padding:1em 0 0.5em 0.5em;'/>
+<h4 style=" font-size:1.1em"><:itwx:config_titre:></h4>
+<:itwx:config_explication:>
+<br class="nettoyeur" /><hr />
+<:itwx:liens:>
+[(#CONFIG{itwx/nosmart}|non)<:itwx:smartphone:>]
+<:itwx:mobile:>
+[(#CONFIG{itwx/notab}|non)<:itwx:tablette:>]
+<:itwx:web:>
+</div>
+<!--/#navigation-->
+<!--#extra--><br />
+<div class='cadre-info' style="margin:0; padding:0 1em 1.5em 1em; font-size:0.9em"><br />
+<img src='../plugins/itwxmobile/prive/img/video_icon.png' alt="" style='float:left;padding:0 0.5em 0 0;'/>
+<:itwx:config_player:>
+<br class="nettoyeur" /><br /><hr />
+<:itwx:vignette_player:>
+</div>
+<!--/#extra-->

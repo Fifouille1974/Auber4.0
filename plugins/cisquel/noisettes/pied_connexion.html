@@ -1,0 +1,23 @@
+#CACHE{0}
+&nbsp;| <a href="#EVAL{_DIR_RESTREINT_ABS}" rel="noindex,nofollow" title="<:cisquel:eq_gestion_site:>"><:cisquel:eq_gestion_site:></a>
+<?php if (isset($GLOBALS['visiteur_session']['id_auteur']) && $GLOBALS['visiteur_session']['id_auteur']) { ?>
+| <a href="#URL_LOGOUT" rel="noindex,nofollow" title="<:cisquel:eq_deconnexion:>"><:cisquel:eq_deconnexion:></a>
+<?php echo interdire_scripts(entites_html($GLOBALS["visiteur_session"]["login"])); } else { ?>
+| <a href="[(#URL_PAGE{login}|parametre_url{url,#SELF})]" rel="noindex,nofollow" title="<:cisquel:eq_authentification:>"><:cisquel:eq_authentification:></a>
+<?php } ?>
+	</div>
+	<div id="copyright">[&copy;&nbsp;(#NOM_SITE_SPIP)]</div>
+</div>
+</div>
+<script type='text/javascript'>
+<!--
+function chainemail(titreobjet) {
+	chaine_mail = "mailto:?subject=" + escape(titreobjet);
+	chaine_mail += "&body=<:cisquel:eq_je_recommande_page:> " + escape(titreobjet);
+	chaine_mail += ". <:cisquel:eq_pour_la_consulter_cliquer:>" + escape(location.href);
+	location.href = chaine_mail;
+}
+-->
+</script>
+</body>
+</html>

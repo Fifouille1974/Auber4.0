@@ -1,0 +1,11 @@
+<BOUCLE_article_invisible(ARTICLES) {titre_mot = invisible} {doublons}></BOUCLE_article_invisible>
+
+<B_articles>      
+[(#ANCRE_PAGINATION|vider_attribut{name})]
+<h4 class="entry-title"><:articles:></h4>
+	<ul>
+    <BOUCLE_articles(ARTICLES) {id_rubrique} {par titre}{doublons}>
+    <li><a href="#URL_ARTICLE">#TITRE</a></li>
+    </BOUCLE_articles>
+    </ul>   
+</B_articles>

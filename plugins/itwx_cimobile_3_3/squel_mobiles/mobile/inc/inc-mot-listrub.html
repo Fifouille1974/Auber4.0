@@ -1,0 +1,12 @@
+<B_rubriques>
+<div class="grouplist"><:rubriques:></div>	
+#ANCRE_PAGINATION
+	<div class="listmenu">     
+	<ul>
+	<BOUCLE_rubriques(RUBRIQUES) {id_mot} {par titre}{pagination 10 #ENV{rub}}>
+	<li><a href="#URL_RUBRIQUE">#TITRE</a></li>
+	</BOUCLE_rubriques>
+	</ul>
+	</div>
+[<div class="pagination">(#PAGINATION)</div>]
+</B_rubriques> 

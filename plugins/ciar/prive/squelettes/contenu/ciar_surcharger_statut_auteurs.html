@@ -1,0 +1,18 @@
+[(#ID_RUBRIQUE|oui)
+	[(#AUTORISER{ecmodifier,rubrique,#ID_RUBRIQUE}|sinon_interdire_acces)]]
+[(#ID_RUBRIQUE|non)
+	[(#EVAL{1>2}|sinon_interdire_acces)]]
+
+<BOUCLE_rub(RUBRIQUES){id_rubrique}{tout}>	
+#SET{retour,#URL_ECRIRE{ciar_rubrique_protection,id_rubrique=#ID_RUBRIQUE}}
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	[(#GET{retour}|icone_verticale{<:icone_retour:>,rubrique,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	[<:ciar:titre_surcharger_statut_auteurs:>
+	<h1>(#INFO_TITRE{rubrique,#ID_RUBRIQUE})</h1>]
+</div>
+#FORMULAIRE_CIAR_SURCHARGER_STATUT_AUTEURS{#ENV{id_rubrique},#ENV{redirect},#ENV{config_fonc}}
+</div>
+</div>
+
+</BOUCLE_rub>

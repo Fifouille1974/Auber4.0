@@ -1,0 +1,175 @@
+#CACHE{0}
+#SET{ciok,''}
+#SET{cititre,''}
+#SET{ciurlretour,''}
+#SET{ciinfo,''}
+
+[(#ENV{ci_objet}|=={site}|oui)
+	#SET{ciok,'oui'}
+	#SET{cititre,#NOM_SITE_SPIP}
+	#SET{ciurlretour,#URL_SITE_SPIP}
+	#SET{ciinfo,'site'}
+]
+<BOUCLE_article(ARTICLES){id_article=#ENV{ci_id_objet}}>
+[(#ENV{ci_objet}|=={article}|oui)
+	#SET{ciok,'oui'}
+	#SET{cititre,#TITRE|supprimer_numero}
+	#SET{ciurlretour,#URL_ARTICLE}
+	#SET{ciinfo,'article'}
+]
+</BOUCLE_article>
+<BOUCLE_rubrique(RUBRIQUES){id_rubrique=#ENV{ci_id_objet}}>
+[(#ENV{ci_objet}|=={rubrique}|oui)
+	#SET{ciok,'oui'}
+	#SET{cititre,#TITRE|supprimer_numero}
+	#SET{ciurlretour,#URL_RUBRIQUE}
+	#SET{ciinfo,'rubrique'}
+]
+</BOUCLE_rubrique>
+
+<div class="formulaire_spip formulaire_signature ajax">
+[<p class="reponse_formulaire reponse_formulaire_ok success">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur error">(#ENV*{message_erreur})</p>]
+[(#ENV{message_ok}|non)
+[(#ENV{message_erreur}|non)
+[(#GET{ciok}|non)
+	<div class="interdit"><:cinotif:acces_interdit:></div>
+]
+]
+]
+
+[(#ENV{abo_tous}|=={non}|oui)
+	#SET{ciok,''}
+	<div class="interdit"><:cinotif:msg_abo_tous:></div>
+]
+
+[(#ENV{_les_quoi}|non)
+	[(#ENV{ci_desabonner}|non)
+		[(#ENV{ci_action}|=={d}|non)	
+			[(#ENV{ci_action}|=={c}|non)	
+			#SET{ciok,''}
+			<div class="interdit"><:cinotif:pasdequoi:></div>
+			]
+		]
+	]
+]
+
+[(#GET{ciok}|oui)
+[(#ENV{editable}|oui)
+[(#ENV{message_ok}|non)
+<form method="post" action="#ENV{action}">
+	#ACTION_FORMULAIRE{#ENV{action}}
+	
+	<input type="hidden" name="url_page" value="[(#SELF|url_absolue)]" />
+	
+	<div class="explication">
+	[(#ENV{ci_desabonner}|oui)	
+	[(#GET{ciinfo}|=={article}|oui)<div class="info"><:cinotif:desa_article:><b>[(#GET{cititre}|supprimer_numero)]</b></div>]
+	[(#GET{ciinfo}|=={rubrique}|oui)<div class="info"><:cinotif:desa_rubrique:><b>[(#GET{cititre}|supprimer_numero)]</b></div>]
+	[(#GET{ciinfo}|=={site}|oui)<div class="info"><:cinotif:desa_site:><b>[(#GET{cititre}|supprimer_numero)]</b></div>]	
+	]
+
+	[(#ENV{ci_desabonner}|non)	
+	[(#GET{ciinfo}|=={article}|oui)<div class="info"><:cinotif:a_article:><b>[(#GET{cititre}|supprimer_numero)]</b></div><div class="info"><:cinotif:afin_de_recevoir_article:></div>]
+	[(#GET{ciinfo}|=={rubrique}|oui)<div class="info"><:cinotif:a_rubrique:><b>[(#GET{cititre}|supprimer_numero)]</b></div><div class="info"><:cinotif:afin_de_recevoir:></div>]
+	[(#GET{ciinfo}|=={site}|oui)<div class="info"><:cinotif:a_site:><b>[(#GET{cititre}|supprimer_numero)]</b></div><div class="info"><:cinotif:afin_de_recevoir:></div>]
+	]
+
+	<br/><div class='info'><:cinotif:form_info1:></div>
+	[(#SESSION{email}|non)
+	[(#ENV{ci_desabonner}|oui)	
+	<div class='info'><:cinotif:desa_form_info_anonyme:></div>
+	]
+	[(#ENV{ci_desabonner}|non)	
+	<div class='info'><:cinotif:form_info_anonyme:></div>
+	]
+	]	
+	
+	[(#GET{ciinfo}|=={article}|oui)<br/><div class="info"><:cinotif:infoarticle:></div>]
+	[(#GET{ciinfo}|=={rubrique}|oui)<br/><div class="info"><:cinotif:inforubrique:></div>]
+	[(#ENV{ci_desabonner}|non)	
+		[(#GET{ciinfo}|=={site}|oui)<br/><div class="info"><:cinotif:infosite:></div>]
+	]
+		
+	[(#GET{ciinfo}|cinotif_info|=={oui}|oui)
+		[(#GET{ciinfo}|=={article}|oui)<div class="info"><:cinotif:infoarticle2:></div>]
+		[(#GET{ciinfo}|=={rubrique}|oui)<div class="info"><:cinotif:inforubrique2:></div>]
+		[(#ENV{ci_desabonner}|non)	
+			[(#GET{ciinfo}|=={site}|oui)<div class="info"><:cinotif:infosite2:></div>]
+		]
+	]
+	
+	[(#ENV{ci_abo_autres_objets}|oui)
+	<br/><div class='info'><:cinotif:voir_tous_mes_abonnements:>,
+	[(#PLUGIN{cisquel}|oui) <a href="[(#URL_PAGE{mesabonnements}|parametre_url{retour,#SELF})]" class="spip_in"><:cinotif:cliquer_ici:></a>.]
+	[(#PLUGIN{cisquel}|non) <a href="[(#URL_PAGE{cinotif_mesabonnements})]" class="spip_in"><:cinotif:cliquer_ici:></a>.]
+	</div>
+	]	
+	
+	[(#ENV{ci_desabonner}|oui)	
+	[(#ENV{ci_objet}|!={site}|oui)
+	<div class="info">
+	[(#PLUGIN{cisquel}|oui)<:cinotif:desa_mail_ce_site:>,
+	 <a href="[(#URL_PAGE{abonnement-site}|parametre_url{desabonner,oui})]" class="spip_in"><:cinotif:cliquer_ici:></a>.
+	]
+	[(#PLUGIN{cisquel}|non)<:cinotif:desa_mail_site:> &quot; #NOM_SITE_SPIP &quot;,
+	 <a href="[(#URL_PAGE{cinotif}|parametre_url{desabonner,oui}|parametre_url{e,#ENV{ci_action_id_abonne}}|parametre_url{i,#ENV{ci_id_courrier}}|parametre_url{objet,site})]" class="spip_in"><:cinotif:cliquer_ici:></a>.
+	]
+	</div>
+	]
+	]
+
+	</div>
+	
+	[(#ENV{ci_desabonner}|non)	
+	<fieldset>	
+		<legend><:cinotif:abonnements:></legend>
+		<div class="choix">
+		#ENV**{_liste_choix}
+		</div>
+	</fieldset>
+	]
+
+	<fieldset>	
+		<legend><:entree_adresse_email:></legend>
+		<ul>
+			<li class='editer saisie_adresse_email[ (#ENV*{erreurs}|table_valeur{session_email}|oui)erreur] obligatoire'>
+				<label for="session_email"><:form_indiquer_email:> <:info_obligatoire_02:></label>
+				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{session_email})</span>]
+				<input type="text" class="text" name="session_email" id="session_email" value="[(#SESSION**{email}|sinon{#SESSION**{session_email}}|entites_html)]" [(#SESSION{email}|oui)disabled="disabled"] size="100" />
+			</li>
+		</ul>
+	</fieldset>
+
+	[(#REM) Piege a robots spammeurs ]
+	<p style="display: none;">
+		<label for="nobot"><:antispam_champ_vide:></label>
+		<input type="text" class="text" name="nobot" id="nobot" value="#ENV{nobot}" size="10" />
+	</p>
+
+
+	[(#ENV{ci_desabonner}|non)	
+	<p class="boutons"><input type="submit" class="submit" value="<:bouton_valider:>" /></p>
+	]
+	[(#ENV{ci_desabonner}|oui)	
+	<p class="boutons"><input type="submit" class="submit" value="<:cinotif:desabonner:>" /></p>
+	]
+</form>
+
+[(#ENV{ci_desabonner}|non)
+<br/><div class="explication">
+[(#SESSION{email}|non)
+<:cinotif:cnil:>
+]
+[(#SESSION{email}|oui)
+<:cinotif:cnil_si_auth:>
+]
+</div><br/>
+]
+
+[(#ENV{legende_publie}|=={oui}|oui)<div class="explication"><:cinotif:legende_publie:></div>]
+
+]
+]
+]
+</div>

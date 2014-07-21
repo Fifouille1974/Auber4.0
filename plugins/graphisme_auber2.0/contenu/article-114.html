@@ -1,0 +1,35 @@
+<BOUCLE_contenu_article_normal(ARTICLES){id_article}>
+ #INSERT_HEAD
+ 
+				<h2 class="titre_article">[(#TITRE|supprimer_numero)]</h2>
+				<BOUCLE_extra_image_normal(DOCUMENTS){id_article}{mode=image}{0,1} {doublons}>
+                        <div id="logoarticle"> [(#EMBED_DOCUMENT|image_reduire{200,0})]</div>
+				</BOUCLE_extra_image_normal>
+                <div id="chapeau">[(#CHAPO)]</div>
+			      	[<div class="texte">(#TEXTE) 
+                    <!--<span class="dateactu"> <:cisquel:eq_publie_le:>&nbsp;[(#DATE|nom_jour)]&nbsp;[(#DATE|jour)]&nbsp;[(#DATE|nom_mois)]&nbsp;[(#DATE|annee)]</span>--></div>]
+				<B_documents_normal>
+				<div class="listedoc">
+				<ul>
+				<!-- <BOUCLE_documents_normal(DOCUMENTS){id_article}{par num titre}{mode=document}{doublons}>
+				<li><a href="#URL_DOCUMENT" onclick="xt_med('C','[(#ID_ARTICLE|ciparam_xtn2)]','[pj(#ID_ARTICLE)-][(#TITRE|supprimer_numero|ciparam_xtTraiter)]','T')" class="document" title="<:cisquel:eq_ouvre_document:> [(#TITRE|supprimer_numero)] <:cisquel:eq_dans_fenetre:>">[(#TITRE|supprimer_numero)]</a>&nbsp;([<:cisquel:eq_format:> (#EXTENSION)][ - (#TAILLE|taille_en_octets)][ - (#DATE|affdate{'d/m/Y'})])[<span class="docdesc">(#DESCRIPTIF)</span>][<span class="docdesc">(#TAILLE|cisquel_temps_telechargement)</span>]
+				</li>
+				</BOUCLE_documents_normal> -->
+				</ul>
+				</div>
+				</B_documents_normal>
+				[<div class="notes">(#NOTES)</div>]
+				
+				
+				
+				<!-- <div>
+				#FORMULAIRE_ABOMAILMAN
+				</div> -->
+</BOUCLE_contenu_article_normal>
+
+<BOUCLE_newsletter(ARTICLES){id_article} {id_article=1950}>
+				
+					<div>
+				#FORMULAIRE_ABOMAILMAN{3}
+				</div>
+</BOUCLE_newsletter>

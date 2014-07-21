@@ -1,0 +1,34 @@
+#CACHE{3600}
+[(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]
+#CIPARAM_DOCTYPE
+<head>
+<title>[(#NOM_SITE_SPIP|textebrut)]</title>
+<meta name="robots" content="noindex, nofollow" />
+<link href="#CHEMIN{_css/styleexceptions.css}" rel="stylesheet" type="text/css" />
+<INCLURE{fond=noisettes/headsimple}{lang}>
+</head>
+
+<body>
+<INCLURE{fond=noisettes/haut}{lang}>
+<div id="pageAuthentification">
+<div id="milieu">
+	<div id="ext-main">
+		<div class="main">
+
+  			<div id="contenu">
+			<div class="main-content">
+				<h1 class="invisible"><:cisquel:eq_contenu:></h1>
+			<div align='center'>
+			<h3 class='spip'>#NOM_SITE_SPIP<br />
+			<small><:cisquel:eq_authentification:></small></h3>
+			</div>
+			#LOGIN_PUBLIC
+				    
+			</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+</body>
+</html>

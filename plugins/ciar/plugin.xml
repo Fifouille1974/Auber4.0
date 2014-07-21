@@ -1,0 +1,93 @@
+<plugin>
+	<nom>ciar : Acc&#232;s restreints Giseh</nom>
+	<auteur>&#169; C. Imberti</auteur>
+	<icon>pyramides-32.png</icon>
+	<licence>[Creative commons by-nc-sa->http://creativecommons.org/licenses/by-nc-sa/2.0/fr/]</licence>
+
+	<lien></lien>
+	<version>1.7</version>
+	<version_base>1.0</version_base>
+	<etat>stable</etat>
+    <slogan>Auteur : &#169; C. Imberti. Licence : Creative commons by-nc-sa.</slogan>
+    <description>
+    Auteur : &#169; C. Imberti. Licence : Creative commons by-nc-sa.<br />
+	Ce plugin active ou d&#233;sactive les acc&#232;s restreints Giseh.
+	</description>
+	<prefix>ciar</prefix>
+	
+	<options>ciar_options.php</options>
+	<fonctions>ciar_fonctions.php</fonctions>
+	<install>base/ciar_install.php</install>
+	
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/ciar_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/ciar_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/ciar_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_boucle</nom>
+		<inclure>ciar_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_edition</nom>
+		<inclure>inc/ciar_pj_protection_simple.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_edition</nom>
+		<inclure>inc/ciar_pj_protection_simple.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>ciar_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>afficher_complement_objet</nom>
+		<inclure>ciar_pipeline.php</inclure>
+	</pipeline>	
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>ciar_autoriser.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ciautoriser</nom>
+		<inclure>ciar_ciautoriser.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>cisf_article_options</nom>
+		<inclure>ciar_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>page_indisponible</nom>
+		<inclure>ciar_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>optimiser_base_disparus</nom>
+		<inclure>ciar_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affichage_entetes_final</nom>
+		<inclure>ciar_pipeline.php</inclure>
+	</pipeline>
+
+    <bouton id='ciar_config' parent='configuration'>
+	<icone>ciar-icone.png</icone>
+		<titre>Liste rubriques prot&#233;g&#233;es</titre>
+		<url>ciar_config</url>
+	</bouton>
+	<bouton id='ciar_config3' parent='bando_configuration'>
+		<titre>ciar:titre</titre>
+		<icone>images/ciar.png</icone>
+		<url>ciar_config</url>
+	</bouton>
+
+	<necessite id="SPIP" version='[2.0.9;]' />
+	<necessite id='ciautoriser' version='[1.3;]' />
+	
+</plugin>

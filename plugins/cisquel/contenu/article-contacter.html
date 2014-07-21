@@ -1,0 +1,21 @@
+<BOUCLE_contenu_article(ARTICLES){id_article}>
+
+				<h2>[(#TITRE|supprimer_numero)]</h2>
+				<div class="dateart">
+				</div>
+			      	[<div class="texte">(#TEXTE)</div>]
+				<B_documents>
+				<div class="listedoc">
+				<ul>
+				<BOUCLE_documents(DOCUMENTS){id_article}{par num titre}{mode=document}{doublons}>
+				<li><a href="#URL_DOCUMENT" onclick="xt_med('C','[(#ID_ARTICLE|ciparam_xtn2)]','[pj(#ID_ARTICLE)-][(#TITRE|supprimer_numero|ciparam_xtTraiter)]','T')" class="document" title="<:cisquel:eq_ouvre_document:> [(#TITRE|supprimer_numero)] <:cisquel:eq_dans_fenetre:>">[(#TITRE|supprimer_numero)]</a>&nbsp;([<:cisquel:eq_format:> (#EXTENSION)][ - (#TAILLE|taille_en_octets)][ - (#DATE|affdate{'d/m/Y'})])[<span class="docdesc">(#DESCRIPTIF)</span>][<span class="docdesc">(#TAILLE|cisquel_temps_telechargement)</span>]</li>
+				</BOUCLE_documents>
+				</ul>
+				</div>
+				</B_documents>
+
+				[<div class="notes">(#NOTES)</div>]
+				
+				#FORMULAIRE_CIFORM_CONTACTER{#ID_ARTICLE,#TITRE}
+
+</BOUCLE_contenu_article>	

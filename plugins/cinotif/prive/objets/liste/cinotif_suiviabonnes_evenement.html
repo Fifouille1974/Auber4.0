@@ -1,0 +1,52 @@
+#SET{ciredirect,''}
+[(#ENV{redirect}|oui)
+#SET{ciredirect,'oui'}
+<div style="float:right;">
+[(#SPIP_VERSION|>={3}|oui)
+	[(#ENV{redirect}|cinotif_icone_verticale{<:icone_retour:>,'rubrique','','verticale left retour[(#ENV{retourajax,''}|oui)ajax preload]'})]
+]
+[(#SPIP_VERSION|>={3}|non)
+	#ENV**{icone_retour}
+]
+</div>
+]
+
+<BOUCLE_evenement(CINOTIF_EVENEMENTS){id_evenement}>
+[<div>(#URL_MULTISITE)</div>]#OBJET[ (#ID_OBJET|>{0}|oui)#ID_OBJET] - [(#VAL{cinotif:}|concat{#QUOI}|_T)]
+</BOUCLE_evenement>
+
+<B_abo>
+<div style="margin:4px 0px 10px 0px;">
+#PAGINATION
+</div>
+<table cellspacing="0" cellpadding="2" style="width: 100%; border: 0px none;" class="arial2">
+<tbody>
+<tr style="background-color:#eee;">
+<th style="width: 80%;"><:cinotif:titre_email:></th>
+<th style="width: 20%;"><:cinotif:titre_statut:></th>
+</tr>
+
+<BOUCLE_abo(CINOTIF_ABONNEMENTS cinotif_abonnes){id_evenement}{email ?LIKE %(#ENV{email})%}{!par id_abonne}{tout}{pagination 50}>
+[(#GET{ciredirect}|oui)
+[<tr class="tr_liste" style="background-color:#fff;">
+<td>(#EMAIL|unique)</td>
+<td>[(#VAL{cinotif:}|concat{#STATUT}|_T)]</td>
+</tr>]
+]
+[(#GET{ciredirect}|non)
+[<tr class="tr_liste" style="background-color:#fff;">
+<td><a href="[(#URL_ECRIRE{cinotif_suiviabonnements,id_abonne=#ID_ABONNE})]">(#EMAIL|unique)</a></td>
+<td>[(#VAL{cinotif:}|concat{#STATUT}|_T)]</td>
+</tr>]
+]
+</BOUCLE_abo>
+</tbody>
+</table>
+<div style="margin:10px 0px 4px 0px;">
+#PAGINATION
+</div>
+<em class='attention'><:cinotif:clic_email_pour_voir_abonnements:></em>
+<div><em class='attention'><:cinotif:legende_publie:></em></div>
+</B_abo>
+<h3><:avis_aucun_resultat:></h3>
+<//B_abo>

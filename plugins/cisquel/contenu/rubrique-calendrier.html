@@ -1,0 +1,225 @@
+#CACHE{0}
+#SET{annee_choisie, #ENV{calendrier_annee, #CIPARAM_MAINTENANT|annee}}
+#SET{mois_choisi, #ENV{calendrier_mois, #CIPARAM_MAINTENANT|mois}}
+
+<BOUCLE_contenu(RUBRIQUES){id_rubrique}>
+<div class="rub">
+<h2>[(#TITRE|supprimer_numero)]</h2>
+	<div class="dateart">
+	</div>
+  	[<div class="texte">(#TEXTE)</div>]
+[<div class="texte">(#NOTES)</div>]
+</div>
+
+[(#SET{mois_choisi,[(#GET{mois_choisi}|intval)]})]
+[(#SET{annee_choisie,[(#GET{annee_choisie}|intval)]})]
+
+[(#GET{mois_choisi}|<{1}|oui)
+	[(#SET{mois_choisi,'1'})]
+]
+[(#GET{mois_choisi}|>{12}|oui)
+	[(#SET{mois_choisi,'12'})]
+]
+[(#GET{annee_choisie}|<{1970}|oui)
+	[(#SET{annee_choisie,'1971'})]
+]
+
+[(#SET{ci_annee_suiv,[(#GET{annee_choisie})]})]
+[(#SET{ci_annee_prec,[(#GET{annee_choisie})]})]
+[(#SET{ci_mois_suiv,[(#GET{mois_choisi}|intval|plus{1})]})]
+[(#SET{ci_mois_prec,[(#GET{mois_choisi}|intval|moins{1})]})]
+
+[(#GET{ci_mois_suiv}|=={13}|oui)
+	[(#SET{ci_mois_suiv,'1'})]
+	[(#SET{ci_annee_suiv,[(#GET{annee_choisie}|intval|plus{1})]})]
+]
+[(#GET{ci_mois_prec}|=={0}|oui)
+	[(#SET{ci_mois_prec,'12'})]
+	[(#SET{ci_annee_prec,[(#GET{annee_choisie}|intval|moins{1})]})]
+]
+
+
+#SET{droitcalendrier,false}
+[(#SESSION{id_auteur}|!={''}|oui)
+	[(#PLUGIN{cisf}|oui)
+		[(#AUTORISER{creerarticledans,rubrique,#ENV{id_rubrique}})
+			#SET{droitcalendrier,true}
+		]
+	]
+]
+
+<?php
+// Compatibilite avec l'interface simplifiee
+$droitcalendrier = #GET{droitcalendrier};
+
+$months = array('', '<:date_mois_1:>', '<:date_mois_2:>', '<:date_mois_3:>', '<:date_mois_4:>', '<:date_mois_5:>', '<:date_mois_6:>', '<:date_mois_7:>', '<:date_mois_8:>', '<:date_mois_9:>', '<:date_mois_10:>', '<:date_mois_11:>', '<:date_mois_12:>');
+$days = array('<:date_jour_1:>', '<:date_jour_2:>', '<:date_jour_3:>', '<:date_jour_4:>', '<:date_jour_5:>', '<:date_jour_6:>', '<:date_jour_7:>');
+
+$Y = intval("[(#GET{annee_choisie}|intval)]");
+$M = intval("[(#GET{mois_choisi}|intval)]");
+$events = array();
+?>
+
+#SET{ci_mots, #ARRAY{}}
+<BOUCLE_mot_sous_rubrique(MOTS){id_rubrique}{type=_multirubricage}{par titre}>
+[(#SET{ci_mots, #GET{ci_mots}|push{#ID_MOT}})]
+</BOUCLE_mot_sous_rubrique>
+
+#SET{ci_id_rubrique_multi, #ID_RUBRIQUE}
+<BOUCLE_article_sous_rubrique(ARTICLES)
+	{id_mot IN #GET{ci_mots}}
+	{agenda date_redac, mois, #GET{annee_choisie}, #GET{mois_choisi}}
+	{doublons}{par num titre}>
+<?php
+	$date = intval("[(#DATE_REDAC|affdate{'Ymd'})]");
+	if (!isset($events[$date])) {
+		$events[$date] = array();
+	}
+	$events[$date][] = array('link' => '[(#URL_PAGE{affiche_article_agenda}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{id_rubrique,#GET{ci_id_rubrique_multi}})]', 'target' => '', 'title' => '[(#TITRE|supprimer_numero|texte_script)]', 'logo' => '');
+?>
+</BOUCLE_article_sous_rubrique>
+
+<BOUCLE_evenements(ARTICLES)
+	{branche}
+	{agenda date_redac, mois, #GET{annee_choisie}, #GET{mois_choisi}}
+	{par num titre}{doublons}>					
+	<?php
+		$date = intval("[(#DATE_REDAC|affdate{'Ymd'})]");
+		if (!isset($events[$date])) {
+			$events[$date] = array();
+		}
+		$events[$date][] = array('link' => '[(#URL_PAGE{affiche_article_agenda}|parametre_url{id_article,#ID_ARTICLE})]', 'target' => '', 'title' => '[(#TITRE|supprimer_numero|texte_script)]', 'logo' => '');
+	?>
+</BOUCLE_evenements>
+
+<div class="choixmois">
+<table cellpadding="0" cellspacing="0" border="0" width="100%" summary="<:cisquel:eq_choix_mois_calendrier:>">
+<tr>
+	<th colspan="2" class="moisprec">
+	<a rel="noindex,nofollow" href="[(#SELF|parametre_url{'calendrier_mois',[(#GET{ci_mois_prec})]}|parametre_url{'calendrier_annee',[(#GET{ci_annee_prec})]})]"><:cisquel:eq_mois_precedent:></a>
+	</th>
+	<th colspan="3" class="selectmois">
+
+<form method="get" action="#URL_RUBRIQUE">
+		<input type="hidden" name="page" value="rubrique" />
+		<input type="hidden" name="id_rubrique" value="#ID_RUBRIQUE" />
+		<?php
+		if ($previsualisation) {
+			echo '<input type="hidden" name="var_mode" value="preview" />';
+		}
+		echo '<select name="calendrier_mois">';
+		for($i = 1; $i < 13; $i++) {
+			echo '<option value="'.$i.'"'.($i == $M ? ' selected="selected"' : '').'>'.$months[$i].'</option>';
+		}
+		echo '</select>';
+		echo ' <select name="calendrier_annee">';
+		$annee_debut = $Y - 20;
+		if ($annee_debut < 1970) $annee_debut = '1971';
+		$annee_fin = $Y + 20;
+		for($i = $annee_debut; $i < $annee_fin; $i++) {
+			echo '<option value="'.$i.'"'.($i == $Y ? ' selected="selected"' : '').'>'.$i.'</option>';
+		}
+		echo '</select> ';
+		?>
+		<input type="submit" name="masquable" value="OK" title="OK" />
+
+</form>
+	</th>
+	<th colspan="2" class="moissuiv">
+	<a rel="noindex,nofollow" href="[(#SELF|parametre_url{'calendrier_mois',[(#GET{ci_mois_suiv})]}|parametre_url{'calendrier_annee',[(#GET{ci_annee_suiv})]})]"><:cisquel:eq_mois_suivant:></a>
+	</th>
+</tr>
+</table>
+</div>
+<div id="calend">
+
+<table cellpadding="5" cellspacing="0" align="center" border="1" width="100%" summary="Calendrier">
+<tr>
+	<?php
+	for($i = 1; $i < 8; $i++) {
+		echo '<th width="14%" scope="col" id="'.$days[$i%7].'">'.$days[$i%7].'</th>';
+	}
+	$TempD = 1;
+	if(date('w', mktime(0, 0, 0, $M, 1, $Y)) != 1) {
+		echo '</tr><tr>';
+		$tmp = '';
+		while(date('w', mktime(0, 0, 0, $M, $TempD, $Y)) != 1) {
+			$TempD--;
+			$case = '<td width="14%" height="50" valign="top" class="agendaNotThisMonth">';
+			$date = date('Ymd', mktime(0, 0, 0, $M, $TempD, $Y));
+			if ($droitcalendrier) {
+				$case .= '<span class="jour">'.date('j', mktime(0, 0, 0, $M, $TempD, $Y)).'</span>';
+				$case .= '<a class="plus" href="[(#URL_PAGE{cisf_article}|parametre_url{id_rubrique,#ID_RUBRIQUE})]&calendrier='.$date.'" title="<:icone_ecrire_article:>">&nbsp;</a>';
+			} else {
+				$case .= date('j', mktime(0, 0, 0, $M, $TempD, $Y));
+			}
+			$case .= '<div class="casejour">';			
+			if (isset($events[$date])) {
+				while (list(, $event) = each($events[$date])) {
+//					$case .= '<br />'.$event['logo'].'<a href="'.$event['link'].'">'.$event['title'].'</a>';
+					if ($event['target']=='blank'){
+						$case .= '<a href="'.$event['link'].'" title="<:cisquel:eq_ouvre_fenetre:>">'.$event['title'].'</a>';
+					} else {	
+						$case .= '<a href="'.$event['link'].'">'.$event['title'].'</a>';
+					}
+				}
+			}
+			$case .= '</div></td>';
+			$tmp = $case.$tmp;
+		}
+		echo $tmp;
+	}
+	$TempD = 1;
+	while((date('m', mktime(0, 0, 0, $M, $TempD, $Y)) == $M) || (date('w', mktime(0, 0, 0, $M, $TempD, $Y)) != 1)) {
+		if(date('w', mktime(0, 0, 0, $M, $TempD, $Y)) == 1) {
+			echo '</tr><tr>';
+		}
+		echo '<td width="14%" height="50" valign="top" class="agenda'.(date('m', mktime(0, 0, 0, $M, $TempD, $Y)) != $M ? 'Not' : '').'This'.(date('Ymd', mktime(0, 0, 0, $M, $TempD, $Y)) == date('Ymd') ? 'Day' : 'Month').'">';
+		$date = date('Ymd', mktime(0, 0, 0, $M, $TempD, $Y));
+		if ($droitcalendrier) {
+			echo '<span class="jour">'.date('j', mktime(0, 0, 0, $M, $TempD, $Y)).'</span>';
+			echo '<a class="plus" href="[(#URL_PAGE{cisf_article}|parametre_url{id_rubrique,#ID_RUBRIQUE})]&calendrier='.$date.'" title="<:icone_ecrire_article:>">&nbsp;</a>';
+		} else {
+			echo date('j', mktime(0, 0, 0, $M, $TempD, $Y));
+		}
+		echo '<div class="casejour">';			
+		if (isset($events[$date])) {
+			while (list(, $event) = each($events[$date])) {
+//				echo '<br />'.$event['logo'].'<a href="'.$event['link'].'">'.$event['title'].'</a>';
+					if ($event['target']=='blank'){
+						echo '<a href="'.$event['link'].'"' ?> onclick="window.open(this.href, 'affiche_image', 'toolbar=0,location=0,directories=0,status=0,scrollbars=1,resizable=1,copyhistory=0,menuBar=0,width=600,height=450'); return false;" title="<:cisquel:eq_ouvre_fenetre:>"><?php echo $event['title'].'</a>';
+					} else {	
+						echo '<a href="'.$event['link'].'">'.$event['title'].'</a>';
+					}
+			}
+		}
+		echo '</div></td>';
+		$TempD++;
+	}
+	?>
+
+</tr>
+</table>
+</div>
+
+
+
+<div class="listeactu">
+	<BOUCLE_principale(RUBRIQUES){id_rubrique}>
+	<ul class="agendaThemes">
+		<BOUCLE_sous_rubriques1(RUBRIQUES){id_parent}{par titre}>
+			<li>
+			[<img src="(#LOGO_RUBRIQUE||image_reduire{44,0}|extraire_attribut{'src'})" alt=""  class="lefttill" />]
+			<a href="[(#URL_RUBRIQUE|parametre_url{calendrier_mois,#GET{mois_choisi}}|parametre_url{calendrier_annee,#GET{annee_choisie}})]"  class="lien">[(#TITRE|supprimer_numero)]</a>
+			<B_sous_rubriques>
+			<ul class="agendaThemes">
+				<BOUCLE_sous_rubriques(BOUCLE_sous_rubriques1)></BOUCLE_sous_rubriques>
+			</ul>
+			</B_sous_rubriques>
+			</li>
+		</BOUCLE_sous_rubriques1>
+	</ul>
+	</BOUCLE_principale>
+</div>
+
+</BOUCLE_contenu>

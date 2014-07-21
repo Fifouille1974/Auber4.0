@@ -1,0 +1,63 @@
+<plugin>
+	<nom>cinotif : Notifications sur abonnement</nom>
+	<auteur>&#169; C. Imberti</auteur>
+	<icon>pyramides-32.png</icon>
+	<licence>[Creative commons by-nc-sa->http://creativecommons.org/licenses/by-nc-sa/2.0/fr/]</licence>
+	<lien></lien>
+	<version>2.0</version>
+	<version_base>2.0</version_base>
+	<etat>stable</etat>
+    <description>
+    Auteur : &#169; C. Imberti. Licence : Creative commons by-nc-sa.<br />
+	Ce plugin ajoute des notifications sur abonnement.
+	</description>
+	<prefix>cinotif</prefix>
+	<install>base/cinotif_install.php</install>
+
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/cinotif_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/cinotif_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/cinotif_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_edition</nom>
+		<inclure>cinotif_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_edition</nom>
+		<inclure>cinotif_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_gauche</nom>
+		<inclure>cinotif_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>optimiser_base_disparus</nom>
+		<inclure>cinotif_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<inclure>cinotif_cron.php</inclure>
+	</pipeline>
+	
+    <bouton id='cinotif_config' parent='configuration'>
+	<icone>cinotif-icone.png</icone>
+		<titre>Configurer les abonnements</titre>
+		<url>cinotif_config</url>
+	</bouton>
+	<bouton id='cinotif_config3' parent='bando_configuration'>
+		<titre>cinotif:titre</titre>
+		<icone>images/cinotif.png</icone>
+		<url>cinotif_config</url>
+	</bouton>
+	
+	<necessite id="SPIP" version='[2.1.0;]' />
+	
+</plugin>

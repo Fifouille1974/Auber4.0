@@ -1,0 +1,46 @@
+<div class='formulaire_spip formulaire_editer formulaire_editer_rubrique formulaire_editer_rubrique-#ENV{id_rubrique,nouveau}'>
+
+	<!-- <br class='bugajaxie' /> -->
+	[<p class='reponse_formulaire reponse_formulaire_ok'>(#ENV**{message_ok})</p>]
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+[(#PLUGIN{ciar}|oui)
+	[(#SET{cistatuts,#ARRAY{1,0minirezo,2,1comite}})]
+]
+[(#PLUGIN{ciar}|non)
+	[(#SET{cistatuts,#ARRAY{1,0minirezo}})]
+]
+
+					<fieldset class="motcle">
+					
+					<B_auteur_col1>
+					[<div class="pagination">(#PAGINATION)</div>]
+					<BOUCLE_auteur_col1(AUTEURS){statut IN #GET{cistatuts}}{par nom}{pagination #ENV{ci_pagination}}>
+#SET{cichecked,''}
+#SET{cidisabled,''}
+[(#ID_AUTEUR|in_array{#ENV{tableau_auteurs}}|oui)
+	#SET{cichecked,' checked="checked" '}
+]
+[(#ID_AUTEUR|=={#SESSION{id_auteur}}|oui)
+	#SET{cidisabled,' disabled="disabled" '}
+]
+					
+					  <div><input id="aut#ID_AUTEUR" type="checkbox" value=#ID_AUTEUR name='auteurs[]' #GET{cichecked} #GET{cidisabled} /><label for="aut#ID_AUTEUR" [(#GET{cichecked}|oui)class="on"]>#NOM</label></div>
+[(#GET{cichecked}|oui)
+	[(#GET{cidisabled}|oui)
+		[(#REM) declarer en hidden pour le controle avec l'image avant ]
+		[(#ID_AUTEUR|ciag_input_hidden{auteurs})]
+	]
+]
+					</BOUCLE_auteur_col1>
+					
+					</fieldset>
+					
+
+	  <p class='boutons'><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+</div>

@@ -1,0 +1,87 @@
+#CACHE{0}
+#SET{ciok,'oui'}
+
+<div class="formulaire_spip formulaire_theme ajax">
+[<p class="reponse_formulaire reponse_formulaire_ok success">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur error">(#ENV*{message_erreur})</p>]
+[(#ENV{message_ok}|non)
+[(#ENV{message_erreur}|non)
+[(#GET{ciok}|non)
+	<div class="interdit"><:cinotif:acces_interdit:></div>
+]
+]
+]
+
+[(#ENV{abo_tous}|=={non}|oui)
+	#SET{ciok,''}
+	<div class="interdit"><:cinotif:msg_abo_tous:></div>
+]
+
+[(#GET{ciok}|oui)
+[(#ENV{editable}|oui)
+[(#ENV{message_ok}|non)
+<form method="post" action="#ENV{action}">
+	#ACTION_FORMULAIRE{#ENV{action}}
+	
+	<input type="hidden" name="url_page" value="[(#SELF|url_absolue)]" />
+	
+	<div class="explication">
+	[(#ENV{ci_desabonner}|oui)	
+	[<div class='info'>(#ENV*{_desabo_texte})</div>]
+	]
+
+	[(#ENV{ci_desabonner}|non)	
+	[<div class='info'>(#ENV*{_abo_texte})</div>]
+	]
+	
+	</div>
+
+	<div class="encadrement">
+	
+	[(#ENV{ci_desabonner}|non)	
+		[(#ENV**{_checkboxthemes})]
+	]
+
+	<fieldset>	
+		<ul>
+			<li class='editer saisie_adresse_email[ (#ENV*{erreurs}|table_valeur{session_email}|oui)erreur] obligatoire'>
+				<label for="session_email"><:cinotif:formtheme_indiquer_email:></label>
+				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{session_email})</span>]
+				<input type="text" class="text" name="session_email" id="session_email" value="[(#SESSION**{email}|sinon{#SESSION**{session_email}}|entites_html)]" [(#SESSION{email}|oui)disabled="disabled"] size="100" />
+			</li>
+		</ul>
+	</fieldset>
+
+	[(#REM) Piege a robots spammeurs ]
+	<p style="display: none;">
+		<label for="nobot"><:antispam_champ_vide:></label>
+		<input type="text" class="text" name="nobot" id="nobot" value="#ENV{nobot}" size="10" />
+	</p>
+
+
+	[(#ENV{ci_desabonner}|non)	
+	<p class="boutons"><input type="submit" class="submit" value="<:cinotif:sabonner:>" /></p>
+	]
+	[(#ENV{ci_desabonner}|oui)	
+	<p class="boutons"><input type="submit" class="submit" value="<:cinotif:desabonner:>" /></p>
+	]
+	
+	</div>
+</form>
+
+
+[(#ENV{ci_desabonner}|non)
+<br/><div class="explication">
+[(#SESSION{email}|non)
+<:cinotif:cnil:>
+]
+[(#SESSION{email}|oui)
+<:cinotif:cnil_si_auth:>
+]
+</div><br/>
+]
+
+]
+]
+]
+</div>

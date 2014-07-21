@@ -1,0 +1,449 @@
+/* -------------------------------------------------------------- */
+/* Feuille de style des squelettes par defaut pour iTwX Spip 2.0  */
+/* -------------------------------------------------------------- */
+
+
+/* ------------------------------------------
+/* Typographie generale (style transversaux)
+/* ------------------------------------------ */
+html { font-size: 100%; } 
+body { font-size: 0.8125em; font-family: Helvetica; color: #000; margin: 0; padding: 0; text-align: center;}
+
+#img_document img{
+width: 100%;
+height: auto;
+}
+
+#img_document1 img{
+float:right;
+}
+
+.spip_documents {
+margin: 0;
+}
+
+div#title {
+width: 100%;
+background-color: rgba(3,168,174,0.8);
+bottom: 0;
+font-size: 19px;
+position: absolute;
+}
+
+div#title-actu {
+width: 100%;
+/* background-color: #fff; */
+bottom: 0;
+font-size: 19px;
+}
+
+#title-actu h3 a {
+color: #03a8ae;
+text-decoration: none;
+margin: 0;
+padding: 0;
+font-size: 15px;
+}
+
+div.logo-article1 {
+float: left;
+width: 50%;
+position: relative;
+padding-top:5px;
+
+padding-right: 5px;
+}
+
+.logo-article1 .articles ul li a {
+color: #FFF;
+text-decoration: none;
+margin: 0;
+padding: 0;
+font-size: 12px;
+}
+
+div.entry-content1 {
+font-size: 0.75em;
+color: #666;
+font-weight: normal;
+margin: 0;
+padding: 0;
+/* padding-left: 52%; */
+padding-top:5px;
+line-height: 1.2em;
+
+}
+
+/* Titraille / Intertitres */
+
+div#title h3 {
+line-height: 1em;
+}
+
+h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-weight: normal; font-size: 1em; font-family: inherit; color: #000; }
+h1 {
+font-size: 1.4em;
+font-weight: bold;
+color: #03a8ae;
+}
+h2 { font-size: 1em; font-weight: normal; color: #000; }
+h2 a, h2 a:focus, h2 a[selected], h2 a:hover, h2 a:active { color: #000; }
+h3 { border-style:none; border-width:medium; font-family: inherit; font-size: 20px; font-weight: bold; padding-top:0.1em}
+h4 { font-size: 18px; color: #000; padding: 0 6px }
+h5 { font-size: 1em; font-weight: bold; color: #FFF; }
+h6 { font-size: 1.4em; color: #FFF; font-weight: bold; padding-top: 5px;}
+
+/* Autres enrichissements typo */
+strong { font-weight: bold; }
+em { font-style: italic; }
+acronym { border-bottom: 1px dotted; cursor: help; }
+small { font-size: 0.90em; color: #666; }
+dfn { font-weight: bold; color: #666; }
+del { text-decoration: line-through; }
+ins { color: red !important; text-decoration: none; }
+sup, sub { font-size: .8em; font-variant: normal; }
+
+/* Logos, documents et images */
+img { margin: 0; padding: 0; border: 0; }
+
+/* Espaceur de blocs */
+.nettoyeur { clear: both; height: 0; margin: 0; padding: 0; border: 0; line-height: 1px; font-size: 1px }
+
+/* Non visible a l'ecran */
+.invisible { position: absolute; top: -3000em; height: 1%; }
+
+
+/* Definition des blocs
+-------------------------------------- */
+body { background: #FFF; }
+#mob { margin:0 auto; width:100%; overflow:hidden; text-align:left; }
+
+.index { margin-top:5em; display:block}
+.itwxchapo { text-align:left;line-height: 18px; }
+.itwxchapo a { color:#666; text-decoration: underline; }
+.itwxchapo img.spip_logos { float:left; width: 100%; height: 100%; }
+
+#pied { text-align:center; color:#333; /*margin: 0.5em 0.5em 1em 0.5em;*/ font-size:13px }
+#pied a { color:#333; font-size:11px }
+#pied img { vertical-align:middle}
+#pied a.top { background: url('../images/themes/img_bleu/top.png') no-repeat right center;}
+#pied a.top img {height:20px}
+
+
+
+/* Habillage des navigations
+-------------------------------------- */
+
+/* Barre navigation */
+#tool { 
+	width: 100%; 
+	height: 29px; 
+	background: #03a8ae;
+	border-top: 1px solid #888; 
+	padding: 3px 8px;
+	font-weight: bold; }
+#tool span#title, #tool a { 
+	line-height:1.4em;
+	color: #FFF;
+	font-size: 20px;
+    text-decoration: none; }
+#tool a:hover,#tool a:hover, #tool  a[selected], #tool a:active, #tool a:focus {color: #9eb4d1 !important; text-decoration:none}
+#tool #home {
+	float: right;
+    overflow: hidden;
+	width: 34px;
+    height: 29px; 
+	margin: 0 5px;
+	vertical-align:middle }
+
+ 
+
+/* Habillage des listes
+-------------------------------------- */
+
+/* Titres de listes */
+.group, .grouplist, .ssgrouplist {
+	height:auto;
+	font-size: 22px;
+	padding: 2px 0 3px 0; 
+	text-align:	center;
+	line-height:1.2em;
+	font-weight: bold;
+	color: #FFF;
+    text-decoration: none; 
+	border-top: none;}
+.group a, .grouplist a, .ssgrouplist a {color:#FFF}
+.group { background: #3f6eb4; }
+.grouplist { background: #90a6c4; }
+.ssgrouplist { background: #a6b8cf; }
+	
+	
+	
+/* Listes d'articles en sommaire et extraits introductifs */
+.hentry { margin: 0; padding: 0;}
+.entry-content{ font-size:0.8em; color:#666; font-weight: normal; margin: 0; padding: 0; line-height: 1em;}
+
+.hentry, .hentry:visited, .hentry .entry-title h3 a, .hentry:visited .entry-title h3 a { cursor:pointer ; margin: 0; padding: 0; color: #000; font-size:19px; font-weight:bold;line-height: 1.2em;}
+
+.menu { clear: both; margin: 0; text-align: left; padding: 0;}
+.menu p { margin: 0; padding: 0; }
+.menu ul { margin: 0; padding: 0; list-style: none; }
+.menu ul li { margin: 0; padding: 0; }
+
+.articles ul { margin: 0; padding: 0;}
+.articles ul a { text-decoration: none;}
+.articles ul li { clear: both; background-color: #fff; margin: 0; padding: 6px 7px; border-top: 1px solid #C0C0C0; font-size: 18px;  }
+.articles ul li a { color: #FFF; text-decoration: none;margin: 0; padding: 0; font-size: 17px;}
+.articles ul li .enclosures { float: right; text-align: right; max-width: 60%; margin: 0; padding: 0; }
+.articles .spip_logos { 
+clear: right;
+margin: 0;
+padding: 0;
+width: 100%;
+height: 100%;}
+
+
+/* Listes des evenements */
+.agenda span.published, .agenda span.published small {font-size:14px; padding:0; color:#999}
+.agenda .hentry_published { background-color: white ;cursor:pointer ; color:#000; }
+
+.agenda ul { background-color: white  }
+.agenda a { color: #000; text-decoration: none; padding:0}
+.agenda ul li { font-size: 18px;  clear: both; padding: 6px 20px 6px 6px; border-top: 1px solid #C0C0C0; }
+.agenda ul li a { color: #000; text-decoration: none; font-size:1.2em;}
+
+.noevent {padding: 1em}	
+
+
+/* Listes de titres */
+.listmenu ul { font-weight:bold; }
+.listmenu ul, .listinc ul, .listincinc ul { margin: 0; padding: 0; list-style: none; border-bottom: 1px solid #C0C0C0;text-align: center;}
+.listmenu ul li a, .listinc ul li a,.listincinc ul li a { 
+    display: block;
+    padding: 6px 7px;
+    text-decoration: none;
+    color: #000;
+	font-size: 18px;
+	background-color: #fff;
+	list-style: none; 
+	border-top: 1px solid #C0C0C0;}
+
+
+/* Liste pied de page */
+.ticket { margin: 0.7em;}
+.ticketmenu ul { margin:0; padding: 0; list-style: none; border-radius : 10px;-moz-border-radius: 10px; -webkit-border-radius: 10px; /* border: 1px solid #C0C0C0; */ border-top: 0;	background-color: #fff;}
+.ticketmenu ul li a { 
+/*     display: block;
+    padding: 7px;
+    text-decoration: none;
+    color: #000;
+	font-size: 16px;
+	font-weight:normal;
+	list-style: none; 
+	border-top: 1px solid #C0C0C0;
+	 */
+	display: block; 
+	width: auto;
+	height: auto;
+	border-top: 4px solid #585858; 
+	border-left: 4px solid #797979;
+	border-right: 4px solid #797979;
+	border-bottom: 4px solid #888888;
+	border-radius : 11px; -moz-border-radius: 11px; -webkit-border-radius: 11px; 
+	background: #CECECE;
+	font-size: 18px;
+	color:#333; 
+	text-decoration: none;
+	padding: 7px 4px 6px 4px;
+	line-height:;
+	margin-bottom: 5px;
+text-align: center;}
+
+	
+	
+/*  Boutons rubriques  */
+.bouton_rub { clear: both; margin: 0.7em 0 0.2em 0; text-align: center; padding: 0;}
+.bouton_rub ul { margin: 0 0.6em; padding: 0; list-style: none;  }
+.bouton_rub ul ul{ margin: 0 1.2em; }
+.bouton_rub ul li { padding: 0 0 7px 0; }
+.bouton_rub ul li ul li { padding: 5px 0 0 0; }
+.bouton_rub ul li a, .bouton_rub ul li a:visited { 
+	display: block; 
+	width: auto;
+	height: auto;
+	border-top: 4px solid #585858; 
+	border-left: 4px solid #797979;
+	border-right: 4px solid #797979;
+	border-bottom: 4px solid #888888;
+	border-radius : 11px; -moz-border-radius: 11px; -webkit-border-radius: 11px; 
+	background: #CECECE;
+	font-size: 18px;
+	color:#333; 
+	text-decoration: none;
+	padding: 7px 4px 6px 4px;
+	line-height:; }
+.bouton_rub ul li a[selected="progress"], .bouton_rub ul li a[selected], .bouton_rub ul li a:active, .bouton_rub a:focus { 
+	display: block; 
+	width: auto;
+	border-bottom: 4px solid #585858; 
+	border-left: 4px solid #797979;
+	border-right: 4px solid #797979;
+	border-top: 4px solid #888888;
+	background-color: #909090 !important; 
+	color:#000 !important;
+	text-decoration: none; }
+.bouton_rub ul li a.on, .bouton_rub ul li ul li a.on, .bouton_rub ul li ul li ul li a.on { 
+	background: #000;
+	background-color: #353535;
+	color:#fff; }
+.bouton_rub a[selected="progress"].on, .bouton_rub a[selected].on, .bouton_rub a:active.on, .bouton_rub a:focus.on { 
+	border-top: 4px solid #585858; 
+	border-left: 4px solid #797979;
+	border-right: 4px solid #797979;
+	border-bottom: 4px solid #888888;
+	background: #000 !important;
+	color:#fff !important; }
+
+
+/* Pagination */
+.pagination {
+	background: #B8C8DC;
+	border-bottom: 1px solid #B9B9B9;
+	line-height: 1.3em ;
+	font-size: 17px;
+	text-align:	center;
+	font-weight: bold;
+	color: #7187A4;
+	padding:0; }
+.pagination a, .pagination a:visited {
+	color:#FFF;
+	padding-bottom:2px;
+    text-decoration: none;  }
+.pagination a:hover, .pagination a:focus, .pagination a[selected], .pagination a:active, .pagination .on {color:#7187A4 }
+.listincinc .pagination { background: #CAD7E6; line-height: 1.2em; color:#93A4BB }
+.listincinc .pagination a:hover, .listincinc .pagination a:focus, .listincinc .pagination a[selected], .listincinc .pagination a:active, .listincinc .pagination .on {color: #93A4BB;}
+
+.pagin-forum { margin: 0.5em 0.5em 1em 0.5em; 	border-radius : 6px; -moz-border-radius: 6px; -webkit-border-radius: 6px }
+
+
+/* ------------------------------------------
+/* Habillage des elements du contenu
+/* ------------------------------------------ */
+.contenu {padding: 0.5em;}
+
+.cartouche { margin-bottom: 0; padding: 0; }
+.cartouche .spip_logos { float: right; margin: 0 0 7px 0;}
+.cartouche p { margin: 0; padding: 0; clear: left; }
+.surtitre, .soustitre { font-size: 0.90em; color: #666; text-transform: uppercase; letter-spacing: 0.10em; }
+.cartouche .surtitre { margin-bottom: 0.30em; }
+.cartouche .soustitre { margin-top: 0.50em; margin-bottom: 0.30em; }
+.cartouche .traductions { font-size: 0.90em; line-height:2.2em; color:#888; }
+.traductions span, .traductions span a.on {  color:#CCC; font-weight:normal; padding: 2px 4px 3px 4px; background:#4A6C9B }
+.traductions span a { color:#FFF; font-weight: bold; }
+
+
+.chapo {
+margin-top: 0.5em;
+line-height: 1.20em;
+font-size: 1.2em;
+font-weight: bold;
+color: #333;
+}
+
+.texte { margin-top: 0.5em; line-height: 1.15em; font-size: 1.3em; text-align: justify; }
+.texte a {color: #4A6C9B;}
+
+.texte .hyperlien a, .texte .hyperlien a:hover, .hyperlien a, .hyperlien a:hover, .lien a, .lien a:hover, .lien-evt a, .lien-evt a:hover { 
+	display: block;
+	margin: 10px;
+	background: #fff;
+	border: 1px solid #C0C0C0; 
+	-moz-border-radius: 10px; 
+	-webkit-border-radius: 10px;
+    padding: 8px 10px;
+    text-decoration: none;
+	font-size: 13px;
+	font-weight:bold;
+	color: #4A6C9B;
+	list-style: none }
+
+.ps, .notes { margin:1em; line-height: 1.40em; font-size: 1.1em; text-align: justify; }
+.notes { clear: both; font-size: 1em; margin:0.5em; }
+.notes a {color:#4A6C9B}
+.texte a.spip_note {font-weight:normal; color:#4A6C9B}
+
+/* Portfolio */
+#documents_portfolio { clear: both; margin: 0; padding:0.5em;text-align: center; }
+#documents_portfolio .spip_logos { margin: 3px; border: 4px solid #fff; }
+
+.pf { margin:0.5em }
+.pf img { width: 100%; height: auto; }
+
+/* Petitions */
+#signatures { clear: both; margin: 0 0 1em 0; padding: 0; background: none; }
+#signatures table { width: 100%; margin: 1em 0 0 0; }
+#signatures table caption { font-size: 17px; text-align: center;	font-weight: bold; color: #FFF; }
+#signatures thead { text-align: center; color: #555; }
+#signatures td { padding: 0.50em; border: 2px solid #FEFEFE; vertical-align: top; }
+#signatures td.signature-date { background: #E1E8F0; text-align: center; white-space: nowrap; }
+#signatures td.signature-nom { background: #EBEFF5; text-align: center; }
+#signatures td.signature-nom a { color:#999 }
+#signatures td.signature-nom small { display: block; }
+#signatures td.signature-message { background: #f1f4f8; }
+#signatures .formulaire_recherche { margin: 1em 0; text-align: right; } 
+#signatures .formulaire_recherche input.text { width: 10em; text-align: left; }
+
+
+abbr.published  { border: 0; color:#888; }
+abbr.published span, abbr.published small, .cartouche .day, .cartouche .month { color:#888; }
+span.published {font-size:14px; padding-left:0.5em }
+h.published a {font-size:1.2em;padding-left:0.5em; color:#000 }
+.hentry_published { background-color: white; cursor: pointer; color:#000; font-size:1.2em }
+
+
+
+/* Habillage des forums
+-------------------------------------- */
+.repondre a, .rep-mess a { 
+    display: block;
+	background-color: #fff;
+    text-decoration: none;
+    color: #000;
+	font-weight:bold;
+	list-style: none; 
+	border: 1px solid #D4D4D4; }
+.repondre a { margin-bottom: 10px; font-size: 18px; -moz-border-radius: 8px; -webkit-border-radius: 8px; padding: 7px 9px; }
+.rep-mess a { margin-bottom:0.3em; font-size: 14px; padding: 5px 7px;}
+	
+
+/* Habillage des forums */
+#total-forums { padding: 0 0.5em; font-weight:bold }
+ul.forum { display: block; clear: both; margin:0; padding:0;}
+ul.forum, ul.forum ul { list-style: none; }
+.forum-fil { margin-top: 1em; background: #728BAD; padding:5px 5px 1px 5px; border-radius: 6px; -moz-border-radius: 6px;}
+.forum-fil ul { display: block; margin: 0; padding: 0; }
+.forum-chapo .forum-titre, .forum-chapo .forum-titre a { display: block; margin: 0; padding: 0; font-weight: bold; color: #333; }
+.forum-texte { margin: 0; padding: 0.50em 1em; color: #333; background: #ede0a6;}
+.forum-message { margin: 0 0 5px 0; padding: 0; }
+
+/* Boite de titre d'un forum : mise en couleur selon la profondeur du forum */
+ul .forum-chapo { margin:0; background: #91a5c0; padding: 3px 6px 2px 6px; font-size: 1em; }
+ul ul .forum-chapo { background: #a2b5ce; }
+ul ul ul .forum-chapo { background: #b7c7dc; }
+ul ul ul ul .forum-chapo { background: #c5d3e6; }
+ul ul ul ul ul .forum-chapo { background: #d5e0f0; }
+ul ul ul ul ul ul .forum-chapo { background: #e5ebf4; }
+ul ul ul ul ul ul ul .forum-chapo { background: #f1f4f8; }
+
+
+/* Couleurs des liens */
+a { color: #336699; text-decoration: none; }
+a:focus, a:active, a[selected], a:hover { text-decoration: underline; }
+
+/* LOGO ARTICLE*/
+
+.logo-article{
+float:left;
+width:100%;
+position: relative;
+}

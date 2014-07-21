@@ -1,0 +1,47 @@
+<BOUCLE_contenu(RUBRIQUES){id_rubrique}>
+				<div class="rub">
+				<h2>[(#TITRE|supprimer_numero)]</h2>
+				<div class="dateart">[<:cisquel:eq_publie_le:> (#DATE|affdate)]
+				</div>
+			      	[<div class="texte">(#TEXTE)</div>]
+				[<div class="texte">(#NOTES)</div>]
+				</div>
+			      	
+				<BOUCLE_sous_rubriques(RUBRIQUES){id_parent}{par num titre}>
+				<div class="listerub">
+					[<img src="(#LOGO_RUBRIQUE||image_reduire{44,0}|extraire_attribut{'src'})" alt=""  class="rightill" />]
+				      	<a href="#URL_RUBRIQUE" class="titresousrub">[(#TITRE|supprimer_numero)]</a>
+				      	[<div class="textesousrub">(#DESCRIPTIF)</div>]
+					<B_sous_sous_rubriques>
+					<div class="liens">
+					<ul>
+					<BOUCLE_sous_sous_rubriques(RUBRIQUES){id_parent}{par num titre}>
+					<li><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></li>
+					</BOUCLE_sous_sous_rubriques>
+					</ul>
+				      	</div>
+					</B_sous_sous_rubriques>
+					<div class="clearer">&nbsp;</div>
+				</div>
+				</BOUCLE_sous_rubriques>
+
+				<BOUCLE_articles(ARTICLES){id_rubrique}{par #CITRI}{!par #CITRIINVERSE}{par num #CITRINUM}{doublons}>
+				<div class="listeart">
+					[<img src="(#LOGO_ARTICLE||image_reduire{44,0}|extraire_attribut{'src'})" alt=""  class="rightill" />]
+				      	<a href="#URL_ARTICLE" <BOUCLE_nouvelle_fenetre(ARTICLES){id_article}{raccourci=_nouvelle_fenetre}>class="spip_out titreartliste"</BOUCLE_nouvelle_fenetre></B_nouvelle_fenetre>class="titreartliste"<//B_nouvelle_fenetre> >[(#TITRE|supprimer_numero)]</a>
+				      	[<div class="texte">(#DESCRIPTIF)</div>]
+				 <div class="clearer">&nbsp;</div>    	
+				</div>
+				</BOUCLE_articles>
+
+				<BOUCLE_sites_syndic(SITES){id_rubrique}{syndication=oui}{par num nom_site}>
+				<BOUCLE_syndic(SYNDIC_ARTICLES){id_syndic}{par date}>
+				<h2>[(#TITRE|supprimer_numero)]</h2>
+				[<div class="texte">(#DESCRIPTIF)</div>]
+				</BOUCLE_syndic>
+				</BOUCLE_sites_syndic>
+				<!-- SPIP-CRON --><div style="background-image: url('spip.php?action=cron');"></div>
+				</B_sites_syndic>
+				
+				
+</BOUCLE_contenu>

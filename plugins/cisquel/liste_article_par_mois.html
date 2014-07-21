@@ -1,0 +1,64 @@
+#CACHE{0}
+#CIPARAM_DOCTYPE
+<head>
+<title><:cisquel:eq_articles_par_mois:>[ - (#NOM_SITE_SPIP|textebrut)]</title>
+<meta name="robots" content="noindex, nofollow" />
+<link href="#CHEMIN{_css/styleexceptions.css}" rel="stylesheet" type="text/css" />
+<INCLURE{fond=noisettes/head}{lang}>
+</head>
+
+<body>
+<INCLURE{fond=noisettes/haut}{lang}>
+<div id="pageArticleParMois">
+<div id="milieu">
+	<div id="ext-main">
+		<div class="main">
+			<div id="gauche">
+				<INCLURE{fond=noisettes/recherche_gauche}{lang}>
+	
+			    <INCLURE{fond=navigation/sommaire}{lang}>
+			</div>
+
+  			<div id="contenu">
+			<div class="main-content">
+				<h1 class="invisible"><:cisquel:eq_contenu:></h1>
+				<div id="boxnavpath"><div id="navpath">
+					<a href="[(#URL_PAGE{sommaire})]"><:cisquel:eq_accueil:></a>&gt; <:cisquel:eq_articles_par_mois:>
+				</div></div>
+				<div id="boxcentrale"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale">
+				<div class="rub">
+				<h2><:cisquel:eq_articles_publies_en:> [(#DATE|nom_mois)] [(#DATE|annee)]</h2>
+				</div>
+				<div class="folio"><div class="choixpage">
+				<INCLURE{fond=noisettes/liste_article_par_mois_choix}>
+				</div></div>
+
+				<div class="actubox">
+				<B_MOIS>
+				<BOUCLE_MOIS(ARTICLES){mois_relatif=0}{par date}{inverse} >
+					<div class="actu">
+					[<img src="(#LOGO_ARTICLE||image_reduire{44,0}|extraire_attribut{'src'})" alt=""  class="rightill" />]
+					<div class="titreactu"><a href="#URL_ARTICLE" class="lien">[(#TITRE|supprimer_numero)]</a></div> 
+					<div class="texte">#DESCRIPTIF</div>
+					<div class="clearer">&nbsp;</div>
+					</div>
+				</BOUCLE_MOIS>
+				</B_MOIS>
+				<div class="texte"><:cisquel:eq_pas_article_publie_en:> [(#DATE|nom_mois)] [(#DATE|annee)].</div>
+				<//B_MOIS>
+				</div>
+				    
+				<div class="folio"><div class="choixpage">
+				<INCLURE{fond=noisettes/liste_article_par_mois_choix}>
+				</div></div>
+
+				</div></div></div></div></div></div>
+			</div>
+			</div>
+		<div class="clearer"></div>			
+		</div>
+	</div>
+</div>
+</div>
+	<INCLURE{fond=noisettes/pied}{lang}><INCLURE{fond=noisettes/pied_connexion}{self=#SELF}{lang}>
+	

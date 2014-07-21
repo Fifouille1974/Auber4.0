@@ -1,0 +1,32 @@
+<div class='formulaire_spip formulaire_editer formulaire_editer_rubrique formulaire_editer_rubrique-#ENV{id_rubrique,nouveau}'>
+	<!-- <br class='bugajaxie' /> -->
+	[<p class='reponse_formulaire reponse_formulaire_ok'>(#ENV**{message_ok})</p>]
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+[(#PLUGIN{ciar}|oui)
+	[(#SET{cistatuts,#ARRAY{1,0minirezo,2,1comite,3,6forum}})]
+]
+[(#PLUGIN{ciar}|non)
+	[(#PLUGIN{cirr}|oui)
+		[(#SET{cistatuts,#ARRAY{1,0minirezo,2,1comite}})]
+	]
+	[(#PLUGIN{cirr}|non)
+		[(#SET{cistatuts,#ARRAY{1,0minirezo}})]
+	]
+]
+		<B_auteur_col1>
+		[<div class="pagination">(#PAGINATION)</div>]
+		<fieldset class="motcle">
+		<BOUCLE_auteur_col1(AUTEURS){statut IN #GET{cistatuts}}{par nom}{pagination #ENV{ci_pagination}}>
+		  <div><input id="aut#ID_AUTEUR" type="checkbox" [(#ID_AUTEUR|in_array{#ENV{tableau_auteurs}}|oui)checked="checked"] value=#ID_AUTEUR name='auteurs[]' /><label for="aut#ID_AUTEUR" [(#ID_AUTEUR|in_array{#ENV{tableau_auteurs}}|oui)class="on"]>[(#STATUT|ciag_puce_statut)] #NOM</label>[(#STATUT|=={0minirezo}|oui)[ (#ID_AUTEUR|in_array{#ENV{ciag_admin_restreints}}|oui)<small><:statut_admin_restreint:></small>][ (#ID_AUTEUR|in_array{#ENV{ciag_admin_site}}|oui)<span style="color: red;"><small><:ciag:admin_site:></small></span>]]</div>
+		</BOUCLE_auteur_col1>		
+		</fieldset>
+		</B_auteur_col1>
+
+	  <p class='boutons'><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+</div>

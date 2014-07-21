@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<item><nom>_portail_dossiers2</nom><description>Page d'accueil : raccourci dans la colonne centrale ("Projets" ...)</description></item>
+<item><nom>_portail_dossiers3</nom><description>Page d'accueil : raccourci dans la colonne centrale ("Pratique" ...)</description></item>
+<item><nom>_portail_dossiers_actu</nom><description>Page d'accueil : raccourci dans la colonne centrale ("Actualités" ...)</description></item>
+<item><nom>_albertivi</nom><description>Page d'accueil : raccourci dans la colonne droite ("Albertivi" ...)</description></item>
+<item><nom>_alaune</nom><description>Page d'accueil : raccourci dans la colonne centrale ("A la une" ...)</description></item>
+<item><nom>_portail_permanent_haut_sortir</nom><description>Page d'accueil : raccourci permanent ("Sortir" ...)</description></item>
+<item><nom>_portail_permanent_haut_projets</nom><description>Page d'accueil : raccourci permanent ("Projets" ...)</description></item>
+<item><nom>_portail_permanent_haut_pratique</nom><description>Page d'accueil : raccourci permanent ("Pratique" ...)</description></item>
+<item><nom>_portail_permanent_haut_actu</nom><description>Page d'accueil : raccourci permanent ("Actualités" ...)</description></item>
+<item><nom>_large</nom><description>Sans la colonne de droite</description></item>

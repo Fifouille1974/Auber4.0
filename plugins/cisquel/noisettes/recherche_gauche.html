@@ -1,0 +1,12 @@
+<div id="rechercher">
+	<form action="[(#URL_PAGE{recherche})]" method="get">
+			<input type="hidden" value="recherche" name="page" />
+			[<input type="hidden" name="lang" value="(#LANG)" />
+			<input type="hidden" name="forcer_lang" value="true" />]
+			<label for="recherche" accesskey="S"><:cisquel:eq_recherche_maj:></label><br />
+			<input name="recherche" type="text" id="recherche" value="" size="15" maxlength="100" />
+			<input name="validsearch" id="validsearch" type="submit" alt="<:cisquel:eq_lancer_recherche:>" title="<:cisquel:eq_lancer_recherche:>" value="Ok" class="ok" />
+
+          <p>&gt;&gt; <a href="#URL_PAGE{rechercheavancee}" title="<:cisquel:recherche_avancee:>"><:cisquel:recherche_avancee:></a></p>
+	</form>
+</div>

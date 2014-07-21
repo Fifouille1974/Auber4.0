@@ -1,0 +1,70 @@
+#CACHE{0}
+
+[<p class='formulaire_ok'>(#ENV*{message_ok})</p>]
+[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	<form action='#ENV{action}' method='post' name="formulaire" onsubmit="return OnSubmitForm();" >
+
+		<B_documents>
+			<div class="titreaction"><:ciform:propriete_doc:></div>
+		<BOUCLE_documents(DOCUMENTS){id_document=#ENV{id_document}}>
+			#SET{ci_type_inclus,'non'}
+			<BOUCLE_type_document(TYPES_DOCUMENTS){extension}>
+			#SET{ci_type_inclus,#INCLUS}
+			</BOUCLE_type_document>
+
+			
+			[(#GET{ci_type_inclus}|=={image}|oui)
+					<img src="[(#FICHIER|image_reduire{600,600}|extraire_attribut{src})]" />
+					<div class="texte">
+					([<:ciform:format:> (#TYPE_DOCUMENT)][ - (#TAILLE|taille_en_octets)][ - hauteur (#HAUTEUR)px][ - largeur (#LARGEUR)px])
+					</div>
+					<ul class="editerdocument">
+				    <li>
+					<label for="titre" class="ftitre1"><:info_titre:></label>
+			
+			]
+			[(#GET{ci_type_inclus}|=={embed}|oui)
+					<div class="texte">
+					<a href="#URL_DOCUMENT" class="document gisehleft" title="<:ciform:ouvre_document:> [(#TITRE|supprimer_numero)] <:ciform:dans_fenetre:>" target="_blank">[(#TITRE|supprimer_numero)]</a>&nbsp;([<:ciform:format:> (#TYPE_DOCUMENT)][ - (#TAILLE|taille_en_octets)])
+					</div>
+					<ul class="editerdocument">
+				    <li>
+					<label for="titre" class="ftitre1"><:info_titre:></label>
+			]
+			[(#GET{ci_type_inclus}|=={non}|oui)
+					<div class="texte">
+					<a href="#URL_DOCUMENT" class="document gisehleft" title="<:ciform:ouvre_document:> [(#TITRE|supprimer_numero)] <:ciform:dans_fenetre:>" target="_blank">[(#TITRE|supprimer_numero)]</a>&nbsp;([<:ciform:format:> (#TYPE_DOCUMENT)][ - (#TAILLE|taille_en_octets)])
+					</div>
+					<ul class="editerdocument">
+				    <li>
+					<label for="titre" class="ftitre1"><:texte_titre_obligatoire:></label>
+			]
+					
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>]
+			<input type='text' class='formo' name='titre' id='titre' size="80"[ lang='(#LANGUE)'] value="[(#ENV**{titre})]"/>
+			</li><li>			
+			<label for="descriptif" class="ftitre1"><span class="gras"><:texte_descriptif_rapide:></span></label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>]
+			<textarea name='descriptif' id='descriptif'[ lang='(#LANGUE)'] class='forml' rows='3' cols='40'>[(#ENV**{descriptif})]</textarea>
+			</li>
+			</ul>
+
+
+		
+		
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+			<input type="hidden" name="ciaction" value="editer_document" />
+			<input name='formulaire' type=Hidden value='doc_modifier' />
+			<input type="hidden" name="id_document" value=#ID_DOCUMENT />
+			
+			<div class="cadrevaliderdocmodif"><input type="submit" name="enregistrer" value="<:bouton_enregistrer:>" title="<:bouton_enregistrer:>" class="bouton_valider" />
+			<input type="submit" name="annuler" value="<:ciform:annuler:>" title="<:ciform:annuler:>" class="bouton_valider" /></div>
+		</BOUCLE_documents>
+		</B_documents>
+			<div class="titreaction"><:ciform:echec_upload:></div>
+		<//B_documents>
+	
+
+	</form>

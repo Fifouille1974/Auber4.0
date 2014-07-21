@@ -1,0 +1,11 @@
+<div class="group"><:itwx:infos:></div>
+<div class="listmenu">
+  <ul class="corner">
+    [(#PLUGIN{agenda}|oui)<li><a href="#URL_PAGE{agenda}" style="font-weight:normal"><:icone_agenda:></a></li>]
+	<BOUCLE_mot_invisible(MOTS) {titre=invisible} {doublons}></BOUCLE_mot_invisible>
+    <BOUCLE_mots(MOTS){0,1}{doublons}><li><a href="#URL_PAGE{lesmots}"><:mots_clefs:></a></li></BOUCLE_mots>
+    <li><a rel="start home" href="#URL_PAGE{lesauteurs}" style="font-weight:normal"><:icone_auteurs:></a></li>
+    <li><a rel="start home" href="#URL_PAGE{plan}" style="font-weight:normal"><:plan_site:></a></li>
+ 	<li><a rel="start home" href="#URL_PAGE{contact}" style="font-weight:normal"><:contact:></a></li>
+ </ul>
+</div>

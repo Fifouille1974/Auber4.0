@@ -1,0 +1,61 @@
+<script type="text/javascript" charset="utf-8">
+//<![CDATA[
+
+[(#CONFIG{itwx/nosmart}|non)
+//cimobile_correspondances = autres_mobiles
+	if((navigator.userAgent.match(/(Symbian|Windows CE|WindowsCE|IEMobile|MSIEMobile|Maemo|webOS|HP iPAQ|Opera Mobi|Opera Mini|LG|MOT|Nokia|Sagem|Samsung|SGH|Siemens|SIE|SonyEricsson|MIDP|Fennec|Tear)/i)))
+	{
+		[(#SET{redirsmart,[(#URL_SITE_SPIP)/?cimobile=mobile]})]
+		[(#ENV{id_rubrique}|oui)[(#SET{redirsmart,[(#URL_RUBRIQUE|parametre_url{'cimobile','mobile'})]})]]
+		[(#ENV{id_article}|oui)[(#SET{redirsmart,[(#URL_ARTICLE|parametre_url{'cimobile','mobile'})]})]]
+		[(#ENV{id_breve}|oui)[(#SET{redirsmart,[(#URL_BREVE|parametre_url{'cimobile','mobile'})]})]]
+		[(#ENV{id_syndic}|oui)[(#SET{redirsmart,[(#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT}|parametre_url{'cimobile','mobile'})]})]]
+		[(#ENV{id_mot}|oui)[(#SET{redirsmart,[(#URL_MOT|parametre_url{'cimobile','mobile'})]})]]
+		[(#ENV{id_auteur}|oui)[(#SET{redirsmart,[(#URL_AUTEUR|parametre_url{'cimobile','mobile'})]})]]
+	document.write("<a href='#GET{redirsmart}' class='itwx_alerte'><:itwx:mob_squel:><\/a><br class='nettoyeur' />");
+	};
+	
+//cimobile_correspondances = smartphone
+	if((navigator.userAgent.match(/(iPhone|Android|BlackBerry|Windows Phone OS 7|Smartphone|Palm|HTC|Nuvifone)/i)))
+	{
+		[(#SET{redirsmart,[(#URL_SITE_SPIP)/?cimobile=smartphone]})]
+		[(#ENV{id_rubrique}|oui)[(#SET{redirsmart,[(#URL_RUBRIQUE|parametre_url{'cimobile','smartphone'})]})]]
+		[(#ENV{id_article}|oui)[(#SET{redirsmart,[(#URL_ARTICLE|parametre_url{'cimobile','smartphone'})]})]]
+		[(#ENV{id_breve}|oui)[(#SET{redirsmart,[(#URL_BREVE|parametre_url{'cimobile','smartphone'})]})]]
+		[(#ENV{id_syndic}|oui)[(#SET{redirsmart,[(#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT}|parametre_url{'cimobile','smartphone'})]})]]
+		[(#ENV{id_mot}|oui)[(#SET{redirsmart,[(#URL_MOT|parametre_url{'cimobile','smartphone'})]})]]
+		[(#ENV{id_auteur}|oui)[(#SET{redirsmart,[(#URL_AUTEUR|parametre_url{'cimobile','smartphone'})]})]]
+	document.write("<a href='#GET{redirsmart}' class='itwx_alerte'><:itwx:smart_squel:><\/a><br class='nettoyeur' />");
+	};
+]
+
+[(#CONFIG{itwx/nosmart}|?{' '})
+	if((navigator.userAgent.match(/(iPhone|Android|BlackBerry|Windows Phone OS 7|Smartphone|Palm|HTC|Nuvifone|Symbian|Windows CE|WindowsCE|IEMobile|MSIEMobile|Maemo|webOS|HP iPAQ|Opera Mobi|Opera Mini|LG|MOT|Nokia|Sagem|Samsung|SGH|Siemens|SIE|SonyEricsson|MIDP|Fennec|Tear)/i)))
+	{ 
+		[(#SET{redirsmart,[(#URL_SITE_SPIP)/?cimobile=mobile]})]
+		[(#ENV{id_rubrique}|oui)[(#SET{redirsmart,[(#URL_RUBRIQUE|parametre_url{'cimobile','mobile'})]})]]
+		[(#ENV{id_article}|oui)[(#SET{redirsmart,[(#URL_ARTICLE|parametre_url{'cimobile','mobile'})]})]]
+		[(#ENV{id_breve}|oui)[(#SET{redirsmart,[(#URL_BREVE|parametre_url{'cimobile','mobile'})]})]]
+		[(#ENV{id_syndic}|oui)[(#SET{redirsmart,[(#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT}|parametre_url{'cimobile','mobile'})]})]]
+		[(#ENV{id_mot}|oui)[(#SET{redirsmart,[(#URL_MOT|parametre_url{'cimobile','mobile'})]})]]
+		[(#ENV{id_auteur}|oui)[(#SET{redirsmart,[(#URL_AUTEUR|parametre_url{'cimobile','mobile'})]})]]
+	document.write("<a href='#GET{redirsmart}' class='itwx_alerte'><:itwx:smart_squel:><\/a><br class='nettoyeur' />");
+	};
+]
+	
+//cimobile_correspondances = tablette
+[(#CONFIG{itwx/notab}|non)
+	if((navigator.userAgent.match(/(iPad|xoom|maemo|playbook|archos)/i)))
+	{
+		[(#SET{redirsmart,[(#URL_SITE_SPIP)/?cimobile=tablette]})]
+		[(#ENV{id_rubrique}|oui)[(#SET{redirsmart,[(#URL_RUBRIQUE|parametre_url{'cimobile','tablette'})]})]]
+		[(#ENV{id_article}|oui)[(#SET{redirsmart,[(#URL_ARTICLE|parametre_url{'cimobile','tablette'})]})]]
+		[(#ENV{id_breve}|oui)[(#SET{redirsmart,[(#URL_BREVE|parametre_url{'cimobile','tablette'})]})]]
+		[(#ENV{id_syndic}|oui)[(#SET{redirsmart,[(#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT}|parametre_url{'cimobile','tablette'})]})]]
+		[(#ENV{id_mot}|oui)[(#SET{redirsmart,[(#URL_MOT|parametre_url{'cimobile','tablette'})]})]]
+		[(#ENV{id_auteur}|oui)[(#SET{redirsmart,[(#URL_AUTEUR|parametre_url{'cimobile','tablette'})]})]]
+	document.write("<a href='#GET{redirsmart}' class='itwx_alerte'><:itwx:tab_squel:><\/a><br class='nettoyeur' />");
+	};
+]
+//]]>
+</script>

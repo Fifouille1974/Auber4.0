@@ -1,0 +1,100 @@
+#CACHE{3600}
+<BOUCLE_principale(RUBRIQUES) {id_rubrique}>
+<!DOCTYPE html>
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+]<!--[if lt IE 7 ]> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html lang="#LANG"class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]--> 
+<head>
+<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+<title>[(#TITRE|textebrut) - ][(#NOM_SITE_ITWX|textebrut)]</title>
+[<meta name="description" content="(#INTRODUCTION{150}|textebrut)" />]
+<INCLURE{fond=inc/inc-head}>
+[(#REM) Lien vers le flux RSS des articles la rubrique ]
+<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" />
+</head>
+
+<body class="#LANG_DIR" id="top">
+<div id="smart">
+
+  [(#REM) TOOL BARRE ]
+  <INCLURE{fond=inc/inc-navBar}/> 
+  
+  <div id="main">
+  
+  <INCLURE{fond=inc/ajax/formulaire_recherche}{env}{ajax}>
+
+  [(#REM) Contenu principal : contenu de la rubrique ]
+  <div class="contenu">
+    <div class="cartouche"> [(#LOGO_RUBRIQUE|image_reduire{120,100})]
+      <h1 class="#EDIT{titre}">#TITRE</h1>
+      [<p><small><:dernier_ajout:> : (#DATE|affdate_jourcourt).</small></p>]
+	</div>
+    [<div class="#EDIT{texte} chapo">(#TEXTE|image_reduire{0,0})</div>]
+  <br class="nettoyeur" />
+    [<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>] 
+		
+  </div><!--#contenu-->
+  <br class="nettoyeur" />
+  
+  [(#REM) Documents joints a la rubrique ]
+  <B_documents_joints>	
+  <div class="listinc">	
+  <div class="grouplist"><:titre_documents_joints:></div>	
+  <ul>
+  	<BOUCLE_documents_joints(DOCUMENTS) {id_rubrique} {mode=document} {par num titre, date} {doublons}>
+		<li><a href="#URL_DOCUMENT" type="#MIME_TYPE">
+			[(#TITRE|sinon{<:info_document:>})]
+			<small>(<span>#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)]</span>)</small>
+		</a></li>
+	</BOUCLE_documents_joints>
+  </ul>
+  </div>
+  </B_documents_joints>
+  
+  [(#REM) Articles de la rubrique ] 
+  <INCLURE{fond=inc/inc-rub-listart}{env}{ajax}{art=_art#ID_ARTICLE}/> 
+  
+  [(#REM) Breves du secteur ] 
+  <INCLURE{fond=inc/inc-rub-listbre}{env}{ajax}{bre=_bre#ID_BREVE}/> 
+  
+  [(#REM) Rubriques ] 
+  <INCLURE{fond=inc/inc-rub-listrub}{env}{ajax}{rub=_rub#ID_RUBRIQUE}/> 
+  
+  [(#REM) Sites de la rubrique ] 
+  <INCLURE{fond=inc/inc-rub-listsite}{env}{ajax}{site=_site#ID_SYNDIC}/> 
+  
+  [(#REM) Proposer un site ]
+  #FORMULAIRE_SITE
+  
+  [(#REM) Menu de navigation mots-cles ] 
+  <INCLURE{fond=inc/inc-rub-listmot}{env}{ajax}{mot=_mot#ID_MOT}/> 
+  
+  [(#REM) Menu de navigation par rubriques ] 
+  <INCLURE{fond=inc/inc-rubriques}{id_rubrique}/> 
+  
+  [(#REM) Pied - Gestion du site ]
+  <div class="group" style="height:17px; border-bottom:1px solid #B9B9B9"></div>
+  <div class="ticket">
+    <div class="ticketmenu">
+      <ul>
+       [(#CONFIG{itwx/classique}|?{' '})
+		<li class="list-border"><a rel="start home" href="[(#URL_RUBRIQUE|parametre_url{'cimobile','web'})]"><:itwx:pageclassique:></a></li>]
+       <li><a rel="start home" href="#URL_PAGE{contact}"><:contact:></a></li>
+       [(#AUTORISER{ecrire})<li><a href="#EVAL{_DIR_RESTREINT_ABS}"><:espace_prive:></a></li>]
+       [(#AUTORISER{ecrire})<li><a href="#EVAL{_DIR_RESTREINT_ABS}?exec=rubrique&id_rubrique=#ID_RUBRIQUE"><:rubrique:> #ID_RUBRIQUE</a></li>]
+       [(#SESSION{id_auteur}|?{' '})<li><a href="#URL_LOGOUT" rel="nofollow" style="background-image: none; text-align:center" class=""><:icone_deconnecter:></a></li>]
+      </ul>
+    </div>
+  </div>
+  
+  <INCLURE{fond=inc/inc-pied}/> 
+
+  </div><!--#smart-->
+
+</div><!--#page-->
+</body>
+</html>
+</BOUCLE_principale>

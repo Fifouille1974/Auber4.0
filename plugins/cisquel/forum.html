@@ -1,0 +1,71 @@
+#CACHE{0}
+#CIPARAM_DOCTYPE
+<head>
+<BOUCLE_contenu(ARTICLES){id_article}>
+<title>[(#NOM_SITE_SPIP|textebrut)]</title>
+<meta name="robots" content="noindex, nofollow" />
+<link href="#CHEMIN{_css/styleexceptions.css}" rel="stylesheet" type="text/css" />
+<INCLURE{fond=noisettes/head}{lang}>
+[(#REM) Balise permettant aux plugins d'inserer des appels javascript ]
+#INSERT_HEAD
+</head>
+
+<body>
+<INCLURE{fond=noisettes/haut}{lang}>
+<div id="pageForum">
+<div id="milieu">
+	<div id="ext-main">
+		<div class="main">
+  			<div id="contenu">
+			<div class="main-content">
+				<h1 class="invisible"><:cisquel:eq_contenu:></h1>
+				<div id="boxnavpath"><div id="navpath">
+					<a href="[(#URL_PAGE{sommaire})]"><:cisquel:eq_accueil:></a>
+					<BOUCLE_chem_nav(HIERARCHIE){id_article}>
+					&gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a>
+					</BOUCLE_chem_nav>
+				</div></div>
+				<div id="boxcentrale"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale">
+				<h2>[(#TITRE|supprimer_numero)]</h2>
+				<div class="dateart">
+				</div>
+			      	[<div class="texte">(#TEXTE)</div>]
+
+				<BOUCLE_forum_parent(FORUMS) {id_forum}>
+			              <div class="forum">
+			            	<div class="ligne-forumh">
+					<div class="textesujet"><:cisquel:eq_en_reponse_message:>&nbsp;:</div>
+					<div class="titresujet">&nbsp;#TITRE[, <:par_auteur:> (#NOM)] <a href="#URL_SITE" title="<:cisquel:eq_visiter_site:> [(#NOM_SITE|supprimer_numero)] <:cisquel:eq_ouvre_fenetre:>)" class="spip_out">[(#NOM_SITE|supprimer_numero)]</a>, <:cisquel:eq_le:> [(#DATE|affdate)]<:cisquel:eq_a:>[(#DATE|heures)]h[(#DATE|minutes)]</div>
+					<div class="textesujet">[(#TEXTE)]</div>
+					
+					<B_docf1>
+					<div class="listedoc">
+					<ul>
+					<BOUCLE_docf1(DOCUMENTS){id_forum}>
+					<li><a href="#URL_DOCUMENT" onclick="xt_med('C','[(#ID_ARTICLE|ciparam_xtn2)]','[pj(#ID_ARTICLE)-][(#TITRE|supprimer_numero|ciparam_xtTraiter)]','T')" class="document" title="<:cisquel:eq_ouvre_document:> [(#TITRE|supprimer_numero)] <:cisquel:eq_dans_fenetre:>">[(#TITRE|supprimer_numero)]</a>&nbsp;([<:cisquel:eq_format:> (#EXTENSION)][ - (#TAILLE|taille_en_octets)][ - (#DATE|affdate{'d/m/Y'})])</li>
+					</BOUCLE_docf1>
+					</ul>
+					</div>
+					</B_docf1>
+					
+			                </div>
+			                </div>
+				</BOUCLE_forum_parent>
+			      	<div class="titrerep"><:cisquel:eq_votre_message:></div>
+			      	<!-- le formulaire de saisie -->
+			                #FORMULAIRE_FORUM
+				
+				</div></div></div></div></div></div>
+			</div>
+			</div>
+			<div class='clearer'>&nbsp;</div>	
+		</div>
+	</div>
+</div>
+</div>
+	<INCLURE{fond=noisettes/pied}{lang}><INCLURE{fond=noisettes/pied_connexion}{self=#SELF}{lang}>
+
+</BOUCLE_contenu>
+</B_contenu>
+<INCLURE{fond=altern}>
+<//B_contenu>

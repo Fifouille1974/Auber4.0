@@ -1,0 +1,14 @@
+<BOUCLE_site_invisible(SITES) {titre_mot = invisible} {doublons}></BOUCLE_site_invisible>
+
+<B_sites>
+<a id='pagination_sites'></a>
+<div class="group"><:sites_web:></div>
+	<div class="listinc">
+	<ul>
+	<BOUCLE_sites(SITES) {par nom_site}{pagination}{doublons}>
+        <li><a href="[(#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT})]"[ class="(#EXPOSE)"]>#NOM_SITE</a></li>
+	</BOUCLE_sites>
+	</ul>
+	[<div class="pagination">(#PAGINATION)</div>]
+	</div>
+</B_sites>

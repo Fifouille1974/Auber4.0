@@ -1,0 +1,46 @@
+<div class='formulaire_spip formulaire_editer'>
+	<!-- <br class='bugajaxie' /> -->
+	[<p class='reponse_formulaire reponse_formulaire_ok'>(#ENV**{message_ok})</p>]
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	[(#ENV{cieditable}|oui)
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+	  <input type='hidden' name='id_groupe' value='#ENV{id_groupe}' />
+	  <ul>
+	    <li class='editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur] editer_type_input'>
+				<label for='titre'><:ciag:info_changer_nom_groupe:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
+				]<input type='text' class='text' name='titre' id='titre' value='[(#ENV**{titre,#VAL{ciag:titre_nouveau_groupe}|_T|filtrer_entites})]'
+				[(#ENV{titre,''}|?{'',' '})onfocus="if(!antifocus){this.value='';antifocus=true;}"]/>
+	    </li>	
+	    <li class='editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur] editer_type_textarea'>
+				<label for='descriptif'><:texte_descriptif_rapide:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>
+				]<textarea name='descriptif' id='descriptif' rows='1' cols='40'>[(#ENV**{descriptif})]</textarea>
+	    </li>
+	  </ul>
+	  <p class='boutons'><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>	
+	]
+	[(#ENV{cieditable}|non)
+		<div class="cadre_padding">[(#ENV{descriptif})]</div>
+	]
+</div>
+
+[(#ID_GROUPE|>{0}|oui)
+	[(#AUTORISER{supprimer,groupeauteur,#ID_GROUPE})
+<div>
+[(#SPIP_VERSION|>={3}|oui)	
+[(#URL_ACTION_AUTEUR{supprimer_groupe_auteurs,#ID_GROUPE,#URL_ECRIRE{ciag_groupes_auteurs}}|icone_horizontale{<:ciag:icone_supprimer_groupe_auteurs:>,groupe_mots,del})]
+]
+
+[(#SPIP_VERSION|>={3}|non)	
+<a href="[(#URL_ACTION_AUTEUR{supprimer_groupe_auteurs,#ID_GROUPE,#URL_ECRIRE{ciag_groupes_auteurs}})]" class="icone36 danger groupe-mot-24" style="float: left;"><img height="24" width="24" style="background: url('../prive/images/groupe-mot-24.gif') no-repeat scroll center center transparent;" alt="<:icone_supprimer_groupe_auteurs:>" src="../prive/images/supprimer.gif"><span><:ciag:icone_supprimer_groupe_auteurs:></span></a>
+]
+</div>
+<div style='clear:both;'></div>	
+	]
+]
+<br />	

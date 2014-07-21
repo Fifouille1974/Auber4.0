@@ -1,0 +1,19 @@
+[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<?xml version="1.0"[ encoding="(#CHARSET)"]?>
+<rss version="2.0" [(#REM) rss 2.0.9)]
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+>
+
+<channel>
+	<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
+	<link>#URL_SITE_SPIP/</link>
+	<description>nombre abonnements publies _ nombre abonnements non publies _ nombre abonnements autres _ nombre abonnes _ nombre auteurs _ nombre notifications _ nombre mails envoyes _ delai moyen</description>
+	<generator>[(#EVAL{_CINOTIF_NB_MAILS_PAR_PAQUET}|intval|>{0}|oui)#EVAL{_CINOTIF_NB_MAILS_PAR_PAQUET}]_[(#EVAL{_CINOTIF_DELAI_ENTRE_PAQUETS}|intval|>{0}|oui)#EVAL{_CINOTIF_DELAI_ENTRE_PAQUETS}]_[(#EVAL{_CINOTIF_CLAUSE_IN_PAR_PAQUET}|intval|>{0}|oui)#EVAL{_CINOTIF_CLAUSE_IN_PAR_PAQUET}]_[(#EVAL{_CINOTIF_NB_MAX_ABONNES}|intval|>{0}|oui)#EVAL{_CINOTIF_NB_MAX_ABONNES}]</generator>
+	#SET{total,0}
+	<item>
+	<title><BOUCLE_1(CINOTIF_ABONNEMENTS){tout}{statut=publie}></BOUCLE_1>#TOTAL_BOUCLE<//B_1>_<BOUCLE_2(CINOTIF_ABONNEMENTS){tout}{statut=prop}></BOUCLE_2>#TOTAL_BOUCLE<//B_2>_<BOUCLE_3(CINOTIF_ABONNEMENTS){tout}{!statut IN (prop,publie)}></BOUCLE_3>#TOTAL_BOUCLE<//B_3>_<BOUCLE_4(CINOTIF_ABONNES){tout}></BOUCLE_4>#TOTAL_BOUCLE<//B_4>_<BOUCLE_5(CINOTIF_ABONNES){tout}{id_auteur>0}></BOUCLE_5>#TOTAL_BOUCLE<//B_5>_<BOUCLE_6(CINOTIF_COURRIERS){tout}{statut=publie}></BOUCLE_6>#TOTAL_BOUCLE<//B_6>_<BOUCLE_7(CINOTIF_COURRIERS){tout}{statut=publie}> [(#SET{total,[(#GET{total}|plus{#NB_EMAILS_ENVOYES})]})]</BOUCLE_7>#GET{total}</B_7> _[(#URL_SITE_SPIP|cinotif_duree_envoi)]</title>	
+	</item>
+
+</channel>
+
+</rss>

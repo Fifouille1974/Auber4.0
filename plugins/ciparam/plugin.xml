@@ -1,0 +1,78 @@
+<plugin>
+	<nom>ciparam : Configurateur de squelettes</nom>
+	<auteur>&#169; C. Imberti</auteur>
+	<icon>pyramides-32.png</icon>
+	<licence>[Creative commons by-nc-sa->http://creativecommons.org/licenses/by-nc-sa/2.0/fr/]</licence>
+
+	<lien></lien>
+	<version>2.0</version>
+	<version_base>1.1</version_base>
+	<etat>stable</etat>
+    <slogan>Auteur : &#169; C. Imberti. Licence : Creative commons by-nc-sa.</slogan>
+    <description>
+    Auteur : &#169; C. Imberti. Licence : Creative commons by-nc-sa.<br />
+	Ce plugin active ou d&#233;sactive le configurateur de squelettes.
+	</description>
+	<prefix>ciparam</prefix>
+	<fonctions>ciparam_fonctions.php</fonctions>
+	<options>ciparam_options.php</options>
+	<install>base/ciparam_install.php</install>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/ciparam_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/ciparam_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/ciparam_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>styliser</nom>
+		<inclure>public/ciparam_styliser.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>inc/ciparam_inc_choix.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_edition</nom>
+		<inclure>inc/ciparam_inc_document.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_propre</nom>
+		<inclure>inc/ciparam_inc_texte.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_typo</nom>
+		<inclure>inc/ciparam_inc_texte.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_typo</nom>
+		<inclure>inc/ciparam_inc_texte.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>cisf_article_options</nom>
+		<inclure>inc/ciparam_inc_cisf.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affichage_final</nom>
+		<inclure>ciparam_pipelines.php</inclure>
+	</pipeline>
+
+    <bouton id='ciparam_config' parent='configuration'>
+	<icone>ciparam-icone.png</icone>
+		<titre>Configurer les squelettes</titre>
+		<url>ciparam_config</url>
+	</bouton>
+	<bouton id='ciparam_config3' parent='bando_configuration'>
+		<titre>ciparam:titre</titre>
+		<icone>images/ciparam.png</icone>
+		<url>ciparam_config</url>
+	</bouton>
+
+	<necessite id="SPIP" version='[2.0.9;]' />
+	
+</plugin>

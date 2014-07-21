@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<item><nom>_portail_droite</nom><description>Page d'accueil : raccourci dans la colonne de droite</description></item>
+<item><nom>_portail_gauche</nom><description>Page d'accueil : raccourci dans la colonne de gauche</description></item>
+<item><nom>_portail_syndication</nom><description>Page d'accueil : syndication des actualités dans la colonne du milieu</description></item>
+<item><nom>_souspageaccueil_droite</nom><description>Sous page d'accueil : raccourci dans la colonne de droite</description></item>
+<item><nom>_souspageaccueil_gauche</nom><description>Sous page d'accueil : raccourci dans la colonne de gauche</description></item>
+<item><nom>_souspageaccueil_syndication</nom><description>Sous page d'accueil : syndication des actualités (au milieu)</description></item>

@@ -1,0 +1,167 @@
+#CACHE{0}[(#RECHERCHE|cisquel_redirige{#ENV**})]
+#CIPARAM_DOCTYPE
+<head>
+<title><:cisquel:eq_recherche_resultats:>[ - (#NOM_SITE_SPIP|textebrut)]</title>
+<meta name="robots" content="noindex, nofollow" />
+<link href="#CHEMIN{_css/styleexceptions.css}" rel="stylesheet" type="text/css" />
+<INCLURE{fond=noisettes/head}{lang}>
+
+[<link href="(#CHEMIN{_css/style_rechercheoptions.css})" rel="stylesheet" type="text/css" />]
+
+[<script type="text/javascript" src="(#CHEMIN{prive/javascript/jquery.js})"></script>]
+[<script type="text/javascript" src="(#CHEMIN{_js/ui.core.js})"></script>]
+[<script type="text/javascript" src="(#CHEMIN{_js/ui.datepicker.js})"></script>]
+[<script type="text/javascript" src="(#CHEMIN{_js/ui.datepicker-[(#LANG)].js})"></script>]
+
+<script type="text/javascript">
+$(function() {
+	$("#datedebut").datepicker({ showOn: 'button', buttonImage: '#CHEMIN{_images/icones/cal-today.gif}', buttonImageOnly: true, dateFormat: 'dd/mm/yy' });
+	$("#datefin").datepicker({ showOn: 'button', buttonImage: '#CHEMIN{_images/icones/cal-today.gif}', buttonImageOnly: true, dateFormat: 'dd/mm/yy' });
+	$("#datedebutg").datepicker({ showOn: 'button', buttonImage: '#CHEMIN{_images/icones/cal-today.gif}', buttonImageOnly: true, dateFormat: 'dd/mm/yy' });
+	$("#datefing").datepicker({ showOn: 'button', buttonImage: '#CHEMIN{_images/icones/cal-today.gif}', buttonImageOnly: true, dateFormat: 'dd/mm/yy' });
+});
+
+function ci_show_hide(object) {
+	if (document.getElementById) {
+		if (document.getElementById(object).style.display == "none")
+			document.getElementById(object).style.display = "block";
+		else
+			document.getElementById(object).style.display = "none";
+	}
+}
+</script>
+
+</head>
+<body>
+<INCLURE{fond=noisettes/haut}{lang}>
+<div id="pageRecherche">
+<div id="milieu">
+	<div id="ext-main">
+		<div class="main">
+			<div id="gauche">
+				[(#VAL{cisqueloptionsrecherchecolgauche}|cisquel_config|=={oui}|oui)
+				[(#RECHERCHE|cisquel_recherche_autorise|=={oui}|oui)
+				<INCLURE{fond=noisettes/recherche_options_g,env}>
+				]
+				]
+			</div>
+
+  			<div id="contenu">
+			<div class="main-content">
+				<h1 class="invisible"><:cisquel:eq_contenu:></h1>
+				<div id="boxnavpath"><div id="navpath">
+					<a href="[(#URL_PAGE{sommaire})]"><:cisquel:eq_accueil:></a>&gt; <:cisquel:eq_recherche_resultats:>
+				</div></div>
+				<div id="boxcentrale"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale">
+				
+[(#SET{cirecherche,[(#RECHERCHE|cisquel_filtrer_recherche)]})]
+				<div class="rub">
+				<h2><:cisquel:eq_recherche_resultats:></h2>
+					<div class="texte">
+					<form action="[(#URL_PAGE{recherche})]" method="get">
+						<div id="recherche_h">
+							<input type="hidden" name="page" value="recherche" />
+							[<input type="hidden" name="lang" value="(#LANG)" />
+							<input type="hidden" name="forcer_lang" value="true" />]
+							<label for="rechercheh" accesskey="S" class="invisible"><:cisquel:recherche:></label>
+							<input type="text" class="recherche" name="recherche" id="rechercheh" value="[(#GET{cirecherche}|entites_html|interdire_scripts)]" />
+							<input type="submit" class="submit" value="<:cisquel:rechercher:>" title="<:cisquel:rechercher:>" />
+						</div>
+						[(#VAL{cisqueloptionsrecherchecolcentrale}|cisquel_config|=={oui}|oui)
+						<INCLURE{fond=noisettes/recherche_options_h,env}>
+						]
+					</form>
+					</div>
+				</div>
+				<div class="clearer">&nbsp;</div>
+				
+				<div id="results">
+
+				[(#RECHERCHE|cisquel_recherche_autorise|=={oui}|non)
+					<div class="recherche_non_autorise"><:cisquel:recherche_non_autorise:></div>
+				]
+				
+				
+				[(#RECHERCHE|cisquel_recherche_autorise|=={oui}|oui)
+
+					[(#SET{cigetmnochoix,[(#RECHERCHE|cisquel_getmnochoix{#ENV**})]})]
+				
+					[(#GET{cigetmnochoix}|=={toussites}|oui)
+						[<h2><:cisquel:articles_et_doc:></h2>(#RECHERCHE|cisquel_getmno{#ENV**})]
+					]
+
+					[(#GET{cigetmnochoix}|=={toussites}|non)
+					
+	  					#SET{cigetonglet,#RECHERCHE|cisquel_getonglet{#ENV**}}
+
+						#SET{citypedoc,''}
+						#SET{tableautypedoc, #ARRAY{0,pdf,1,odt}} 
+						[(#ENV{typedoc}|in_array{#GET{tableautypedoc}}|oui)
+							#SET{citypedoc,#ENV{typedoc}}
+						]
+
+						[(#GET{citypedoc}|non)
+						<INCLURE{fond=noisettes/recherche_onglets,env}>
+						]
+						[(#GET{citypedoc}|oui)
+						<INCLURE{fond=noisettes/recherche_onglets,env,extension=#GET{citypedoc}}>
+						]
+						
+						[(#GET{cigetonglet}|non)
+							<INCLURE{fond=contenu/rechercheart,env}>
+						]
+						[(#GET{cigetonglet}|=={article}|oui)
+							<INCLURE{fond=contenu/rechercheart,env}>
+						]
+						[(#GET{cigetonglet}|=={rubrique}|oui)
+							<INCLURE{fond=contenu/rechercherub,env}>
+						]
+						[(#GET{cigetonglet}|=={document}|oui)
+	  						[(#GET{cigetmnochoix}|=={doc}|oui)
+	  							[<h2><:onglet_documents:></h2>(#RECHERCHE|cisquel_getmno{#ENV**})]
+	  						]
+	  						[(#GET{cigetmnochoix}|=={doc}|non)
+	  							[(#GET{citypedoc}|oui)
+	  							<INCLURE{fond=contenu/recherchetypedoc,env}>
+	  							]
+	  							[(#GET{citypedoc}|non)
+	  							<INCLURE{fond=contenu/recherchedoc,env}>
+	  							]
+	  						]
+						]
+						[(#GET{cigetonglet}|=={forum}|oui)
+							<INCLURE{fond=contenu/rechercheforum,env}>
+						]
+						
+					]
+				]
+				
+				</div>
+
+				  </div></div></div></div></div></div>
+			</div>
+			</div>
+		<div class="clearer"></div>
+				
+		</div>
+	</div>
+</div>
+</div>
+#SET{cixiti,''}
+
+#SET{cipagination,''}
+[(#ENV{debut_articles}|intval|>{0}|oui)#SET{cipagination,'oui'}]
+[(#ENV{debut_messages}|intval|>{0}|oui)#SET{cipagination,'oui'}]
+[(#ENV{debut_doc}|intval|>{0}|oui)#SET{cipagination,'oui'}]
+[(#GET{cigetmnochoix}|oui)[(#ENV{np}|intval|>{0}|oui)#SET{cipagination,'oui'}]]
+[(#GET{cipagination}|oui)#SET{cixiti,#GET{cixiti}-pagination}]
+
+[(#GET{cigetmnochoix}|oui)#SET{cixiti,#GET{cixiti}-#GET{cigetmnochoix}}]
+[(#ENV{tri}|oui)#SET{cixiti,#GET{cixiti}-tri}]
+[(#ENV{age}|intval|>{0}|oui)#SET{cixiti,#GET{cixiti}-depuis}]
+[(#ENV{datedebut}|oui)[(#ENV{datefin}|oui)#SET{cixiti,#GET{cixiti}-periode}]]
+[(#ENV{typedoc}|oui)#SET{cixiti,#GET{cixiti}-formatdoc}]
+
+[(#CIPARAM_ABONNEMENT_XITI|oui)[(#CIPARAM_ABONNEMENT_XITI|match{_images/void.gif}|non)[(#INCLURE{fond=noisettes/compteur_recherche,cigetmnochoix=#GET{cixiti}})]]]
+
+<INCLURE{fond=noisettes/pied}{lang}><INCLURE{fond=noisettes/pied_connexion}{self=#SELF}{lang}>

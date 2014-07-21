@@ -1,0 +1,183 @@
+body {
+	font-family: Arial,Sans,sans-serif;
+	font-size: 11px;
+}		
+
+h1 {
+	font-size: 16px;
+	margin: 20px 0 0 0;
+}
+
+ul {
+	list-style-type: none;
+}
+
+li {
+	padding: 3px 0px;
+}
+
+a {
+	color: #85909A;
+	text-decoration: none;
+}
+
+
+div.info {
+	border: 1px solid #B1B1B1;
+	padding:5px;
+	margin:10px 0;
+	font-size: 12px;
+}
+
+.clearer {
+	line-height: 0em;
+	clear: both;
+}
+
+.folio {
+	margin: 10px 0px 0px 0px;
+	background: #eeeeee;
+	padding: 0.5em;
+	color: #484848;
+	height: 15px;
+	line-height: 0.7em;
+}
+
+.pagination {
+	color: #484848;
+	text-align:right;
+	font-size: 14px;
+	line-height: 14px;
+	padding:0px;
+}
+.pagination a {
+	color: #484848;
+	text-decoration: underline;
+}
+.pagination a:hover {
+	color: #484848;
+	text-decoration: none;
+}
+
+
+/* Tient compte de l'eventuel bloc de la previsu */
+.cadretitre{
+	margin: 35px 0 10px 0;
+}
+
+.cadretitreep{
+	margin: 15px 0 10px 0;
+}
+
+.titre {
+	font-size: 20px;
+	font-weight: bold;
+	color: #85909A;
+	padding-top: 12px;
+}
+
+.icone36 {
+    border: 0 none;
+    font-size: 11px;
+    margin: 0;
+    padding: 5px 0;
+    text-align: center;
+    text-decoration: none;
+    width: 72px;
+}
+.icone36 a, .icone36 a, a.icone36, a.icone36:hover {
+    text-decoration: none;
+}
+.icone36 a img, a.icone36 img {
+    background-color: #EEEEEE;
+    border: 2px solid #85909A;
+    display: inline;
+    margin: 0 auto;
+    padding: 4px;
+}
+.icone36 a:hover img, a.icone36:hover img {
+    background-color: #FFFFFF;
+    border: 2px solid #666666;
+}
+.icone36 span {
+    color: #85909A;
+    display: block;
+    font-weight: bold;
+    height: 1em;
+    margin: 2px auto;
+    width: 100%;
+}
+.icone36 a:hover span, a.icone36:hover span {
+    color: #000000;
+}
+
+/* -------------------------------
+* Onglets
+----------------------------------*/
+
+.onglets_lien {
+    border-bottom: 1px solid #85909A;
+    clear: left;
+    margin: 3em 0;
+    padding-left: 5px;
+}
+.onglets_lien ul {
+    list-style: none outside none;
+    margin-left: 1px;
+    padding: 0;
+}
+.onglets_lien ul li {
+    float: left;
+    margin: 0 0 -1px;
+    padding: 0;
+}
+.onglets_lien ul li a {
+    color: #484848;
+    font-size: 14px;    
+    background-color: #EEEEEE;
+    background-position: left center;
+    background-repeat: no-repeat;
+    border: 1px solid #85909A;
+    display: block;
+    float: left;
+    margin-left: 5px;
+    padding: 4px 7px;
+}
+.onglets_lien ul li a:hover {
+    background-color: #F8F7F3;
+}
+.onglets_lien ul li a:hover {
+    cursor: pointer;
+}
+.onglets_lien ul li .on {
+    border-bottom: 1px solid #F8F7F3;
+    font-weight: bold;
+    color: #555555;
+}
+
+/* Couleurs et design de la previsu */
+.spip-previsu { background-color: #111111; color: #eeeeee; font-size: 18px; position: absolute; padding-right: 5px; padding-top: 2px; padding-bottom: 5px;top: 0px; left: 0px;}
+.spip-previsu img {display:inline;}
+
+
+/* icones pour SPIP 3 
+---------------------------- */
+.icone a,.icone .submit{display:block;margin:0 auto;width:72px;padding:5px 0;border:0;cursor:hand;cursor:pointer}
+.icone a:hover{text-decoration:none}
+.icone a img,.icone .submit img{margin:0 auto;display:inline;padding:4px;background-color:#eee;border:2px solid #85909A;background-repeat:no-repeat;background-position:center center}
+.icone a:hover img,.icone .submit:hover img{background-color:#fff;border-color:#666}
+.icone a b,.box .icone a b,.icone .submit b,.box .icone .submit b{font-weight:700;color:#85909A;display:block;margin:2px auto;width:100%;font-size:12px;height:1em;line-height:1}
+.icone a:hover b,.icone .submit:hover b{color:#000}
+.icone.left{float:left}
+.icone.right{float:right}
+.icone.center a,.icone.center .submit{margin:0 auto}
+.icone.clearleft{clear:left}
+.icone.clearright{clear:right}
+.lte7 .icone.verticale.left,.lte7 .icone.verticale.right{width:72px}
+.icones_img .icone.verticale b{display:none}
+.icones_texte .icone img{display:none}
+.icone.verticale.historique-24{width:90px}
+.icone.verticale.suivi-forum-24{width:100px}
+.icone.verticale.edition_deja,.icone.verticale.edition_deja a,.icone.verticale.edition_deja a b{width:100px}
+.icone.verticale.edition_deja a b{height:4.6em}
+.cadre-icone{position:absolute;top:-16px;left:10px;z-index:1}

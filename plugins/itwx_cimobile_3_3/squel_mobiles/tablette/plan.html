@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+]<!--[if lt IE 7 ]> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html lang="#LANG"class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]--> 
+<head>
+<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+<title><:plan_site:> - [(#NOM_SITE_ITWX|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|attribut_html)" />]
+<INCLURE{fond=inc/inc-head}/>
+<meta name="robots" content="none" />
+</head>
+
+<body id="top">
+<div id="tab">
+
+ [(#REM) TOOL BARRE ]
+ <INCLURE{fond=inc/inc-navBar}>
+
+  <div id="main">
+
+  [(#REM) Hierarchie ]
+  <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <strong class="on"><:plan_site:></strong></div>
+  
+  <div id="conteneur"> 
+  
+  [(#REM) Contenu ]
+    <div class="contenu plan">
+	  
+	    [(#REM) Plan par rubrique ]
+	  	<div class="surlignable"> 
+        <h1><:plan_site:></h1>
+		</div>
+		
+        [(#REM) Contenu racine ] 
+        <BOUCLE_menu_rubrique_invisible(RUBRIQUES) {titre_mot = invisible} {doublons}></BOUCLE_menu_rubrique_invisible>
+		<BOUCLE_secteurs(RUBRIQUES) {racine} {par titre}>
+        <div class="group"><a href="#URL_RUBRIQUE">#TITRE</a></div>
+		
+        [(#REM) Contenu rubrique ]
+        <div class="listinc">
+		 <INCLURE{fond=inc/inc-plan-listart}{id_rubrique}{env}{ajax}{art=_rub#ID_RUBRIQUE}/>
+		 <INCLURE{fond=inc/inc-plan-listbre}{id_rubrique}{env}{ajax}{bre=_bre#ID_RUBRIQUE}/> 
+		 <INCLURE{fond=inc/inc-plan-listsite}{id_rubrique}{env}{ajax}{site=_site#ID_RUBRIQUE}/> 
+		</div>
+		
+        [(#REM) Sous-rubriques ]
+        <B_rubriques_plan>
+		 <BOUCLE_rubriques_plan(RUBRIQUES) {id_parent} {par titre}{doublons}>
+          <div class="grouplist"><a href="#URL_RUBRIQUE">[(#TITRE|couper{40})]</a></div>
+          <div class="listinc">
+		   <INCLURE{fond=inc/inc-plan-listart}{id_rubrique}{env}{ajax}{art=_rub#ID_RUBRIQUE}/> 
+		   <INCLURE{fond=inc/inc-plan-listbre}{id_rubrique}{env}{ajax}{bre=_bre#ID_RUBRIQUE}/> 
+		   <INCLURE{fond=inc/inc-plan-listsite}{id_rubrique}{env}{ajax}{site=_site#ID_RUBRIQUE}/> 
+		  </div>
+		  
+          <BOUCLE_sous_rubriques(RUBRIQUES) {id_parent} {par titre}{doublons}>
+          <div class="ssgrouplist"><a href="#URL_RUBRIQUE">#TITRE</a></div>
+          <div class="listinc">
+		   <INCLURE{fond=inc/inc-plan-listart}{id_rubrique}{env}{ajax}{art=_rub#ID_RUBRIQUE}/> 
+		   <INCLURE{fond=inc/inc-plan-listbre}{id_rubrique}{env}{ajax}{bre=_bre#ID_RUBRIQUE}/> 
+		   <INCLURE{fond=inc/inc-plan-listsite}{id_rubrique}{env}{ajax}{site=_site#ID_RUBRIQUE}/> 
+		  </div>
+		  
+          	<BOUCLE_sous_sous_rubriques(BOUCLE_sous_rubriques)></BOUCLE_sous_sous_rubriques>
+		  
+          </BOUCLE_sous_rubriques>
+		  
+         </BOUCLE_rubriques_plan>
+        </B_rubriques_plan>
+		
+        </BOUCLE_secteurs>
+		
+    </div><!--#contenu-->
+	
+  [(#REM) Navigation ]
+    <div id="navigation">
+      <div class="group bord" style="height:13px"></div>
+
+	  [(#REM) Infos ]
+      <div id="navigation-a">
+      [(#REM) Infos ]
+      <INCLURE{fond=inc/inc-infos_plan}/> 
+      </div>
+	  
+      [(#REM) Menu de Rubriques ] 
+      <div id="navigation-cs"> 
+		<BOUCLE_rubrique_invisible(RUBRIQUES) {titre_mot = invisible} {doublons}></BOUCLE_rubrique_invisible>
+		<B_rubriques>
+		  <div class="group"><:rubriques:></div>
+		  <div class="listmenu">
+            <ul class="corner">
+  		      <BOUCLE_rubriques(RUBRIQUES) {racine} {par num titre, titre}{doublons}>
+       		  <li><a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></li>
+	          </BOUCLE_rubriques>
+		    </ul>
+		  </div>
+		</B_rubriques>
+      </div><!--#navigation-cs-->
+
+    </div><!--#navigation-->
+	
+  </div><!--#conteneur-->
+  
+  [(#REM) Pied ]
+  <div id="pied"> 
+    <div class="group" style="height:13px;border-bottom: 1px solid #B9B9B9;"></div>
+	<div class="ticket">
+      <div class="ticketmenu"> 
+	    [(#CONFIG{itwx/classique}|?{' '})<a rel="start home" href="[(#URL_PAGE{plan}|parametre_url{'cimobile','web'})]"><:itwx:pageclassique:></a>]
+		[(#AUTORISER{ecrire})<a href="#EVAL{_DIR_RESTREINT_ABS}"><:espace_prive:></a>]
+		[(#SESSION{id_auteur}|?{' '})<a href="#URL_LOGOUT" rel="nofollow" style="background-image: none;text-align:center;padding: 10px 12px;"><:icone_deconnecter:></a>]
+      </div>
+    </div><!--#ticket-->
+	<INCLURE{fond=inc/inc-pied}/> 
+  </div><!--#pied-->
+  
+  </div><!--#main-->
+
+</div><!--#page-->
+</body>
+</html>

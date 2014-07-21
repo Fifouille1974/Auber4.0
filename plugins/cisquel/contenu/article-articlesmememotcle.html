@@ -1,0 +1,45 @@
+<BOUCLE_contenu(ARTICLES){id_article}>
+				<h2>[(#TITRE|supprimer_numero)]</h2>
+				<div class="dateart">[(#DATE|affdate{'Ymd'}|=={[(#DATE_MODIF|affdate{'Ymd'})]}|?{<:cisquel:eq_publie_le:> [(#DATE|affdate)] ,<:cisquel:eq_publie_le:> [(#DATE|affdate)] (<:cisquel:eq_modifie_le:> [(#DATE_MODIF|affdate)]) })]
+				</div>
+			      	[<div class="texte">(#TEXTE)</div>]
+				<B_documents>
+				<div class="listedoc">
+				<ul>
+				<BOUCLE_documents(DOCUMENTS){id_article}{par num titre}{mode=document}{doublons}>
+				<li><a href="#URL_DOCUMENT" onclick="xt_med('C','[(#ID_ARTICLE|ciparam_xtn2)]','[pj(#ID_ARTICLE)-][(#TITRE|supprimer_numero|ciparam_xtTraiter)]','T')" class="document" title="<:cisquel:eq_ouvre_document:> [(#TITRE|supprimer_numero)] <:cisquel:eq_dans_fenetre:>">[(#TITRE|supprimer_numero)]</a>&nbsp;([<:cisquel:eq_format:> (#EXTENSION)][ - (#TAILLE|taille_en_octets)][ - (#DATE|affdate{'d/m/Y'})])[<span class="docdesc">(#DESCRIPTIF)</span>][<span class="docdesc">(#TAILLE|cisquel_temps_telechargement)</span>]</li>
+				</BOUCLE_documents>
+				</ul>
+				</div>
+				</B_documents>
+
+				[<div class="notes">(#NOTES)</div>]
+				
+				<div class="listediv">
+				<B_multirubricage_mot>
+				<div class="liens">
+				<div class="titre"><:cisquel:eq_autres_rubriques_cet_article:>&nbsp;:</div>
+				<ul>
+				<BOUCLE_multirubricage_mot(MOTS){id_article}{type=_multirubricage}>
+				<BOUCLE_multirubricage_rubrique(RUBRIQUES){id_mot}>
+				<li><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></li>
+				</BOUCLE_multirubricage_rubrique>
+				</BOUCLE_multirubricage_mot>
+				</ul>
+				</div>
+				</B_multirubricage_mot>
+				<B_mot_article>
+				<div class="liens">
+				<div class="titre"><:cisquel:eq_voir_aussi:>&nbsp;:</div>
+				<ul>
+				<BOUCLE_mot_article(MOTS){id_article}{par titre}>
+				<BOUCLE_article_lie(ARTICLES){id_mot}{exclus}{par num titre}{inverse}>
+				<li><a href="#URL_ARTICLE" <BOUCLE_nouvelle_fenetre(ARTICLES){id_article}{raccourci=_nouvelle_fenetre}>class="spip_out"</BOUCLE_nouvelle_fenetre> >[(#TITRE|supprimer_numero)]</a></li>
+				</BOUCLE_article_lie>
+				</BOUCLE_mot_article>
+				</ul>
+				</div>
+				</B_mot_article>
+				</div>
+				
+</BOUCLE_contenu>

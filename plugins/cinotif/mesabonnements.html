@@ -1,0 +1,80 @@
+#CACHE{0}
+#CIPARAM_DOCTYPE
+<head>
+<title>[(#NOM_SITE_SPIP|textebrut)]</title>
+<link rel="schema.DC" href="http://purl.org/DC/elements/1.0/" />
+<meta name="DC.Title" content="#NOM_SITE_SPIP" />
+<meta name="DC.Creator" content="[(#NOM_SITE_SPIP)]" />
+<meta name="DC.Date" content="<BOUCLE_datesite(ARTICLES){par date}{inverse}{0,1}>[(#DATE|affdate{'Y-m-d'})]</BOUCLE_datesite>" />
+<meta name="DC.Subject" content="#CIPARAM_MOTCLE_ACCUEIL" />
+<meta name="DC.Format" content="text/html" />
+<meta name="DC.Language" content="#LANG" />
+<meta name="DC.Identifier" content="[(#URL_SITE_SPIP)]" />
+<meta name="keywords" content="#CIPARAM_MOTCLE_ACCUEIL" />
+<meta name="robots" content="noindex, nofollow" />
+<INCLURE{fond=noisettes/head}{lang}>
+</head>
+
+<body>
+<INCLURE{fond=noisettes/haut}{lang}>
+<div id="milieu">
+	<div id="ext-main">
+		<div class="main">
+			<div id="gauche">
+				<INCLURE{fond=noisettes/recherche_gauche}{lang}>
+	
+			    <INCLURE{fond=navigation/sommaire}{lang}>
+			</div>
+
+  			<div id="contenu">
+			<div class="main-content">
+				<h1 class="invisible"><:cisquel:eq_contenu:></h1>
+				<div id="boxnavpath"><div id="navpath">
+					<a href="[(#URL_PAGE{sommaire})]"><:cisquel:eq_accueil:></a>
+				</div></div>
+				<div id="boxcentrale"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale">
+
+				<div class="rub">	
+				<h2><:cinotif:tous_mes_abonnements:></h2>
+				<div class="retour"><a href="#ENV{retour}"><:cinotif:retour:></a></div>
+				</div>
+
+#SET{ci_id_abonne,0}
+<BOUCLE_auteur(CINOTIF_ABONNES){id_auteur=#SESSION{id_auteur}}>
+[(#SESSION{id_auteur}|>{0}|oui)
+#SET{ci_id_abonne,#ID_ABONNE}
+]
+</BOUCLE_auteur>
+
+<B_abo>
+<div id="tableau">
+<table class="forme" summary="les articles">
+<tbody>
+<tr style="background-color:#eee;">
+<th style="width: 35%;" class="forme" id="col1" scope="col"><:cinotif:titre_objet:></th>
+<th style="width: 45%;" class="forme" id="col2" scope="col"><:cinotif:abonnements:></th>
+<th style="width: 20%;" class="forme" id="col3" scope="col"><:cinotif:titre_statut:></th>
+</tr>
+<BOUCLE_abo(CINOTIF_ABONNEMENTS cinotif_evenements){id_abonne=#GET{ci_id_abonne}}{!par objet}{par id_objet}{tout}>
+<tr class="tr_liste" style="background-color:#fff;">
+<td  class="forme" headers="col1">[(#PLUGIN{cisquel}|oui)<a href="[(#URL_PAGE{abonnement-#OBJET}|parametre_url{id_#OBJET,#ID_OBJET})]" class="spip_in">][(#PLUGIN{cisquel}|non)<a href="[(#URL_PAGE{cinotif}|parametre_url{objet,#OBJET}|parametre_url{id_objet,#ID_OBJET})]">]#OBJET [(#ID_OBJET|?{#ID_OBJET,''})]</a></td>
+<td  class="forme" headers="col2">[(#VAL{cinotif:}|concat{#QUOI}|_T)]</td>
+<td  class="forme" headers="col3">[(#VAL{cinotif:}|concat{#STATUT}|_T)]</td>
+</tr>
+</BOUCLE_abo>
+</tbody>
+</table>
+</div>
+<div class="texte"><:cinotif:legende_publie:></div>
+</B_abo>								
+		    	<div class="o2paj"><a href="#entete" title="<:cisquel:eq_haut_page:>"><:cisquel:eq_haut_page:></a></div>
+				</div></div></div></div></div></div>
+			</div>
+			</div>
+			<div class='clearer'>&nbsp;</div>	
+		</div>
+		<div id="droite">
+		</div>
+	</div>
+</div>
+	<INCLURE{fond=noisettes/pied}{lang}><INCLURE{fond=noisettes/pied_connexion}{self=#SELF}{lang}>

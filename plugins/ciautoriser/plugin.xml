@@ -1,0 +1,22 @@
+<plugin>
+	<nom>ciautoriser : Pipeline pour autoriser</nom>
+	<auteur>&#169; C. Imberti</auteur>
+	<icon>pyramides-32.png</icon>
+	<licence>[Creative commons by-nc-sa->http://creativecommons.org/licenses/by-nc-sa/2.0/fr/]</licence>
+	<lien></lien>
+	<version>1.3</version>
+	<etat>stable</etat>
+    <slogan>Auteur : &#169; C. Imberti. Licence : Creative commons by-nc-sa.</slogan>
+    <description>
+    Auteur : &#169; C. Imberti. Licence : Creative commons by-nc-sa.<br />
+    Pipeline pour certaines fonctions de autoriser.
+    </description>
+	<prefix>ciautoriser</prefix>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>ciautoriser.php</inclure>
+	</pipeline>
+  
+	<necessite id="SPIP" version='[2.0.9;]' />
+
+</plugin>

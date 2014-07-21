@@ -1,0 +1,25 @@
+<paquet
+	prefix="cisquel"
+	categorie="squelette"
+	version="2.0.0"
+	etat="stable"
+	compatibilite="[3.0.0;]"
+	logo="prive/themes/spip/images/pyramides-32.png"
+	documentation="http://contrib.spip.net/cisquel-plugin-de-squelettes-sur-3-colonnes-pour-Giseh"	
+>	
+
+	<nom>cisquel : Squelettes de base avec 3 colonnes</nom>
+
+	<auteur>C. Imberti</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>	
+
+	<pipeline nom="formulaire_charger" inclure="cisquel_pipelines.php" />
+	<pipeline nom="formulaire_verifier" inclure="cisquel_pipelines.php" />
+	<pipeline nom="pre_edition" inclure="cisquel_pipelines.php" />
+	<pipeline nom="cisf_article_options" inclure="cisquel_pipelines.php" />
+
+	<utilise nom="medias" />
+	<necessite nom="ciparam" compatibilite="[2.0.0;]" />
+
+</paquet>

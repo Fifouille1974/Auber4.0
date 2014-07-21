@@ -1,0 +1,52 @@
+<BOUCLE_contenu(RUBRIQUES){id_rubrique}>
+				<div class="rub">
+				<h2>[(#TITRE|supprimer_numero)]</h2>
+				<div class="dateart">[<:cisquel:eq_publie_le:> (#DATE|affdate)]
+				</div>
+			      	[<div class="texte">(#TEXTE)</div>]
+				[<div class="texte">(#NOTES)</div>]
+				</div>
+			      	
+				<BOUCLE_sous_rubriques(RUBRIQUES){id_parent}{par num titre}>
+				<div class="listerub">
+					[<img src="(#LOGO_RUBRIQUE||image_reduire{44,0}|extraire_attribut{'src'})" alt=""  class="rightill" />]
+				      	<a href="#URL_RUBRIQUE" class="titresousrub">[(#TITRE|supprimer_numero)]</a>
+				      	[<div class="textesousrub">(#DESCRIPTIF)</div>]
+					<B_sous_sous_rubriques>
+					<div class="liens">
+					<ul>
+					<BOUCLE_sous_sous_rubriques(RUBRIQUES){id_parent}{par num titre}>
+					<li><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></li>
+					</BOUCLE_sous_sous_rubriques>
+					</ul>
+				      	</div>
+					</B_sous_sous_rubriques>
+				<div class="clearer">&nbsp;</div>
+				</div>
+				</BOUCLE_sous_rubriques>
+
+				#SET{ci_mots, #ARRAY{}}
+				<BOUCLE_mot_sous_rubrique(MOTS){id_rubrique}{type=_multirubricage}{par titre}>
+				[(#SET{ci_mots, #GET{ci_mots}|push{#ID_MOT}})]
+				</BOUCLE_mot_sous_rubrique>
+				
+				#SET{ci_id_rubrique_multi, #ID_RUBRIQUE}
+			    <BOUCLE_article_sous_rubrique(ARTICLES){id_mot IN #GET{ci_mots}}{doublons}{par #CITRI}{!par #CITRIINVERSE}{par num #CITRINUM}>
+				<div class="listeart">
+					[<img src="(#LOGO_ARTICLE||image_reduire{44,0}|extraire_attribut{'src'})" alt=""  class="rightill" />]
+					<a href="[(#URL_ARTICLE|parametre_url{id_rubrique,#GET{ci_id_rubrique_multi}})]" <BOUCLE_nf1(ARTICLES){id_article}{raccourci=_nouvelle_fenetre}>class="spip_out titreartliste"</BOUCLE_nf1></B_nf1>class="titreartliste"<//B_nf1> >[(#TITRE|supprimer_numero)]</a>
+			      	[<div class="texte">(#DESCRIPTIF)</div>]
+				 <div class="clearer">&nbsp;</div>    	
+				</div>
+			    </BOUCLE_article_sous_rubrique>
+				
+				<BOUCLE_articles(ARTICLES){id_rubrique}{par #CITRI}{!par #CITRIINVERSE}{par num #CITRINUM}{doublons}>
+				<div class="listeart">
+					[<img src="(#LOGO_ARTICLE||image_reduire{44,0}|extraire_attribut{'src'})" alt=""  class="rightill" />]
+				      	<a href="#URL_ARTICLE" <BOUCLE_nouvelle_fenetre(ARTICLES){id_article}{raccourci=_nouvelle_fenetre}>class="spip_out titreartliste"</BOUCLE_nouvelle_fenetre></B_nouvelle_fenetre>class="titreartliste"<//B_nouvelle_fenetre> >[(#TITRE|supprimer_numero)]</a>
+				      	[<div class="texte">(#DESCRIPTIF)</div>]
+				 <div class="clearer">&nbsp;</div>    	
+				</div>
+				</BOUCLE_articles>
+
+</BOUCLE_contenu>

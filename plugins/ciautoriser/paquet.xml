@@ -1,0 +1,19 @@
+<paquet
+	prefix="ciautoriser"
+	categorie="auteur"
+	version="1.3.0"
+	etat="stable"
+	compatibilite="[3.0.0;]"
+	logo="prive/themes/spip/images/pyramides-32.png"
+	documentation="http://contrib.spip.net/ciautoriser-plugin-Pipeline-pour-autoriser"
+>	
+
+	<nom>ciautoriser : Pipeline pour autoriser</nom>
+
+	<auteur>C. Imberti</auteur>
+
+	<licence lien="http://creativecommons.org/licenses/by-nc-sa/2.0/fr/">Creative commons by-nc-sa</licence>	
+	
+	<pipeline nom="autoriser" inclure="ciautoriser.php" />
+
+</paquet>

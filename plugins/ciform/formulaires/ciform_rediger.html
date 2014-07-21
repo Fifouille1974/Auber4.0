@@ -1,0 +1,81 @@
+#CACHE{0}
+<div class="formulaire_spip">
+[<p class='formulaire_ok'>(#ENV*{message_ok})</p>]
+[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+
+[(#ENV{rediger_actif}|=={oui}|oui)
+
+[(#EDITABLE|oui)
+
+	<form action='#ENV{action}' method='post'>
+
+		<fieldset>
+			<ul>
+				<li class='saisie_session_nom'>
+					<label for="session_nom"><:ciform:ci_votre_nom:> <span class="obligatoire"><:ciform:obligatoire:></span></label>
+					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{session_nom})</span>]
+					<input type="text" class="text" name="session_nom" id="session_nom" value="[(#SESSION**{nom}|entites_html)]" size="40" [(#SESSION{nom}|oui)disabled="disabled"] />
+				</li>
+				<li class='saisie_session_email'>
+					<label for="session_email"><:ciform:email:> <span class="obligatoire"><:ciform:obligatoire:></span></label>
+					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{session_email})</span>]
+					<input type="text" class="text" name="session_email" id="session_email" value="[(#SESSION**{email}|entites_html)]" size="40" [(#SESSION{email}|oui)disabled="disabled"] />
+				</li>
+       			
+				<li class="saisie_titre">
+					<label for="rubrique"><:rubrique:> :</label>
+					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{rubrique})</span>]
+	       			<select name="rubrique" id="rubrique">
+		 			#ENV*{_ciform_rediger_rubrique}
+	       			</select>
+				</li>
+				
+				<li class="saisie_titre">
+					<label for="titre2"><:info_titre:> <span class="obligatoire"><:ciform:obligatoire:></span></label>
+					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{titre})</span>]
+					<input type='text' name='titre' id='titre2' class='text' value='[(#ENV{titre}|htmlentities)]' />
+				</li>
+				<li class="saisie_texte">
+					<label for="texte"><:info_texte:></label>
+					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{texte})</span>]
+					<textarea name='texte' id="texte" rows="15" cols="80">[(#ENV{texte}|htmlentities)]</textarea>
+				</li>
+				<li class="saisie_texte">
+					<label for="descriptif"><:ciform:resume:></label>
+					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{descriptif})</span>]
+					<textarea name='descriptif' id="descriptif" rows="5" cols="80">[(#ENV{descriptif}|htmlentities)]</textarea>
+				</li>
+				<li style="display: none;">
+					<label for="nom_site"><:antispam_champ_vide:></label>
+					<input type="text" class="text" name="nom_site" id="nom_site" value="" size="40" />
+				</li>
+				<li style="display: none;">
+					<label for="url_site"><:antispam_champ_vide:></label>
+					<input type="text" class="text" name="url_site" id="url_site" value="" size="40" />
+				</li>
+			</ul>
+		</fieldset>
+
+		
+		[(#REM) Piege a robots spammeurs ]
+		<p style="display: none;">
+			<label for="nobot"><:antispam_champ_vide:></label>
+			<input type="text" class="text" name="nobot" id="nobot" value="#ENV{nobot}" size="10" />
+		</p>
+		
+		#ACTION_FORMULAIRE{#ENV{action}}
+		
+		<p class="boutons"><input type="submit" class="submit" value="<:ciform:envoyer:>" title="<:ciform:envoyer:>" /></p>
+	</form>
+]
+]
+[(#ENV{rediger_actif}|!={oui}|oui)
+	[(#PLUGIN{ciparam}|oui)
+		<div><:ciform:rediger_attention_pas_raccourci:></div>
+	]
+	[(#PLUGIN{ciparam}|non)
+		<div><:ciform:rediger_attention_pas_motcle:></div>
+	]
+	
+]
+</div>

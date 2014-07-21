@@ -1,0 +1,13 @@
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+[(#SPIP_VERSION|>={3}|oui)
+	[(#URL_ECRIRE{ciag_groupes_auteurs}|ciag_icone_verticale{<:icone_retour:>,rubrique,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+]
+[(#SPIP_VERSION|>={3}|non)
+	#ENV**{icone_retour}
+]
+<:ciag:titre_groupe_auteurs:>
+[<h1>(#ENV{titre})</h1>]
+</div>
+#FORMULAIRE_EDITER_CIAG_GROUPE_AUTEURS{#ENV{new},#ENV{redirect},#ENV{config_fonc}}
+</div>

@@ -1,0 +1,12 @@
+<div id="pied">
+<h1 class="invisible"><:cisquel:eq_pied_page:></h1>
+<div id="outils">
+[(#ENV{datesite}|=={oui}|oui)
+<div class="datesite">
+	<:cisquel:eq_site_maj_le:> [(#VAL{d/m/Y}|date{#CONFIG{derniere_modif_article}}|affdate)]
+</div>
+]
+<a href="[(#URL_PAGE{plan}|parametre_url{lang,#LANG})]"><:plan_site:></a>
+<BOUCLE_pied_article(ARTICLES){raccourci=_pied}{par num titre}{lang_select=non}>
+         | <a href="[(#URL_ARTICLE|parametre_url{lang,#ENV{lang}}|parametre_url{forcer_lang,true})]">[(#TITRE|supprimer_numero)]</a>
+</BOUCLE_pied_article>

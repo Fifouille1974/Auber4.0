@@ -1,0 +1,15 @@
+<BOUCLE_mot_invisible(MOTS) {titre=invisible} {doublons}></BOUCLE_mot_invisible>
+  
+<B_mots>
+<a id='pagination_mots'></a>
+<div class="group"><:mots_clefs:></div>
+	<BOUCLE_mots(MOTS) {id_rubrique} {par titre} {pagination 3}{doublons}>            
+	<div class="listmenu">                   
+	<ul class="docs">        
+        <li><a href="#URL_MOT" rel="tag">#TITRE</a></li>
+	</ul>
+	</div>
+	</BOUCLE_mots>
+[<div class="pagination">(#PAGINATION)</div>]
+<br /><br />
+</B_mots>

@@ -1,0 +1,79 @@
+[(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]
+#CIPARAM_DOCTYPE
+<head>
+<BOUCLE_contenu(ARTICLES){id_article}>
+<title>[(#TITRE|supprimer_numero)][ - (#NOM_SITE_SPIP|textebrut)]</title>
+<link rel="schema.DC" href="http://purl.org/DC/elements/1.0/" />
+<meta name="DC.Title" content="[(#TITRE|supprimer_numero)]" />
+<meta name="DC.Creator" content="[(#NOM_SITE_SPIP)]" />
+<meta name="DC.Date" content="[(#DATE|affdate{'Y-m-d'})]" />
+<meta name="DC.Subject" content="<BOUCLE_motcle2(MOTS){id_article}{type!==Type de document}>#TITRE, </BOUCLE_motcle2>" />
+<meta name="DC.Format" content="text/html" />
+<meta name="DC.Language" content="#LANG" />
+<meta name="DC.Identifier" content="[(#URL_SITE_SPIP)/][(#URL_ARTICLE)]" />
+<meta name="DC.Type" content="<BOUCLE_typedoc(MOTS){id_article}{type==Type de document}>#TITRE, </BOUCLE_typedoc>" />
+<meta name="keywords" content="<BOUCLE_motcle(MOTS){id_article}{type!==Type de document}>#TITRE, </BOUCLE_motcle>" />
+<link href="#CHEMIN{_css/styleexceptions.css}" rel="stylesheet" type="text/css" />
+<INCLURE{fond=noisettes/headsimple}{lang}>
+
+#SET{ci_reagir,''}
+<BOUCLE_reagir(ARTICLES){id_article}{raccourci=_reagir}>
+#SET{ci_reagir,'oui'}
+<link rel="alternate" type="application/rss+xml" title="<:cisquel:eq_rss_forum:> : [(#TITRE|supprimer_numero)]" href="[(#URL_PAGE{backend-forum-article}|parametre_url{id_article,#ID_ARTICLE})]" />
+</BOUCLE_reagir>
+
+<style type="text/css">
+<!-- 
+body {background: #FFFFFF;}
+-->
+</style>
+</head>
+
+<body>
+<div id="pageAfficheArticle">
+<div id="entete">
+<div id="milieu">
+	<div id="ext-main">
+		<div class="main">
+
+  			<div id="contenu">
+			<div class="main-content">
+				<h1 class="invisible"><:cisquel:eq_contenu:></h1>
+      	[<div class="texte">(#TEXTE)</div>]
+				<B_documents>
+				<div class="listedoc">
+				<ul>
+				<BOUCLE_documents(DOCUMENTS){id_article}{par num titre}{mode=document}{doublons}>
+				<li><a href="#URL_DOCUMENT" onclick="xt_med('C','[(#ID_ARTICLE|ciparam_xtn2)]','[pj(#ID_ARTICLE)-][(#TITRE|supprimer_numero|ciparam_xtTraiter)]','T')" class="document" title="<:cisquel:eq_ouvre_document:> [(#TITRE|supprimer_numero)] <:cisquel:eq_dans_fenetre:>">[(#TITRE|supprimer_numero)]</a>&nbsp;([<:cisquel:eq_format:> (#EXTENSION)][ - (#TAILLE|taille_en_octets)][ - (#DATE|affdate{'d/m/Y'})])[<span class="docdesc">(#DESCRIPTIF)</span>][<span class="docdesc">(#TAILLE|cisquel_temps_telechargement)</span>]</li>
+				</BOUCLE_documents>
+				</ul>
+				</div>
+				</B_documents>
+				[<div class="notes">(#NOTES)</div>]
+				
+				[(#GET{ci_reagir}|oui)
+				[(#INCLURE{fond=noisettes/commentaire,id_article,lang})]
+				]
+				
+			</div>
+			</div>
+			<div class='clearer'>&nbsp;</div>	
+		</div>
+	</div>
+</div>
+<div id="pied">
+<h1 class="invisible"><:cisquel:eq_pied_page:></h1>
+[(#CIPARAM_ABONNEMENT_XITI|oui)[(#CIPARAM_ABONNEMENT_XITI|match{_images/void.gif}|non)[(#INCLURE{fond=noisettes/compteur_article,id_article})]]]
+
+[<div id="copyright">&copy;&nbsp;(#NOM_SITE_SPIP)</div>]
+</div>
+
+
+</div>
+</body>
+</html>
+
+</BOUCLE_contenu>
+</B_contenu>
+<INCLURE{fond=altern}>
+<//B_contenu>

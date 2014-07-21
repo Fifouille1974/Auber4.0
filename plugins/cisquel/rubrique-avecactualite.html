@@ -1,0 +1,129 @@
+#CIPARAM_DOCTYPE
+<head>
+<BOUCLE_contenu(RUBRIQUES){id_rubrique}>
+<title>[(#TITRE|supprimer_numero)][ - (#NOM_SITE_SPIP|textebrut)]</title>
+<link rel="schema.DC" href="http://purl.org/DC/elements/1.0/" />
+<meta name="DC.Title" content="[(#TITRE|supprimer_numero)]" />
+<meta name="DC.Creator" content="[(#NOM_SITE_SPIP)]" />
+<meta name="DC.Date" content="<BOUCLE_datesite(ARTICLES){par date}{inverse}{0,1}>[(#DATE|affdate{'Y-m-d'})]</BOUCLE_datesite>" />
+<meta name="DC.Subject" content="<BOUCLE_motcle2(MOTS){id_rubrique}{type!==Type de document}>#TITRE, </BOUCLE_motcle2>" />
+<meta name="DC.Format" content="text/html" />
+<meta name="DC.Language" content="#LANG" />
+<meta name="DC.Identifier" content="[(#URL_SITE_SPIP)/][(#URL_RUBRIQUE)]" />
+<meta name="DC.Type" content="<BOUCLE_typedoc(MOTS){id_rubrique}{type==Type de document}>#TITRE, </BOUCLE_typedoc>" />
+<meta name="keywords" content="<BOUCLE_motcle(MOTS){id_rubrique}{type!==Type de document}>#TITRE, </BOUCLE_motcle>" />
+ 
+<link rel="alternate" type="application/rss+xml" title="#NOM_SITE_SPIP - <:cisquel:eq_actu:> - <:rubrique:> : [(#TITRE|supprimer_numero)]" href="[(#URL_PAGE{backend-rubactu}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" />
+<INCLURE{fond=noisettes/head}{lang}>
+</head>
+
+<body>
+<INCLURE{fond=noisettes/haut}{lang}>
+<div id="milieu">
+	<div id="ext-main">
+		 
+		<div class="main">
+			<div id="gauche">
+				<INCLURE{fond=noisettes/recherche_gauche}{lang}>
+	
+			    [(#INCLURE{fond=navigation/rubrique,id_rubrique,lang})]
+			</div>
+
+  			<div id="contenu">
+			<div class="main-content">
+				<h1 class="invisible"><:cisquel:eq_contenu:></h1>
+				<div id="boxnavpath"><div id="navpath">
+					<a href="[(#URL_PAGE{sommaire})]"><:cisquel:eq_accueil:></a>
+					<BOUCLE_chem_nav(HIERARCHIE){id_rubrique}>
+					&gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a>
+					</BOUCLE_chem_nav>
+					&gt; [(#TITRE|supprimer_numero)]
+				</div></div>
+				<div id="boxcentrale"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale">
+				<div class="rub">
+				<h2>[(#TITRE|supprimer_numero)]</h2>
+				<div class="dateart">[<:cisquel:eq_publie_le:> (#DATE|affdate)]
+				</div>
+			      	[<div class="texte">(#TEXTE)</div>]
+				[<div class="texte">(#NOTES)</div>]
+				</div>
+			      	
+				<B_actu>
+				<div class="actuliterub">
+				<div class="titreacturub"><:cisquel:eq_actu:></div>
+				<div class="listeactu">
+				<BOUCLE_actu(ARTICLES){branche}{raccourci=_rubrique_actu}{par date}{inverse}{0,5}{doublons}>
+				<div class="actu">
+					[<img src="(#LOGO_ARTICLE||image_reduire{44,0}|extraire_attribut{'src'})" alt=""  class="leftill" />]
+					<div class="titreactu"><a href="#URL_ARTICLE" class="lien">[(#TITRE|supprimer_numero)]</a></div> 
+					<div class="texte">#DESCRIPTIF<span class="dateactu"> <:cisquel:eq_publie_le:>&nbsp;[(#DATE|nom_jour)]&nbsp;[(#DATE|jour)]&nbsp;[(#DATE|nom_mois)]&nbsp;[(#DATE|annee)]</span></div>
+				</div>
+				</BOUCLE_actu>
+				</div>
+				<div class="tout"><a href="[(#URL_PAGE{archive_article_rubrique}|parametre_url{id_rubrique,#ID_RUBRIQUE})]"><:cisquel:eq_toute_actu:></a></div>
+				</div>
+				</B_actu>
+
+				<BOUCLE_sous_rubriques(RUBRIQUES){id_parent}{par num titre}>
+				<div class="listerub">
+					[<img src="(#LOGO_RUBRIQUE||image_reduire{44,0}|extraire_attribut{'src'})" alt=""  class="rightill" />]
+				      	<a href="#URL_RUBRIQUE" class="titresousrub">[(#TITRE|supprimer_numero)]</a>
+				      	[<div class="textesousrub">(#DESCRIPTIF)</div>]
+					<B_sous_sous_rubriques>
+					<div class="liens">
+					<ul>
+					<BOUCLE_sous_sous_rubriques(RUBRIQUES){id_parent}{par num titre}>
+					<li><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></li>
+					</BOUCLE_sous_sous_rubriques>
+					</ul>
+				      	</div>
+					</B_sous_sous_rubriques>
+					<div class="clearer">&nbsp;</div>
+				</div>
+				</BOUCLE_sous_rubriques>
+
+				#SET{ci_mots, #ARRAY{}}
+				<BOUCLE_mot_sous_rubrique(MOTS){id_rubrique}{type=_multirubricage}{par titre}>
+				[(#SET{ci_mots, #GET{ci_mots}|push{#ID_MOT}})]
+				</BOUCLE_mot_sous_rubrique>
+				
+				#SET{ci_id_rubrique_multi, #ID_RUBRIQUE}
+			    <BOUCLE_article_sous_rubrique(ARTICLES){id_mot IN #GET{ci_mots}}{doublons}{par #CITRI}{!par #CITRIINVERSE}{par num #CITRINUM}>
+				<div class="listeart">
+					[<img src="(#LOGO_ARTICLE||image_reduire{44,0}|extraire_attribut{'src'})" alt=""  class="rightill" />]
+				      	<a href="[(#URL_ARTICLE|parametre_url{id_rubrique,#GET{ci_id_rubrique_multi}})]" class="titreartliste">[(#TITRE|supprimer_numero)]</a>
+				      	[<div class="texte">(#DESCRIPTIF)</div>]
+				 <div class="clearer">&nbsp;</div>    	
+				</div>
+			    </BOUCLE_article_sous_rubrique>
+				
+				<BOUCLE_articles(ARTICLES){id_rubrique}{doublons}{par #CITRI}{!par #CITRIINVERSE}{par num #CITRINUM}>
+				<div class="listeart">
+					[<img src="(#LOGO_ARTICLE||image_reduire{44,0}|extraire_attribut{'src'})" alt=""  class="rightill" />]
+				      	<a href="#URL_ARTICLE" <BOUCLE_nouvelle_fenetre(ARTICLES){id_article}{raccourci=_nouvelle_fenetre}>class="spip_out titreartliste"</BOUCLE_nouvelle_fenetre></B_nouvelle_fenetre>class="titreartliste"<//B_nouvelle_fenetre> >[(#TITRE|supprimer_numero)]</a>
+				      	[<div class="texte">(#DESCRIPTIF)</div>]
+				 <div class="clearer">&nbsp;</div>    	
+				</div>
+				</BOUCLE_articles>
+				
+			    	<div class="o2paj"><a href="#entete" title="<:cisquel:eq_haut_page:>"><:cisquel:eq_haut_page:></a></div>
+				</div></div></div></div></div></div>
+			</div>
+			</div>
+			<div class='clearer'>&nbsp;</div>	
+		</div>
+		<div id="droite">
+		[(#ID_RUBRIQUE|cisquel_logo_ari)]
+		[(#INCLURE{fond=extra/rubrique,id_rubrique,lang})]
+		</div>
+		 
+	</div>
+</div>
+[(#CIPARAM_ABONNEMENT_XITI|oui)[(#CIPARAM_ABONNEMENT_XITI|match{_images/void.gif}|non)[(#INCLURE{fond=noisettes/compteur_rubrique,id_rubrique})]]]
+
+	<INCLURE{fond=noisettes/pied}{lang}><INCLURE{fond=noisettes/pied_connexion}{self=#SELF}{lang}>
+
+</BOUCLE_contenu>
+</B_contenu>
+<INCLURE{fond=altern}>
+<//B_contenu>

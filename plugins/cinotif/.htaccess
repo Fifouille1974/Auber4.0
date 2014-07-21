@@ -1,0 +1,7 @@
+<Files *.html>
+deny from all
+</Files>
+
+<Files *.xml>
+deny from all
+</Files>

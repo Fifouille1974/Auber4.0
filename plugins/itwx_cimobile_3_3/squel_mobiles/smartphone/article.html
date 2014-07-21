@@ -1,0 +1,109 @@
+<BOUCLE_principale_article(ARTICLES) {id_article}>
+<!DOCTYPE html>
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+]<!--[if lt IE 7 ]> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html lang="#LANG"class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]--> 
+<head>
+<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+<title>[(#TITRE|textebrut) - ][(#NOM_SITE_ITWX|textebrut)]</title>
+[<meta name="description" content="(#INTRODUCTION{150}|attribut_html)" />]
+<INCLURE{fond=inc/inc-head}>
+</head>
+
+<body id="top">
+<div id="smart">
+
+  [(#REM) TOOL BARRE ]
+  <INCLURE{fond=inc/inc-navBar}/> 
+  
+  <div id="main">
+  
+  <INCLURE{fond=inc/ajax/formulaire_recherche}{env}{ajax}>
+
+  [(#REM) Contenu principal : contenu de l'article ]
+  <div class="contenu">
+  
+    <div class="cartouche">
+	 [(#LOGO_ARTICLE|image_reduire{120,100})]
+      <div class="surlignable"> 
+	   [<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]				
+       [<h1>(#TITRE)</h1>]				
+       [<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>]
+       <p><small><abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour) ][(#DATE|affdate)]</abbr>, <:par_auteur:> #MODELE{lesauteurs}[ (<:texte_date_publication_anterieure:> (#DATE_REDAC|affdate)).]</small></p>
+      </div>
+	    #MODELE{itwx_article_traductions} 
+
+		[(#CONFIG{itwx/itwxsocialtags}|?{' '})<div id="socialtags"></div>]
+		[(#CONFIG{itwx/itwxgoogleplus1}|?{' '})#GOOGLEPLUS1]
+
+		</div> <!--#cartouche-->
+    <br class="nettoyeur" />
+	
+    <div class="surlignable">
+	 [<div class="#EDIT{chapo} chapo">(#CHAPO|image_reduire{0,0})</div>]			
+     [<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{0,0})</div>]
+	</div>
+	
+    [<p class="#EDIT{hyperlien} hyperlien"><a href="(#URL_SITE)" target="_blank"><:voir_en_ligne:> : [(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]	
+    
+    [<div class="ps surlignable">
+      <h2 class="pas_surlignable"><b><:info_ps:></b></h2>
+      <div class="#EDIT{ps}">(#PS|image_reduire{300,0})</div>
+    </div>]
+    [<div class="notes surlignable">
+      <h2 class="pas_surlignable"><:info_notes:></h2>
+      (#NOTES)</div>]
+	 <br />
+		
+  </div><!--#contenu-->
+  
+  [(#REM) Gestion du portfolio et des documents ]
+  [(#INCLURE{fond=inc/inc-documents}{id_article}{env})]
+
+  [(#REM) Petition ]
+  [(#PETITION|?{' '})
+  <INCLURE{fond=inc/inc-petition}{id_article}{env}{ajax}/>]
+  
+  [(#REM) Forum de l'article ]
+  <a href="#forum" id="forum"></a> 
+  [(#PARAMETRES_FORUM|?{' '})<div class="grouplist"><:forum:forum:></div>
+  <div class="ticket">
+    <div class="repondre"><INCLURE{fond=inc/ajax/formulaire-article}{env}{ajax}></div>
+	<INCLURE{fond=inc/inc-forum}{id_article}{env}{ajax}{for=_for#ID_FORUM}/>
+  </div>]
+  
+  [(#REM) Articles dans la meme rubrique ]
+  <INCLURE{fond=inc/inc-art-listart}{id_rubrique}{env}{ajax}{art=_art#ID_ARTICLE}/>
+  
+  [(#REM) Menu de navigation mots-cles ]
+  <INCLURE{fond=inc/inc-art-listmot}{id_rubrique}{env}{ajax}{mot=_mot#ID_MOT}/>
+  
+  [(#REM) Menu de Rubriques ] 
+  <INCLURE{fond=inc/inc-rubriques}{id_rubrique}/>
+  
+  [(#REM) Pied - Gestion du site ]
+  <div class="group" style="height:17px; border-bottom:1px solid #B9B9B9"></div>
+  <div class="ticket">
+    <div class="ticketmenu">
+      <ul>
+       [(#CONFIG{itwx/classique}|?{' '})
+		<li class="list-border"><a rel="start home" href="[(#URL_ARTICLE|parametre_url{'cimobile','web'})]"><:itwx:pageclassique:></a></li>]
+        <li><a rel="start home" href="#URL_PAGE{contact}"><:contact:></a></li>
+       [(#AUTORISER{ecrire})<li><a href="#EVAL{_DIR_RESTREINT_ABS}"><:espace_prive:></a></li>]
+       [(#AUTORISER{ecrire})<li><a href="#EVAL{_DIR_RESTREINT_ABS}?exec=article&id_article=#ID_ARTICLE"><:article:> #ID_ARTICLE</a></li>]
+       [(#SESSION{id_auteur}|?{' '})<li><a href="#URL_LOGOUT" rel="nofollow" style="background-image: none; text-align:center" class=""><:icone_deconnecter:></a></li>]
+      </ul>
+    </div>
+  </div>
+  
+  <INCLURE{fond=inc/inc-pied}/> 
+
+  </div><!--#main-->
+
+</div><!--#smart-->
+</body>
+</html>
+</BOUCLE_principale_article>

@@ -1,0 +1,88 @@
+#SET{ciar,#ENV{id}|ciar_protection}
+#SET{ciarheritage,#ENV{id}|ciar_protection_par_heritage}
+#SET{cilibre,'oui'}
+#SET{cimodifier,'non'}
+[(#GET{ciarheritage}|<>{_acces_indiv}|oui)
+	[(#AUTORISER{modifier,rubrique,#ENV{id}})				
+		#SET{cimodifier,'oui'}
+	]
+	[(#GET{ciar}|=={_acces_indiv}|oui)
+		#SET{cimodifier,'non'}
+		[(#AUTORISER{ecmodifier,rubrique,#ENV{id}})				
+			#SET{cimodifier,'oui'}
+		]
+	]
+]
+
+
+<div class="cadre" id="test">
+<div class="formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+   	<div class='titrem cadre-couleur'><:ciar:titre_bloc_rub:></div>
+   	
+   	<div style="float:left;padding:5px;width:400px;">
+   	
+
+	[(#GET{ciar}|=={_acces_restreint}|oui)
+	#SET{cilibre,'non'}
+	<img src="#EVAL{_DIR_PLUGIN_CIAR}_images/ar.gif" style="float:left;height:24px;width:24px;margin-right:5px;"><div style="line-height:3em;"><:ciar:ar:></div>
+	]
+
+	[(#GET{ciar}|=={_acces_indiv}|oui)
+	#SET{cilibre,'non'}
+	<img src="#EVAL{_DIR_PLUGIN_CIAR}_images/ari.gif" style="float:left;height:40px;width:40px;margin-right:5px;"><div style="line-height:3em;"><:ciar:ari:></div>
+	]
+
+	[(#GET{ciarheritage}|=={_acces_restreint}|oui)
+	[(#GET{ciar}|=={_acces_indiv}|non)
+	#SET{cilibre,'non'}
+	<img src="#EVAL{_DIR_PLUGIN_CIAR}_images/ar.gif" style="float:left;height:24px;width:24px;margin-right:5px;">
+	<div style="line-height:1.2em;"><:ciar:ar_heritage:></div>
+	]
+	]
+
+	[(#GET{ciarheritage}|=={_acces_indiv}|oui)
+	#SET{cilibre,'non'}
+	<img src="#EVAL{_DIR_PLUGIN_CIAR}_images/ari.gif" style="float:left;height:40px;width:40px;margin-right:5px;">
+	<div style="line-height:1.2em;"><:ciar:ari_heritage:></div>
+	[(#SPIP_VERSION|>={3}|oui)	
+	<div style="line-height:1.2em;"><:ciar:parent_protege_ari:> <a href="#URL_ECRIRE{rubrique, id_rubrique=#ENV{id}|ciar_parent_protege}"><:ciar:cliquer:></a></div>
+	]
+	[(#SPIP_VERSION|>={3}|non)	
+	<div style="line-height:1.2em;"><:ciar:parent_protege_ari:> <a href="#URL_ECRIRE{naviguer, id_rubrique=#ENV{id}|ciar_parent_protege}"><:ciar:cliquer:></a></div>
+	]	
+	]
+
+	[(#GET{cilibre}|=={oui}|oui)<div style="padding:5px;"><:ciar:alibre:></div>]
+
+	</div>
+
+	
+	[(#GET{cimodifier}|=={oui}|oui)
+
+	[(#SPIP_VERSION|>={3}|oui)
+	   	<div style="float:right;width:80px;">		
+		<span>&#91;<a href="#URL_ECRIRE{ciar_rubrique_protection, id_rubrique=#ENV{id}}"><:ciar:modifier:></a>&#93;</span>
+		</div>
+	]
+
+	[(#SPIP_VERSION|>={3}|non)	
+	   	<div style="float:right;width:80px;">
+	<a href="#URL_ECRIRE{ciar_rubrique_protection, id_rubrique=#ENV{id}}" class="icone36 article-24" style="float: right;"><img height="24" width="24" src="../prive/images/administration-24.gif"><span style="height:1em;"><:ciar:modifier:></span></a>
+		</div>
+	]
+
+	]
+	
+	[(#GET{ciarheritage}|=={_acces_indiv}|non)
+    [(#GET{cimodifier}|=={non}|oui)
+    <div style="float:right;width:80px;">
+<a href="#URL_ECRIRE{ciar_rubrique_protection, id_rubrique=#ENV{id}}" class="icone36 article-24" style="float: right;"><img height="24" width="24" src="../prive/images/message.gif"><span style="line-height:1.1em;"><:ciar:liste_membres:></span></a>
+    </div>
+    ]
+    ]
+
+	<div class="nettoyeur"></div>
+
+</div>
+<div class="nettoyeur"></div>
+</div>

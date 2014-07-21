@@ -1,0 +1,21 @@
+[(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]
+<BOUCLE_art(ARTICLES){id_article}{statut IN (prop,prepa,publie)}{tout}>
+[(#VAL{cinotif:sujet_article_modifie}|_T{#ARRAY{nom_site_spip,#NOM_SITE_SPIP,titre,#TITRE|supprimer_numero}}|nettoyer_titre_email)]
+
+<:cinotif:message_auto:>
+
+<:cinotif:article_modifie:>
+<:cinotif:article:>[ : (#TITRE|supprimer_numero)]
+<:cinotif:modifie_par:>[ : (#SESSION{nom})]
+
+<:cinotif:info_consulter:>
+[(#URL_SITE_SPIP)/spip.php?page=article&id_article=#ID_ARTICLE][(#URL_SITE_SPIP|cinotif_xtor)]
+
+
+<:cinotif:info_extrait:>
+[(#DESCRIPTIF|textebrut)]
+
+
+
+</BOUCLE_art>
+#FILTRE{supprimer_tags|filtrer_entites|trim}

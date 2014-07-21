@@ -1,0 +1,25 @@
+<plugin>
+	<nom>ciimport : Importation d'auteurs et de mots-cl&#233;s</nom>
+	<auteur>&#169; C. Imberti</auteur>
+	<icon>pyramides-32.png</icon>
+	<licence>[Creative commons by-nc-sa->http://creativecommons.org/licenses/by-nc-sa/2.0/fr/]</licence>
+
+	<lien></lien>
+	<version>1.4</version>
+	<etat>stable</etat>
+    <slogan>Auteur : &#169; C. Imberti. Licence : Creative commons by-nc-sa.</slogan>
+    <description>
+    Auteur : &#169; C. Imberti. Licence : Creative commons by-nc-sa.<br />
+	Ce plugin permet d'importer des auteurs et des mots-cl&#233;s.
+	</description>
+	<prefix>ciimport</prefix>
+	<options>ciimport_options.php</options>
+
+	<pipeline>
+		<nom>affiche_gauche</nom>
+		<inclure>ciimport_pipeline.php</inclure>
+	</pipeline>
+	
+	<necessite id="SPIP" version='[2.0.9;]' />
+	
+</plugin>

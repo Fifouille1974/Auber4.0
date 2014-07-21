@@ -1,0 +1,90 @@
+<BOUCLE_contenu(RUBRIQUES){id_rubrique}>
+				<div class="rub">
+				<h2>[(#TITRE|supprimer_numero)]</h2>
+				<div class="dateart">[<:cisquel:eq_publie_le:> (#DATE|affdate)]
+				</div>
+			      	[<div class="texte">(#TEXTE)</div>]
+				[<div class="texte">(#NOTES)</div>]
+				</div>
+			      	
+				<B_actu>
+				<div class="titreacturub"><:cisquel:eq_actu:></div>
+				<div class="listeactu">
+				<BOUCLE_actu(ARTICLES){branche}{raccourci=_rubrique_actu}{par date}{inverse}{0,5}{doublons}>
+				<div class="actu">
+					[<img src="(#LOGO_ARTICLE||image_reduire{44,0}|extraire_attribut{'src'})" alt=""  class="leftill">]
+					<div class="titreactu"><a href="#URL_ARTICLE" class="lien">[(#TITRE|supprimer_numero)]</a></div> 
+					<div class="texte">#DESCRIPTIF</div>
+				</div>
+				</BOUCLE_actu>
+				</div>
+				<div class="tout"><a href="[(#URL_PAGE{archive_article_rubrique}|parametre_url{id_rubrique,#ID_RUBRIQUE})]"><:cisquel:eq_toute_actu:></a></div>
+				</B_actu>
+				
+				<div class="listerub1sur2">
+				<BOUCLE_sous_rubriques_col1(RUBRIQUES){id_parent}{par num titre}{1/2}>
+				<div class="listerub">
+					[<img src="(#LOGO_RUBRIQUE||image_reduire{44,0}|extraire_attribut{'src'})" alt=""  class="rightill" />]
+				      	<a href="#URL_RUBRIQUE" class="titresousrub">[(#TITRE|supprimer_numero)]</a>
+				      	[<div class="textesousrub">(#DESCRIPTIF)</div>]
+					<B_sous_sous_rubriques_col1>
+					<div class="liens">
+					<ul>
+					<BOUCLE_sous_sous_rubriques_col1(RUBRIQUES){id_parent}{par num titre}>
+					<li><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></li>
+					</BOUCLE_sous_sous_rubriques_col1>
+					</ul>
+				      	</div>
+					</B_sous_sous_rubriques_col1>
+					<div class="clearer">&nbsp;</div>
+				</div>
+				</BOUCLE_sous_rubriques_col1>
+				</div>
+
+				<div class="listerub2sur2">
+				<BOUCLE_sous_rubriques_col2(RUBRIQUES){id_parent}{par num titre}{2/2}>
+				<div class="listerub">
+					[<img src="(#LOGO_RUBRIQUE||image_reduire{44,0}|extraire_attribut{'src'})" alt=""  class="rightill" />]
+				      	<a href="#URL_RUBRIQUE" class="titresousrub">[(#TITRE|supprimer_numero)]</a>
+				      	[<div class="textesousrub">(#DESCRIPTIF)</div>]
+					<B_sous_sous_rubriques_col2>
+					<div class="liens">
+					<ul>
+					<BOUCLE_sous_sous_rubriques_col2(RUBRIQUES){id_parent}{par num titre}>
+					<li><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></li>
+					</BOUCLE_sous_sous_rubriques_col2>
+					</ul>
+				      	</div>
+					</B_sous_sous_rubriques_col2>
+					<div class="clearer">&nbsp;</div>
+				</div>
+				</BOUCLE_sous_rubriques_col2>
+				</div>
+
+				<div class='clearer'>&nbsp;</div>	
+
+				#SET{ci_mots, #ARRAY{}}
+				<BOUCLE_mot_sous_rubrique(MOTS){id_rubrique}{type=_multirubricage}{par titre}>
+				[(#SET{ci_mots, #GET{ci_mots}|push{#ID_MOT}})]
+				</BOUCLE_mot_sous_rubrique>
+				
+				#SET{ci_id_rubrique_multi, #ID_RUBRIQUE}
+			    <BOUCLE_article_sous_rubrique(ARTICLES){id_mot IN #GET{ci_mots}}{doublons}{par #CITRI}{!par #CITRIINVERSE}{par num #CITRINUM}>
+				<div class="listeart">
+					[<img src="(#LOGO_ARTICLE||image_reduire{44,0}|extraire_attribut{'src'})" alt=""  class="rightill" />]
+				      	<a href="[(#URL_ARTICLE|parametre_url{id_rubrique,#GET{ci_id_rubrique_multi}})]" class="titreartliste">[(#TITRE|supprimer_numero)]</a>
+				      	[<div class="texte">(#DESCRIPTIF)</div>]
+				 <div class="clearer">&nbsp;</div>    	
+				</div>
+			    </BOUCLE_article_sous_rubrique>
+				
+				<BOUCLE_articles(ARTICLES){id_rubrique}{doublons}{par #CITRI}{!par #CITRIINVERSE}{par num #CITRINUM}>
+				<div class="listeart">
+					[<img src="(#LOGO_ARTICLE||image_reduire{44,0}|extraire_attribut{'src'})" alt=""  class="rightill" />]
+				      	<a href="#URL_ARTICLE" <BOUCLE_nouvelle_fenetre(ARTICLES){id_article}{raccourci=_nouvelle_fenetre}>class="spip_out titreartliste"</BOUCLE_nouvelle_fenetre></B_nouvelle_fenetre>class="titreartliste"<//B_nouvelle_fenetre> >[(#TITRE|supprimer_numero)]</a>
+				      	[<div class="texte">(#DESCRIPTIF)</div>]
+				 <div class="clearer">&nbsp;</div>    	
+				</div>
+				</BOUCLE_articles>
+				
+</BOUCLE_contenu>

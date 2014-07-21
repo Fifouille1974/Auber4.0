@@ -1,0 +1,19 @@
+  <BOUCLE_article_invisible(ARTICLES) {titre_mot = invisible} {doublons}></BOUCLE_article_invisible>
+
+  <B_articles_recents>
+	<a id='pagination_articles_recents'></a>
+    <div class="group"><:derniers_articles:></div>
+    <div class="menu articles">
+      <ul>
+        <BOUCLE_articles_recents(ARTICLES) {par date}{inverse} {pagination 10}{doublons}>
+        <li class="hentry" onclick="window.location.href='#URL_ARTICLE'"> 
+		 [(#LOGO_ARTICLE_RUBRIQUE{#URL_ARTICLE}|image_reduire{750,50})]
+          <h3 class="entry-title"><a href="#URL_ARTICLE">#TITRE</a></h3>
+          [(#INTRODUCTION{100}|inserer_attribut{class,entry-content})]
+          <div class="nettoyeur"></div>
+        </li>
+        </BOUCLE_articles_recents>
+      </ul>
+	  [<div class="pagination">(#PAGINATION)</div>]
+    </div>
+  </B_articles_recents>

@@ -1,0 +1,29 @@
+<BOUCLE_site_invisible(SITES) {titre_mot = invisible} {doublons}></BOUCLE_site_invisible>
+
+<B_sites>       
+<a id='pagination_sites'></a>
+<div class="group"><:sur_web:></div>		
+
+<BOUCLE_sites(SITES) {id_rubrique} {par nom_site}{pagination 5}{doublons}>
+	
+	<div class="listmenu">
+    <ul class="docs">
+        <li><a href="[(#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT})]">#NOM_SITE</a></li>
+	</ul>
+	</div>
+	
+	<B_syndic>
+    <div class="listincinc">
+    <ul class="docs">
+    <BOUCLE_syndic(SYNDIC_ARTICLES) {id_syndic} {age<180} {par date}{inverse} {pagination 3 #ENV{site}}>                    
+        <li><a href="#URL_ARTICLE">#TITRE</a></li>
+    </BOUCLE_syndic>
+    </ul>
+	[<div class="pagination">(#PAGINATION)</div>]
+	</div>        
+    </B_syndic>
+	
+</BOUCLE_sites>
+[<div class="pagination">(#PAGINATION)</div>]           
+<br />
+</B_sites>

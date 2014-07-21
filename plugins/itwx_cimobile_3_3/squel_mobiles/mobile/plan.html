@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title><:plan_site:> - [(#NOM_SITE_ITWX|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|attribut_html)" />]
+<INCLURE{fond=inc/inc-head}/>
+<meta name="robots" content="none" />
+</head>
+
+<body class="#LANG_DIR">
+<div id="mob">
+
+  [(#REM) TOOL BARRE ]
+  <INCLURE{fond=inc/inc-navBar}/>   
+  
+  [(#REM) Plan par rubrique ]
+  <div class="contenu">
+    <h1 class="entry-title"><:plan_site:></h1>
+  </div><!--#contenu-->
+  
+  <BOUCLE_menu_rubrique_invisible(RUBRIQUES) {titre_mot = invisible} {doublons}></BOUCLE_menu_rubrique_invisible>
+  
+  [(#REM) Contenu racine ] 
+  <BOUCLE_secteurs(RUBRIQUES) {racine} {par titre}{doublons}>
+		
+        <div class="group"><a href="#URL_RUBRIQUE">#TITRE</a></div>
+		
+   [(#REM) Contenu rubrique ]
+   <div class="listinc"> 
+   <INCLURE{fond=inc/inc-plan-listart}{id_rubrique}{env}{ajax}{art=_rub#ID_RUBRIQUE}/> 
+   <INCLURE{fond=inc/inc-plan-listbre}{id_rubrique}{env}{ajax}{bre=_bre#ID_RUBRIQUE}/> 
+   <INCLURE{fond=inc/inc-plan-listsite}{id_rubrique}{env}{ajax}{site=_site#ID_RUBRIQUE}/> 
+   </div>
+  
+   [(#REM) Sous-rubriques ]
+   <B_rubriques>
+    <BOUCLE_rubriques(RUBRIQUES) {id_parent} {par titre}{doublons}>
+	
+        [(#CONFIG{itwx/itwxurl}|non)
+        <div class="grouplist"><a href="[(#URL_PAGE{rubrique}|parametre_url{id_rubrique,#ID_RUBRIQUE})]">#TITRE</a></div>]
+        [(#CONFIG{itwx/itwxurl}|oui)
+        <div class="grouplist"><a href="rubrique#ID_RUBRIQUE.mobi">#TITRE</a></div>]
+		
+     <div class="listinc">
+	  <INCLURE{fond=inc/inc-plan-listart}{id_rubrique}{env}{ajax}{art=_rub#ID_RUBRIQUE}/> 
+	  <INCLURE{fond=inc/inc-plan-listbre}{id_rubrique}{env}{ajax}{bre=_bre#ID_RUBRIQUE}/> 
+	  <INCLURE{fond=inc/inc-plan-listsite}{id_rubrique}{env}{ajax}{site=_site#ID_RUBRIQUE}/> 
+	 </div>
+      <BOUCLE_sous_rubriques(RUBRIQUES) {id_parent} {par titre}{doublons}>
+	
+        [(#CONFIG{itwx/itwxurl}|non)
+        <div class="ssgrouplist"><a href="[(#URL_PAGE{rubrique}|parametre_url{id_rubrique,#ID_RUBRIQUE})]">#TITRE</a></div>]
+        [(#CONFIG{itwx/itwxurl}|oui)
+        <div class="ssgrouplist"><a href="rubrique#ID_RUBRIQUE.mobi">#TITRE</a></div>]
+		
+       <div class="listinc">
+        <INCLURE{fond=inc/inc-plan-listart}{id_rubrique}{env}{ajax}{art=_rub#ID_RUBRIQUE}/> 
+        <INCLURE{fond=inc/inc-plan-listbre}{id_rubrique}{env}{ajax}{bre=_bre#ID_RUBRIQUE}/> 
+        <INCLURE{fond=inc/inc-plan-listsite}{id_rubrique}{env}{ajax}{site=_site#ID_RUBRIQUE}/> 
+	   </div>
+       <BOUCLE_sous_sous_rubriques(BOUCLE_sous_rubriques)></BOUCLE_sous_sous_rubriques>
+      </BOUCLE_sous_rubriques>
+     </BOUCLE_rubriques>
+   </B_rubriques>
+   
+  </BOUCLE_secteurs>
+  
+  [(#REM) Pied ] 
+  <div class="group" style="height:17px"></div>
+  <div class="ticket">
+    <div class="ticketmenu">
+      <ul>
+        <li><a rel="start home" href="#URL_SITE_SPIP/"><:accueil_site:></a></li>
+	    [(#CONFIG{itwx/classique}|?{' '})<li><a rel="start home" href="[(#URL_PAGE{plan}|parametre_url{'cimobile','web'})]"><:itwx:pageclassique:></a></li>]
+        [(#AUTORISER{ecrire})<li><a href="#EVAL{_DIR_RESTREINT_ABS}"><:espace_prive:></a></li>]
+        [(#SESSION{id_auteur}|?{' '})<li><a href="#URL_LOGOUT" rel="nofollow" style="text-align:center"><:icone_deconnecter:></a></li>]
+      </ul>
+    </div>
+  </div>
+  
+  <INCLURE{fond=inc/inc-pied}/> 
+  
+</div><!--#page-->
+</body>
+</html>

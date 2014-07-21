@@ -1,0 +1,19 @@
+<paquet
+	prefix="citrace"
+	categorie="divers"
+	version="1.1.0"
+	etat="stable"
+	compatibilite="[3.0.0;]"
+	logo="prive/themes/spip/images/pyramides-32.png"
+>	
+
+	<nom>citrace : Tracer certaines actions</nom>
+
+	<auteur>C. Imberti</auteur>
+
+	<licence lien="http://creativecommons.org/licenses/by-nc-sa/2.0/fr/">Creative commons by-nc-sa</licence>	
+	
+	<pipeline nom="pre_edition" inclure="citrace_pipelines.php" />
+	<pipeline nom="post_edition" inclure="citrace_pipelines.php" />
+	
+</paquet>

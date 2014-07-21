@@ -1,0 +1,107 @@
+#CACHE{0}[(#RECHERCHE|cisquel_recherche_autorise|cisquel_accesinterdit)]
+
+#SET{cimno,'cisquelmnogosearch'}	
+#SET{cioptions,''}	
+[(#ENV{recherche_avancee}|=={oui}|oui)
+	#SET{cioptions,'oui'}
+]
+
+#SET{citri,''}
+#SET{citriinverse,'points'}
+#SET{cidebut,'0000-01-01'}
+#SET{cifin,'9000-01-01'}
+
+#SET{tableautri, #ARRAY{0,date}} 
+#SET{tableautriinverse, #ARRAY{0,datedesc}} 
+
+[(#ENV{tri}|in_array{#GET{tableautri}}|oui)
+	#SET{citri,#ENV{tri}}
+]
+[(#ENV{tri}|in_array{#GET{tableautriinverse}}|oui)
+	[(#SET{citriinverse,[(#ENV{tri}|substr{0,-4})]})]
+]
+[(#ENV{age}|intval|>{0}|oui)
+	[(#SET{cidebut,[(#ENV{age}|cisquel_age_vers_date|sinon{0000-01-01})]})]
+]
+[(#ENV{datedebut}|cisquel_verifier_et_convertir_date|oui)
+	#SET{cidebut, #ENV{datedebut}|cisquel_verifier_et_convertir_date|sinon{0000-01-01}}	
+]
+[(#ENV{datefin}|cisquel_verifier_et_convertir_date|oui)
+	#SET{cifin, #ENV{datefin}|cisquel_verifier_et_convertir_date|sinon{9000-01-01}}	
+]
+
+#SET{cidebut,#GET{cidebut}' 00:00:00'}
+#SET{cifin,#GET{cifin}' 23:59:59'}
+
+	
+#SET{ci_art_forum, #ARRAY{}}
+#SET{ci_art_forumh, #ARRAY{}}
+#SET{ci_art_commentaire2, #ARRAY{}}
+
+<BOUCLE_rub1(RUBRIQUES){ciforme=_forum}>
+<BOUCLE_art1(ARTICLES){id_rubrique}>
+[(#SET{ci_art_forum, #GET{ci_art_forum}|push{#ID_ARTICLE}})]
+</BOUCLE_art1>
+</BOUCLE_rub1>
+
+<BOUCLE_rub2(RUBRIQUES){ciforme=_forumhierarchique}>
+<BOUCLE_art2(ARTICLES){id_rubrique}>
+[(#SET{ci_art_forumh, #GET{ci_art_forumh}|push{#ID_ARTICLE}})]
+</BOUCLE_art2>
+</BOUCLE_rub2>
+
+<BOUCLE_art3(ARTICLES){id_article}{ciforme=_commentaireautrepage}>
+[(#SET{ci_art_commentaire2, #GET{ci_art_commentaire2}|push{#ID_ARTICLE}})]
+</BOUCLE_art3>
+
+
+[(#REM) Messages trouves ]
+<B_messages>
+
+<h2><:cisquel:eq_commentaires:> (#GRAND_TOTAL)</h2>
+[<div class="folio"><div class="pagination">(#PAGINATION{page_precedent_suivant})</div></div>]
+	<p class="enteteresult">#GRAND_TOTAL <strong><:cisquel:forums_trouves:></strong></p>
+<BOUCLE_messages(FORUMS) {recherche} {par #GET{citri}} {!par #GET{citriinverse}} {date_heure>=#GET{cidebut}} {date_heure<=#GET{cifin}} {pagination 5}>
+<div class="item">					
+<p class="titreresult">
+
+#SET{cipage, "article"}
+#SET{ciidarticle,0}
+
+[(#SPIP_VERSION|>={3}|oui)
+	[(#OBJET|=={article}|oui)
+		[(#SET{ciidarticle,[(#ID_OBJET|intval)]})]
+	]
+]
+[(#SPIP_VERSION|>={3}|non)
+	[(#SET{ciidarticle,[(#ID_ARTICLE|intval)]})]
+]
+
+[(#GET{ci_art_forum}|find{#GET{ciidarticle}}|oui)
+	#SET{cipage, "sujet"}
+]
+[(#GET{ci_art_forumh}|find{#GET{ciidarticle}}|oui)
+	#SET{cipage, "sujethierarchique"}
+]
+[(#GET{ci_art_commentaire2}|find{#GET{ciidarticle}}|oui)
+	#SET{cipage, "_commentaire"}
+]
+
+<B_navmsg>
+<a href="spip.php?page=#GET{cipage}&amp;id_article=#GET{ciidarticle}&amp;id_forum=#ID_FORUM">
+[(#TITRE|supprimer_numero)]</a> (le [(#DATE|affdate{'d/m/Y'})])</p>
+<p class="path"><a href="[(#URL_PAGE{sommaire})]"><:cisquel:eq_accueil:></a>
+<BOUCLE_navmsg(ARTICLES){id_article=#GET{ciidarticle}}>
+<BOUCLE_chem_navmsg(HIERARCHIE){id_article}>
+&gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a>
+</BOUCLE_chem_navmsg>
+</BOUCLE_navmsg>
+</p>
+[<div class="texte">(#DESCRIPTIF)</div>]                
+</div>					
+</BOUCLE_messages>
+[<div class="folio"><div class="pagination">(#PAGINATION{page_precedent_suivant})</div></div>]
+</B_messages>
+	<h2><:cisquel:eq_commentaires:></h2>
+	<p class="enteteresult">0 <strong><:cisquel:forums_trouves:></strong></p>
+	<//B_messages>

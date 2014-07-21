@@ -1,0 +1,12 @@
+<B_auteurs>
+<a id='pagination_auteurs'></a>
+<div class="group"><:info_auteurs:></div>
+    <div class="listinc">
+    <ul>
+    <BOUCLE_auteurs(AUTEURS) {par nom} {pagination 5 #ENV{aut}}>
+    <li><a href="#URL_AUTEUR"[ class="(#EXPOSE)"]>[(#NOM|couper{80})]</a></li>
+    </BOUCLE_auteurs>
+    </ul>
+    </div>
+[<div class="pagination">(#PAGINATION)</div>]
+</B_auteurs>

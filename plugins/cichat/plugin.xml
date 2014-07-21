@@ -1,0 +1,20 @@
+<plugin>
+	<nom>cichat : CHAT pour SPIP 2</nom>
+	<auteur>&#169; C. Imberti</auteur>
+	<icon>pyramides-32.png</icon>
+	<licence>GNU General Public License</licence>
+
+	<lien></lien>
+	<version>1.1</version>
+	<version_base>1.0</version_base>
+	<etat>stable</etat>
+    <description>
+    Auteur : &#169; C. Imberti. Licence : GNU General Public License<br />
+	Ce plugin active ou d&eacute;sactive le CHAT (lace)
+	</description>
+	<prefix>cichat</prefix>
+	<install>base/cichat_install.php</install>
+
+	<necessite id="SPIP" version='[2.0.9;]' />
+	
+</plugin>

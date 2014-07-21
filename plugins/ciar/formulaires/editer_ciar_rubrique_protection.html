@@ -1,0 +1,46 @@
+#SET{cichoixec,'non'}
+#SET{ciarheritage,#ENV{id_rubrique}|ciar_protection_par_heritage}
+[(#AUTORISER{eccreer,rubrique,#ENV{id_rubrique}})
+	#SET{cichoixec,'oui'}
+]
+[(#AUTORISER{modifier,rubrique,#ENV{id_rubrique}})
+	#SET{cichoixec,'oui'}
+]
+
+<div class='formulaire_spip formulaire_editer formulaire_editer_rubrique formulaire_editer_rubrique-#ENV{id_rubrique,nouveau}'>
+	<!-- <br class='bugajaxie' /> -->
+	[<p class='reponse_formulaire reponse_formulaire_ok'>(#ENV**{message_ok})</p>]
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		
+		<ul>
+			<li class="editer_syndication">
+[(#GET{ciarheritage}|=={_acces_restreint}|non)
+				<div class="choix">
+					<input type='radio' class='radio' name='ci_protection' value='_acces_libre' [(#ENV{protection}|=={_acces_libre}|oui) checked='checked'] id='_acces_libre' #GET{disable}/>
+					<label for='_acces_libre'>[(#ENV{protection}|=={_acces_libre}|oui)<b>]<:ciar:alibre:>[(#ENV{protection}|=={_acces_libre}|oui)</b>]</label>
+				</div>
+]
+				<div class="choix">
+					<input type='radio' class='radio' name='ci_protection' value='_acces_restreint' [(#ENV{protection}|=={_acces_restreint}|oui) checked='checked'] id='_acces_restreint' #GET{disable}/>
+					<label for='_acces_restreint'>[(#ENV{protection}|=={_acces_restreint}|oui)<b>]<:ciar:ar:>[(#ENV{protection}|=={_acces_restreint}|oui)</b>]</label>
+				</div>
+
+[(#GET{cichoixec}|=={oui}|oui)
+				<div class="choix">
+					<input type='radio' class='radio' name='ci_protection' value='_acces_indiv' [(#ENV{protection}|=={_acces_indiv}|oui) checked='checked'] id='_acces_indiv' #GET{disable}/>
+					<label for='_acces_indiv'>[(#ENV{protection}|=={_acces_indiv}|oui)<b>]<:ciar:ari:>[(#ENV{protection}|=={_acces_indiv}|oui)</b>]</label>
+				</div>
+]
+
+			</li>
+		</ul>
+		
+	  <p class='boutons'><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

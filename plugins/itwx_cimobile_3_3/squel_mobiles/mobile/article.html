@@ -1,0 +1,802 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title>[(#TITRE|textebrut) - ][(#NOM_SITE_ITWX|textebrut)]</title>
+[<meta name="description" content="(#INTRODUCTION{150}|attribut_html)" />]
+<INCLURE{fond=inc/inc-head}>
+</head>
+
+<body class="#LANG_DIR">
+<BOUCLE_principale_article2(ARTICLES) {id_article} {raccourci=_portail_permanent_haut_actu}>
+<div id="mob">
+
+  [(#REM) TOOL BARRE ]
+  <INCLURE{fond=inc/inc-navBar}/> 
+  
+  [(#REM) Contenu principal : contenu de l'article ]
+  <div class="contenu">
+    <div class="cartouche"> 
+	
+	<div class="surlignable"> 
+<!-- 	   [<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>] -->				
+       <!--<h1>[(#TITRE|supprimer_numero)]	</h1>	-->		
+      <!--  [<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>] -->
+<!--        <p><small><abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour) ][(#DATE|affdate)]</abbr>, <:par_auteur:> #MODELE{lesauteurs}[ (<:texte_date_publication_anterieure:> (#DATE_REDAC|affdate)).]</small></p>
+ -->      </div>
+ 		
+ 
+	 
+             
+        <div id="title-actu"><h3 class="entry-title" style="padding: 0px;"><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a></h3></div>
+	 <BOUCLE_trombi_image5(DOCUMENTS){id_article}{mode=image}{0,1} {doublons}>
+                        <div id="img_document1"> [(#EMBED_DOCUMENTimage_reduire{160,auto})]</div>
+			  </BOUCLE_trombi_image5>
+        
+	 [<div class="#EDIT{chapo} chapo">(#CHAPO|image_reduire{0,0})</div>]
+     
+
+	    #MODELE{itwx_article_traductions} 
+
+		[(#CONFIG{itwx/itwxsocialtags}|?{' '})<div id="socialtags"></div>]
+		[(#CONFIG{itwx/itwxgoogleplus1}|?{' '})#GOOGLEPLUS1]
+
+		</div> <!--#cartouche-->
+    <br class="nettoyeur" />
+	
+    <div class="surlignable">			
+     [<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{0,0})</div>]
+	</div>
+	
+    [<p class="#EDIT{hyperlien} hyperlien"><a href="(#URL_SITE)" target="_blank"><:voir_en_ligne:> : [(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]	
+    
+    [<div class="ps surlignable">
+      <h2 class="pas_surlignable"><b><:info_ps:></b></h2>
+      <div class="#EDIT{ps}">(#PS|image_reduire{300,0})</div>
+    </div>]
+    [<div class="notes surlignable">
+      <h2 class="pas_surlignable"><:info_notes:></h2>
+      (#NOTES)</div>]
+	 <br />
+		
+  </div><!--#contenu-->
+  
+  [(#REM) Gestion du portfolio et des documents ]
+  [(#INCLURE{fond=inc/inc-documents}{id_article}{env})]
+
+
+  
+  [(#REM) Articles dans la meme rubrique ]
+  <INCLURE{fond=inc/inc-art-listart}{id_rubrique}{env}{ajax}{art=_art#ID_ARTICLE}/>
+  
+
+  
+  [(#REM) Pied ]
+  <div class="group" style="height:17px"></div>
+<!--   <div class="ticket">
+    <div class="ticketmenu">
+      <ul>
+        <li><a rel="start home" href="#URL_SITE_SPIP/"><:accueil_site:></a></li>
+        [(#CONFIG{itwx/classique}|?{' '})<li><a rel="start home" href="[(#URL_ARTICLE|parametre_url{'cimobile','web'})]"><:itwx:pageclassique:></a></li>]
+        [(#AUTORISER{ecrire})<li><a href="#EVAL{_DIR_RESTREINT_ABS}"><:espace_prive:></a></li>]
+		[(#SESSION{id_auteur}|?{' '})<li><a href="#URL_LOGOUT" rel="nofollow" style="text-align:center"><:icone_deconnecter:></a></li>]
+    </ul>
+    </div>
+  </div> -->
+  
+  <INCLURE{fond=inc/inc-pied}/> 
+  
+ </div><!--#page-->
+ </BOUCLE_principale_article2>
+ 
+ <BOUCLE_principale_article4(ARTICLES) {id_article} {raccourci=_portail_permanent_haut_sortir}>
+<div id="mob">
+
+  [(#REM) TOOL BARRE ]
+  <INCLURE{fond=inc/inc-navBar}/> 
+  
+  [(#REM) Contenu principal : contenu de l'article ]
+  <div class="contenu">
+    <div class="cartouche"> 
+	
+	<div class="surlignable"> 
+<!-- 	   [<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>] -->				
+       <!--<h1>[(#TITRE|supprimer_numero)]	</h1>	-->		
+      <!--  [<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>] -->
+<!--        <p><small><abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour) ][(#DATE|affdate)]</abbr>, <:par_auteur:> #MODELE{lesauteurs}[ (<:texte_date_publication_anterieure:> (#DATE_REDAC|affdate)).]</small></p>
+ -->      </div>
+ 		
+ 
+	 
+        <div id="title-actu"><h3 class="entry-title" style="padding: 0px;"><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a></h3></div>
+	 <BOUCLE_trombi_image(DOCUMENTS){id_article}{mode=image}{0,1} {doublons}>
+                        <div id="img_document1"> [(#EMBED_DOCUMENTimage_reduire{160,auto})]</div>
+			  </BOUCLE_trombi_image>
+        
+	 [<div class="#EDIT{chapo} chapo">(#CHAPO|image_reduire{0,0})</div>]
+        
+     
+
+	    #MODELE{itwx_article_traductions} 
+
+		[(#CONFIG{itwx/itwxsocialtags}|?{' '})<div id="socialtags"></div>]
+		[(#CONFIG{itwx/itwxgoogleplus1}|?{' '})#GOOGLEPLUS1]
+
+		</div> <!--#cartouche-->
+    <br class="nettoyeur" />
+	
+    <div class="surlignable">			
+     [<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{0,0})</div>]
+	</div>
+	
+    [<p class="#EDIT{hyperlien} hyperlien"><a href="(#URL_SITE)" target="_blank"><:voir_en_ligne:> : [(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]	
+    
+    [<div class="ps surlignable">
+      <h2 class="pas_surlignable"><b><:info_ps:></b></h2>
+      <div class="#EDIT{ps}">(#PS|image_reduire{300,0})</div>
+    </div>]
+    [<div class="notes surlignable">
+      <h2 class="pas_surlignable"><:info_notes:></h2>
+      (#NOTES)</div>]
+	 <br />
+		
+  </div><!--#contenu-->
+  
+  [(#REM) Gestion du portfolio et des documents ]
+  [(#INCLURE{fond=inc/inc-documents}{id_article}{env})]
+
+
+  
+  [(#REM) Articles dans la meme rubrique ]
+  <INCLURE{fond=inc/inc-art-listart}{id_rubrique}{env}{ajax}{art=_art#ID_ARTICLE}/>
+  
+
+  
+  [(#REM) Pied ]
+  <div class="group" style="height:17px"></div>
+<!--   <div class="ticket">
+    <div class="ticketmenu">
+      <ul>
+        <li><a rel="start home" href="#URL_SITE_SPIP/"><:accueil_site:></a></li>
+        [(#CONFIG{itwx/classique}|?{' '})<li><a rel="start home" href="[(#URL_ARTICLE|parametre_url{'cimobile','web'})]"><:itwx:pageclassique:></a></li>]
+        [(#AUTORISER{ecrire})<li><a href="#EVAL{_DIR_RESTREINT_ABS}"><:espace_prive:></a></li>]
+		[(#SESSION{id_auteur}|?{' '})<li><a href="#URL_LOGOUT" rel="nofollow" style="text-align:center"><:icone_deconnecter:></a></li>]
+    </ul>
+    </div>
+  </div> -->
+  
+  <INCLURE{fond=inc/inc-pied}/> 
+  
+ </div><!--#page-->
+ </BOUCLE_principale_article4>
+ 
+ <BOUCLE_principale_article6(ARTICLES) {id_article} {raccourci=_portail_permanent_haut_projets}>
+<div id="mob">
+
+  [(#REM) TOOL BARRE ]
+  <INCLURE{fond=inc/inc-navBar}/> 
+  
+  [(#REM) Contenu principal : contenu de l'article ]
+  <div class="contenu">
+    <div class="cartouche"> 
+	
+	<div class="surlignable"> 
+<!-- 	   [<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>] -->				
+       <!--<h1>[(#TITRE|supprimer_numero)]	</h1>	-->		
+      <!--  [<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>] -->
+<!--        <p><small><abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour) ][(#DATE|affdate)]</abbr>, <:par_auteur:> #MODELE{lesauteurs}[ (<:texte_date_publication_anterieure:> (#DATE_REDAC|affdate)).]</small></p>
+ -->      </div>
+ 		
+ 
+	 
+       <div id="title-actu"><h3 class="entry-title" style="padding: 0px;"><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a></h3></div>
+	 <BOUCLE_trombi_image2(DOCUMENTS){id_article}{mode=image}{0,1} {doublons}>
+                        <div id="img_document1"> [(#EMBED_DOCUMENTimage_reduire{160,auto})]</div>
+			  </BOUCLE_trombi_image2>
+        
+	 [<div class="#EDIT{chapo} chapo">(#CHAPO|image_reduire{0,0})</div>]
+        
+     
+
+	    #MODELE{itwx_article_traductions} 
+
+		[(#CONFIG{itwx/itwxsocialtags}|?{' '})<div id="socialtags"></div>]
+		[(#CONFIG{itwx/itwxgoogleplus1}|?{' '})#GOOGLEPLUS1]
+
+		</div> <!--#cartouche-->
+    <br class="nettoyeur" />
+	
+    <div class="surlignable">			
+     [<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{0,0})</div>]
+	</div>
+	
+    [<p class="#EDIT{hyperlien} hyperlien"><a href="(#URL_SITE)" target="_blank"><:voir_en_ligne:> : [(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]	
+    
+    [<div class="ps surlignable">
+      <h2 class="pas_surlignable"><b><:info_ps:></b></h2>
+      <div class="#EDIT{ps}">(#PS|image_reduire{300,0})</div>
+    </div>]
+    [<div class="notes surlignable">
+      <h2 class="pas_surlignable"><:info_notes:></h2>
+      (#NOTES)</div>]
+	 <br />
+		
+  </div><!--#contenu-->
+  
+  [(#REM) Gestion du portfolio et des documents ]
+  [(#INCLURE{fond=inc/inc-documents}{id_article}{env})]
+
+
+  
+  [(#REM) Articles dans la meme rubrique ]
+  <INCLURE{fond=inc/inc-art-listart}{id_rubrique}{env}{ajax}{art=_art#ID_ARTICLE}/>
+  
+
+  
+  [(#REM) Pied ]
+  <div class="group" style="height:17px"></div>
+<!--   <div class="ticket">
+    <div class="ticketmenu">
+      <ul>
+        <li><a rel="start home" href="#URL_SITE_SPIP/"><:accueil_site:></a></li>
+        [(#CONFIG{itwx/classique}|?{' '})<li><a rel="start home" href="[(#URL_ARTICLE|parametre_url{'cimobile','web'})]"><:itwx:pageclassique:></a></li>]
+        [(#AUTORISER{ecrire})<li><a href="#EVAL{_DIR_RESTREINT_ABS}"><:espace_prive:></a></li>]
+		[(#SESSION{id_auteur}|?{' '})<li><a href="#URL_LOGOUT" rel="nofollow" style="text-align:center"><:icone_deconnecter:></a></li>]
+    </ul>
+    </div>
+  </div> -->
+  
+  <INCLURE{fond=inc/inc-pied}/> 
+  
+ </div><!--#page-->
+ </BOUCLE_principale_article6>
+ 
+ <BOUCLE_principale_article5(ARTICLES) {id_article} {raccourci=_portail_permanent_haut_pratique}>
+<div id="mob">
+
+  [(#REM) TOOL BARRE ]
+  <INCLURE{fond=inc/inc-navBar}/> 
+  
+  [(#REM) Contenu principal : contenu de l'article ]
+  <div class="contenu">
+    <div class="cartouche"> 
+	
+	<div class="surlignable"> 
+<!-- 	   [<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>] -->				
+       <!--<h1>[(#TITRE|supprimer_numero)]	</h1>	-->		
+      <!--  [<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>] -->
+<!--        <p><small><abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour) ][(#DATE|affdate)]</abbr>, <:par_auteur:> #MODELE{lesauteurs}[ (<:texte_date_publication_anterieure:> (#DATE_REDAC|affdate)).]</small></p>
+ -->      </div>
+ 		
+ 
+	 
+        <div id="title-actu"><h3 class="entry-title" style="padding: 0px;"><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a></h3></div>
+	 <BOUCLE_trombi_image3(DOCUMENTS){id_article}{mode=image}{0,1} {doublons}>
+                        <div id="img_document1"> [(#EMBED_DOCUMENTimage_reduire{160,auto})]</div>
+			  </BOUCLE_trombi_image3>
+        
+	 [<div class="#EDIT{chapo} chapo">(#CHAPO|image_reduire{0,0})</div>]
+        
+     
+
+	    #MODELE{itwx_article_traductions} 
+
+		[(#CONFIG{itwx/itwxsocialtags}|?{' '})<div id="socialtags"></div>]
+		[(#CONFIG{itwx/itwxgoogleplus1}|?{' '})#GOOGLEPLUS1]
+
+		</div> <!--#cartouche-->
+    <br class="nettoyeur" />
+	
+    <div class="surlignable">			
+     [<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{0,0})</div>]
+	</div>
+	
+    [<p class="#EDIT{hyperlien} hyperlien"><a href="(#URL_SITE)" target="_blank"><:voir_en_ligne:> : [(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]	
+    
+    [<div class="ps surlignable">
+      <h2 class="pas_surlignable"><b><:info_ps:></b></h2>
+      <div class="#EDIT{ps}">(#PS|image_reduire{300,0})</div>
+    </div>]
+    [<div class="notes surlignable">
+      <h2 class="pas_surlignable"><:info_notes:></h2>
+      (#NOTES)</div>]
+	 <br />
+		
+  </div><!--#contenu-->
+  
+  [(#REM) Gestion du portfolio et des documents ]
+  [(#INCLURE{fond=inc/inc-documents}{id_article}{env})]
+
+
+  
+  [(#REM) Articles dans la meme rubrique ]
+  <INCLURE{fond=inc/inc-art-listart}{id_rubrique}{env}{ajax}{art=_art#ID_ARTICLE}/>
+  
+
+  
+  [(#REM) Pied ]
+  <div class="group" style="height:17px"></div>
+<!--   <div class="ticket">
+    <div class="ticketmenu">
+      <ul>
+        <li><a rel="start home" href="#URL_SITE_SPIP/"><:accueil_site:></a></li>
+        [(#CONFIG{itwx/classique}|?{' '})<li><a rel="start home" href="[(#URL_ARTICLE|parametre_url{'cimobile','web'})]"><:itwx:pageclassique:></a></li>]
+        [(#AUTORISER{ecrire})<li><a href="#EVAL{_DIR_RESTREINT_ABS}"><:espace_prive:></a></li>]
+		[(#SESSION{id_auteur}|?{' '})<li><a href="#URL_LOGOUT" rel="nofollow" style="text-align:center"><:icone_deconnecter:></a></li>]
+    </ul>
+    </div>
+  </div> -->
+  
+  <INCLURE{fond=inc/inc-pied}/> 
+  
+ </div><!--#page-->
+ </BOUCLE_principale_article5>
+ 
+ <BOUCLE_principale_article3(ARTICLES) {id_article} {raccourci=_portail_dossiers_actu}>
+<div id="mob">
+
+  [(#REM) TOOL BARRE ]
+  <INCLURE{fond=inc/inc-navBar}/> 
+  
+  [(#REM) Contenu principal : contenu de l'article ]
+  <div class="contenu">
+    <div class="cartouche"> 
+	
+	<div class="surlignable"> 
+<!-- 	   [<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>] -->				
+       <!--<h1>[(#TITRE|supprimer_numero)]	</h1>	-->		
+      <!--  [<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>] -->
+<!--        <p><small><abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour) ][(#DATE|affdate)]</abbr>, <:par_auteur:> #MODELE{lesauteurs}[ (<:texte_date_publication_anterieure:> (#DATE_REDAC|affdate)).]</small></p>
+ -->      </div>
+ 		
+ <div id="title-actu"><h3 class="entry-title" style="padding: 0px;"><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a></h3></div>
+	 
+        [(#LOGO_ARTICLE|image_reduire{160,auto})]
+	 [<div class="#EDIT{chapo} chapo">(#CHAPO|image_reduire{0,0})</div>]
+     
+        
+          
+            
+
+	    #MODELE{itwx_article_traductions} 
+
+		[(#CONFIG{itwx/itwxsocialtags}|?{' '})<div id="socialtags"></div>]
+		[(#CONFIG{itwx/itwxgoogleplus1}|?{' '})#GOOGLEPLUS1]
+
+		</div> <!--#cartouche-->
+    <br class="nettoyeur" />
+	
+    <div class="surlignable">			
+     [<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{0,0})</div>]
+	</div>
+	
+    [<p class="#EDIT{hyperlien} hyperlien"><a href="(#URL_SITE)" target="_blank"><:voir_en_ligne:> : [(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]	
+    
+    [<div class="ps surlignable">
+      <h2 class="pas_surlignable"><b><:info_ps:></b></h2>
+      <div class="#EDIT{ps}">(#PS|image_reduire{300,0})</div>
+    </div>]
+    [<div class="notes surlignable">
+      <h2 class="pas_surlignable"><:info_notes:></h2>
+      (#NOTES)</div>]
+	 <br />
+		
+  </div><!--#contenu-->
+  
+  [(#REM) Gestion du portfolio et des documents ]
+  [(#INCLURE{fond=inc/inc-documents}{id_article}{env})]
+
+
+  
+  [(#REM) Articles dans la meme rubrique ]
+  <INCLURE{fond=inc/inc-art-listart}{id_rubrique}{env}{ajax}{art=_art#ID_ARTICLE}/>
+  
+
+  
+  [(#REM) Pied ]
+  <div class="group" style="height:17px"></div>
+<!--   <div class="ticket">
+    <div class="ticketmenu">
+      <ul>
+        <li><a rel="start home" href="#URL_SITE_SPIP/"><:accueil_site:></a></li>
+        [(#CONFIG{itwx/classique}|?{' '})<li><a rel="start home" href="[(#URL_ARTICLE|parametre_url{'cimobile','web'})]"><:itwx:pageclassique:></a></li>]
+        [(#AUTORISER{ecrire})<li><a href="#EVAL{_DIR_RESTREINT_ABS}"><:espace_prive:></a></li>]
+		[(#SESSION{id_auteur}|?{' '})<li><a href="#URL_LOGOUT" rel="nofollow" style="text-align:center"><:icone_deconnecter:></a></li>]
+    </ul>
+    </div>
+  </div> -->
+  
+  <INCLURE{fond=inc/inc-pied}/> 
+  
+ </div><!--#page-->
+ </BOUCLE_principale_article3>
+ 
+  <BOUCLE_principale_article8(ARTICLES) {id_article} {raccourci=_portail_dossiers}>
+<div id="mob">
+
+  [(#REM) TOOL BARRE ]
+  <INCLURE{fond=inc/inc-navBar}/> 
+  
+  [(#REM) Contenu principal : contenu de l'article ]
+  <div class="contenu">
+    <div class="cartouche"> 
+	
+	<div class="surlignable"> 
+<!-- 	   [<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>] -->				
+       <!--<h1>[(#TITRE|supprimer_numero)]	</h1>	-->		
+      <!--  [<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>] -->
+<!--        <p><small><abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour) ][(#DATE|affdate)]</abbr>, <:par_auteur:> #MODELE{lesauteurs}[ (<:texte_date_publication_anterieure:> (#DATE_REDAC|affdate)).]</small></p>
+ -->      </div>
+ 		
+ <div id="title-actu"><h3 class="entry-title" style="padding: 0px;"><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a></h3></div>
+	 
+        [(#LOGO_ARTICLE|image_reduire{160,auto})]
+	 [<div class="#EDIT{chapo} chapo">(#CHAPO|image_reduire{0,0})</div>]
+     
+        
+          
+            
+
+	    #MODELE{itwx_article_traductions} 
+
+		[(#CONFIG{itwx/itwxsocialtags}|?{' '})<div id="socialtags"></div>]
+		[(#CONFIG{itwx/itwxgoogleplus1}|?{' '})#GOOGLEPLUS1]
+
+		</div> <!--#cartouche-->
+    <br class="nettoyeur" />
+	
+    <div class="surlignable">			
+     [<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{0,0})</div>]
+	</div>
+	
+    [<p class="#EDIT{hyperlien} hyperlien"><a href="(#URL_SITE)" target="_blank"><:voir_en_ligne:> : [(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]	
+    
+    [<div class="ps surlignable">
+      <h2 class="pas_surlignable"><b><:info_ps:></b></h2>
+      <div class="#EDIT{ps}">(#PS|image_reduire{300,0})</div>
+    </div>]
+    [<div class="notes surlignable">
+      <h2 class="pas_surlignable"><:info_notes:></h2>
+      (#NOTES)</div>]
+	 <br />
+		
+  </div><!--#contenu-->
+  
+  [(#REM) Gestion du portfolio et des documents ]
+  [(#INCLURE{fond=inc/inc-documents}{id_article}{env})]
+
+
+  
+  [(#REM) Articles dans la meme rubrique ]
+  <INCLURE{fond=inc/inc-art-listart}{id_rubrique}{env}{ajax}{art=_art#ID_ARTICLE}/>
+  
+
+  
+  [(#REM) Pied ]
+  <div class="group" style="height:17px"></div>
+<!--   <div class="ticket">
+    <div class="ticketmenu">
+      <ul>
+        <li><a rel="start home" href="#URL_SITE_SPIP/"><:accueil_site:></a></li>
+        [(#CONFIG{itwx/classique}|?{' '})<li><a rel="start home" href="[(#URL_ARTICLE|parametre_url{'cimobile','web'})]"><:itwx:pageclassique:></a></li>]
+        [(#AUTORISER{ecrire})<li><a href="#EVAL{_DIR_RESTREINT_ABS}"><:espace_prive:></a></li>]
+		[(#SESSION{id_auteur}|?{' '})<li><a href="#URL_LOGOUT" rel="nofollow" style="text-align:center"><:icone_deconnecter:></a></li>]
+    </ul>
+    </div>
+  </div> -->
+  
+  <INCLURE{fond=inc/inc-pied}/> 
+  
+ </div><!--#page-->
+ </BOUCLE_principale_article8>
+ 
+  <BOUCLE_principale_article9(ARTICLES) {id_article} {raccourci=_portail_dossiers2}>
+<div id="mob">
+
+  [(#REM) TOOL BARRE ]
+  <INCLURE{fond=inc/inc-navBar}/> 
+  
+  [(#REM) Contenu principal : contenu de l'article ]
+  <div class="contenu">
+    <div class="cartouche"> 
+	
+	<div class="surlignable"> 
+<!-- 	   [<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>] -->				
+       <!--<h1>[(#TITRE|supprimer_numero)]	</h1>	-->		
+      <!--  [<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>] -->
+<!--        <p><small><abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour) ][(#DATE|affdate)]</abbr>, <:par_auteur:> #MODELE{lesauteurs}[ (<:texte_date_publication_anterieure:> (#DATE_REDAC|affdate)).]</small></p>
+ -->      </div>
+ 		
+ <div id="title-actu"><h3 class="entry-title" style="padding: 0px;"><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a></h3></div>
+	 
+        [(#LOGO_ARTICLE|image_reduire{160,auto})]
+	 [<div class="#EDIT{chapo} chapo">(#CHAPO|image_reduire{0,0})</div>]
+     
+        
+          
+            
+
+	    #MODELE{itwx_article_traductions} 
+
+		[(#CONFIG{itwx/itwxsocialtags}|?{' '})<div id="socialtags"></div>]
+		[(#CONFIG{itwx/itwxgoogleplus1}|?{' '})#GOOGLEPLUS1]
+
+		</div> <!--#cartouche-->
+    <br class="nettoyeur" />
+	
+    <div class="surlignable">			
+     [<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{0,0})</div>]
+	</div>
+	
+    [<p class="#EDIT{hyperlien} hyperlien"><a href="(#URL_SITE)" target="_blank"><:voir_en_ligne:> : [(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]	
+    
+    [<div class="ps surlignable">
+      <h2 class="pas_surlignable"><b><:info_ps:></b></h2>
+      <div class="#EDIT{ps}">(#PS|image_reduire{300,0})</div>
+    </div>]
+    [<div class="notes surlignable">
+      <h2 class="pas_surlignable"><:info_notes:></h2>
+      (#NOTES)</div>]
+	 <br />
+		
+  </div><!--#contenu-->
+  
+  [(#REM) Gestion du portfolio et des documents ]
+  [(#INCLURE{fond=inc/inc-documents}{id_article}{env})]
+
+
+  
+  [(#REM) Articles dans la meme rubrique ]
+  <INCLURE{fond=inc/inc-art-listart}{id_rubrique}{env}{ajax}{art=_art#ID_ARTICLE}/>
+  
+
+  
+  [(#REM) Pied ]
+  <div class="group" style="height:17px"></div>
+<!--   <div class="ticket">
+    <div class="ticketmenu">
+      <ul>
+        <li><a rel="start home" href="#URL_SITE_SPIP/"><:accueil_site:></a></li>
+        [(#CONFIG{itwx/classique}|?{' '})<li><a rel="start home" href="[(#URL_ARTICLE|parametre_url{'cimobile','web'})]"><:itwx:pageclassique:></a></li>]
+        [(#AUTORISER{ecrire})<li><a href="#EVAL{_DIR_RESTREINT_ABS}"><:espace_prive:></a></li>]
+		[(#SESSION{id_auteur}|?{' '})<li><a href="#URL_LOGOUT" rel="nofollow" style="text-align:center"><:icone_deconnecter:></a></li>]
+    </ul>
+    </div>
+  </div> -->
+  
+  <INCLURE{fond=inc/inc-pied}/> 
+  
+ </div><!--#page-->
+ </BOUCLE_principale_article9>
+ 
+  <BOUCLE_principale_article10(ARTICLES) {id_article} {raccourci=_portail_dossiers3}>
+<div id="mob">
+
+  [(#REM) TOOL BARRE ]
+  <INCLURE{fond=inc/inc-navBar}/> 
+  
+  [(#REM) Contenu principal : contenu de l'article ]
+  <div class="contenu">
+    <div class="cartouche"> 
+	
+	<div class="surlignable"> 
+<!-- 	   [<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>] -->				
+       <!--<h1>[(#TITRE|supprimer_numero)]	</h1>	-->		
+      <!--  [<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>] -->
+<!--        <p><small><abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour) ][(#DATE|affdate)]</abbr>, <:par_auteur:> #MODELE{lesauteurs}[ (<:texte_date_publication_anterieure:> (#DATE_REDAC|affdate)).]</small></p>
+ -->      </div>
+ 		
+ <div id="title-actu"><h3 class="entry-title" style="padding: 0px;"><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a></h3></div>
+	 
+        [(#LOGO_ARTICLE|image_reduire{160,auto})]
+	 [<div class="#EDIT{chapo} chapo">(#CHAPO|image_reduire{0,0})</div>]
+     
+        
+          
+            
+
+	    #MODELE{itwx_article_traductions} 
+
+		[(#CONFIG{itwx/itwxsocialtags}|?{' '})<div id="socialtags"></div>]
+		[(#CONFIG{itwx/itwxgoogleplus1}|?{' '})#GOOGLEPLUS1]
+
+		</div> <!--#cartouche-->
+    <br class="nettoyeur" />
+	
+    <div class="surlignable">			
+     [<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{0,0})</div>]
+	</div>
+	
+    [<p class="#EDIT{hyperlien} hyperlien"><a href="(#URL_SITE)" target="_blank"><:voir_en_ligne:> : [(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]	
+    
+    [<div class="ps surlignable">
+      <h2 class="pas_surlignable"><b><:info_ps:></b></h2>
+      <div class="#EDIT{ps}">(#PS|image_reduire{300,0})</div>
+    </div>]
+    [<div class="notes surlignable">
+      <h2 class="pas_surlignable"><:info_notes:></h2>
+      (#NOTES)</div>]
+	 <br />
+		
+  </div><!--#contenu-->
+  
+  [(#REM) Gestion du portfolio et des documents ]
+  [(#INCLURE{fond=inc/inc-documents}{id_article}{env})]
+
+
+  
+  [(#REM) Articles dans la meme rubrique ]
+  <INCLURE{fond=inc/inc-art-listart}{id_rubrique}{env}{ajax}{art=_art#ID_ARTICLE}/>
+  
+
+  
+  [(#REM) Pied ]
+  <div class="group" style="height:17px"></div>
+<!--   <div class="ticket">
+    <div class="ticketmenu">
+      <ul>
+        <li><a rel="start home" href="#URL_SITE_SPIP/"><:accueil_site:></a></li>
+        [(#CONFIG{itwx/classique}|?{' '})<li><a rel="start home" href="[(#URL_ARTICLE|parametre_url{'cimobile','web'})]"><:itwx:pageclassique:></a></li>]
+        [(#AUTORISER{ecrire})<li><a href="#EVAL{_DIR_RESTREINT_ABS}"><:espace_prive:></a></li>]
+		[(#SESSION{id_auteur}|?{' '})<li><a href="#URL_LOGOUT" rel="nofollow" style="text-align:center"><:icone_deconnecter:></a></li>]
+    </ul>
+    </div>
+  </div> -->
+  
+  <INCLURE{fond=inc/inc-pied}/> 
+  
+ </div><!--#page-->
+ </BOUCLE_principale_article10>
+ <BOUCLE_principale_article(ARTICLES) {id_article} {id_secteur!=94}>
+ [(#REM) TOOL BARRE ]
+  <INCLURE{fond=inc/inc-navBar}/> 
+  
+  [(#REM) Contenu principal : contenu de l'article ]
+  <div class="contenu">
+    <div class="cartouche"> 
+	
+	<div class="surlignable"> 
+<!-- 	   [<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>] -->				
+       <h1>[(#TITRE|supprimer_numero)]	</h1>			
+      <!--  [<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>] -->
+<!--        <p><small><abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour) ][(#DATE|affdate)]</abbr>, <:par_auteur:> #MODELE{lesauteurs}[ (<:texte_date_publication_anterieure:> (#DATE_REDAC|affdate)).]</small></p>
+ -->      </div>
+ 
+	 [(#LOGO_ARTICLE|image_reduire{160,auto})]
+	 [<div class="#EDIT{chapo} chapo" align="left">(#CHAPO|image_reduire{0,0})</div>]
+     
+
+	    #MODELE{itwx_article_traductions} 
+
+		[(#CONFIG{itwx/itwxsocialtags}|?{' '})<div id="socialtags"></div>]
+		[(#CONFIG{itwx/itwxgoogleplus1}|?{' '})#GOOGLEPLUS1]
+
+		</div> <!--#cartouche-->
+    <br class="nettoyeur" />
+	
+    <div class="surlignable">			
+     [<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{0,0})</div>]
+	</div>
+	
+    [<p class="#EDIT{hyperlien} hyperlien"><a href="(#URL_SITE)" target="_blank"><:voir_en_ligne:> : [(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]	
+    
+    [<div class="ps surlignable">
+      <h2 class="pas_surlignable"><b><:info_ps:></b></h2>
+      <div class="#EDIT{ps}">(#PS|image_reduire{300,0})</div>
+    </div>]
+    [<div class="notes surlignable">
+      <h2 class="pas_surlignable"><:info_notes:></h2>
+      (#NOTES)</div>]
+	 <br />
+		
+  </div><!--#contenu-->
+  
+  [(#REM) Gestion du portfolio et des documents ]
+  [(#INCLURE{fond=inc/inc-documents}{id_article}{env})]
+
+
+  
+  [(#REM) Articles dans la meme rubrique ]
+  <INCLURE{fond=inc/inc-art-listart}{id_rubrique}{env}{ajax}{art=_art#ID_ARTICLE}/>
+  
+
+  
+  [(#REM) Pied ]
+  <div class="group" style="height:17px"></div>
+<!--   <div class="ticket">
+    <div class="ticketmenu">
+      <ul>
+        <li><a rel="start home" href="#URL_SITE_SPIP/"><:accueil_site:></a></li>
+        [(#CONFIG{itwx/classique}|?{' '})<li><a rel="start home" href="[(#URL_ARTICLE|parametre_url{'cimobile','web'})]"><:itwx:pageclassique:></a></li>]
+        [(#AUTORISER{ecrire})<li><a href="#EVAL{_DIR_RESTREINT_ABS}"><:espace_prive:></a></li>]
+		[(#SESSION{id_auteur}|?{' '})<li><a href="#URL_LOGOUT" rel="nofollow" style="text-align:center"><:icone_deconnecter:></a></li>]
+    </ul>
+    </div>
+  </div> -->
+  
+  <INCLURE{fond=inc/inc-pied}/> 
+  </BOUCLE_principale_article>
+ 
+ 
+ <BOUCLE_principale_article_alaune(ARTICLES) {id_article} {raccourci=_alaune}>
+<div id="mob">
+
+  [(#REM) TOOL BARRE ]
+  <INCLURE{fond=inc/inc-navBar}/> 
+  
+  [(#REM) Contenu principal : contenu de l'article ]
+  <div class="contenu">
+    <div class="cartouche"> 
+	
+	<div class="surlignable"> 
+<!-- 	   [<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>] -->				
+       <!--<h1>[(#TITRE|supprimer_numero)]	</h1>	-->		
+      <!--  [<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>] -->
+<!--        <p><small><abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour) ][(#DATE|affdate)]</abbr>, <:par_auteur:> #MODELE{lesauteurs}[ (<:texte_date_publication_anterieure:> (#DATE_REDAC|affdate)).]</small></p>
+ -->      </div>
+ 		
+ <div id="title-actu"><h3 class="entry-title" style="padding: 0px;"><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a></h3></div>
+	 
+        [(#LOGO_ARTICLE|image_reduire{160,auto})]
+	 [<div class="#EDIT{chapo} chapo">(#CHAPO|image_reduire{0,0})</div>]
+     
+        
+          
+            
+
+	    #MODELE{itwx_article_traductions} 
+
+		[(#CONFIG{itwx/itwxsocialtags}|?{' '})<div id="socialtags"></div>]
+		[(#CONFIG{itwx/itwxgoogleplus1}|?{' '})#GOOGLEPLUS1]
+
+		</div> <!--#cartouche-->
+    <br class="nettoyeur" />
+	
+    <div class="surlignable">			
+     [<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{0,0})</div>]
+	</div>
+	
+    [<p class="#EDIT{hyperlien} hyperlien"><a href="(#URL_SITE)" target="_blank"><:voir_en_ligne:> : [(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]	
+    
+    [<div class="ps surlignable">
+      <h2 class="pas_surlignable"><b><:info_ps:></b></h2>
+      <div class="#EDIT{ps}">(#PS|image_reduire{300,0})</div>
+    </div>]
+    [<div class="notes surlignable">
+      <h2 class="pas_surlignable"><:info_notes:></h2>
+      (#NOTES)</div>]
+	 <br />
+		
+  </div><!--#contenu-->
+  
+  [(#REM) Gestion du portfolio et des documents ]
+  [(#INCLURE{fond=inc/inc-documents}{id_article}{env})]
+
+
+  
+  [(#REM) Articles dans la meme rubrique ]
+  <INCLURE{fond=inc/inc-art-listart}{id_rubrique}{env}{ajax}{art=_art#ID_ARTICLE}/>
+  
+
+  
+  [(#REM) Pied ]
+  <div class="group" style="height:17px"></div>
+<!--   <div class="ticket">
+    <div class="ticketmenu">
+      <ul>
+        <li><a rel="start home" href="#URL_SITE_SPIP/"><:accueil_site:></a></li>
+        [(#CONFIG{itwx/classique}|?{' '})<li><a rel="start home" href="[(#URL_ARTICLE|parametre_url{'cimobile','web'})]"><:itwx:pageclassique:></a></li>]
+        [(#AUTORISER{ecrire})<li><a href="#EVAL{_DIR_RESTREINT_ABS}"><:espace_prive:></a></li>]
+		[(#SESSION{id_auteur}|?{' '})<li><a href="#URL_LOGOUT" rel="nofollow" style="text-align:center"><:icone_deconnecter:></a></li>]
+    </ul>
+    </div>
+  </div> -->
+  
+  <INCLURE{fond=inc/inc-pied}/> 
+  
+ </div><!--#page-->
+ </BOUCLE_principale_article_alaune>
+ 
+</body>
+</html>
+

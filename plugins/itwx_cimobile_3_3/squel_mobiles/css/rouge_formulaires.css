@@ -1,0 +1,297 @@
+/*  ------------------------------------------
+/*  Habillage des formulaires
+/*  ------------------------------------------ */
+input, select, textarea { font-size: 100%; font-family: inherit; }
+.extrait {margin:0}
+
+/* Structure generale des formulaires
+-------------------------------------- */
+.formulaire_spip { clear: both; margin: 0px 0px 15px 0px; padding: 0; border: 0; text-align: left; font-size: 1em }
+.formulaire_spip form { margin: 0; padding: 0; } 
+.formulaire_site { margin-top:-5px }
+.formulaire_signature { margin-top:-13px }
+
+/* Fieldset */
+.formulaire_spip fieldset { clear: both; padding: 0; border: 0; margin:0; }
+.formulaire_spip fieldset legend, .formulaire_spip fieldset .legend { 
+	width:100%;
+	background: url('../images/themes/img_rouge/listGroup.png') repeat-x;
+	border-top: 1px solid #e1b9b8;
+	font-size: 1em;
+	padding: 1px 0 3px 0; 
+	text-align:	center;
+	font-weight: normal;
+	font-weight: bold;
+	color: #FFF;
+    text-decoration: none; } 
+#tab #contenu .formulaire_spip fieldset legend, #tab #contenu .formulaire_spip fieldset .legend { 
+	border: 1px solid #C0C0C0;
+	-webkit-border-radius: 14px; 
+	-moz-border-radius: 14px; 
+	-ms-border-radius: 14px; 
+	-o-border-radius: 14px; 
+	border-radius: 14px; 
+	font-size: 0.90em; } /* PAGES TABLETTE */
+#mob .formulaire_spip fieldset legend, #mob .formulaire_spip fieldset .legend { 
+	width:100%;
+	background: #d88c70;
+	border-top: 1px solid #CCC;
+	font-size: 16px;
+	padding: 2px 0 3px 0; 
+	text-align:	center;
+	font-weight: bold;
+	color: #FFF; } /* PAGES MOBILE */
+	
+
+/* Explications */
+.formulaire_spip .explication { margin: 0.50em; color: #444; }
+.formulaire_spip .explication .details { color: #444; font-size:0.9em}
+.formulaire_spip .details a {margin-top:0.5em;}
+.formulaire_spip .saisie_session_email label {margin-top:-1em}
+
+/* Lignes */
+.formulaire_spip ul { margin: 0; padding: 0; list-style: none; }
+.formulaire_spip ul li { clear: both; margin: 0; padding: 0.5em; }
+
+/* Labels */
+.formulaire_spip label { display: block; text-align: left; color: #444; font-weight: bold; position: relative; }
+.formulaire_spip li p { margin-top: 0; margin-bottom: 0; }
+
+.formulaire_spip .choix label{display:inline;font-weight:normal;}
+.formulaire_spip .choix input.radio,
+.formulaire_spip .choix input.checkbox {width:auto;}
+
+
+/* Champs de saisie */
+.formulaire_spip input.text { width: 15em; border: 1px inset; }
+.formulaire_spip textarea { width: 99%; border: 1px inset; }
+.formulaire_spip select { width: 99%; }
+
+
+/* Boutons */
+.formulaire_spip .boutons { clear: both; margin: 0.5em; text-align: right;  }
+.formulaire_spip .boutons input { margin-top: 1em; padding:0.3em;  width: 100%; font-size:1em; font-weight:bold; }
+.formulaire_spip .boutons input, input.submit {color:#fff; background:#A22D2D; font-size:1em}
+.formulaire_spip .boutonforum input, .formulaire_spip .boutonforum input.submit { width: 100%; padding: 0.3em;font-weight: bold;font-size:1em;}
+.formulaire_spip .boutonrech input, .formulaire_spip .boutonrech input.submit { width: 100%; padding: 0.2em; font-size:1em;}
+
+
+/* Reponses, previsu et erreurs
+-------------------------------------- */
+
+/* Champs obligatoires */
+.formulaire_spip li.obligatoire {}
+.formulaire_spip li.obligatoire label {}
+
+/* Previsualisation du message */
+.formulaire_spip fieldset.previsu { margin:0; padding:0 0 1em 0; background: #C14533; border: 0 }
+.formulaire_forum fieldset.previsu legend, 
+#mob .formulaire_forum fieldset.previsu legend, #mob .formulaire_forum fieldset legend { 
+	background: #b33f30;
+	margin-bottom:1em;
+	padding: 0; 
+	-webkit-border-radius: 0; 
+	-moz-border-radius: 0; 
+	-ms-border-radius: 0; 
+	-o-border-radius: 0; 
+	border-radius: 0; 
+	font-weight: bold; 
+	color: #fff;} /* PAGES MOBILE */
+
+.formulaire_spip fieldset.previsu li {padding:3px;border:none}
+.formulaire_spip fieldset.previsu ul li, .formulaire_spip fieldset.previsu ul {border:0}
+.formulaire_spip fieldset.previsu p {padding-bottom:0.5em} 
+.formulaire_spip fieldset.previsu a, .formulaire_spip fieldset.previsu a:visited, .formulaire_spip fieldset.previsu a:hover, .formulaire_spip fieldset.previsu a:active, .formulaire_spip fieldset.previsu a[selected] {
+	background: #da8c6f;
+	border:0;
+	text-align: left; 
+	padding:0;
+	font-size: 1em;
+	color:#333;
+	text-decoration: none;
+	cursor:inherit; }
+
+
+/* Reponse du formulaire */
+.reponse_formulaire { font-weight: bold; color: #e86519; font-size: 1.20em; }
+fieldset.reponse_formulaire { border-color: #e86519; font-weight: normal; }
+fieldset.reponse_formulaire.reponse_formulaire legend { color: #F57900; } 
+
+/* * Erreurs */
+.formulaire_spip li.erreur .erreur_message { display: block; color: #C30; font-weight: bold; }
+.formulaire_spip li.erreur input.text, .formulaire_spip li.erreur textarea { background-color: #FCC; border-style: solid; border-color: #C30; }
+.reponse_formulaire_erreur { margin: 0; color: #C30; font-weight: bold; }
+
+/* * OK */
+.reponse_formulaire_ok { margin: 0; color: #53AD20; font-weight: bold; }
+
+
+/* Variantes et cas particuliers
+-------------------------------------- */
+
+/* Barre de raccourcis typographiques */
+table.spip_barre { width: 100%; }
+table.spip_barre a img { background: #FDA; padding: 3px; border: 1px outset #CC9; }
+table.spip_barre a:focus img,
+table.spip_barre a:hover img,
+table.spip_barre a:active img { background: #FFF; border: 1px solid #CC9; }
+table.spip_barre input.barre { width: 99%; border: 0; color:inherit }
+
+/* Formulaire de forum */
+.formulaire_forum { margin-top:0.5em; }
+.repondre .formulaire_forum { padding-bottom: 0.5em; border: 2px solid #B33F30; }
+.formulaire_forum .saisie_titre input.text, .formulaire_forum .saisie_titre textarea { width: 86%; }
+.formulaire_forum .saisie_url_site input.text { padding-left: -20px; }
+.formulaire_forum fieldset a {
+    display: inherit;
+    padding: 0.25em; 
+    text-decoration: none;
+    color: #000;
+	font-size: 1em;
+	font-weight:normal;
+    background: none;
+	border:0;}
+.formulaire_forum fieldset a:hover { 
+	text-decoration: underline;
+    display: inherit;
+    padding: 0.25em; 
+    color: #000;
+	font-size: 1em;
+	font-weight:normal;
+    background: none;
+	border:0;}
+.formulaire_forum fieldset legend { background:#B33F30; border-color:#B33F30}
+.formulaire_forum .saisie_session_nom { margin-bottom:1em}
+ul.forum .formulaire_forum .forum-chapo a { background:transparent}
+
+	/* PAGES TABLETTE */
+#tab #contenu #div_repondre .formulaire_forum { margin: 0.5em 0.7em 1em 0.7em; }
+#tab #contenu .formulaire_forum .saisie_session_nom .details a { font-size: 1em; }
+
+#tab #contenu .repondre .formulaire_forum fieldset .saisie_session_nom input.text { margin-bottom:1em;}
+#tab #contenu .repondre .formulaire_forum fieldset .explication .details a {margin-top:0.8em;font-size: 1em;}
+#tab #contenu .formulaire_forum fieldset legend { 
+	border:0;
+	-webkit-border-radius: 0; 
+	-moz-border-radius: 0; 
+	-ms-border-radius: 0; 
+	-o-border-radius: 0; 
+	border-radius: 0; 
+	font-size: 0.90em; } 
+#tab #contenu .formulaire_inscription, #tab #contenu .formulaire_login { background:#E1BFA9; border:2px solid #fff; padding:0.5em; -webkit-border-radius: 10px; -moz-border-radius: 10px; -ms-border-radius: 10px; -o-border-radius: 10px; border-radius: 10px; }
+#tab #contenu .extra .formulaire_inscription fieldset input.password, #tab #contenu .extra .formulaire_login fieldset input.password { width:15em }
+
+#tab .formulaire_ecrire_auteur fieldset.previsu { margin: 0.5em; background:none }
+#tab .formulaire_ecrire_auteur fieldset.previsu ul { margin: 1em }
+#tab .formulaire_ecrire_auteur fieldset.previsu .boutons { text-align:center }
+#tab .formulaire_ecrire_auteur fieldset.previsu input.submit { width:95% }
+
+
+#formulaire_inscription ul { background:#c46b4a; border:0}
+#mob #formulaire_inscription ul { background:none; }	/* PAGE MOBILE */
+#smart #formulaire_inscription { margin-top:0; padding-top:0; }	/* PAGE SMARTPHONE */
+#tab #div_inscription { margin-top:4em }	/* PAGE MOBILE */
+#tab #formulaire_inscription .legend { -webkit-border-radius: 10px; -moz-border-radius: 10px; -ms-border-radius: 10px; -o-border-radius: 10px; border-radius: 10px; }	/* PAGE MOBILE */
+
+
+/* Selection des langues */
+.formulaire_menu_lang { margin: 0; padding: 0; background: none; }
+
+/* Formulaires de recherche (site / petitions) */
+.formulaire_recherche { width: auto; margin: 0; padding: 0.5em; background: #BA5C41; }
+#mob .formulaire_recherche { margin-bottom:1em; padding: 0.5em; border-top: 1px solid #B3583E;} /* PAGES MOBILE */
+.formulaire_recherche h10 {padding-bottom: 1em;} 
+.formulaire_recherche * { display: inline; vertical-align: middle; }
+.formulaire_recherche label { display:none }
+#mob .formulaire_recherche label { display: block; color:#fff; font-size:1.2em }
+.formulaire_recherche input.text { width: 97%; background: #FFF ; font-size: 1.3em; margin-bottom: 1em; padding: 8px 0 8px 8px;}
+.formulaire_recherche input, .formulaire_recherche input.submit { width: auto;  }
+.formulaire_recherche input.submit {margin-bottom: 0; width: 100%; padding: 5px 4px 6px 4px }
+
+#div_recherche .formulaire_recherche input.text { display:block; width: 97%; font-size: 1em; } /* PAGES SMARTPHONE TABLETTE */
+#div_recherche .formulaire_recherche input.submit { display:block; width: 100%; } /* PAGES SMARTPHONE TABLETTE */
+
+
+/* Choix des mots-clefs */
+ul.choix_mots { display: block; margin: 0; padding: 0; list-style: none; }
+ul.choix_mots li { clear: none; float: left; display: block; width: 30%; padding: 1%; }
+ul.choix_mots li label { display: inline; font-weight: normal; }
+
+.formulaire_spip .bugajaxie { display: none; } 
+
+
+/* Formulaire de login dans une page */
+.formulaire_login ul li {clear:left;}
+.formulaire_login .editer_password .details {display:block; }
+.formulaire_login #spip_logo_auteur {float:right;}
+
+/* login */
+#div_login, #div_inscription {
+	position: relative; 
+	z-index:9; 
+	background:#c46b4a;
+	padding:0.5em;
+	border:2px solid #fff;
+	-webkit-border-radius: 10px; 
+	-moz-border-radius: 10px; 
+	-ms-border-radius: 10px; 
+	-o-border-radius: 10px; 
+	border-radius: 10px; 
+	}
+#smart #div_login { margin:-1.1em 0.8em 0 0.8em;}	/* PAGES SMARTPHONE */
+#tab #div_login {margin: -1.5em 25% 0.5em 25%}	/* PAGES TABLETTE */
+#smart #div_inscription { 
+	margin-top:-2.95em;  
+	-webkit-border-radius: 3px 3px 0 0;
+	-moz-border-radius: 3px 3px 0 0;
+	-ms-border-radius: 3px 3px 0 0;
+	-o-border-radius: 3px 3px 0 0;
+	border-radius: 3px 3px 0 0;
+	}	/* PAGES SMARTPHONE */
+#tab #div_inscription { margin:-3.1em 25% 0.7em 25%}	/* PAGES TABLETTE */
+#div_inscription .formulaire_inscription fieldset { margin-top:-6px}
+#div_login .formulaire_login fieldset input.password, #div_inscription .formulaire_inscription fieldset input.password { width:15em }
+#div_login .formulaire_login .boutons input, 
+#div_inscription .formulaire_inscription .boutons input,
+#div_recherche .formulaire_recherche input.submit { font-size:1.5em; padding: 0.3em; border: 2px outset #C0C0C0; -webkit-border-radius: 18px; -moz-border-radius: 18px; -ms-border-radius: 18px; -o-border-radius: 18px; border-radius: 18px; }
+#div_login legend, #div_inscription legend { 
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-ms-border-radius: 10px;
+	-o-border-radius: 10px;
+	border-radius: 10px;
+	border:1px solid #C0C0C0; 
+    color: #fff;
+	font-weight:bold; }
+.clicCacher #logbutton { 
+	display:block;
+	position: relative;
+	background:red;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#FF0000), to(#CC0000));
+	background-image: -moz-linear-gradient(top, #FF0000, #CC0000);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#FF0000,endColorstr=#CC0000);
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#FF0000,endColorstr=#CC0000)";
+    margin: 6px;
+ 	padding: 0.25em;
+    border: 2px outset #C0C0C0;
+	-webkit-border-radius: 18px; 
+	-moz-border-radius: 18px;
+	-ms-border-radius: 18px;
+	-o-border-radius: 18px;
+	border-radius: 18px;
+	text-align:center;
+    text-decoration: none;
+	font-weight: bold;
+	font-size:1.5em;
+ 	font-weight:bold; 
+	color:#fff;  }
+#tab .clicCacher #logbutton { padding: 0.18em; -webkit-border-radius: 20px; -moz-border-radius: 20px; -ms-border-radius: 20px; -o-border-radius: 20px; border-radius: 20px; }
+#div_recherche .clicCacher #logbutton { padding: 0.25em; margin-bottom: 0.5em; -webkit-border-radius: 20px; -moz-border-radius: 20px; -ms-border-radius: 20px; -o-border-radius: 20px; border-radius: 20px;  }
+#tab .formulaire_signature legend { -webkit-border-radius: 14px; -moz-border-radius: 14px; -ms-border-radius: 14px; -o-border-radius: 14px; border-radius: 14px; }
+
+/* PAGES TABLETTE */
+@media only screen and (orientation:portrait){
+	#tab #contenu .formulaire_ecrire_auteur fieldset legend { -webkit-border-radius: 0; -moz-border-radius: 0; -ms-border-radius: 0; -o-border-radius: 0; border-radius: 0; }
+	#tab #contenu .formulaire_ecrire_auteur fieldset.previsu ul { margin:0; border-left: 0; border-right: 0; }
+	#tab #contenu .formulaire_ecrire_auteur fieldset.previsu p.boutons { margin: 0; border-left: 0; border-right: 0; }
+	#tab .formulaire_signature legend { -webkit-border-radius: 0; -moz-border-radius: 0; -ms-border-radius: 0; -o-border-radius: 0; border-radius: 0; }

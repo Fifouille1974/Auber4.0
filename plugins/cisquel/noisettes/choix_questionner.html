@@ -1,0 +1,16 @@
+#CACHE{0}
+				<BOUCLE_masquer(ARTICLES){id_rubrique}{ciforme=_questionner}{doublons}></BOUCLE_masquer>
+				
+				<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
+				<B_sommaire>
+				<div class="actubox2">
+				<ul>
+				<BOUCLE_sommaire(ARTICLES){id_rubrique}{par #CITRI}{!par #CITRIINVERSE}{par num #CITRINUM}{doublons}>
+					<li>
+						<a href="#sommaire_#ID_ARTICLE" class="lien">[(#TITRE|supprimer_numero)]</a>
+					</li>
+				</BOUCLE_sommaire>
+				</ul>
+				</div>
+				</B_sommaire>
+				</BOUCLE_rubrique>

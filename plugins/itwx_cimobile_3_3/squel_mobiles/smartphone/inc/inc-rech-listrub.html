@@ -1,0 +1,14 @@
+<BOUCLE_rubrique_invisible(RUBRIQUES) {titre_mot = invisible} {doublons}></BOUCLE_rubrique_invisible>
+
+<B_rubriques>
+<a id="pagination_rubriques"></a>
+<div class="group"><:rubriques:> (#GRAND_TOTAL)</div>	
+	<div class="listmenu">
+	<ul>
+	<BOUCLE_rubriques(RUBRIQUES) {recherche} {par points}{inverse}{pagination 5 #ENV{rub}}{doublons}>
+	<li><a href="#URL_RUBRIQUE">#TITRE</a></li>
+	</BOUCLE_rubriques>
+	</ul>
+	</div>
+[<div class="pagination">(#PAGINATION)</div>]	
+</B_rubriques>

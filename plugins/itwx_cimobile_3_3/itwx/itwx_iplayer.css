@@ -1,0 +1,11 @@
+.twx-player,
+.texte dl.spip_documents object, .chapo dl.spip_documents object, 
+.texte dl.spip_documents dd.spip_doc_descriptif, .chapo dl.spip_documents dd.spip_doc_descriptif,
+.texte #playliste_video, .chapo #playliste_video, 
+.texte .neolao_multi, .chapo .neolao_multi {display:none !important} /* lecteur flash */
+
+.itwx-player, itwx_player {display:inline !important}
+.itwx_player dl.spip_documents {display:block !important; margin:1em 0}  /* lecteur quick */
+.texte .itwx_player .spip_documents a img { width: 280px; height:175px; margin:0; padding:5px; -webkit-border-radius: 5px; background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ccc)); } /* vignette pour lecteur quick */
+.texte .itwx_player dl.spip_documents dt.spip_doc_titre, .chapo .itwx_player dl.spip_documents dt.spip_doc_titre { padding-top:0.3em; font-size: 16px }
+.texte .itwx_player dl.spip_documents dd.spip_doc_descriptif, .chapo .itwx_player dl.spip_documents dd.spip_doc_descriptif { font-size: 13px }

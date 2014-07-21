@@ -1,0 +1,15 @@
+<BOUCLE_article_invisible(ARTICLES) {titre_mot = invisible} {doublons}></BOUCLE_article_invisible>
+
+<B_articles>	
+<a id="pagination_articles"></a>
+<div class="group"><:articles:> (#GRAND_TOTAL)</div>	
+	<BOUCLE_articles(ARTICLES) {recherche} {par points}{inverse} {pagination}{doublons}>
+	<div class="listmenu">
+	<ul class="docs">				
+        <li><a href="#URL_ARTICLE">#TITRE</a></li>
+	</ul>
+	</div>
+	</BOUCLE_articles>
+[<div class="pagination">(#PAGINATION)</div>]	
+<br />
+</B_articles>

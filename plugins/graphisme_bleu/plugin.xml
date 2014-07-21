@@ -1,0 +1,17 @@
+<plugin>
+	<nom>Charte graphique bleue</nom>
+
+	<lien></lien>
+	<version>1.32</version>
+	<version_base>1.0</version_base>
+	<etat>stable</etat>
+    <description>
+    Graphisme bleu.
+    </description>
+	<prefix>charte</prefix>
+	<install>base/charte_install.php</install>
+
+	<necessite id="SPIP" version='[2.0.9;]' />
+	<necessite id="cisquel" version='[1.0;]' />
+
+</plugin>

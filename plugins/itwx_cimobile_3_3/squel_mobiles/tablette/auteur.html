@@ -1,0 +1,91 @@
+<BOUCLE_principale(AUTEURS) {id_auteur}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title>[(#NOM|textebrut) - ][(#NOM_SITE_ITWX|textebrut)]</title>
+[<meta name="description" content="(#BIO|couper{150}|attribut_html)" />]
+<INCLURE{fond=inc/inc-head}>
+[(#REM) Lien vers le flux RSS des articles de l'auteur ]
+<link rel="alternate" type="application/rss+xml" title="[(#NOM|textebrut)]" href="[(#URL_PAGE{backend}|parametre_url{id_auteur,#ID_AUTEUR})]" />
+</head>
+
+<body class="#LANG_DIR" id="top">
+<div id="tab">
+
+ [(#REM) TOOL BARRE ]
+ <INCLURE{fond=inc/inc-navBar}>
+
+  <div id="main">
+  
+  [(#REM) Hierarchie ]
+  <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <a href="#URL_PAGE{lesauteurs}"><:itwx:auteurs:></a> &gt; <strong class="on">#NOM</strong></div>
+
+   <div id="conteneur">
+	
+	 [(#REM) Contenu principal : affichage de l'auteur ]
+     <div class="contenu">
+	  
+        <div class="vcard surlignable">
+		 [(#REM) microformat vcard]
+          <div class="cartouche">
+		   [(#LOGO_AUTEUR|image_reduire{150,100})]
+            <h1 class="#EDIT{qui} fn">#NOM</h1>
+          [<div class="#EDIT{bio} texte note">(#BIO)</div>]
+          [<p class="#EDIT{hyperlien} hyperlien"><a href="(#URL_SITE)" target="_blank"><:voir_en_ligne:> : [(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>] 
+		  </div>
+        </div><!--#vcard-->
+		
+        [(#REM) Articles de l'auteur ] 
+		<INCLURE{fond=inc/inc-aut-listart}{id_auteur}{env}{ajax}/> <br />
+		
+        [(#REM) Ecrire a l'auteur ]
+        #FORMULAIRE_ECRIRE_AUTEUR
+        
+        [<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>] 
+		
+		
+   </div><!--#contenu-->
+	  
+	
+	
+  [(#REM) Navigation ] 
+   <div id="navigation">
+      <div class="group bord" style="height:13px;border-bottom: 1px solid #B9B9B9;"></div>
+	  
+      [(#REM) Autres auteurs ]
+	  <div id="navigation-a"><INCLURE{fond=inc/inc-aut-listaut}{env}{ajax}/> </div>
+	  
+      [(#REM) Informations ]
+      <div id="navigation-b">
+      <INCLURE{fond=inc/inc-infos_auteurs}/> 
+      </div>
+	  
+      [(#REM) Menu de Rubriques ] 
+      [(#REM) Landscape mode  ]
+      <div id="navigation-c" class="display-landscape"> <INCLURE{fond=inc/inc-rubriques}{id_rubrique}/> </div>
+      [(#REM) Portrait mode  ]
+      <div id="navigation-e" class="display-portrait"> <INCLURE{fond=inc/inc-rubriques}{id_rubrique}/> </div>
+
+    </div> <!--#navigation-->
+	
+  </div><!--#conteneur-->
+  
+  [(#REM) Pied ]
+  <div id="pied"> 
+    <div class="group" style="height:13px;border-bottom: 1px solid #B9B9B9;"></div>
+	<div class="ticket">
+      <div class="ticketmenu"> 
+	    [(#CONFIG{itwx/classique}|?{' '})<a rel="start home" href="[(#URL_AUTEUR|parametre_url{'cimobile','web'})]"><:itwx:pageclassique:></a>]
+		[(#AUTORISER{ecrire})<a href="#EVAL{_DIR_RESTREINT_ABS}"><:espace_prive:></a>]
+		[(#SESSION{id_auteur}|?{' '})<a href="#URL_LOGOUT" rel="nofollow" style="background-image: none;text-align:center;padding: 10px 12px;"><:icone_deconnecter:></a>]
+      </div>
+    </div><!--#ticket-->
+	<INCLURE{fond=inc/inc-pied}/> 
+  </div><!--#pied-->
+  
+  </div><!--#main-->
+
+</div><!--#page-->
+</body>
+</html>
+</BOUCLE_principale>

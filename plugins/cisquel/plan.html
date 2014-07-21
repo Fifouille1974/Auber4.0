@@ -1,0 +1,48 @@
+#CIPARAM_DOCTYPE
+<head>
+<title><:plan_site:>[ - (#NOM_SITE_SPIP|textebrut)]</title>
+<meta name="robots" content="noindex, nofollow" />
+<link href="#CHEMIN{_css/styleexceptions.css}" rel="stylesheet" type="text/css" />
+<INCLURE{fond=noisettes/head}{lang}>
+</head>
+
+<body>
+<INCLURE{fond=noisettes/haut}{lang}>
+<div id="pagePlan">
+<div id="milieu">
+	<div id="ext-main">
+		<div class="main">
+
+  			<div id="contenu">
+			<div class="main-content">
+				<h1 class="invisible"><:cisquel:eq_contenu:></h1>
+				<div id="boxnavpath"><div id="navpath">
+					<a href="[(#URL_PAGE{sommaire})]"><:cisquel:eq_accueil:></a>&gt; <:plan_site:>
+				</div></div>
+				<div id="boxcentrale"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale">
+				<div class="rub">
+				<h2><:plan_site:></h2>
+				</div>
+				 <div id="plan2">
+
+
+				<BOUCLE_masquer(RUBRIQUES){raccourci=_masquer_dans_plan}{doublons}{par id_rubrique}></BOUCLE_masquer>
+				#SET{montableau, #ARRAY{}}
+				<BOUCLE_sous_rubriques(RUBRIQUES){doublons}{par id_parent}{par num titre}>[(#SET{montableau, #GET{montableau}|push{#ARRAY{id_parent,#ID_PARENT,id_rubrique,#ID_RUBRIQUE,titre,#TITRE}}})]</BOUCLE_sous_rubriques>
+
+				<div class="rub">
+				[(#GET{montableau}|ciparam_plan)]
+				</div>
+
+
+				</div>
+				</div></div></div></div></div></div>
+			</div>
+			</div>
+		<div class="clearer"></div>				
+		</div>
+	</div>
+</div>
+</div>
+<INCLURE{fond=noisettes/pied}{lang}><INCLURE{fond=noisettes/pied_connexion}{self=#SELF}{lang}>
+	

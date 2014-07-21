@@ -1,0 +1,12 @@
+<a href="[(#URL_PAGE{plan}|parametre_url{lang,#LANG})]"><:plan_site:></a>
+
+<BOUCLE_pied_article(ARTICLES){raccourci=_pied}{par num titre}{lang_select=non}>
+         | <a href="[(#URL_ARTICLE|parametre_url{lang,#ENV{lang}}|parametre_url{forcer_lang,true})]">[(#TITRE|supprimer_numero)]</a>
+
+
+</BOUCLE_pied_article>
+
+<div id="copyright">[&copy;&nbsp;2014&nbsp;-&nbsp;Site internet de la (#NOM_SITE_SPIP)]
+<img src="http://intranet.mairie-aubervilliers.fr/auber3.0/plugins/graphisme_auber2.0/NAVPICS/pied-img.jpg" width="980" height="92" hspace="0" vspace="0" border="0" /></div>
+</body>
+</html>

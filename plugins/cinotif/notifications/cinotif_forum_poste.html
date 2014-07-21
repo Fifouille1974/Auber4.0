@@ -1,0 +1,20 @@
+[(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]
+<BOUCLE_message(FORUMS){id_forum}{statut?}{tout}>
+[[(#NOM_SITE_SPIP|textebrut)]] [<:forum_forum:>][ (#TITRE|nettoyer_titre_email)]
+
+<:cinotif:message_auto:>
+
+<:cinotif:forum_poste_par:>[ (#AUTEUR)][(#STATUT|=={spam}|oui) (SPAM)]
+<BOUCLE_art(ARTICLES){id_article}><:cinotif:forum_suite_article:>[ (#TITRE|supprimer_numero)]
+
+<:cinotif:forum_ne_repondez_pas:>
+[(#URL_SITE_SPIP)/spip.php?page=#ENV{cipage}][(#URL_SITE_SPIP|cinotif_xtor)]
+</BOUCLE_art>
+
+** #TITRE **
+[(#TEXTE|textebrut) ]
+
+
+
+</BOUCLE_message>
+#FILTRE{supprimer_tags|filtrer_entites|trim}

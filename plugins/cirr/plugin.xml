@@ -1,0 +1,31 @@
+<plugin>
+	<nom>cirr : R&#233;dacteurs restreints</nom>
+	<auteur>&#169; C. Imberti</auteur>
+	<icon>pyramides-32.png</icon>
+	<licence>[Creative commons by-nc-sa->http://creativecommons.org/licenses/by-nc-sa/2.0/fr/]</licence>
+	<lien></lien>
+	<version>1.11</version>
+	<etat>stable</etat>
+    <slogan>Auteur : &#169; C. Imberti. Licence : Creative commons by-nc-sa.</slogan>
+    <description>
+    Auteur : &#169; C. Imberti. Licence : Creative commons by-nc-sa.<br />
+    Ce plugin ajoute la notion de r&#233;dacteurs restreint.
+    Il s'agit d'&#233;viter qu'un rédacteur puisse voir tous les articles propos&#233;s sur le site.
+    Il autorise les administrateurs restreints et les r&#233;dacteurs restreints &#224; voir uniquement leurs rubriques.
+    </description>
+	<prefix>cirr</prefix>
+	<options>cirr_options.php</options>
+	<fonctions>cirr_fonctions.php</fonctions>
+	<pipeline>
+		<nom>ciautoriser</nom>
+		<inclure>cirr_ciautoriser.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_boucle</nom>
+		<inclure>cirr_pipeline.php</inclure>
+	</pipeline>
+
+	<necessite id="SPIP" version='[2.0.9;]' />
+	<necessite id='ciautoriser' version='[1.0;]' />
+
+</plugin>

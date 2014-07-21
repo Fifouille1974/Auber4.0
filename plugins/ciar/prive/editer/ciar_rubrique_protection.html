@@ -1,0 +1,111 @@
+#CACHE{0}
+<div class='cadre cadre-formulaire-editer'>
+<div class="entete-formulaire">
+#ENV**{icone_retour}
+[(#AUTORISER{modifier,rubrique,#ENV{new}})
+<:ciar:titre_protection:>
+]
+[<h1>(#ENV{titre})</h1>]
+</div>
+#FORMULAIRE_EDITER_CIAR_RUBRIQUE_PROTECTION{#ENV{new},#ENV{redirect},#ENV{config_fonc}}
+</div>
+
+#SET{cilargeur,'33'}
+#SET{cipluginciag,''}
+[(#PLUGIN{ciag}|oui)
+	#SET{cipluginciag,'oui'}
+	#SET{cilargeur,'25'}
+]
+<BOUCLE_rubrique(CIAR_RUBRIQUES_PROTECTION){id_rubrique=#ENV{new}}{acces_restreint=_acces_indiv}>
+<div style="margin-top:20px; padding:10px;" class="cadre cadre-liste" id="lesauteurs">
+<img class="cadre-icone" alt="" src="../prive/images/auteur-24.gif">
+<div class="cadre_padding">
+<br/>
+<h1><:ciar:titre_gestion_droit_acces:></h1>
+<B_auteurs>
+[<div class="folio"><div class="pagination">(#PAGINATION)</div></div>]
+<table cellspacing="0" cellpadding="2" style="width: 100%; border: 0px none;" class="arial2">
+<tbody>
+
+[(#GET{cipluginciag}|oui)
+<tr class="titrem">
+<th width="3%"></th>
+<th width="42%"><:ciar:auteurs:></th>
+<th width="30%"><:ciar:ec_via_grpauteurs:></th>
+<th width="25%"><:ciar:droit_rubrique:></th>
+</tr>
+]
+
+[(#GET{cipluginciag}|non)
+<tr class="titrem">
+<th width="3%"></th>
+<th width="60%"><:ciar:auteurs:></th>
+<th width="37%"><:ciar:droit_rubrique:></th>
+</tr>
+]
+
+
+<BOUCLE_auteurs(CIAR_AUTEURS_ACCES_RUBRIQUES auteurs){id_rubrique=#ENV{new}}{par nom}{pagination 50}>
+#SET{cilogo,''}
+[(#GET{cipluginciag}|oui)
+	[(#SET{cilogo,[(#ID_AUTEUR|ciar_auteur_rubrique_via_groupe{#ID_RUBRIQUE})]})]		
+]
+<tr class="tr_liste">
+<td class="arial11">[(#STATUT|ciar_puce_statut)]</td>
+<td class="verdana1">[(#GET{cilogo}|oui)<img src="#EVAL{_DIR_PLUGIN_CIAR}_images/annonce-12.gif" style="margin-right:5px;">]#NOM</td>
+[(#GET{cipluginciag}|oui)
+<td class="verdana1">#GET{cilogo}</td>
+]
+[(#PLUGIN{cirv}|non)
+<td class="arial1">[(#STATUT|ciar_statut_auteur_rubrique{#CISTATUT_AUTEUR_RUB})]</td>
+]
+[(#PLUGIN{cirv}|oui)
+<td class="arial1">[(#STATUT|ciar_statut_auteur_rubrique{#CISTATUT_AUTEUR_RUB,#CISTATUT})]</td>
+]
+</tr>
+</BOUCLE_auteurs>
+
+</tbody>
+</table>
+<br>
+<div class="nettoyeur"></div>
+
+<BOUCLE_eccma(CIAR_AUTEURS_ACCES_RUBRIQUES){id_rubrique=#ENV{new}}{id_auteur=#SESSION{id_auteur}}{cistatut_auteur_rub=eccma}>
+<table width="100%">
+<tbody>
+<tr>
+<td width="[(#GET{cilargeur})%]"><a href="#URL_ECRIRE{ciar_ajouter_acces_auteurs, id_rubrique=#ENV{new}}" >
+<img style="background: url('../prive/images/auteur-24.gif') no-repeat scroll center center transparent;" alt="<:ciar:ajouter:>" src="../prive/images/creer.gif"> <:ciar:ajouter:>
+</a></td>
+<td width="[(#GET{cilargeur})%]"><a href="#URL_ECRIRE{ciar_retirer_acces_auteurs, id_rubrique=#ENV{new}}" >
+<img style="background: url('../prive/images/auteur-24.gif') no-repeat scroll center center transparent;" alt="<:ciar:retirer:>" src="../prive/images/supprimer.gif"> <:ciar:retirer:>
+</a></td>
+
+[(#GET{cipluginciag}|oui)
+<td width="[(#GET{cilargeur})%]"><a href="[(#URL_ECRIRE{ciag_gerer_grpauteurs_rubrique,id_rubrique=#ENV{new}}|parametre_url{retour,ciar_rubrique_protection})]" >
+<img style="background: url('../prive/images/annonce.gif') no-repeat scroll center center transparent;" alt="<:ciag:titre_groupes_auteurs:>" src="../prive/images/creer.gif"> <:ciag:titre_groupes_auteurs:>
+</a></td>
+]
+
+<td width="[(#GET{cilargeur})%]"><a href="#URL_ECRIRE{ciar_surcharger_statut_auteurs, id_rubrique=#ENV{new}}" alt="<:ciar:modifier_droits:>">
+<img src="../prive/images/administration-24.gif"> <:ciar:modifier_droits:>
+</a></td>
+</tr>
+</tbody>
+</table>
+</BOUCLE_eccma>
+
+</div>
+</div>
+
+[(#GET{cipluginciag}|oui)
+<div style="margin-top:20px; padding:10px;" class="cadre cadre-liste">
+<div><:ciar:ec_auteur_via_groupe:></div>
+</div>
+]
+
+<div style="margin-top:20px; padding:10px;" class="cadre cadre-liste">
+<div><:ciar:ari_info_1:></div>
+<div><:ciar:ari_info_2:></div>
+</div>
+</BOUCLE_rubrique>

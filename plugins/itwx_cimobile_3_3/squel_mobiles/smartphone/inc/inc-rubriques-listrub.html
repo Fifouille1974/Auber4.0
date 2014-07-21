@@ -1,0 +1,12 @@
+  <BOUCLE_rubrique_invisible(RUBRIQUES) {titre_mot = invisible} {doublons}></BOUCLE_rubrique_invisible>
+  <B_rubriques>
+  <a id='pagination_rubriques'></a>
+    <div class="listmenu">
+      <ul>
+        <BOUCLE_rubriques(RUBRIQUES) {racine} {par num titre, titre}{doublons} {pagination}>
+        <li><a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></li>
+        </BOUCLE_rubriques>
+      </ul>
+    </div>
+  [<div class="pagination">(#PAGINATION)</div>]           
+  </B_rubriques>

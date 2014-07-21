@@ -1,0 +1,40 @@
+#CACHE{0}
+<script type="text/javascript">
+<!--
+xtnv = document;        //parent.document or top.document or document         
+xtsd = "[(#CIPARAM_ABONNEMENT_XITI|ciparam_xtsd)]";
+xtsite = "[(#CIPARAM_ABONNEMENT_XITI|ciparam_xtsite)]";
+xtn2 = "[(#CIPARAM_ABONNEMENT_XITI|ciparam_xtn2)]";        // level 2 site 
+xtpage = "page_accueil";        //page name (with the use of :: to create chapters)
+xtdi = "";        //implication degree
+
+// partie specifique du xtcore.js standard
+var xt1='[(#CIPARAM_ABONNEMENT_XITI|ciparam_xt1)]',xtLogDom='.xiti.com/hit.xiti',xtpreview=false,xtfirst=false,xtcode='',xt46='1',xt50='1',xt48='',xt54=false,xt58=false,xtdocl=false,xtud='undefined',xt2='0',xt3=3650,xtkwv='xtmc',xtkwp='xtnp',xtadch=new Array,xt4=new Array;xt4['sec']='20';xt4['rss']='20';xt4['epr']='20';xt4['erec']='20';xt4['adi']='20';xt4['adc']='20';xt4['al']='20';xt4['es']='20';xt4['ad']='20';
+//-->
+</script>
+<script type="text/javascript" src="#CHEMIN{_js/xtcore_partiel.js}"></script>
+<noscript>
+<img width="1" height="1" alt="" src="[(#CIPARAM_ABONNEMENT_XITI)]&amp;p=page_accueil&amp;di=&amp;" />
+</noscript>
+
+
+<script type="text/javascript">
+<!--
+function xt_clic(typecl,page,url,nvlle)
+{
+Xt_r = document.referrer;
+Xt_h = new Date();
+xt_img = new Image();
+Xt_i = '[(#CIPARAM_ABONNEMENT_XITI)]';
+Xt_i += '&p='+page+'&clic='+typecl+'&hl=' + Xt_h.getHours() + 'x' + Xt_h.getMinutes() + 'x' + Xt_h.getSeconds();
+if(parseFloat(navigator.appVersion)>=4)
+{Xiti_s=screen;Xt_i += '&r=' + Xiti_s.width + 'x' + Xiti_s.height + 'x' + Xiti_s.pixelDepth + 'x' + Xiti_s.colorDepth;}
+Xt_i += '&ref=' + Xt_r.replace(/[<>"]/g, '').replace(/&/g, '$');
+xt_img.src = Xt_i;
+if ((url != null)&&(url!=undefined))
+{ if ((nvlle=='')||(nvlle==null)) { document.location = url;} else {xfen = window.open(url,'xfen',''); xfen.focus();}}
+else
+{return;}
+}
+//-->
+</script>

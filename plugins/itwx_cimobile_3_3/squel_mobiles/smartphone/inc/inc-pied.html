@@ -1,0 +1,5 @@
+  <div id="pied">
+	 <BOUCLE_annee(ARTICLES){par date}{0,1}>[(#DATE|annee)]</BOUCLE_annee>-</B_annee>[(#DATE|annee) ]#NOM_SITE_SPIP<br />
+     <a href="http://www.spip.net/" title="<:site_realise_avec_spip:>"><img src="#CHEMIN{squel_mobiles/images/themes/spip.png}" alt="SPIP" width="48" height="16" /></a> - <:itwx:copyright:> - <a href="#top" class="top"><img src="#CHEMIN{squel_mobiles/images/themes/rien.gif}" width="14" height="20" alt=""/></a>[(#SESSION{id_auteur}|?{'',' '})<INCLURE{fond=inc/ajax/formulaire-login}{env}{ajax}>]
+  </div>	
+  <INCLURE{fond=inc/ajax/inc-js}/> 

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<item><nom>_nouvelle_fenetre</nom><description>L'article s'ouvre dans une nouvelle fenêtre</description></item>
+<item><nom>_pied</nom><description>Pied de page : raccourci vers l'article</description></item>
+<item><nom>_podcasting</nom><description>Podcasting : prendre en compte dans le flux de podcasting</description></item>
+<item><nom>_portail_actu</nom><description>Page d'accueil : actualités (raccourci temporaire)</description></item>
+<item><nom>_portail_commentaire</nom><description>Page d'accueil : affichage du dernier commentaire</description></item>
+<item><nom>_portail_dossiers</nom><description>Page d'accueil : raccourci dans la colonne centrale ("dossiers" ...)</description></item>
+<item><nom>_portail_droite</nom><description>Page d'accueil : raccourci dans la colonne de droite</description></item>
+<item><nom>_portail_gauche</nom><description>Page d'accueil : raccourci dans la colonne de gauche</description></item>
+<item><nom>_portail_permanent</nom><description>Page d'accueil : le texte figure en permanence</description></item>
+<item><nom>_portail_permanent_bas</nom><description>Page d'accueil : raccourci permanent en bas des actualités</description></item>
+<item><nom>_portail_permanent_haut</nom><description>Page d'accueil : raccourci permanent au début des actualités</description></item>
+<item><nom>_reader_acrobat_ou_autre</nom><description>Outils : raccourci relatif à Acrobat reader ou autre</description></item>
+<item><nom>_reagir</nom><description>Les visiteurs pourront réagir sur cet article</description></item>
+<item><nom>_rubrique_actu</nom><description>Rubrique : raccourci temporaire dans les dernières actualités</description></item>
+<item><nom>_souspageaccueil_actu</nom><description>Sous page d'accueil : raccourci dans les dernières actualités</description></item>
+<item><nom>_souspageaccueil_centre</nom><description>Sous page d'accueil : raccourci dans la colonne centrale</description></item>
+<item><nom>_souspageaccueil_droite</nom><description>Sous page d'accueil : raccourci dans la colonne de droite</description></item>
+<item><nom>_souspageaccueil_gauche</nom><description>Sous page d'accueil : raccourci dans la colonne de gauche</description></item>
+<item><nom>_souspageaccueil_permanent</nom><description>Sous page d'accueil : permanent</description></item>
+<item><nom>_souspageaccueil_permanent_bas</nom><description>Sous page d'accueil : raccourci permanent en bas des actualités</description></item>
+<item><nom>_souspageaccueil_permanent_haut</nom><description>Sous page d'accueil : raccourci permanent au début des actualités</description></item>
+<item><nom>_large</nom><description>Sans la colonne de droite</description></item>

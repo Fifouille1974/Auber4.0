@@ -1,0 +1,94 @@
+#CACHE{0}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<BOUCLE_titre_article(ARTICLES){id_article}{statut IN (prop,prepa,publie,poubelle,refuse,archive)}>
+<title>[(#NOM_SITE_SPIP|textebrut) - ][(#TITRE|supprimer_numero)]</title>
+</BOUCLE_titre_article>
+</B_titre_article>
+<title>[(#NOM_SITE_SPIP|textebrut)]</title>
+<//B_titre_article>
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET">
+<meta name="robots" content="noindex, nofollow">
+<link href="#CHEMIN{_css/cisf_style.css}" rel="stylesheet" type="text/css">
+
+<BOUCLE_script_article(ARTICLES){id_article}{statut IN (prop,prepa,publie,poubelle,refuse,archive)}>
+<script type='text/javascript'>
+function chainemailmembres(titreobjet) {
+	chaine_mail = "mailto:";
+	chaine_mail += "[(#ID_RUBRIQUE|ciar_liste_email_outlook)]";	
+	chaine_mail += "?subject=<:cisf:eq_pour_information:>" + titreobjet;
+	chaine_mail += "&body= <:cisf:eq_je_recommande_page:>" + titreobjet;
+	chaine_mail += ". <:cisf:eq_pour_la_consulter_cliquer:>" + escape("#URL_PAGE{cisf_article}&id_article=#ID_ARTICLE&id_rubrique=#ID_RUBRIQUE");
+	location.href = chaine_mail;
+}
+
+function chainemailmembrestb(titreobjet) {
+	chaine_mail = "mailto:";
+	chaine_mail += "[(#ID_RUBRIQUE|ciar_liste_email_thunderbird)]";
+	chaine_mail += "?subject=<:cisf:eq_pour_information:>" + titreobjet;
+	chaine_mail += "&body= <:cisf:eq_je_recommande_page:>" + titreobjet;
+	chaine_mail += ". <:cisf:eq_pour_la_consulter_cliquer:>" + escape("#URL_PAGE{cisf_article}&id_article=#ID_ARTICLE&id_rubrique=#ID_RUBRIQUE");
+	location.href = chaine_mail;
+}
+</script>
+</BOUCLE_script_article>
+	
+</head>
+<body>
+<div id="page">
+
+<div id="milieu">
+	<div id="ext-main">
+		<div class="main">
+
+  			<div id="contenu">
+			<div class="main-content">
+				<h1 class="invisible"><:cisf:eq_contenu:></h1>
+				<div id="boxnavpath"><div id="navpath">
+					<a href="[(#URL_PAGE{sommaire})]"><:cisf:eq_accueil:></a>
+					<BOUCLE_chem_nav(HIERARCHIE){id_article}>
+					&gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a>
+					</BOUCLE_chem_nav>
+				</div></div>
+
+				[(#SESSION{id_auteur}|?{'',' '})
+					[(#REM) <!-- Auteur non connecte -->]
+		  			<div id="contenu">
+					<INCLURE{fond=cisf_altern}>
+					</div>
+				]
+				
+				<BOUCLE_article(ARTICLES){id_article}{statut IN (prop,prepa,publie,poubelle,refuse,archive)}>
+				<div id="boxcentrale"><div class="blc"><div class="brc"><div class="tlc"><div class="trc"><div class="innercentrale">
+				[(#SESSION{id_auteur}|!={''}|oui)
+				[(#AUTORISER{modifier,article,#ID_ARTICLE})
+					<h2>#TITRE</h2>
+					<div class="retour"><a href="[(#URL_PAGE{cisf_article}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" title="<:cisf:eq_retour_article:>"><:cisf:eq_retour_article:></a></div>
+					<div class="titreaction"><:ciar:liste_membres:></div>
+					
+					[(#ID_RUBRIQUE|ciar_liste_email_texte)]
+	
+					<div class="envoimembres">
+					<a href="javascript:chainemailmembrestb('[(#NOM_SITE_SPIP|ciar_filtre_mailto{#CHARSET})]  [(#TITRE|supprimer_numero|ciar_filtre_mailto{#CHARSET})]')"><:ciar:envoyer_courriel_membres:> (Thunderbird)</a>
+					
+					<a href="javascript:chainemailmembres('[(#NOM_SITE_SPIP|ciar_filtre_mailto{#CHARSET})]  [(#TITRE|supprimer_numero|ciar_filtre_mailto{#CHARSET})]')"><:ciar:envoyer_courriel_membres:> (Outlook)</a>
+					</div>
+				]
+				]					
+				</div></div></div></div></div></div>
+				</BOUCLE_article>	
+				
+			</div>
+			</div>
+			<div class='clearer'>&nbsp;</div>	
+		</div>
+	</div>
+</div>
+<div id=pied>
+<h1 class="invisible"><:cisf:eq_pied_page:></h1>
+</div>
+ 
+</div>
+</body>
+</html>

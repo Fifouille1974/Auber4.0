@@ -1,0 +1,2 @@
+<:ciimport:prenom:>,<:ciimport:nom:>,<:ciimport:nom_affiche:>,<:ciimport:surnom:>,<:ciimport:email:><BOUCLE_auteur(AUTEURS){statut IN #ENV{cistatuts}}{email!=''}{par email}>
+[,,[(#EMAIL|ciimport_extraire_nom)],,(#EMAIL)]</BOUCLE_auteur>

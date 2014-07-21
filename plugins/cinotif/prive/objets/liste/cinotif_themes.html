@@ -1,0 +1,8 @@
+<B_evenements>
+<ul class='arial11'>
+<BOUCLE_evenements(CINOTIF_EVENEMENTS){par num titre,titre}>
+	<li><a href="[(#URL_ECRIRE{cinotif_theme,id_evenement=#ID_EVENEMENT})]">#TITRE</a> ( <a href="[(#OBJET|cinotif_url_public{#ID_OBJET})]">#OBJET[(#ID_OBJET|>{0}|oui)[ (#ID_OBJET)]]</a> / [(#VAL{cinotif:}|concat{#QUOI}|_T)] / [(#VAL{cinotif:}|concat{#STATUT}|_T)] ) 
+	</li>
+</BOUCLE_evenements>	
+</ul>
+</B_evenements>

@@ -1,0 +1,23 @@
+<div class='ajax'>
+<div class="formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'>
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+      	<div style="padding:10px 0px 5px 5px;">
+			[<span class='erreur_message'>(#GET{erreurs})</span>]
+		<input type='radio' class='radio' name='cistatut' id='ar_oui' value='ciredval' [(#ENV{name}|=={ciredval}|oui)checked='checked'] /><label for='ar_oui' [(#ENV{name}|=={ciredval}|oui)style='font-weight: bold;']><:cirv:ciredval_oui:></label>
+		<br>
+		[(#ENV{_cirvt}|oui)
+		<input type='radio' class='radio' name='cistatut' id='ar_tout' value='ciredvaltout' [(#ENV{name}|=={ciredvaltout}|oui)checked='checked'] /><label for='ar_tout' [(#ENV{name}|=={ciredvaltout}|oui)style='font-weight: bold;']>[(#PLUGIN{cirr}|oui)<:cirv:ciredval_tout_cirr:>][(#PLUGIN{cirr}|non)<:cirv:ciredval_tout:>]</label>
+		<br>
+		]
+		<input type='radio' class='radio' name='cistatut' id='ar_non' value='non' [(#ENV{name}|=={non}|oui)checked='checked'] /><label for='ar_non' [(#ENV{name}|=={non}|oui)style='font-weight: bold;']><:cirv:ciredval_non:></label>
+		</div>
+		
+	  <p class='boutons'><span class='image_loading'></span><input type='submit' class='submit' value='<:bouton_valider:>' /></p>
+	</div>
+	</form>
+</div>
+</div>

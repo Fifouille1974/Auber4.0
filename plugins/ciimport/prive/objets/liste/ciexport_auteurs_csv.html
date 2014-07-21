@@ -1,0 +1,2 @@
+<BOUCLE_auteur(AUTEURS){statut IN #ENV{cistatuts}}{email!=''}{par nom}>
+"[(#URL_SITE_SPIP)]","[(#NOM|ciimport_filtre_csv)]","[(#EMAIL|ciimport_filtre_csv)]"[(#PLUGIN{cirv}|non),"[(#VAL{ciimport:statut_}|concat{#STATUT}|_T)]"][(#PLUGIN{cirv}|oui)[(#CISTATUT|oui),"[(#VAL{ciimport:statut_}|concat{#CISTATUT}|_T)]"][(#CISTATUT|non),"[(#VAL{ciimport:statut_}|concat{#STATUT}|_T)]"]][(#PLUGIN{ciar}|oui),"[(#VAL{ciimport:cioption_}|concat{#CIOPTION}|_T)]"]</BOUCLE_auteur>
